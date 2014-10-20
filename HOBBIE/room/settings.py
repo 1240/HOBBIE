@@ -49,9 +49,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'HOBBIE.urls'
+ROOT_URLCONF = 'room.urls'
 
-WSGI_APPLICATION = 'HOBBIE.wsgi.application'
+WSGI_APPLICATION = 'room.wsgi.application'
 
 
 # Database

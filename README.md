@@ -1,4 +1,3 @@
 HOBBIE
 ======
-
-DREAM TEAM - ДОСУГ
+DREAM TEAM
