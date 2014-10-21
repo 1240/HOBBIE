@@ -15,8 +15,8 @@ def room_one(request):
 
 def template(request):
     view = "template"
-    template = get_template('test.html')
-    html = template.render(Context({'number': view}))
+    t = get_template('test.html')
+    html = t.render(Context({'number': view}))
     return HttpResponse(html)
 
 
