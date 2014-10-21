@@ -3,26 +3,26 @@
       <![CDATA[
         /* Region */
         .map-region {
-            fill: #c1df7f;
+            fill: #7FDFDF;
             stroke-width: 1.1px; /* @fix Chrome render artefact + 0.1 */
-            stroke: #95BB47;
+            stroke: #ADADAD;
             cursor: pointer;
         }
 
             .map-region:hover,
             .map-region[data-state='hover'] {
-                fill: #9acc37;
+                fill: #35B6C7;
             }
 
         /* Point */
         .map-city-point {
-            fill: #FF6163;
+            fill: #ADADAD;
             cursor: pointer;
         }
 
             .map-city-point:hover,
             .map-city-point[data-state='hover'] {
-                fill: #CC4E50;
+                fill: #ADADAD;
             }
 
         /* Name city */
