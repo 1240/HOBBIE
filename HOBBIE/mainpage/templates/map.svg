@@ -40,7 +40,7 @@
             }
 
             .map-city-name[data-region='637640'],
-            .map-city-name[data-region='653240'] {
+            .map-city-name[data-region='777777'] {
                 display: block !important;
             }
       ]]>
@@ -173,5 +173,9 @@
     <ellipse data-region="661420" class="j-map-item map-city-point" cy="370.5" cx="390.5" ry="5.5" rx="5.5"/>
     <text data-region="661420" class="j-map-item map-city-name" y="342" x="385">
         <tspan x="385" dy="20.8">Челябинск</tspan>
+    </text>
+    <ellipse data-region="777777" class="j-map-item map-city-point" cy="260.5" cx="320.5" ry="3.5" rx="3.5"/>
+    <text data-region="777777" class="j-map-item map-city-name" y="240" x="200">
+        <tspan x="318" dy="10.8">Киров</tspan>
     </text>
 </svg>
