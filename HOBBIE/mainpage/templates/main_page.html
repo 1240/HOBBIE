@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -5,9 +6,6 @@
     <title></title>
 </head>
 <body>
-<object data="../mm.svg" type="image/svg+xml" width="400" height="300">
-    <embed src="../mm.svg" type="image/svg+xml" width="400" height="300" />
-</object>
-<img src="../mm.svg">
+    <object data="{% static "map.svg" %}" type="image/svg+xml"></object>
 </body>
 </html>
