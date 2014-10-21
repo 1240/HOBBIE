@@ -1,0 +1,65 @@
+.map-svg_west {
+    margin-top: 10px;
+    margin-bottom: 37px;
+    width: 621px;
+    height: 531px
+}
+
+.map-area,.map-svg {
+    display: block;
+    position: relative
+}
+
+.b-select-city {
+    position: relative}
+
+.col-8 {
+    width: 636px
+}
+
+.cols:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    font: 0/0 a;
+    height: 0
+}
+
+.b-map {
+    padding-top: 10px}
+
+.col-2 {
+    width: 144px
+}
+
+.col-4 {
+    width: 308px
+}
+
+.b-cities a {
+    float: left;
+    clear: left
+}
+
+.b-cities a.hover {
+    color: #f06939
+}
+
+.b-cities .clear {
+    height: 10px
+}
+
+.b-cities .current-city {
+    font-size: 21px;
+    line-height: 21px;
+    height: 24px;
+    overflow: hidden
+}
+
+.cities a {
+    font-weight: 700
+}
+
+.col-1,.col-10,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9 {
+    float: left}
