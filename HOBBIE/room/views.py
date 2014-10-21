@@ -16,7 +16,7 @@ def room(request, room_id=1):
     args = {}
     args.update(csrf(request))
     args['room'] = Room.objects.get(id=room_id)
-    args['messages'] = Message.objects.filter(message_room_id=room_id)
+    args['messages'] = Message.objects.filter(message_room_id=room_id).order_by('message_datetime')
     args['form'] = message_form
     return render_to_response('room.html', args)
 

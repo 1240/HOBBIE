@@ -1,21 +1,22 @@
 {% extends 'main.html' %}
+{% load bootstrap3 %}
 {% block rooms %}
     <h4>{{ room.room_title }}</h4>
     <h6>{{ room.room_create_date }}</h6>
     <p>{{ room.room_text }}</p>
     <p>{{ room.room_people_count }}</p>
     <hr>
-    <p>Сообщения</p>
-    {% for message in messages %}
-        <p>{{ message.message_text }}</p>
-        <p>{{ message.message_datetime }}</p>
-    {% endfor %}
-    <hr>
-    <form action="/rooms/addmessage/{{ room.id }}/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <br>
-        <input type="submit" class="btn btn-default" value="Написать сообщение">
-    </form>
-
+    <div>
+        <p>Сообщения</p>
+        {% for message in messages %}
+            <p>{{ message.message_text }}</p>
+            <p>{{ message.message_datetime }}</p>
+        {% endfor %}
+        <hr>
+        <form action="/rooms/addmessage/{{ room.id }}/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" class="btn btn-default" value="Написать сообщение">
+        </form>
+    </div>
 {% endblock %}
