@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'room',
     'bootstrap3',
     'mainpage',
+    'jquery',
 )
 
 MIDDLEWARE_CLASSES = (
