@@ -10,38 +10,45 @@
     <script rel="stylesheet" type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">
-                <img src="{% static "img/logo.gif" %}" alt="logo" width="100px">
-            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <div>
-                <form action="" class="navbar-form">
-                    <div class="input-group">
-                        <input type="Search" placeholder="Search..." class="form-control"/>
-
-                        <div class="input-group-btn">
-                            <button class="btn btn-info">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+<div class="container">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container col-xs-2">
+        <div class="row vertical-align">
+            <div class="">
+                <img src="{% static "img/logo.gif" %}" alt="logo" width="80%">
             </div>
-
         </div>
     </div>
+    <div class="container col-xs-10">
+        <div class="collapse navbar-collapse text-center" id="navbar-collapse-1">
+            <h1>WE ARE AWESOME</h1>
+        </div>
+        <div>
+            <ul class="nav navbar-nav ">
+                <li>
+                    <a href="#" title="Александр Попов">
+                        <img src="http://cs606017.vk.me/v606017802/6def/wf3hHo1sZtY.jpg"
+                             style="width:49px; margin-top: -15px;">
+                    </a>
+                </li>
+                <li><a href="#" title="Александр Попов">Александр Попов</a></li>
+                <li><a href="#">Сообщения</a></li>
+                <li><a href="#about">Приглашения</a></li>
+                <li><a href="#contact">Новости</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
 </nav>
+
+<div class="row text-center">
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
+</div>
+
+<hr>
 {% block rooms %}
 {% endblock %}
 </body>
