@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'mainpage',
     'jquery',
+    'loginsys',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -90,10 +91,12 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "room/static"),
     os.path.join(BASE_DIR, "mainpage/static"),
+    os.path.join(BASE_DIR, "loginsys/static"),
 )
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
     os.path.join(BASE_DIR,  'room/templates'),
     os.path.join(BASE_DIR,  'mainpage/templates'),
+    os.path.join(BASE_DIR,  'loginsys/templates'),
 )
