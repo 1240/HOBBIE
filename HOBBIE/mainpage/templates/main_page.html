@@ -22,31 +22,32 @@
         </div>
     </div>
     <div class="container col-xs-10">
-        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <div class="collapse navbar-collapse text-center" id="navbar-collapse-1">
             <h1>WE ARE AWESOME</h1>
         </div>
-
-        <ul class="nav navbar-nav ">
-            <li>
-                <a href="#" title="Александр Попов">
-                    <img src="http://cs606017.vk.me/v606017802/6def/wf3hHo1sZtY.jpg"
-                         style="width:49px; margin-top: -15px;">
-                </a>
-            </li>
-            <li><a href="#" title="Александр Попов">Александр Попов</a></li>
-            <li><a href="#">Сообщения</a></li>
-            <li><a href="#about">Приглашения</a></li>
-            <li><a href="#contact">Новости</a></li>
-        </ul>
+        <div>
+            <ul class="nav navbar-nav ">
+                <li>
+                    <a href="#" title="Александр Попов">
+                        <img src="http://cs606017.vk.me/v606017802/6def/wf3hHo1sZtY.jpg"
+                             style="width:49px; margin-top: -15px;">
+                    </a>
+                </li>
+                <li><a href="#" title="Александр Попов">Александр Попов</a></li>
+                <li><a href="#">Сообщения</a></li>
+                <li><a href="#about">Приглашения</a></li>
+                <li><a href="#contact">Новости</a></li>
+            </ul>
+        </div>
         <!--/.nav-collapse -->
     </div>
 </nav>
 
 <div class="row text-center">
-    <div class="col-md-3">Категория</div>
-    <div class="col-md-3">Категория</div>
-    <div class="col-md-3">Категория</div>
-    <div class="col-md-3">Категория</div>
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
 </div>
 
 <hr>
@@ -56,7 +57,7 @@
     <div class="b-map">
 
         <div class="map-svg map-svg_west">
-            <object data="{% static 'map.svg' %}" type="image/svg+xml"></object>
+            <object data="{% static 'img/map.svg' %}" type="image/svg+xml"></object>
         </div>
     </div>
 </div>
