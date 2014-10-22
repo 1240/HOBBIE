@@ -3,33 +3,34 @@
       <![CDATA[
         /* Region */
         .map-region {
-            fill: #7FDFDF;
+            fill: rgb(52, 73, 94);
             stroke-width: 1.1px; /* @fix Chrome render artefact + 0.1 */
-            stroke: #ADADAD;
+            stroke: rgb(111, 121, 130);
             cursor: pointer;
         }
 
             .map-region:hover,
             .map-region[data-state='hover'] {
-                fill: #35B6C7;
+                fill: rgb(0, 207, 175);
             }
 
         /* Point */
         .map-city-point {
-            fill: #ADADAD;
+            fill: rgb(255, 255, 255);
             cursor: pointer;
         }
 
             .map-city-point:hover,
             .map-city-point[data-state='hover'] {
-                fill: #ADADAD;
+                fill: rgb(0, 207, 175);
             }
 
         /* Name city */
         .map-city-name {
             font-family: Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #394F0E;
+            font-size: 18px;
+            color: #ADADAD;
+            fill: rgb(255, 255, 255);
             display: none;
             cursor: pointer;
         }
