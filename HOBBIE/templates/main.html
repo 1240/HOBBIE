@@ -10,9 +10,9 @@
     <script rel="stylesheet" type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
 </head>
 <body>
-<div class="container">
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container col-xs-2">
+<nav class=" navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="col-xs-2">
             <div class="row vertical-align">
                 <div class="">
                     <a href="/">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="container col-xs-10">
+        <div class="col-xs-10">
             <div class="collapse navbar-collapse text-center" id="navbar-collapse-1">
                 <h1>WE ARE AWESOME</h1>
             </div>
@@ -46,17 +46,17 @@
             </div>
             <!--/.nav-collapse -->
         </div>
-    </nav>
-
-    <div class="row text-center">
-        <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
-        <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
-        <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
-        <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
     </div>
-    <hr>
+</nav>
 
+<div class="row text-center">
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
+    <div class="col-md-3"><a href="#"><img src="{% static "img/stay_strong.png" %}" width="30%">Категория</a></div>
 </div>
+<hr>
+
 {% block map %}{% endblock %}
 {% block rooms %}{% endblock %}
 {% block login %}{% endblock %}
