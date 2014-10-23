@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% block rooms %}
+    <div class="container">
     {% for room in rooms %}
         <h4><a href="/rooms/get/{{ room.id }}">{{ room.room_title }}</a></h4>
         <h6>{{ room.room_create_date }}</h6>
@@ -7,4 +8,5 @@
         <p>{{ room.room_people_count }}</p>
         <hr>
     {% endfor %}
+    </div>
 {% endblock %}
