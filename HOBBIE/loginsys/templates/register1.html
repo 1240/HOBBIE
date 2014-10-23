@@ -2,12 +2,12 @@
 
 {% block login %}
 
-    <div class="container">
+    <div class="large-offset-3 large-6 columns">
         <form action="/auth/register/" method="post">
             {% csrf_token %}
             {{ form }}
-
-            <button class="btn btn-default" type="submit">Зарегистрироваться</button>
+            <br>
+            <button class=button" type="submit">Зарегистрироваться</button>
         </form>
     </div>
 

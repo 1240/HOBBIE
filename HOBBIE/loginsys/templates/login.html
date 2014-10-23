@@ -6,11 +6,11 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.css" %}">
 
     <div class="authenty signin-alt section-content" style="height: 495px;">
-        <div class="container">
+        <div class="row">
             <div class="text-center">
                 <h3>Войти</h3>
             </div>
-            <div class="col-md-4 col-md-offset-1">
+            <div class="medium-4 medium-offset-1 columns">
                 <div class="normal-signin">
                     <div class="form-main">
                         <form id="login_form" id="login_form" method="post" action="/auth/login/" role="form">
@@ -31,7 +31,7 @@
                                            required="required">
                                 </div>
                                 <div class="row top-buffer">
-                                    <div class="col-md-4 col-md-offset-8">
+                                    <div class="medium-4 medium-offset-8 column">
                                         <button type="submit" class="btn btn-block signin">Войти</button>
                                     </div>
                                 </div>
@@ -40,10 +40,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-2 col-sm-1">
+            <div class=" medium-2 small-1 columns">
                 <div class="horizontal-divider"></div>
             </div>
-            <div class="col-md-4">
+            <div class="medium-4 columns">
                 <div class="sns-signin">
                     <a href="#" class="vk"><i
                             class="fa fa-vk"></i><span>Войти через VK</span></a>
@@ -51,12 +51,12 @@
                             class="fa fa-google-plus"></i><span>Войти через Google+</span></a>
                 </div>
             </div>
-            <div class="col-md-1"></div>
+            <div class="medium-1 columns"></div>
         </div>
         <div class="row top-buffer bottom-wrap">
             <div class="container">
                     <a href="/auth/register/" id="forgot_from_2">
-                        <span class="glyphicon glyphicon-plus-sign"></span> Создать аккаунт
+                        <i class="fa fa-plus"></i> Создать аккаунт
                     </a>
             </div>
         </div>
