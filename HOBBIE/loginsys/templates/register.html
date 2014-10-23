@@ -1,0 +1,95 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block login %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/authenty.css" %}">
+    <script rel="stylesheet" type="text/javascript" src="{% static "js/authenty.js" %}"></script>
+    <div class="container authenty signup-wizard section-content" style="height: 550px;">
+        <div class="text-center">
+            <h3>Регистрация</h3>
+        </div>
+        <div class="form-wrap wrap">
+
+            <div class="row nav-step">
+                <div class="col-xs-4 active"><span></span></div>
+                <div class="col-xs-4"><span></span></div>
+                <div class="col-xs-4"><span></span></div>
+            </div>
+            <div class="row nav-step-label">
+                <div class="col-xs-4">Информация</div>
+                <div class="col-xs-4">Аккаунт</div>
+                <div class="col-xs-4">Подтверждение</div>
+            </div>
+
+            <div class="row">
+                <ul class="page-container">
+                    <li class="current animated" style="display: list-item;">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Имя" required="required">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Фамилия" required="required">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="E-mail" required="required">
+                            </div>
+                        </form>
+                    </li>
+                    <li style="display: none;" class="">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Имя пользователя" required="required">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Пароль" required="required">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Подтверждение пароля" required="required">
+                            </div>
+                        </form>
+                    </li>
+                    <li style="display: none; color: #000000" class=""><span>Подтвердите информацию перед отправкой.</span>
+
+                        <div class="step-confirm">
+                            <div class="row">
+                                <div class="col-xs-5">Имя</div>
+                                <div class="col-xs-5"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-5">E-mail</div>
+                                <div class="col-xs-5"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-5">Имя пользователя</div>
+                                <div class="col-xs-5"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="page-footer">
+                <div class="row step-wrap">
+                    <div class="col-xs-12">
+                        <span><span id="stepNo">1</span> из 3</span>
+                    </div>
+                </div>
+                <div class="row btn-wrap">
+                    <div class="col-xs-6 invisible" id="prev">
+                        <button class="btn btn-block nav-step-btn">Назад</button>
+                    </div>
+                    <div class="col-xs-6" id="next">
+                        <button class="btn btn-block nav-step-btn">Вперед</button>
+                    </div>
+                    <div class="col-xs-6 remove" id="submit">
+                        <button class="btn btn-block nav-step-btn" type="submit">Отправить</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

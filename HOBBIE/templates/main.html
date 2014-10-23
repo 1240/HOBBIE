@@ -6,8 +6,8 @@
     <title>Weekdays</title>
     <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/weekdays.css" %}">
-    <script rel="stylesheet" type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
-    <script rel="stylesheet" type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.js"></script>
+    <script rel="stylesheet" type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+    <script rel="stylesheet" type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
 </head>
 <body>
 <div class="container">
@@ -15,7 +15,9 @@
         <div class="container col-xs-2">
             <div class="row vertical-align">
                 <div class="">
-                    <img src="{% static "img/logo.gif" %}" alt="logo" width="80%">
+                    <a href="/">
+                        <img src="{% static "img/logo.gif" %}" alt="logo" width="80%">
+                    </a>
                 </div>
             </div>
         </div>
@@ -55,6 +57,7 @@
     <hr>
 
 </div>
+{% block map %}{% endblock %}
 {% block rooms %}{% endblock %}
 {% block login %}{% endblock %}
 </body>
