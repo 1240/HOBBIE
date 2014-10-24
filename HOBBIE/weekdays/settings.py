@@ -41,7 +41,6 @@ INSTALLED_APPS = (
     'jquery',
     'loginsys',
     'accounts',
-    'profiles',
 )
 
 MIDDLEWARE_CLASSES = (
