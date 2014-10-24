@@ -2,10 +2,10 @@ function slotRenderCallback(e) {
     var t = $("#ads_ldr_top");
     if (e.slot.getAdUnitPath() === t.data("dfpslot")) {
         var o, n = $(" > div > iframe", t), i = !1;
-        fixIframeHeight(n[0]), o = t.height(), $(n).on("mouseover mouseout", function(e) {
-            i && clearTimeout(i), "mouseover" == e.type ? i = setTimeout(function() {
+        fixIframeHeight(n[0]), o = t.height(), $(n).on("mouseover mouseout", function (e) {
+            i && clearTimeout(i), "mouseover" == e.type ? i = setTimeout(function () {
                 fixIframeHeight(n[0])
-            }, 100) : "mouseout" == e.type && (i = setTimeout(function() {
+            }, 100) : "mouseout" == e.type && (i = setTimeout(function () {
                 fixIframeHeight(n[0], o)
             }, 100))
         })
@@ -51,13 +51,14 @@ $(function() {
     p ? (u.get(0).addEventListener("load", m.handler), a.on("load.svgfix", m.handler)) : $("#region-map area, #region-map-crimea area, .i-city-point").on("mouseenter mouseleave", m.toggleRegion), l.on("mouseenter mouseleave", m.toggleRegion), c.appendTo(r), $(".b-category-list .switcher .pseudo-link").on("click", function() {
         s.toggleClass("open"), s.hasClass("open") || $("html, body").delay(300).animate({scrollTop: s.offset().top - 20}, 300)
     })
-}), function(e) {
+}), function (e) {
     "use strict";
-    var t = {ldr_top: 0,ldr_mid: 0,ldr_low: 0,vr_top: 0,vr_low: 0}, o = {storage: "sessionStorage"}, n = function(o, n) {
+    var t = {ldr_top: 0, ldr_mid: 0, ldr_low: 0, vr_top: 0, vr_low: 0}, o = {storage: "sessionStorage"}, n = function (o, n) {
         function i() {
             var o = e.extend(t, JSON.parse(("sessionStorage" === f.params.storage && "undefined" != typeof window.sessionStorage ? sessionStorage.getItem(h) : e.cookie(h)) || "{}"));
             o[f.params.code]++, "sessionStorage" === f.params.storage && "undefined" != typeof window.sessionStorage ? sessionStorage.setItem(h, JSON.stringify(o)) : e.cookie(h, JSON.stringify(o), {path: "/"})
         }
+
         function a(t) {
             var n, i = e.Deferred(), a = !1;
             switch (t) {
@@ -69,43 +70,62 @@ $(function() {
             }
             return a && i.resolve() || i.reject(), i.promise()
         }
+
         function r() {
-            c || (c = setTimeout(function() {
-                a("viewport").done(function() {
+            c || (c = setTimeout(function () {
+                a("viewport").done(function () {
                     f.$window.off(["scroll.dfp_views_counter", f.params.code].join("_")), l()
                 }), clearTimeout(c), c = null
             }, d))
         }
+
         function s() {
             clearTimeout(c), c = null, f.$window.on(["scroll.dfp_views_counter", f.params.code].join("_"), r)
         }
+
         function l() {
-            a("full").done(i).fail(function() {
+            a("full").done(i).fail(function () {
                 var e = 0;
-                g && (g = !1, u = setInterval(function() {
-                    a("full").done(function() {
+                g && (g = !1, u = setInterval(function () {
+                    a("full").done(function () {
                         a("viewport").done(i).fail(s), clearInterval(u), u = null
-                    }).fail(function() {
+                    }).fail(function () {
                         ++e > m && (clearInterval(u), u = null)
                     })
                 }, p))
             })
         }
+
         {
             var f = this, c = null, u = null, g = !0, d = 50, p = 300, m = 10, h = "dfp_views";
-            !function() {
+            !function () {
                 f.$window = e(window), f.params = n, a("viewport").done(l).fail(s)
             }()
         }
     };
-    n.prototype = {destroy: function() {
-            this.$window.off(["scroll.dfp_views_counter", this.params.code].join("_"))
-        }}, e.fn.dfpViewsCounter = function(i) {
-        return this.each(function() {
+    n.prototype = {destroy: function () {
+        this.$window.off(["scroll.dfp_views_counter", this.params.code].join("_"))
+    }}, e.fn.dfpViewsCounter = function (i) {
+        return this.each(function () {
             var a = e(this), r = a.data("DfpViewsCounter");
             r && "string" == typeof i ? "function" == typeof r[i] && r[i]() : (i = e.extend({code: a.data("banner-code")}, o), i.code in t && a.data("DfpViewsCounter", new n(a, i)))
         })
-    }, e(function() {
+    }, e(function () {
         e(".dfp").dfpViewsCounter()
     })
 }(jQuery);
+
+$(window).load(function () {
+    var svg = document.querySelector('object').getSVGDocument().documentElement;
+    var paths = svg.getElementsByTagName("path");
+    var i;
+    for (i=0; i<paths.length;i++) {
+        paths[i].addEventListener('click', showAlert )
+        paths[i].attr('onmousemove', "ShowTooltip(evt, '" + paths[i].getAttribute("data-title") + "')" )
+    }
+
+    function showAlert(e) {
+        var title = this.getAttribute("data-title");
+        alert(title);
+    }
+});
