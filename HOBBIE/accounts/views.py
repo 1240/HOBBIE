@@ -9,6 +9,9 @@ from accounts.forms import UserChangeForm
 def edit(request):
     args = {}
     args['form'] = UserChangeForm()
+    args['user'] = request.user
+    args['username'] = auth.get_user(request).username
+    args['id_email'] = request.user.email
     '''
     if request.POST:
         newuser_from = UserChangeForm(request.POST)
@@ -20,4 +23,4 @@ def edit(request):
             return redirect('/')
         else:
             args['form'] = newuser_from'''
-    return render_to_response('register1.html', args)
+    return render_to_response('edit.html', args)
