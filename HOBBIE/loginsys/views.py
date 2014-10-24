@@ -2,9 +2,9 @@
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.shortcuts import redirect, render_to_response
-from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
+from accounts.forms import UserCreationForm
 
 
 def login(request):

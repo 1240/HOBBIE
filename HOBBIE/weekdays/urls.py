@@ -10,6 +10,7 @@ urlpatterns = patterns('',
        url(r'^rooms/', include('room.urls')),
        url(r'^main/', include('mainpage.urls')),
        url(r'^auth/', include('loginsys.urls')),
+       url(r'^account/', include('accounts.urls')),
        url(r'^', include('room.urls')),
 
 )

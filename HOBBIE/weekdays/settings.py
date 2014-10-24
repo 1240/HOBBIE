@@ -40,6 +40,8 @@ INSTALLED_APPS = (
     'mainpage',
     'jquery',
     'loginsys',
+    'accounts',
+    'profiles',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,6 +93,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "room/static"),
     os.path.join(BASE_DIR, "mainpage/static"),
     os.path.join(BASE_DIR, "loginsys/static"),
+    os.path.join(BASE_DIR, "accounts/static"),
 )
 
 TEMPLATE_DIRS = (
@@ -98,4 +101,11 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'room/templates'),
     os.path.join(BASE_DIR,  'mainpage/templates'),
     os.path.join(BASE_DIR,  'loginsys/templates'),
+    os.path.join(BASE_DIR,  'accounts/templates'),
+)
+
+AUTH_USER_MODEL = 'accounts.User'
+
+AUTHENTICATION_BACKENDS = (
+    ('django.contrib.auth.backends.ModelBackend'),
 )
