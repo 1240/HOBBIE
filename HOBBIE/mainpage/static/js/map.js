@@ -121,11 +121,12 @@ $(window).load(function () {
     var i;
     for (i=0; i<paths.length;i++) {
         paths[i].addEventListener('click', showAlert )
-        paths[i].attr('onmousemove', "ShowTooltip(evt, '" + paths[i].getAttribute("data-title") + "')" )
     }
 
     function showAlert(e) {
         var title = this.getAttribute("data-title");
-        alert(title);
+        var id = this.getAttribute("data-region");
+        var a_now = document.getElementById("region_" + id);
+        a_now.click();
     }
 });

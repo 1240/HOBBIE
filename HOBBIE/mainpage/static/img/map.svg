@@ -29,7 +29,6 @@
 	    tooltip_bg.setAttributeNS(null,"x",evt.clientX+8);
 	    tooltip_bg.setAttributeNS(null,"y",evt.clientY+14);
 	    tooltip_bg.setAttributeNS(null,"visibility","visibile");
-	    ctx.insertBefore(rect, textElm);
 	}
 
 	function HideTooltip(evt)
