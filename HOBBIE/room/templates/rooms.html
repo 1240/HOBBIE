@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 {% block rooms %}
-    <div class="container_div">
+
     {% for room in rooms %}
         <a href="/rooms/get/{{ room.id }}">
-        <div class="room-circle">
+        <div class="room-rect">
         <h6>{{ room.room_title }}</h6>
-        <p>{{ room.room_create_date }}</p>
+       <!-- <p>{{ room.room_create_date }}</p>-->
+        <div class="room-circle">
+
         <p>В комнате:{{ room.room_people_count }}</p>
+        </div>
         </div>
         </a>
 
     {% endfor %}
     <hr>
-    </div>
+
 {% endblock %}
