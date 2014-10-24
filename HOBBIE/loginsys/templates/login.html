@@ -7,58 +7,66 @@
 
     <div class="authenty signin-alt section-content" style="height: 495px;">
         <div class="row">
-            <div class="text-center">
-                <h3>Войти</h3>
-            </div>
-            <div class="medium-4 medium-offset-1 columns">
-                <div class="normal-signin">
-                    <div class="form-main">
-                        <form id="login_form" id="login_form" method="post" action="/auth/login/" role="form">
-                            <div class="form-group">
-                                {% csrf_token %}
-                                {% if login_error %}
-                                    <p><strong>{{ login_error }}</strong></p>
-                                {% endif %}
-                                <div class="un-wrap">
-                                    <i class="fa fa-user"></i>
-                                    <input type="text" name="username" class="form-control"
-                                           placeholder="Имя пользователя"
-                                           required="required">
-                                </div>
-                                <div class="pw-wrap">
-                                    <i class="fa fa-lock"></i>
-                                    <input type="password" name="password" class="form-control" placeholder="Пароль"
-                                           required="required">
-                                </div>
-                                <div class="row top-buffer">
-                                    <div class="medium-4 medium-offset-8 column">
-                                        <button type="submit" class="btn btn-block signin">Войти</button>
+            {% if is_authenticated %}
+                <div class="container_div center">
+                    Что такое, {{ username }}? Вы же уже авторизорваны.
+                    Впрочем, всегда можно <a href="/auth/logout">выйти</a>.<br/><br/>
+                </div>
+            {% else %}
+                <div class="text-center">
+                    <h3>Войти</h3>
+                </div>
+                <div class="medium-4 medium-offset-1 columns">
+                    <div class="normal-signin">
+                        <div class="form-main">
+                            <form id="login_form" id="login_form" method="post" action="/auth/login/" role="form">
+                                <div class="form-group">
+                                    {% csrf_token %}
+                                    {% if login_error %}
+                                        <p><strong>{{ login_error }}</strong></p>
+                                    {% endif %}
+                                    <div class="un-wrap">
+                                        <i class="fa fa-user"></i>
+                                        <input type="text" name="username" class="form-control"
+                                               placeholder="Имя пользователя"
+                                               required="required">
+                                    </div>
+                                    <div class="pw-wrap">
+                                        <i class="fa fa-lock"></i>
+                                        <input type="password" name="password" class="form-control" placeholder="Пароль"
+                                               required="required">
+                                    </div>
+                                    <div class="row top-buffer">
+                                        <div class="medium-4 medium-offset-8 column">
+                                            <button type="submit" class="btn btn-block signin">Войти</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class=" medium-2 small-1 columns">
-                <div class="horizontal-divider"></div>
-            </div>
-            <div class="medium-4 columns">
-                <div class="sns-signin">
-                    <a href="#" class="vk"><i
-                            class="fa fa-vk"></i><span>Войти через VK</span></a>
-                    <a href="#" class="google-plus"><i
-                            class="fa fa-google-plus"></i><span>Войти через Google+</span></a>
+                <div class=" medium-2 small-1 columns">
+                    <div class="horizontal-divider"></div>
                 </div>
-            </div>
-            <div class="medium-1 columns"></div>
-        </div>
-        <div class="row top-buffer bottom-wrap">
-            <div class="container">
+                <div class="medium-4 columns">
+                    <div class="sns-signin">
+                        <a href="#" class="vk"><i
+                                class="fa fa-vk"></i><span>Войти через VK</span></a>
+                        <a href="#" class="google-plus"><i
+                                class="fa fa-google-plus"></i><span>Войти через Google+</span></a>
+                    </div>
+                </div>
+                <div class="medium-1 columns"></div>
+                </div>
+                <div class="row top-buffer bottom-wrap">
+                <div class="container">
                     <a href="/auth/register/" id="forgot_from_2">
                         <i class="fa fa-plus"></i> Создать аккаунт
                     </a>
+                </div>.
+            {% endif %}
             </div>
-        </div>
     </div>
+
 {% endblock %}

@@ -116,3 +116,31 @@
     margin: 0 auto;
     width: 975px;
 }
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  /*
+  Yep!
+  */
+  transform: translate(-50%, -50%);
+
+  width: 40%;
+
+}
+
+.center_with_height {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  /*
+  Yep!
+  */
+  transform: translate(-50%, -50%);
+
+  width: 40%;
+  height: 50%;
+}

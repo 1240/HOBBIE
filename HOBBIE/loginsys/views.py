@@ -10,6 +10,8 @@ from django.contrib.auth.forms import UserCreationForm
 def login(request):
     args = {}
     args.update(csrf(request))
+    args['username'] = auth.get_user(request).username
+    args['is_authenticated'] = auth.get_user(request).is_authenticated()
     if request.POST:
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
