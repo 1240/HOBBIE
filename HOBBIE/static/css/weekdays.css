@@ -83,13 +83,12 @@
 }
 
 .logo-wrapper .logo {
-    width: 92px;
-    height: 92px;
+    width: 17%;
 
     position: absolute;
-    left: 50%;
+    left: 46%;
     right: 50%;
-    top: 5px;
+    top: -20px;
     margin-left: -46px;
     z-index: 2;
 }
