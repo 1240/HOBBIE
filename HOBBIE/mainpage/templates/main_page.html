@@ -5,299 +5,33 @@
     <script type="text/javascript" src="{% static "js/map.js" %}"></script>
 
     <div class="container_div">
-    <div class="cols b-select-city">
-    <div class="col-8">
-        <div class="b-map">
+        <div class="cols b-select-city">
+            <div class="col-8">
+                <div class="b-map">
 
-            <div class="map-svg map-svg_west">
-                <object data="{% static 'img/map.svg' %}" type="image/svg+xml"></object>
+                    <div class="map-svg map-svg_west">
+                        <object data="{% static 'img/map.svg' %}" type="image/svg+xml"></object>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 b-cities">
+                <div class="clear"></div>
+
+                <div class="col-2">
+                    {% for region in regions %}
+                        <a href="{{ region.region_url }}" id="{{ region.region_id }}" data-iscity=""
+                           title="{{ region.region_title }}" class=""
+                           data-state="">
+                            {{ region.region_name }}
+                        </a>
+                        {% if  region.region_id == 'region_636370' %}
+                        </div>
+                        <div class="col-2">
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                <div class="clear"></div>
             </div>
         </div>
-    </div>
-    <div class="col-4 b-cities">
-    <div class="col-4 current-city">
-        <a href="/kirovskaya_oblast_kirov" id="region_631870" title="Объявления в Кирове">Киров</a>
-    </div>
-    <div class="clear"></div>
-    <div class="col-2 cities">
-        <a href="/moskva" id="region_637640" data-iscity="1" title="Объявления в Москве" class=""
-           data-state="">
-            Москва
-        </a>
-        <a href="/sankt-peterburg" id="region_653240" data-iscity="1" title="Объявления в Санкт-Петербурге"
-           class="" data-state="">
-            Санкт-Петербург
-        </a>
-        <a href="/volgograd" id="region_624840" data-iscity="1" title="Объявления в Волгограде" class=""
-           data-state="">
-            Волгоград
-        </a>
-        <a href="/ekaterinburg" id="region_654070" data-iscity="1" title="Объявления в Екатеринбурге" class=""
-           data-state="">
-            Екатеринбург
-        </a>
-        <a href="/kazan" id="region_650400" data-iscity="1" title="Объявления в Казани" class=""
-           data-state="">
-            Казань
-        </a>
-        <a href="/krasnodar" id="region_633540" data-iscity="1" title="Объявления в Краснодаре" class=""
-           data-state="">
-            Краснодар
-        </a>
-    </div>
-    <div class="col-2 cities"><a href="/nizhniy_novgorod" id="region_640860" data-iscity="1"
-                                 title="Объявления в Нижнем Новгороде" class="" data-state="">
-        Нижний Новгород
-    </a>
-        <a href="/perm" id="region_644200" data-iscity="1" title="Объявления в Перми" class="" data-state="">
-            Пермь
-        </a>
-        <a href="/rostov-na-donu" id="region_652000" data-iscity="1" title="Объявления в Ростове-на-Дону"
-           class="" data-state="">
-            Ростов-на-Дону
-        </a>
-        <a href="/samara" id="region_653040" data-iscity="1" title="Объявления в Самаре" class=""
-           data-state="">
-            Самара
-        </a>
-        <a href="/ufa" id="region_646600" data-iscity="1" title="Объявления в Уфе" class="" data-state="">
-            Уфа
-        </a>
-        <a href="/chelyabinsk" id="region_661420" data-iscity="1" title="Объявления в Челябинске" class=""
-           data-state="">
-            Челябинск
-        </a>
-    </div>
-    <div class="clear"></div>
-
-    <div class="col-2">
-        <a href="/adygeya" id="region_645530" data-iscity="" title="Объявления в Республике Адыгее" class=""
-           data-state="">
-            Адыгея
-        </a>
-        <a href="/arhangelskaya_oblast" id="region_622650" data-iscity=""
-           title="Объявления в Архангельской области" class="" data-state="">
-            Архангельская обл.
-        </a>
-        <a href="/astrahanskaya_oblast" id="region_623110" data-iscity=""
-           title="Объявления в Астраханской области" class="" data-state="">
-            Астраханская обл.
-        </a>
-        <a href="/bashkortostan" id="region_645790" data-iscity=""
-           title="Объявления в Республике Башкортостан" class="" data-state="">
-            Башкортостан
-        </a>
-        <a href="/belgorodskaya_oblast" id="region_623410" data-iscity=""
-           title="Объявления в Белгородской области" class="" data-state="">
-            Белгородская обл.
-        </a>
-        <a href="/bryanskaya_oblast" id="region_623840" data-iscity="" title="Объявления в Брянской области"
-           class="" data-state="">
-            Брянская обл.
-        </a>
-        <a href="/vladimirskaya_oblast" id="region_624300" data-iscity=""
-           title="Объявления в Владимирской области" class="" data-state="">
-            Владимирская обл.
-        </a>
-        <a href="/volgogradskaya_oblast" id="region_624770" data-iscity=""
-           title="Объявления в Волгоградской области" class="" data-state="">
-            Волгоградская обл.
-        </a>
-        <a href="/vologodskaya_oblast" id="region_625330" data-iscity=""
-           title="Объявления в Вологодской области" class="" data-state="">
-            Вологодская обл.
-        </a>
-        <a href="/voronezhskaya_oblast" id="region_625670" data-iscity=""
-           title="Объявления в Воронежской области">
-            Воронежская обл.
-        </a>
-        <a href="/dagestan" id="region_646710" data-iscity="" title="Объявления в Республике Дагестан"
-           class="" data-state="">
-            Дагестан
-        </a>
-        <a href="/ivanovskaya_oblast" id="region_628450" data-iscity=""
-           title="Объявления в Ивановской области">
-            Ивановская обл.
-        </a>
-        <a href="/ingushetiya" id="region_628455" data-iscity="" title="Объявления в Ингушетии" class=""
-           data-state="">
-            Ингушетия
-        </a>
-        <a href="/kabardino-balkariya" id="region_629430" data-iscity=""
-           title="Объявления в Кабардино-Балкарии">
-            Кабардино-Балкария
-        </a>
-        <a href="/kaliningradskaya_oblast" id="region_629990" data-iscity=""
-           title="Объявления в Калининградской области" class="" data-state="">
-            Калининградская обл.
-        </a>
-        <a href="/kalmykiya" id="region_629995" data-iscity="" title="Объявления в Калмыкии" class=""
-           data-state="">
-            Калмыкия
-        </a>
-        <a href="/kaluzhskaya_oblast" id="region_630270" data-iscity="" title="Объявления в Калужской области"
-           class="" data-state="">
-            Калужская обл.
-        </a>
-        <a href="/karachaevo-cherkesiya" id="region_630750" data-iscity=""
-           title="Объявления в Карачаево-Черкесии" class="" data-state="">
-            Карачаево-Черкесия
-        </a>
-        <a href="/kareliya" id="region_648070" data-iscity="" title="Объявления в Республике Карелии" class=""
-           data-state="">
-            Карелия
-        </a>
-        <a href="/kirovskaya_oblast" id="region_631730" data-iscity="" title="Объявления в Кировской области"
-           class="" data-state="">
-            Кировская обл.
-        </a>
-        <a href="/komi" id="region_648340" data-iscity="" title="Объявления в Республике Коми" class=""
-           data-state="">
-            Коми
-        </a>
-        <a href="/kostromskaya_oblast" id="region_632390" data-iscity=""
-           title="Объявления в Костромской области">
-            Костромская обл.
-        </a>
-        <a href="/krasnodarskiy_kray" id="region_632660" data-iscity=""
-           title="Объявления в Краснодарском крае">
-            Краснодарский край
-        </a>
-        <a href="/krym" id="region_658810" data-iscity="" title="Объявления в Республике Крым">
-            Крым
-        </a>
-        <a href="/kurganskaya_oblast" id="region_635730" data-iscity=""
-           title="Объявления в Курганской области">
-            Курганская обл.
-        </a>
-        <a href="/kurskaya_oblast" id="region_636030" data-iscity="" title="Объявления в Курской области">
-            Курская обл.
-        </a>
-        <a href="/leningradskaya_oblast" id="region_636370" data-iscity=""
-           title="Объявления в Ленинградской области">
-            Ленинградская обл.
-        </a>
-        <a href="/lipetskaya_oblast" id="region_637260" data-iscity="" title="Объявления в Липецкой области">
-            Липецкая обл.
-        </a>
-        <a href="/mariy_el" id="region_648730" data-iscity="" title="Объявления в Республике Марий Эл">
-            Марий Эл
-        </a>
-    </div>
-    <div class="col-2"><a href="/mordoviya" id="region_648960" data-iscity=""
-                          title="Объявления в Республике Мордовии" class="" data-state="">
-        Мордовия
-    </a>
-        <a href="/moskovskaya_oblast" id="region_637680" data-iscity=""
-           title="Объявления в Московской области" class="" data-state="">
-            Московская обл.
-        </a>
-        <a href="/murmanskaya_oblast" id="region_640000" data-iscity=""
-           title="Объявления в Мурманской области" class="" data-state="">
-            Мурманская обл.
-        </a>
-        <a href="/nenetskiy_ao" id="region_640001" data-iscity="" title="Объявления в Ненецком АО" class=""
-           data-state="">
-            Ненецкий АО
-        </a>
-        <a href="/nizhegorodskaya_oblast" id="region_640310" data-iscity=""
-           title="Объявления в Нижегородской области" class="" data-state="">
-            Нижегородская обл.
-        </a>
-        <a href="/novgorodskaya_oblast" id="region_641240" data-iscity=""
-           title="Объявления в Новгородской области" class="" data-state="">
-            Новгородская обл.
-        </a>
-        <a href="/orenburgskaya_oblast" id="region_642480" data-iscity=""
-           title="Объявления в Оренбургской области" class="" data-state="">
-            Оренбургская обл.
-        </a>
-        <a href="/orlovskaya_oblast" id="region_643030" data-iscity="" title="Объявления в Орловской области"
-           class="" data-state="">
-            Орловская обл.
-        </a>
-        <a href="/penzenskaya_oblast" id="region_643250" data-iscity=""
-           title="Объявления в Пензенской области" class="" data-state="">
-            Пензенская обл.
-        </a>
-        <a href="/permskiy_kray" id="region_643700" data-iscity="" title="Объявления в Пермском крае" class=""
-           data-state="">
-            Пермский край
-        </a>
-        <a href="/pskovskaya_oblast" id="region_645260" data-iscity="" title="Объявления в Псковской области"
-           class="" data-state="">
-            Псковская обл.
-        </a>
-        <a href="/rostovskaya_oblast" id="region_651110" data-iscity=""
-           title="Объявления в Ростовской области" class="" data-state="">
-            Ростовская обл.
-        </a>
-        <a href="/ryazanskaya_oblast" id="region_652220" data-iscity="" title="Объявления в Рязанской области"
-           class="" data-state="">
-            Рязанская обл.
-        </a>
-        <a href="/samarskaya_oblast" id="region_652560" data-iscity="" title="Объявления в Самарской области"
-           class="" data-state="">
-            Самарская обл.
-        </a>
-        <a href="/saratovskaya_oblast" id="region_653420" data-iscity=""
-           title="Объявления в Саратовской области" class="" data-state="">
-            Саратовская обл.
-        </a>
-        <a href="/sverdlovskaya_oblast" id="region_653700" data-iscity=""
-           title="Объявления в Свердловской области" class="" data-state="">
-            Свердловская обл.
-        </a>
-        <a href="/severnaya_osetiya" id="region_649820" data-iscity="" title="Объявления в Северной Осетии"
-           class="" data-state="">
-            Северная Осетия
-        </a>
-        <a href="/smolenskaya_oblast" id="region_654860" data-iscity=""
-           title="Объявления в Смоленской области" class="" data-state="">
-            Смоленская обл.
-        </a>
-        <a href="/stavropolskiy_kray" id="region_655190" data-iscity=""
-           title="Объявления в Ставропольском крае" class="" data-state="">
-            Ставропольский край
-        </a>
-        <a href="/tambovskaya_oblast" id="region_656520" data-iscity=""
-           title="Объявления в Тамбовской области">
-            Тамбовская обл.
-        </a>
-        <a href="/tatarstan" id="region_650130" data-iscity="" title="Объявления в Республике Татарстан">
-            Татарстан
-        </a>
-        <a href="/tverskaya_oblast" id="region_656890" data-iscity="" title="Объявления в Тверской области">
-            Тверская обл.
-        </a>
-        <a href="/tulskaya_oblast" id="region_657610" data-iscity="" title="Объявления в Тульской области">
-            Тульская обл.
-        </a>
-        <a href="/udmurtiya" id="region_659200" data-iscity="" title="Объявления в Удмуртской республике">
-            Удмуртия
-        </a>
-        <a href="/ulyanovskaya_oblast" id="region_659540" data-iscity=""
-           title="Объявления в Ульяновской области">
-            Ульяновская обл.
-        </a>
-        <a href="/chelyabinskaya_oblast" id="region_660710" data-iscity=""
-           title="Объявления в Челябинской области">
-            Челябинская обл.
-        </a>
-        <a href="/chechenskaya_respublika" id="region_660711" data-iscity=""
-           title="Объявления в Чеченской республике">
-            Чеченская республика
-        </a>
-        <a href="/chuvashiya" id="region_662000" data-iscity="" title="Объявления в Чувашской Республике">
-            Чувашия
-        </a>
-        <a href="/yaroslavskaya_oblast" id="region_662530" data-iscity=""
-           title="Объявления в Ярославской области">
-            Ярославская обл.
-        </a>
-    </div>
-    <div class="clear"></div>
-    </div>
-    </div>
     </div>
 {% endblock %}

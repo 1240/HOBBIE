@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import get_template
 from django.contrib import auth
+from mainpage.models import Regions
 
 
 def home2(request):
@@ -33,6 +34,7 @@ def home(request):
     c = Context({
         "width": 621,
         "username": auth.get_user(request).username,
+        "regions": Regions.objects.all(),
     })
     svg = t.render(c)
     r = HttpResponse(svg)
