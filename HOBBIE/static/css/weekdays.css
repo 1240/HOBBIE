@@ -1,10 +1,18 @@
-.room {
+
+.room-rect {
+    width:160px;
+	height:80px;
+    margin:30px;
+    display:inline-block;
+    text-align:center;
+}
+.room-circle {
 	width:155px;
 	height:155px;
 	background-color:#e5e5ff;
 	border-radius:100%;
-	margin:30px;
-	display:inline-block;
+
+	padding-top: 15px;
     text-align:center;
 }
 

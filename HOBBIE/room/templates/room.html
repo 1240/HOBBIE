@@ -10,7 +10,6 @@
         <p>Обсуждение</p>
         {% for message in messages %}
             <p>{{ message.message_datetime }}: {{ message.message_text }}</p>
-
         {% endfor %}
         <hr>
         <form action="/rooms/addmessage/{{ room.id }}/" method="post">

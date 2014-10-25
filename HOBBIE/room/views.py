@@ -32,3 +32,6 @@ def addmessage(request, room_id):
             message.message_room = Room.objects.get(id=room_id)
             form.save()
     return redirect('/rooms/get/%s/' % room_id)
+
+def makeroom(request):
+    return render_to_response('makeroom.html')
