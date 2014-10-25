@@ -4,7 +4,7 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from django.shortcuts import render_to_response, redirect
 
-from room.forms import MessageForm
+from room.forms import MessageForm, RoomForm
 
 from room.models import Room, Message
 
@@ -34,4 +34,17 @@ def addmessage(request, room_id):
     return redirect('/rooms/get/%s/' % room_id)
 
 def makeroom(request):
-    return render_to_response('makeroom.html')
+    room_form = RoomForm
+    args2 = {}
+    args2.update(csrf(request))
+    args2['form'] = room_form
+    return render_to_response('makeroom.html', args2)
+
+def addroom(request):
+    pass
+
+def joinroom(request,room_id):
+    return redirect('/rooms/get/%s/' % room_id)
+
+def invite(request,room_id):
+    return redirect('/rooms/get/%s/' % room_id)

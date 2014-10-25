@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
 {% block rooms %}
    <p>Создать новую комнату</p>
+
+   <form action="/rooms/addroom/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="btn btn-default" value="Создать комнату">
+   </form>
 {% endblock %}

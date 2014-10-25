@@ -5,7 +5,6 @@ from django.db import models
 
 
 # Create your models here.
-from mainpage.models import Regions
 
 
 class Room(models.Model):
@@ -17,7 +16,7 @@ class Room(models.Model):
     room_create_date = models.DateTimeField(default=datetime.datetime.now)
     room_to_date = models.DateTimeField(null=True, blank=True)
     room_people_count = models.IntegerField(default=1)
-    room_retgion = models.ForeignKey(Regions)
+    #room_open = models.BooleanField(default=True)
 
 
 class Message(models.Model):
