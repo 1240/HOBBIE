@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url(r'^rooms/get/(?P<room_id>\d+)/$', 'room.views.room'),
     url(r'^rooms/addmessage/(?P<room_id>\d+)/$', 'room.views.addmessage'),
     url(r'^$', 'mainpage.views.home'),
+    url(r'^rooms/makeroom/$', 'room.views.makeroom'),
 )

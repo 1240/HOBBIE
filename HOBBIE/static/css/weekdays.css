@@ -1,19 +1,20 @@
+
 .room-rect {
     width:160px;
-	height:170px;
+	height:80px;
     margin:30px;
     display:inline-block;
-    text-align: center;
+    text-align:center;
 }
-
 .room-circle {
 	width:155px;
 	height:155px;
 	background-color:#e5e5ff;
 	border-radius:100%;
-    text-align: center;
-}
 
+	padding-top: 15px;
+    text-align:center;
+}
 
 .map-svg_west {
     margin-top: 10px;
@@ -100,12 +101,13 @@
 }
 
 .logo-wrapper .logo {
-    width: 17%;
+    width: 92px;
+    height: 92px;
 
     position: absolute;
-    left: 46%;
+    left: 50%;
     right: 50%;
-    top: -20px;
+    top: 5px;
     margin-left: -46px;
     z-index: 2;
 }
@@ -131,32 +133,4 @@
 .container_div {
     margin: 0 auto;
     width: 975px;
-}
-
-.center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-
-  /*
-  Yep!
-  */
-  transform: translate(-50%, -50%);
-
-  width: 40%;
-
-}
-
-.center_with_height {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-
-  /*
-  Yep!
-  */
-  transform: translate(-50%, -50%);
-
-  width: 40%;
-  height: 50%;
 }
