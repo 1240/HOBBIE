@@ -1,0 +1,639 @@
+[
+    {
+        "model": "mainpage.regions",
+        "pk": 1,
+        "fields": {
+            "region_name": "Адыгея",
+            "region_id": "region_645530",
+            "region_title": "Объявления в Республике Адыгее",
+            "region_url": "/adygeya"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 2,
+        "fields": {
+            "region_name": "Архангельская обл.",
+            "region_id": "region_622650",
+            "region_title": "Объявления в Архангельской области",
+            "region_url": "/arhangelskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 3,
+        "fields": {
+            "region_name": "Астраханская обл.",
+            "region_id": "region_623110",
+            "region_title": "Объявления в Астраханской области",
+            "region_url": "/astrahanskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 4,
+        "fields": {
+            "region_name": "Башкортостан",
+            "region_id": "region_645790",
+            "region_title": "Объявления в Республике Башкортостан",
+            "region_url": "/bashkortostan"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 5,
+        "fields": {
+            "region_name": "Белгородская обл.",
+            "region_id": "region_623410",
+            "region_title": "Объявления в Белгородской области",
+            "region_url": "/belgorodskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 6,
+        "fields": {
+            "region_name": "Брянская обл.",
+            "region_id": "region_623840",
+            "region_title": "Объявления в Брянской области",
+            "region_url": "/bryanskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 7,
+        "fields": {
+            "region_name": "Владимирская обл.",
+            "region_id": "region_624300",
+            "region_title": "Объявления в Владимирской области",
+            "region_url": "/vladimirskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 8,
+        "fields": {
+            "region_name": "Волгоградская обл.",
+            "region_id": "region_624770",
+            "region_title": "Объявления в Волгоградской области",
+            "region_url": "/volgogradskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 9,
+        "fields": {
+            "region_name": "Вологодская обл.",
+            "region_id": "region_625330",
+            "region_title": "Объявления в Вологодской области",
+            "region_url": "/vologodskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 10,
+        "fields": {
+            "region_name": "Воронежская обл.",
+            "region_id": "region_625670",
+            "region_title": "Объявления в Воронежской области",
+            "region_url": "/voronezhskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 11,
+        "fields": {
+            "region_name": "Дагестан",
+            "region_id": "region_646710",
+            "region_title": "Объявления в Республике Дагестан",
+            "region_url": "/dagestan"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 12,
+        "fields": {
+            "region_name": "Ивановская обл.",
+            "region_id": "region_628450",
+            "region_title": "Объявления в Ивановской области",
+            "region_url": "/ivanovskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 13,
+        "fields": {
+            "region_name": "Ингушетия",
+            "region_id": "region_628455",
+            "region_title": "Объявления в Ингушетии",
+            "region_url": "/ingushetiya"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 14,
+        "fields": {
+            "region_name": "Кабардино-Балкария",
+            "region_id": "region_629430",
+            "region_title": "Объявления в Кабардино-Балкарии",
+            "region_url": "/kabardino-balkariya"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 15,
+        "fields": {
+            "region_name": "Калининградская обл.",
+            "region_id": "region_629990",
+            "region_title": "Объявления в Калининградской области",
+            "region_url": "/kaliningradskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 16,
+        "fields": {
+            "region_name": "Калмыкия",
+            "region_id": "region_629995",
+            "region_title": "Объявления в Калмыкии",
+            "region_url": "/kalmykiya"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 17,
+        "fields": {
+            "region_name": "Калужская обл.",
+            "region_id": "region_630270",
+            "region_title": "Объявления в Калужской области",
+            "region_url": "/kaluzhskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 18,
+        "fields": {
+            "region_name": "Карачаево-Черкесия",
+            "region_id": "region_630750",
+            "region_title": "Объявления в Карачаево-Черкесии",
+            "region_url": "/karachaevo-cherkesiya"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 19,
+        "fields": {
+            "region_name": "Карелия",
+            "region_id": "region_648070",
+            "region_title": "Объявления в Республике Карелии",
+            "region_url": "/kareliya"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 20,
+        "fields": {
+            "region_name": "Кировская обл.",
+            "region_id": "region_631730",
+            "region_title": "Объявления в Кировской области",
+            "region_url": "/kirovskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 21,
+        "fields": {
+            "region_name": "Коми",
+            "region_id": "region_648340",
+            "region_title": "Объявления в Республике Коми",
+            "region_url": "/komi"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 22,
+        "fields": {
+            "region_name": "Костромская обл.",
+            "region_id": "region_632390",
+            "region_title": "Объявления в Костромской области",
+            "region_url": "/kostromskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 23,
+        "fields": {
+            "region_name": "Краснодарский край",
+            "region_id": "region_632660",
+            "region_title": "Объявления в Краснодарском крае",
+            "region_url": "/krasnodarskiy_kray"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 24,
+        "fields": {
+            "region_name": "Крым",
+            "region_id": "region_658810",
+            "region_title": "Объявления в Республике Крым",
+            "region_url": "/krym"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 25,
+        "fields": {
+            "region_name": "Курганская обл.",
+            "region_id": "region_635730",
+            "region_title": "Объявления в Курганской области",
+            "region_url": "/kurganskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 26,
+        "fields": {
+            "region_name": "Курская обл.",
+            "region_id": "region_636030",
+            "region_title": "Объявления в Курской области",
+            "region_url": "/kurskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 27,
+        "fields": {
+            "region_name": "Ленинградская обл.",
+            "region_id": "region_636370",
+            "region_title": "Объявления в Ленинградской области",
+            "region_url": "/leningradskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 28,
+        "fields": {
+            "region_name": "Липецкая обл.",
+            "region_id": "region_637260",
+            "region_title": "Объявления в Липецкой области",
+            "region_url": "/lipetskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 29,
+        "fields": {
+            "region_name": "Марий Эл",
+            "region_id": "region_648730",
+            "region_title": "Объявления в Республике Марий Эл",
+            "region_url": "/mariy_el"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 30,
+        "fields": {
+            "region_name": "Мордовия",
+            "region_id": "region_648960",
+            "region_title": "Объявления в Республике Мордовии",
+            "region_url": "/mordoviya"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 31,
+        "fields": {
+            "region_name": "Московская обл.",
+            "region_id": "region_637680",
+            "region_title": "Объявления в Московской области",
+            "region_url": "/moskovskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 32,
+        "fields": {
+            "region_name": "Мурманская обл.",
+            "region_id": "region_640000",
+            "region_title": "Объявления в Мурманской области",
+            "region_url": "/murmanskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 33,
+        "fields": {
+            "region_name": "Ненецкий АО",
+            "region_id": "region_640001",
+            "region_title": "Объявления в Ненецком АО",
+            "region_url": "/nenetskiy_ao"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 34,
+        "fields": {
+            "region_name": "Нижегородская обл.",
+            "region_id": "region_640310",
+            "region_title": "Объявления в Нижегородской области",
+            "region_url": "/nizhegorodskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 35,
+        "fields": {
+            "region_name": "Новгородская обл.",
+            "region_id": "region_641240",
+            "region_title": "Объявления в Новгородской области",
+            "region_url": "/novgorodskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 36,
+        "fields": {
+            "region_name": "Оренбургская обл.",
+            "region_id": "region_642480",
+            "region_title": "Объявления в Оренбургской области",
+            "region_url": "/orenburgskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 37,
+        "fields": {
+            "region_name": "Орловская обл.",
+            "region_id": "region_643030",
+            "region_title": "Объявления в Орловской области",
+            "region_url": "/orlovskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 38,
+        "fields": {
+            "region_name": "Пензенская обл.",
+            "region_id": "region_643250",
+            "region_title": "Объявления в Пензенской области",
+            "region_url": "/penzenskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 39,
+        "fields": {
+            "region_name": "Пермский край",
+            "region_id": "region_643700",
+            "region_title": "Объявления в Пермском крае",
+            "region_url": "/permskiy_kray"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 40,
+        "fields": {
+            "region_name": "Псковская обл.",
+            "region_id": "region_645260",
+            "region_title": "Объявления в Псковской области",
+            "region_url": "/pskovskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 41,
+        "fields": {
+            "region_name": "Ростовская обл.",
+            "region_id": "region_651110",
+            "region_title": "Объявления в Ростовской области",
+            "region_url": "/rostovskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 42,
+        "fields": {
+            "region_name": "Рязанская обл.",
+            "region_id": "region_652220",
+            "region_title": "Объявления в Рязанской области",
+            "region_url": "/ryazanskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 43,
+        "fields": {
+            "region_name": "Самарская обл.",
+            "region_id": "region_652560",
+            "region_title": "Объявления в Самарской области",
+            "region_url": "/samarskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 44,
+        "fields": {
+            "region_name": "Саратовская обл.",
+            "region_id": "region_653420",
+            "region_title": "Объявления в Саратовской области",
+            "region_url": "/saratovskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 45,
+        "fields": {
+            "region_name": "Свердловская обл.",
+            "region_id": "region_653700",
+            "region_title": "Объявления в Свердловской области",
+            "region_url": "/sverdlovskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 46,
+        "fields": {
+            "region_name": "Северная Осетия",
+            "region_id": "region_649820",
+            "region_title": "Объявления в Северной Осетии",
+            "region_url": "/severnaya_osetiya"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 47,
+        "fields": {
+            "region_name": "Смоленская обл.",
+            "region_id": "region_654860",
+            "region_title": "Объявления в Смоленской области",
+            "region_url": "/smolenskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 48,
+        "fields": {
+            "region_name": "Ставропольский край",
+            "region_id": "region_655190",
+            "region_title": "Объявления в Ставропольском крае",
+            "region_url": "/stavropolskiy_kray"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 49,
+        "fields": {
+            "region_name": "Тамбовская обл.",
+            "region_id": "region_656520",
+            "region_title": "Объявления в Тамбовской области",
+            "region_url": "/tambovskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 50,
+        "fields": {
+            "region_name": "Татарстан",
+            "region_id": "region_650130",
+            "region_title": "Объявления в Республике Татарстан",
+            "region_url": "/tatarstan"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 51,
+        "fields": {
+            "region_name": "Тверская обл.",
+            "region_id": "region_656890",
+            "region_title": "Объявления в Тверской области",
+            "region_url": "/tverskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 52,
+        "fields": {
+            "region_name": "Тульская обл.",
+            "region_id": "region_657610",
+            "region_title": "Объявления в Тульской области",
+            "region_url": "/tulskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 53,
+        "fields": {
+            "region_name": "Удмуртия",
+            "region_id": "region_659200",
+            "region_title": "Объявления в Удмуртской республике",
+            "region_url": "/udmurtiya"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 54,
+        "fields": {
+            "region_name": "Ульяновская обл.",
+            "region_id": "region_659540",
+            "region_title": "Объявления в Ульяновской области",
+            "region_url": "/ulyanovskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 55,
+        "fields": {
+            "region_name": "Челябинская обл.",
+            "region_id": "region_660710",
+            "region_title": "Объявления в Челябинской области",
+            "region_url": "/chelyabinskaya_oblast"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 56,
+        "fields": {
+            "region_name": "Чеченская республика",
+            "region_id": "region_660711",
+            "region_title": "Объявления в Чеченской республике",
+            "region_url": "/chechenskaya_respublika"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 57,
+        "fields": {
+            "region_name": "Чувашия",
+            "region_id": "region_662000",
+            "region_title": "Объявления в Чувашской Республике",
+            "region_url": "/chuvashiya"
+        }
+    }
+    ,
+    {
+        "model": "mainpage.regions",
+        "pk": 58,
+        "fields": {
+            "region_name": "Ярославская обл.",
+            "region_id": "region_662530",
+            "region_title": "Объявления в Ярославской области",
+            "region_url": "/yaroslavskaya_oblast"
+        }
+    }
+]
