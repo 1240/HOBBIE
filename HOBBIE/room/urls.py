@@ -8,4 +8,7 @@ urlpatterns = patterns('',
     url(r'^rooms/addmessage/(?P<room_id>\d+)/$', 'room.views.addmessage'),
     url(r'^$', 'mainpage.views.home'),
     url(r'^rooms/makeroom/$', 'room.views.makeroom'),
+    url(r'^rooms/addroom/$', 'room.views.addroom'),
+    url(r'^rooms/join/(?P<room_id>\d+)/$', 'room.views.joinroom'),
+    url(r'^rooms/invite/(?P<room_id>\d+)/$', 'room.views.invite'),
 )
