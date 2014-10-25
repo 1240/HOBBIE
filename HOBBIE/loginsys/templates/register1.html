@@ -4,6 +4,7 @@
 
     <div class="large-offset-3 large-6 columns">
         <form action="" method="post">
+            {% csrf_token %}
             {{ form }}
             <br>
             <button class=button" type="submit">Зарегистрироваться</button>
