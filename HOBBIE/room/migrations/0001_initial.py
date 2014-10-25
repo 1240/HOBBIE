@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import datetime
 
 
 class Migration(migrations.Migration):
@@ -14,8 +15,8 @@ class Migration(migrations.Migration):
             name='Message',
             fields=[
                 ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
-                ('message_text', models.TextField()),
-                ('message_datetime', models.DateTimeField()),
+                ('message_text', models.TextField(verbose_name='Текст сообщения')),
+                ('message_datetime', models.DateTimeField(default=datetime.datetime.now)),
             ],
             options={
                 'db_table': 'message',
@@ -26,11 +27,11 @@ class Migration(migrations.Migration):
             name='Room',
             fields=[
                 ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
-                ('room_title', models.CharField(max_length=100)),
-                ('room_text', models.TextField()),
-                ('room_create_date', models.DateTimeField()),
-                ('room_to_date', models.DateTimeField()),
-                ('room_people_count', models.IntegerField(default=0)),
+                ('room_title', models.CharField(max_length=100, verbose_name='Название комнаты')),
+                ('room_text', models.TextField(verbose_name='Описание комнаты')),
+                ('room_create_date', models.DateTimeField(default=datetime.datetime.now)),
+                ('room_to_date', models.DateTimeField(null=True, blank=True)),
+                ('room_people_count', models.IntegerField(default=1)),
             ],
             options={
                 'db_table': 'room',
