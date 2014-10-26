@@ -1,4 +1,9 @@
 
+.body-div-color {
+    background: #f8f8f8;
+    border-color: #E7E7E7;
+}
+
 .room-rect {
     width: 160px;
     height: 80px;
@@ -86,6 +91,10 @@
     float: left
 }
 
+.col-2 a{
+    color: #2285a2;
+}
+
 .vcenter {
     display: inline-block;
     vertical-align: middle;
@@ -131,7 +140,7 @@
     float: right;
 }
 
-.container_div {
+.container-div {
     margin: 0 auto;
     width: 975px;
 }
