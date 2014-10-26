@@ -28,12 +28,12 @@ def edit(request):
     return render_to_response('edit.html', args)
 
 def user_page(request, username):
-    args = {}
-    args['user'] = request.user
-    args['username'] = auth.get_user(request).username
-    args['id_email'] = request.user.email
-    args['first_name'] = request.user.first_name
-    args['last_name'] = request.user.last_name
-    args['date_of_birth'] = request.user.date_of_birth
+    name = {}
+    name['user'] = request.user
+    name['username'] = auth.get_user(request).username
+    name['id_email'] = request.user.email
+    name['first_name'] = request.user.first_name
+    name['last_name'] = request.user.last_name
+    name['date_of_birth'] = request.user.date_of_birth
 
-    return render_to_response('user_page.html', args)
+    return render_to_response('user_page.html', name)
