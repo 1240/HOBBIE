@@ -20,7 +20,7 @@
                 <div class="col-2">
                     {% for region in regions %}
                         <a href="{{ region.region_url }}" id="{{ region.region_id }}" data-iscity=""
-                           title="{{ region.region_title }}" class="" onmouseover="addHover('{{ region.region_id }}')"
+                           title="{{ region.region_title }}" class="map-region" onmouseover="addHover('{{ region.region_id }}')"
                            onmouseout="deleteHover('{{ region.region_id }}')" data-state="">
                             {{ region.region_name }}
                         </a>

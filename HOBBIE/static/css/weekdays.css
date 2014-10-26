@@ -1,19 +1,20 @@
 
 .room-rect {
-    width:160px;
-	height:80px;
-    margin:30px;
-    display:inline-block;
-    text-align:center;
+    width: 160px;
+    height: 80px;
+    margin: 30px;
+    display: inline-block;
+    text-align: center;
 }
-.room-circle {
-	width:155px;
-	height:155px;
-	background-color:#e5e5ff;
-	border-radius:100%;
 
-	padding-top: 15px;
-    text-align:center;
+.room-circle {
+    width: 155px;
+    height: 155px;
+    background-color: #e5e5ff;
+    border-radius: 100%;
+
+    padding-top: 15px;
+    text-align: center;
 }
 
 .map-svg_west {
@@ -133,4 +134,13 @@
 .container_div {
     margin: 0 auto;
     width: 975px;
+}
+
+.map-region:hover,
+.map-region[data-state='hover'] {
+    color: rgb(0, 207, 175);
+}
+
+a:hover {
+    color: rgb(0, 207, 175) !important;
 }
