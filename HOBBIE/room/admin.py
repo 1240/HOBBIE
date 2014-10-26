@@ -9,7 +9,7 @@ class RoomMessage(admin.StackedInline):
 
 
 class RoomAdmin(admin.ModelAdmin):
-    fields = ['room_title', 'room_text', 'room_to_date']
+    fields = ['room_title', 'room_text', 'room_to_date', 'room_region']
     inlines = [RoomMessage]
     list_filter = ['room_title', 'room_text', 'room_to_date', 'room_create_date']
 
