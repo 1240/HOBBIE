@@ -1369,7 +1369,7 @@ button, .button {
     padding-bottom: 1.0625rem;
     padding-left: 2rem;
     font-size: 1rem;
-    background-color: #2ba6cb;
+    background-color: #00cfaf;
     border-color: #2285a2;
     color: white;
     transition: background-color 300ms ease-out;
@@ -1502,7 +1502,7 @@ button.round, .button.round {
 }
 
 button.disabled, button[disabled], .button.disabled, .button[disabled] {
-    background-color: #2ba6cb;
+    background-color: #00cfaf;
     border-color: #2285a2;
     color: white;
     cursor: default;
@@ -1519,7 +1519,7 @@ button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[dis
 }
 
 button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
-    background-color: #2ba6cb;
+    background-color: #00cfaf;
 }
 
 button.disabled.secondary, button[disabled].secondary, .button.disabled.secondary, .button[disabled].secondary {
@@ -2413,7 +2413,7 @@ meta.foundation-mq-topbar {
     font-size: 0.8125rem;
     padding-right: 15px;
     padding-left: 15px;
-    background-color: #2ba6cb;
+    background-color: #00cfaf;
     border-color: #2285a2;
     color: white;
 }
@@ -2486,7 +2486,7 @@ meta.foundation-mq-topbar {
     font-size: 0.8125rem;
     padding-right: 15px;
     padding-left: 15px;
-    background-color: #2ba6cb;
+    background-color: #00cfaf;
     border-color: #2285a2;
     color: white;
 }
@@ -2562,7 +2562,7 @@ meta.foundation-mq-topbar {
 }
 
 .top-bar-section ul li.active > a {
-    background: #2ba6cb;
+    background: #00cfaf;
     color: white;
 }
 
@@ -2762,7 +2762,7 @@ meta.foundation-mq-topbar {
         padding: 0 15px;
         line-height: 45px;
         color: white;
-        background: #2ba6cb;
+        background: #00cfaf;
     }
 
     .top-bar-section li.active:not(.has-form) a:not(.button):hover {
@@ -2904,7 +2904,7 @@ meta.foundation-mq-topbar {
     }
 
     .no-js .top-bar-section ul li:active > a {
-        background: #2ba6cb;
+        background: #00cfaf;
         color: white;
     }
 
@@ -2948,7 +2948,7 @@ meta.foundation-mq-topbar {
     font-size: 0.6875rem;
     line-height: 0.6875rem;
     text-transform: uppercase;
-    color: #2ba6cb;
+    color: #00cfaf;
 }
 
 .breadcrumbs > *:hover a, .breadcrumbs > *:focus a {
@@ -2956,7 +2956,7 @@ meta.foundation-mq-topbar {
 }
 
 .breadcrumbs > * a {
-    color: #2ba6cb;
+    color: #00cfaf;
 }
 
 .breadcrumbs > *.current {
@@ -3016,7 +3016,7 @@ meta.foundation-mq-topbar {
     padding: 0.875rem 1.5rem 0.875rem 0.875rem;
     font-size: 0.8125rem;
     transition: opacity 300ms ease-out;
-    background-color: #2ba6cb;
+    background-color: #00cfaf;
     border-color: #258faf;
     color: white;
 }
@@ -3755,7 +3755,7 @@ meta.foundation-mq-topbar {
 }
 
 .panel.callout a:not(.button) {
-    color: #2ba6cb;
+    color: #00cfaf;
 }
 
 .panel.radius {
@@ -4039,7 +4039,7 @@ meta.foundation-mq-topbar {
 }
 
 .icon-bar > *:hover {
-    background: #2ba6cb;
+    background: #00cfaf;
 }
 
 .icon-bar > * label {
@@ -4311,14 +4311,14 @@ ul.pagination li.unavailable:hover a, ul.pagination li.unavailable a:focus, ul.p
 }
 
 ul.pagination li.current a, ul.pagination li.current button {
-    background: #2ba6cb;
+    background: #00cfaf;
     color: white;
     font-weight: bold;
     cursor: default;
 }
 
 ul.pagination li.current a:hover, ul.pagination li.current a:focus, ul.pagination li.current button:hover, ul.pagination li.current button:focus {
-    background: #2ba6cb;
+    background: #00cfaf;
 }
 
 ul.pagination li {
@@ -4353,7 +4353,7 @@ ul.pagination li {
 
 .side-nav li a:not(.button) {
     display: block;
-    color: #2ba6cb;
+    color: #00cfaf;
     margin: 0;
     padding: 0.4375rem 0.875rem;
 }
@@ -4378,7 +4378,7 @@ ul.pagination li {
 }
 
 .side-nav li.heading {
-    color: #2ba6cb;
+    color: #00cfaf;
     font-size: 0.875rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -4651,7 +4651,7 @@ td {
 
 /* Default Link Styles */
 a {
-    color: #2ba6cb;
+    color: #00cfaf;
     text-decoration: none;
     line-height: inherit;
 }
@@ -5369,7 +5369,7 @@ dialog[open] {
 
 .has-tip:hover, .has-tip:focus {
     border-bottom: dotted 1px #134b5b;
-    color: #2ba6cb;
+    color: #00cfaf;
 }
 
 .has-tip.tip-left, .has-tip.tip-right {
@@ -5421,7 +5421,7 @@ dialog[open] {
 }
 
 .tooltip.opened {
-    color: #2ba6cb !important;
+    color: #00cfaf !important;
     border-bottom: dotted 1px #134b5b !important;
 }
 
@@ -5704,7 +5704,7 @@ dialog[open] {
 }
 
 .progress .meter {
-    background: #2ba6cb;
+    background: #00cfaf;
     height: 100%;
     display: block;
 }
@@ -5789,7 +5789,7 @@ dialog[open] {
 .sub-nav li.active a {
     border-radius: 3px;
     font-weight: normal;
-    background: #2ba6cb;
+    background: #00cfaf;
     padding: 0.1875rem 1rem;
     cursor: default;
     color: white;
@@ -6003,7 +6003,7 @@ dialog[open] {
     margin-bottom: inherit;
     padding: 0.25rem 0.5rem 0.25rem;
     font-size: 0.6875rem;
-    background-color: #2ba6cb;
+    background-color: #00cfaf;
     color: white;
 }
 
@@ -6963,7 +6963,7 @@ table tr td {
 }
 
 .range-slider.radius .range-slider-handle {
-    background: #2ba6cb;
+    background: #00cfaf;
     border-radius: 3px;
 }
 
@@ -6977,7 +6977,7 @@ table tr td {
 }
 
 .range-slider.round .range-slider-handle {
-    background: #2ba6cb;
+    background: #00cfaf;
     border-radius: 1000px;
 }
 
@@ -6992,7 +6992,7 @@ table tr td {
 }
 
 .range-slider.disabled .range-slider-handle, .range-slider[disabled] .range-slider-handle {
-    background: #2ba6cb;
+    background: #00cfaf;
     cursor: default;
     opacity: 0.7;
 }
@@ -7019,7 +7019,7 @@ table tr td {
     cursor: pointer;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
-    background: #2ba6cb;
+    background: #00cfaf;
 }
 
 .range-slider-handle:hover {
@@ -7614,7 +7614,7 @@ kbd {
 }
 
 .switch input:checked + label {
-    background: #2ba6cb;
+    background: #00cfaf;
 }
 
 .switch input:checked + label:after {
@@ -7645,7 +7645,7 @@ kbd {
 }
 
 .switch input:checked + label {
-    background: #2ba6cb;
+    background: #00cfaf;
 }
 
 .switch.large label {

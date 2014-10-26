@@ -1,21 +1,41 @@
 {% extends 'base.html' %}
-        {% load staticfiles %}
+{% load staticfiles %}
 {% block rooms %}
-        <h3>Комнаты: </h3>
-        <p><a href="/rooms/makeroom/">Создать комнату</a></p>
-    {% for room in rooms %}
-        <a href="/rooms/get/{{ room.id }}">
-        <div class="room-rect">
-        <h6>{{ room.room_title }}</h6>
-       <!-- <p>{{ room.room_create_date }}</p>-->
-        <div class="room-circle">
-        <img src="{% static "5.png" %}">
-        <p>В комнате:{{ room.room_people_count }}</p>
+    <div class="body-div-color">
+        <div class="row vertical-align">
+            <div class="large-5 columns text-right">по дате публикации</div>
+            <div class="large-2 columns text-center">
+                <div class="switch">
+                    <input id="exampleCheckboxSwitch" type="checkbox">
+                    <label for="exampleCheckboxSwitch"></label>
+                </div>
+            </div>
+            <div class="large-5 columns text-left">по количеству участников</div>
         </div>
+
+        <div class="large-9 columns">
+            <h3>Комнаты: </h3>
+
+            <p><a href="/rooms/makeroom/">Создать комнату</a></p>
+            <ul class="small-block-grid-3">
+                {% for room in rooms %}
+                    <li>
+                        <a href="/rooms/get/{{ room.id }}">
+                            <div class="room-rect">
+                                <h6>{{ room.room_title }}</h6>
+                                <!-- <p>{{ room.room_create_date }}</p>-->
+                                <div class="room-circle">
+                                    <img src="{% static "img/5.png" %}">
+
+                                    <p>В комнате:{{ room.room_people_count }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
-        </a>
-
-    {% endfor %}
-    <hr>
-
+        <div class="large-3"></div>
+        <hr>
+    </div>
 {% endblock %}
