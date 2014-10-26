@@ -5,14 +5,13 @@
         <div class="row vertical-align">
             <div class="large-5 columns text-right">по дате публикации</div>
             <div class="large-2 columns text-center">
-                <div class="switch">
-                    <input id="exampleCheckboxSwitch" type="checkbox">
+                <form method="get" class="switch">
+                    <input id="exampleCheckboxSwitch" name="toggle" onclick="this.form.submit()" type="checkbox" {{ checked }}>
                     <label for="exampleCheckboxSwitch"></label>
-                </div>
+                </form>
             </div>
             <div class="large-5 columns text-left">по количеству участников</div>
         </div>
-
         <div class="large-9 columns">
             <h3>Комнаты: </h3>
 

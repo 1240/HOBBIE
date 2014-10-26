@@ -10,7 +10,19 @@ from room.models import Room, Message
 
 
 def rooms(request):
-    return render_to_response('rooms.html', {'rooms': Room.objects.all(), 'username': auth.get_user(request).username})
+    if 'toggle' in request.GET:
+        checked = 'checked'
+    else:
+        checked = ''
+    if (checked == ''):
+        rooms = Room.objects.order_by("-room_create_date")
+    else:
+        rooms = Room.objects.order_by("-room_people_count")
+    args = {}
+    args['rooms'] = rooms
+    args['username'] = auth.get_user(request).username
+    args['checked'] = checked
+    return render_to_response('rooms.html', args)
 
 
 def room(request, room_id=1):
