@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from django.shortcuts import redirect, render_to_response
 
+
 # Create your views here.
 from accounts.forms import UserCreationForm
 

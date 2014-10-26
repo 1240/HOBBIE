@@ -6,5 +6,5 @@ __author__ = '1240'
 
 urlpatterns = patterns('',
     url(r'^edit/', 'accounts.views.edit'),
-    url(r'^(?P<username>\w+)/$', 'accounts.views.user_page'),
+    url(r'^(?P<username>\w+)/', 'accounts.views.user_page'),
 )
