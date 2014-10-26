@@ -35,6 +35,7 @@ def home(request):
         "width": 621,
         "username": auth.get_user(request).username,
         "regions": Regions.objects.all(),
+        "id_user": auth.get_user(request).id,
     })
     svg = t.render(c)
     r = HttpResponse(svg)

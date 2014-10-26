@@ -38,7 +38,7 @@
                                  style="width:49px; margin-top: -15px;">
                         </a>
                     </li>
-                    <li><a href="/account/edit" title="{{ username }}">{{ username }}</a></li>
+                    <li><a href="/account/{{ username }}/" title="{{ username }}">{{ username }}</a></li>
                     <li><a href="#">Сообщения</a></li>
                     <li><a href="#">Приглашения</a></li>
                     <li><a href="/auth/logout">Выйти</a></li>
@@ -73,6 +73,8 @@
 {% block map %}{% endblock %}
 {% block rooms %}{% endblock %}
 {% block login %}{% endblock %}
+{% block user_page %}{% endblock %}
 {% block edit %}{% endblock %}
+
 </body>
 </html>

@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect, render_to_response
 
 # Create your views here.
 from accounts.forms import UserChangeForm
+from accounts.models import User
+
 
 
 def edit(request):
@@ -24,3 +26,7 @@ def edit(request):
         else:
             args['form'] = newuser_from'''
     return render_to_response('edit.html', args)
+
+def user_page(request, username):
+
+    return render_to_response('user_page.html', {"name": auth.get_user(request).username,"email":request.user.email})
