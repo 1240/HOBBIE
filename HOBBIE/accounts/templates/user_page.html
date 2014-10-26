@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block user_page %}
+
+    <div class="large-offset-3 large-6 columns">
+        <form action="" method="post">
+             <div class ="label round secondary"><a href="/account/edit/">Редактировать страницу</a></div>
+            {% csrf_token %}
+            <h3>Имя: {{ name }}</h3>
+            <p></p>
+            <h5>Email: {{ email }}</h5>
+            <br>
+        </form>
+    </div>
+
+{% endblock %}

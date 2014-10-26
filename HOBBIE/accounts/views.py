@@ -29,4 +29,4 @@ def edit(request):
 
 def user_page(request, username):
 
-    return render_to_response('user_page.html', {"name": auth.get_user(request).username,"email":request.user.email})
+    return render_to_response('user_page.html', {"name": User.objects.get()})
