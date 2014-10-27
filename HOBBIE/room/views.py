@@ -1,8 +1,11 @@
 # Create your views here.
+from django import forms
 from django.contrib import auth
 from django.core.context_processors import csrf
+from django.db.models import fields
 from django.shortcuts import render_to_response, redirect
 from django.template.loader import select_template
+from mainpage.models import Regions
 
 from room.forms import MessageForm, RoomForm
 
@@ -22,6 +25,7 @@ def rooms(request):
     args['rooms'] = rooms
     args['username'] = auth.get_user(request).username
     args['toggle'] = checked
+    args['regions_list'] = Regions.objects.all()
     return render_to_response('rooms.html', args)
 
 

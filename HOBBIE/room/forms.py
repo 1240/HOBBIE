@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.forms import ModelForm
+
+from mainpage.models import Regions
 from room.models import Message, Room
-from django.forms import ModelForm, Form
+
 
 __author__ = '1240'
 

@@ -10,7 +10,7 @@ _author__ = '1240'
 
 
 @dajaxice_register
-def rooms_list(request, toggle=''):
+def rooms_list(request):
     json_string = request.POST.get('argv')
     argv = json.loads(json_string)
     if argv.get('toggle'):
@@ -19,7 +19,8 @@ def rooms_list(request, toggle=''):
     else:
         rooms = Room.objects.order_by("-room_create_date")
         checked = 'notchecked'
-
+    if (argv.get('region')):
+        rooms = rooms.filter(room_region_id=argv.get('region'))
     args = {}
     args['rooms'] = rooms
 

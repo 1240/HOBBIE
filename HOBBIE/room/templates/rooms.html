@@ -4,7 +4,7 @@
 {% block rooms %}
     {% dajaxice_js_import %}
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
-    <div  class="body-div-color">
+    <div class="large-9 columns body-div-color">
         <div class="row vertical-align">
             <div class="large-5 columns text-right">по дате публикации</div>
             <div class="large-2 columns text-center">
@@ -17,29 +17,42 @@
             </div>
             <div class="large-5 columns text-left">по количеству участников</div>
         </div>
-        <div class="large-9 columns">
-            <h3>Комнаты: </h3>
 
-            <p><a href="/rooms/makeroom/">Создать комнату</a></p>
-            <ul id="rooms" class="small-block-grid-3">
-                {% for room in rooms %}
-                    <li>
-                        <a href="/rooms/get/{{ room.id }}">
-                            <div class="room-rect">
-                                <h6>{{ room.room_title }}</h6>
-                                <!-- <p>{{ room.room_create_date }}</p>-->
-                                <div class="room-circle">
-                                    <img src="{% static "img/5.png" %}">
+        <h3>Комнаты: </h3>
 
-                                    <p>В комнате:{{ room.room_people_count }}</p>
-                                </div>
+        <p><a href="/rooms/makeroom/">Создать комнату</a></p>
+        <ul id="rooms" class="small-block-grid-3">
+            {% for room in rooms %}
+                <li>
+                    <a href="/rooms/get/{{ room.id }}">
+                        <div class="room-rect">
+                            <h6>{{ room.room_title }}</h6>
+                            <!-- <p>{{ room.room_create_date }}</p>-->
+                            <div class="room-circle">
+                                <img src="{% static "img/5.png" %}">
+
+                                <p>В комнате:{{ room.room_people_count }}</p>
                             </div>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="large-3"></div>
-        <hr>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
+    <div class="large-3 columns">
+        <label>Выбирите область
+            <select onchange="Dajaxice.room.rooms_list(Dajax.process,
+             {'toggle':$('#exampleCheckboxSwitch').is(':checked'), 'region': this.selectedIndex})">
+                <option value="all">Все</option>
+                {% for region in regions_list %}
+                    <option value="{{ region.region_id }}">{{ region.region_name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label>Поиск по названию комнаты
+            <input type="text" placeholder="Название комнаты" maxlength="200"/>
+        </label>
+    </div>
+    <hr>
+
 {% endblock %}
