@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -41,6 +42,8 @@ INSTALLED_APPS = (
     'jquery',
     'loginsys',
     'accounts',
+    'dajaxice',
+    'dajax',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -96,11 +99,11 @@ STATICFILES_DIRS = (
 )
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
-    os.path.join(BASE_DIR,  'room/templates'),
-    os.path.join(BASE_DIR,  'mainpage/templates'),
-    os.path.join(BASE_DIR,  'loginsys/templates'),
-    os.path.join(BASE_DIR,  'accounts/templates'),
+    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'room/templates'),
+    os.path.join(BASE_DIR, 'mainpage/templates'),
+    os.path.join(BASE_DIR, 'loginsys/templates'),
+    os.path.join(BASE_DIR, 'accounts/templates'),
 )
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -110,5 +113,10 @@ AUTHENTICATION_BACKENDS = (
 )
 
 FIXTURE_DIRS = (
-    os.path.join(BASE_DIR,  'fixtures'),
+    os.path.join(BASE_DIR, 'fixtures'),
 )
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "dajaxice.finders.DajaxiceFinder")

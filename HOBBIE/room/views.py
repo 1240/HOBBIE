@@ -1,8 +1,8 @@
 # Create your views here.
 from django.contrib import auth
-
 from django.core.context_processors import csrf
 from django.shortcuts import render_to_response, redirect
+from django.template.loader import select_template
 
 from room.forms import MessageForm, RoomForm
 
@@ -13,15 +13,15 @@ def rooms(request):
     if 'toggle' in request.GET:
         checked = 'checked'
     else:
-        checked = ''
-    if (checked == ''):
+        checked = 'notchecked'
+    if (checked == 'notchecked'):
         rooms = Room.objects.order_by("-room_create_date")
     else:
         rooms = Room.objects.order_by("-room_people_count")
     args = {}
     args['rooms'] = rooms
     args['username'] = auth.get_user(request).username
-    args['checked'] = checked
+    args['toggle'] = checked
     return render_to_response('rooms.html', args)
 
 
@@ -45,6 +45,7 @@ def addmessage(request, room_id):
             form.save()
     return redirect('/rooms/get/%s/' % room_id)
 
+
 def makeroom(request):
     room_form = RoomForm
     args2 = {}
@@ -52,11 +53,14 @@ def makeroom(request):
     args2['form'] = room_form
     return render_to_response('makeroom.html', args2)
 
+
 def addroom(request):
     pass
 
-def joinroom(request,room_id):
+
+def joinroom(request, room_id):
     return redirect('/rooms/get/%s/' % room_id)
 
-def invite(request,room_id):
+
+def invite(request, room_id):
     return redirect('/rooms/get/%s/' % room_id)

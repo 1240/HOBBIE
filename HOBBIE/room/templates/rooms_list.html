@@ -1,11 +1,5 @@
-{% extends 'base.html' %}
-{% load dajaxice_templatetags %}
-{% load staticfiles %}
-{% block rooms %}
-    {% dajaxice_js_import %}
-    <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
-    <div id="rooms"  class="body-div-color">
-        <div class="row vertical-align">
+{% load static %}
+<div class="row vertical-align">
             <div class="large-5 columns text-right">по дате публикации</div>
             <div class="large-2 columns text-center">
                 <div class="switch">
@@ -41,5 +35,3 @@
         </div>
         <div class="large-3"></div>
         <hr>
-    </div>
-{% endblock %}
