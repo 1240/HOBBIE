@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib import auth
 from django.core.context_processors import csrf
+from django.core.paginator import Paginator
 from django.db.models import fields
 from django.shortcuts import render_to_response, redirect
 from django.template.loader import select_template
@@ -21,8 +22,9 @@ def rooms(request):
         rooms = Room.objects.order_by("-room_create_date")
     else:
         rooms = Room.objects.order_by("-room_people_count")
+    current_page = Paginator(object_list=rooms, per_page=2)
     args = {}
-    args['rooms'] = rooms
+    args['rooms'] = current_page.page(1)
     args['username'] = auth.get_user(request).username
     args['toggle'] = checked
     args['regions_list'] = Regions.objects.all()

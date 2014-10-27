@@ -10,7 +10,10 @@
             <div class="large-2 columns text-center">
                 <div class="switch">
                     <input id="exampleCheckboxSwitch" name="toggle"
-                           onclick="Dajaxice.room.rooms_list(Dajax.process, {'toggle':$('#exampleCheckboxSwitch').is(':checked')})"
+                           onclick="Dajaxice.room.rooms_list(Dajax.process,
+                        {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
+                        'region': document.getElementById('region_select').selectedIndex,
+                        'p': 1})"
                            type="checkbox" {{ toggle }}>
                     <label for="exampleCheckboxSwitch"></label>
                 </div>
@@ -21,28 +24,73 @@
         <h3>Комнаты: </h3>
 
         <p><a href="/rooms/makeroom/">Создать комнату</a></p>
-        <ul id="rooms" class="small-block-grid-3">
-            {% for room in rooms %}
-                <li>
-                    <a href="/rooms/get/{{ room.id }}">
-                        <div class="room-rect">
-                            <h6>{{ room.room_title }}</h6>
-                            <!-- <p>{{ room.room_create_date }}</p>-->
-                            <div class="room-circle">
-                                <img src="{% static "img/5.png" %}">
 
-                                <p>В комнате:{{ room.room_people_count }}</p>
+        <div id="rooms">
+            <ul class="small-block-grid-3">
+                {% for room in rooms %}
+                    <li>
+                        <a href="/rooms/get/{{ room.id }}">
+                            <div class="room-rect">
+                                <h6>{{ room.room_title }}</h6>
+                                <!-- <p>{{ room.room_create_date }}</p>-->
+                                <div class="room-circle">
+                                    <img src="{% static "img/5.png" %}">
+
+                                    <p>В комнате:{{ room.room_people_count }}</p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="row">
+                <div class="large-3 large-offset-5 columns">
+                    <ul class="pagination">
+                        {% if rooms.has_previous %}
+                            <li class="arrow"><a href="#"
+                                                 onclick="Dajaxice.room.rooms_list(Dajax.process,
+                                                         {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
+                                                         'region': this.selectedIndex,
+                                                         'p': {{ rooms.previous_page_number }}})">&laquo;</a></li>
+                        {% else %}
+                            <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                        {% endif %}
+                        {% for page in rooms.paginator.page_range %}
+                            {% if page == rooms.number %}
+                                <li class="current"><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                                        {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
+                                        'region': this.selectedIndex,
+                                        'p': {{ page }}})">{{ page }}</a></li>
+                            {% else %}
+                                <li><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                                        {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
+                                        'region': this.selectedIndex,
+                                        'p': {{ page }}})">{{ page }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if rooms.has_next %}
+                            <li class="arrow"><a href="#"
+                                                 onclick="Dajaxice.room.rooms_list(Dajax.process,
+                                                         {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
+                                                         'region': this.selectedIndex,
+                                                         'p': {{ rooms.next_page_number }}})">&raquo;</a></li>
+                        {% else %}
+                            <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
     </div>
     <div class="large-3 columns">
         <label>Выберите область
-            <select onchange="Dajaxice.room.rooms_list(Dajax.process,
-             {'toggle':$('#exampleCheckboxSwitch').is(':checked'), 'region': this.selectedIndex})">
+            <select id="region_select" onchange="Dajaxice.room.rooms_list(Dajax.process,
+                        {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
+                        'region': this.selectedIndex,
+                        'p': 1})">
                 <option value="all">Все</option>
                 {% for region in regions_list %}
                     <option value="{{ region.region_id }}">{{ region.region_name }}</option>
