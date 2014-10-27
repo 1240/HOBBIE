@@ -13,7 +13,7 @@ _author__ = '1240'
 def rooms_list(request, toggle=''):
     json_string = request.POST.get('argv')
     argv = json.loads(json_string)
-    if argv.get('toggle') == 'notchecked':
+    if argv.get('toggle'):
         rooms = Room.objects.order_by("-room_people_count")
         checked = 'checked'
     else:
@@ -22,7 +22,6 @@ def rooms_list(request, toggle=''):
 
     args = {}
     args['rooms'] = rooms
-    args['toggle'] = checked
 
     render = render_to_string('rooms_list.html', args)
 
