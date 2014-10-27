@@ -39,7 +39,7 @@ def room(request, room_id=1):
     args['username'] = auth.get_user(request).username
     return render_to_response('room.html', args)
 
-
+'''
 def addmessage(request, room_id):
     if request.POST:
         form = MessageForm(request.POST)
@@ -47,7 +47,7 @@ def addmessage(request, room_id):
             message = form.save(commit=False)
             message.message_room = Room.objects.get(id=room_id)
             form.save()
-    return redirect('/rooms/get/%s/' % room_id)
+    return redirect('/rooms/get/%s/' % room_id)'''
 
 
 def makeroom(request):
@@ -59,7 +59,13 @@ def makeroom(request):
 
 
 def addroom(request):
-    pass
+    if request.POST:
+        form = RoomForm(request.POST)
+        if form.is_valid():
+            #message = form.save(commit=False)
+            #message.message_room = Room.objects.get(id=room_id)
+            form.save()
+    return redirect('/rooms/all/')
 
 
 def joinroom(request, room_id):

@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
+{% load dajaxice_templatetags %}
+{% load staticfiles %}
 {% block rooms %}
+    {% dajaxice_js_import %}
+    <!--<script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>-->
+    <script type="text/javascript" src="/js/jquery.dajax.core.js" charset="utf-8"></script>
+    <div id="chat">
     <div class="container-div">
-    <a href="/rooms/join/{{ room.id }}/">Вступить</a>
+    <a href="/rooms/join/{{ room.id }}/">Вступить</a><a href="/rooms/leave/{{ room.id }}/">Покинуть</a>
     <a href="/rooms/invite/{{ room.id }}/">Пригласить</a>
 
     <h4>{{ room.room_title }}</h4>
@@ -15,11 +21,14 @@
             <p>{{ message.message_datetime }}: {{ message.message_text }}</p>
         {% endfor %}
         <hr>
-        <form action="/rooms/addmessage/{{ room.id }}/" method="post">
+        <form method="post">
             {% csrf_token %}
             {{ form }}
-            <input type="submit" class="btn btn-default" value="Написать сообщение">
+            <input type="button" class="btn btn-default" value="Написать сообщение"
+                    onclick="Dajaxice.room.chat(Dajax.process, {'room_id':'{{ room.id }}'})">
+
         </form>
+    </div>
     </div>
     </div>
 {% endblock %}
