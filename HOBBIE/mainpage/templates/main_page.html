@@ -4,20 +4,20 @@
     <script type="text/javascript" src="{% static "js/jquery/jquery.svg.js" %}"></script>
     <script type="text/javascript" src="{% static "js/map.js" %}"></script>
     <div class="row text-center b-map">
-    <hr>
-    <p>Описание сервиса</p>
-    <hr>
-    <p>Формы регистрации</p>
-    <hr>
+        <hr>
+        <p>Описание сервиса</p>
+        <hr>
+        <p>Формы регистрации</p>
+        <hr>
     </div>
     <hr>
-    <div class="container-div">
+    <!--<div class="container-div">
         <div class="cols b-select-city">
             <div class="col-8">
                 <div class="b-map">
 
                     <div class="map-svg map-svg_west">
-                        <object data="{% static 'img/map.svg' %}" type="image/svg+xml"></object>
+                        <object data="{% static 'img/map1.svg' %}" type="image/svg+xml"></object>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,8 @@
                 <div class="col-2">
                     {% for region in regions %}
                         <a href="{{ region.region_url }}" id="{{ region.region_id }}" data-iscity=""
-                           title="{{ region.region_title }}" class="map-region" onmouseover="addHover('{{ region.region_id }}')"
+                           title="{{ region.region_title }}" class="map-region" onmouseover="addHover('
+        {{ region.region_id }}')"
                            onmouseout="deleteHover('{{ region.region_id }}')" data-state="">
                             {{ region.region_name }}
                         </a>
@@ -40,5 +41,8 @@
                 <div class="clear"></div>
             </div>
         </div>
+    </div> -->
+    <div>
+        <object data="{% static 'img/map1.svg' %}" type="image/svg+xml"></object>
     </div>
 {% endblock %}
