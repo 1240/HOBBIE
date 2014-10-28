@@ -51,27 +51,6 @@ def rooms_list(request):
     return dajax.json()
 
 
-def chat(request, room_id=0):
-    json_string = request.POST.get('argv')
-    argv = json.loads(json_string)
-
-    form = MessageForm
-    if form.is_valid():
-        message = form.save(commit=False)
-        message.message_room = Room.objects.get(id=room_id)
-        form.save()
-
-    args = {}
-
-    args.update(csrf(request))
-
-    args['messages'] = Message.objects.filter(message_room_id=room_id).order_by('message_datetime')
-
-    dajax = Dajax()
-    dajax.assign('#chat', 'innerHTML', render_to_string('chat.html', args))
-    return dajax.json()
-
-
 @dajaxice_register
 def send_message(request):
     json_string = request.POST.get('argv')
