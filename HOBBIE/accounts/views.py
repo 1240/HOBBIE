@@ -29,5 +29,5 @@ def edit(request):
 def user_page(request, username):
     args = {}
     args['user'] = auth.get_user(request)
-
+    args['username'] = auth.get_user(request).username
     return render_to_response('user_page.html', args)
