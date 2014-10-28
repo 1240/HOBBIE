@@ -19,18 +19,24 @@ def rooms_list(request):
     json_string = request.POST.get('argv')
     argv = json.loads(json_string)
 
-    if argv.get('toggle'):
-        rooms = Room.objects.order_by("-room_people_count")
-        checked = 'checked'
-    else:
-        rooms = Room.objects.order_by("-room_create_date")
-        checked = 'notchecked'
-
-    if (argv.get('region')):
-        rooms = rooms.filter(room_region_id=argv.get('region'))
-
+    toggle = argv.get('toggle')
+    region_index = argv.get('region')
     page_number = argv.get('p')
-    current_page = Paginator(object_list=rooms, per_page=2)
+
+    per_page = 2
+    if region_index and toggle:
+        current_page = Paginator(object_list=Room.objects.filter(room_region_id=argv.get('region'))
+                                 .order_by("-room_people_count"), per_page=per_page)
+    elif toggle:
+        current_page = Paginator(object_list=Room.objects.all()
+                                 .order_by("-room_people_count"), per_page=per_page)
+    elif region_index:
+        current_page = Paginator(object_list=Room.objects.filter(room_region_id=argv.get('region'))
+                                 .order_by("-room_create_date"), per_page=per_page)
+    else:
+        current_page = Paginator(object_list=Room.objects.all()
+                                 .order_by("-room_create_date"), per_page=per_page)
+
     args = {}
     args['rooms'] = current_page.page(page_number)
 
