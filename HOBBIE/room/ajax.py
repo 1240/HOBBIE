@@ -22,25 +22,28 @@ def rooms_list(request):
     toggle = argv.get('toggle')
     region_index = argv.get('region')
     page_number = argv.get('p')
-
+    view = argv.get('view')
     per_page = 10
-    if region_index and toggle:
+    toggles = {
+        'by_date': '-room_create_date',
+        'by_people': '-room_people_count',
+    }
+    if region_index:
         current_page = Paginator(object_list=Room.objects.filter(room_region_id=argv.get('region'))
-                                 .order_by("-room_people_count"), per_page=per_page)
-    elif toggle:
-        current_page = Paginator(object_list=Room.objects.all()
-                                 .order_by("-room_people_count"), per_page=per_page)
-    elif region_index:
-        current_page = Paginator(object_list=Room.objects.filter(room_region_id=argv.get('region'))
-                                 .order_by("-room_create_date"), per_page=per_page)
+                                 .order_by(toggles[toggle]), per_page=per_page)
     else:
         current_page = Paginator(object_list=Room.objects.all()
-                                 .order_by("-room_create_date"), per_page=per_page)
+                                 .order_by(toggles[toggle]), per_page=per_page)
+    views = {
+        'gallery_view': 'rooms_ul.html',
+        'table_view': 'rooms_div.html',
+        'list_view': 'rooms_div.html',
+    }
 
     args = {}
     args['rooms'] = current_page.page(page_number)
 
-    render = render_to_string('rooms_list.html', args)
+    render = render_to_string(views[view], args)
 
     dajax = Dajax()
     dajax.assign('#rooms', 'innerHTML', render)

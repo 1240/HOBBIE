@@ -1,0 +1,64 @@
+{% load static %}
+{% for room in rooms %}
+    <div class="row">
+        <div class="small-3 columns">
+            <a href="/rooms/get/{{ room.id }}">
+                <div class="room-circle">
+
+                    <img src="{% static "img/5.png" %}">
+
+                </div>
+            </a>
+        </div>
+        <div class="small-9 columns">
+            <h3><a href="/rooms/get/{{ room.id }}">{{ room.room_title }}</a></h3>
+
+            <p>В комнате: {{ room.room_people_count }} человек</p>
+
+            <p>Дата встречи: {{ room.room_to_date }}</p>
+        </div>
+    </div>
+    <br>
+{% endfor %}
+<div class="row">
+    <div class="large-3 large-offset-5 columns">
+        <ul class="pagination">
+            {% if rooms.has_previous %}
+                <li class="arrow"><a href="#"
+                                     onclick="Dajaxice.room.rooms_list(Dajax.process,
+                                             {'toggle':getSort(),
+                                             'region': document.getElementById('region_select').selectedIndex,
+                                             'p': {{ rooms.previous_page_number }},
+                                             'view': getView()})">&laquo;</a></li>
+            {% else %}
+                <li class="arrow unavailable"><a href="">&laquo;</a></li>
+            {% endif %}
+            {% for page in rooms.paginator.page_range %}
+                {% if page == rooms.number %}
+                    <li class="current"><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                            {'toggle':getSort(),
+                            'region': document.getElementById('region_select').selectedIndex,
+                            'p': {{ page }},
+                            'view': getView()})">{{ page }}</a></li>
+                {% else %}
+                    <li><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                            {'toggle':getSort(),
+                            'region': document.getElementById('region_select').selectedIndex,
+                            'p': {{ page }},
+                            'view': getView()})">{{ page }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if rooms.has_next %}
+                <li class="arrow"><a href="#"
+                                     onclick="Dajaxice.room.rooms_list(Dajax.process,
+                                             {'toggle':getSort(),
+                                             'region': document.getElementById('region_select').selectedIndex,
+                                             'p': {{ rooms.next_page_number }},
+                                             'view': getView()})">&raquo;</a></li>
+            {% else %}
+                <li class="arrow unavailable"><a href="">&raquo;</a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+</div>
