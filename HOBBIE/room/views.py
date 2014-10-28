@@ -64,8 +64,8 @@ def addroom(request):
     if request.POST:
         form = RoomForm(request.POST)
         if form.is_valid():
-            #message = form.save(commit=False)
-            #message.message_room = Room.objects.get(id=room_id)
+            room=form.save(commit=False)
+            room.room_region_id=1 ###сделать
             form.save()
     return redirect('/rooms/all/')
 

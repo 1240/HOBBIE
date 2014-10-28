@@ -1,10 +1,27 @@
 {% extends 'base.html' %}
 {% block rooms %}
+{% load staticfiles %}
+   <div class="container-div">
    <p>Создать новую комнату</p>
 
    <form action="/rooms/addroom/" method="post">
             {% csrf_token %}
             {{ form }}
+            <div>Изображение комнаты</div>
+        <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+             <li><img src="{% static "img/1.png" %}" onclick="if (this.className=='onclick')this.className='';else this.className='onclick';this.onmouseover='';this.onmouseout='';"></li>
+             <li><img src="{% static "img/2.png" %}" onclick="if (this.className=='onclick')this.className='';else this.className='onclick';this.onmouseover='';this.onmouseout='';"></li>
+             <li><img src="{% static "img/3.png" %}" onclick="if (this.className=='onclick')this.className='';else this.className='onclick';this.onmouseover='';this.onmouseout='';"></li>
+             <li><img src="{% static "img/4.png" %}" onclick="if (this.className=='onclick')this.className='';else this.className='onclick';this.onmouseover='';this.onmouseout='';"></li>
+             <li><img src="{% static "img/5.png" %}" onclick="if (this.className=='onclick')this.className='';else this.className='onclick';this.onmouseover='';this.onmouseout='';"></li>
+             <li><img src="{% static "img/6.png" %}" onclick="if (this.className=='onclick')this.className='';else this.className='onclick';this.onmouseover='';this.onmouseout='';"></li>
+             <li><img src="{% static "img/7.png" %}" onclick="if (this.className=='onclick')this.className='';else this.className='onclick';this.onmouseover='';this.onmouseout='';"></li>
+             <li><img src="{% static "img/8.png" %}" onclick="if (this.className=='onclick')this.className='';else this.className='onclick';this.onmouseover='';this.onmouseout='';"></li>
+             <li><img src="{% static "img/9.png" %}" onclick="if (this.className=='onclick')this.className='';else this.className='onclick';this.onmouseover='';this.onmouseout='';"></li>
+             <li><img src="{% static "img/10.png" %}" onclick="if (this.className=='onclick')this.className='';else this.className='onclick';this.onmouseover='';this.onmouseout='';"></li>
+             <li><img src="{% static "img/11.png" %}" onclick="if (this.className=='onclick')this.className='';else this.className='onclick';this.onmouseover='';this.onmouseout='';"></li>
+        </ul>
             <input type="submit" class="btn btn-default" value="Создать комнату">
    </form>
+   </div>
 {% endblock %}
