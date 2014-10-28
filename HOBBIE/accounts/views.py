@@ -10,7 +10,7 @@ from accounts.models import User
 
 def edit(request):
     args = {}
-    args['form'] = UserChangeForm()
+    args['form'] = UserChangeForm(instance=request.user)
     args['user'] = request.user
     args['username'] = auth.get_user(request).username
     args['id_email'] = request.user.email
@@ -26,6 +26,7 @@ def edit(request):
         else:
             args['form'] = newuser_from'''
     return render_to_response('edit.html', args)
+
 
 def user_page(request, username):
     argv = {}
