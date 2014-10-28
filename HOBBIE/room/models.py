@@ -18,7 +18,7 @@ class Room(models.Model):
     room_to_date = models.DateTimeField(null=True, blank=True)
     room_people_count = models.IntegerField(default=1)
     room_region = models.ForeignKey(Regions)
-    #room_open = models.BooleanField(default=True)
+    room_open = models.BooleanField(default=True)
 
 
 class Message(models.Model):
