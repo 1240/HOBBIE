@@ -10,26 +10,24 @@ from accounts.models import User
 
 def edit(request):
     args = {}
+    args.update(csrf(request))
     args['form'] = UserChangeForm(instance=request.user)
-    args['user'] = request.user
     args['username'] = auth.get_user(request).username
-    args['id_email'] = request.user.email
-    '''
-    if request.POST:
-        newuser_from = UserChangeForm(request.POST)
-        if newuser_from.is_valid():
-            newuser_from.save()
-            newuser = auth.authenticate(username=newuser_from.cleaned_data['username'],
-                                             password=newuser_from.cleaned_data['password2'])
-            auth.login(request, newuser)
-            return redirect('/')
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            args = {}
+            args['user'] = auth.get_user(request)
+            return render_to_response('user_page.html', args)
         else:
-            args['form'] = newuser_from'''
+            args['form'] = UserChangeForm(request.POST)
+        args['form'] = form
     return render_to_response('edit.html', args)
 
 
 def user_page(request, username):
-    argv = {}
-    argv['user'] = auth.get_user(request)
+    args = {}
+    args['user'] = auth.get_user(request)
 
-    return render_to_response('user_page.html', argv)
+    return render_to_response('user_page.html', args)
