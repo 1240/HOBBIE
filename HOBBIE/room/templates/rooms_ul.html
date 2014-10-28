@@ -22,31 +22,34 @@
             {% if rooms.has_previous %}
                 <li class="arrow"><a href="#"
                                      onclick="Dajaxice.room.rooms_list(Dajax.process,
-                                             {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
-                                             'region': this.selectedIndex,
-                                             'p': {{ rooms.previous_page_number }}})">&laquo;</a></li>
+                                             {'toggle':getSort(),
+                                             'region': document.getElementById('region_select').selectedIndex,
+                                             'p': {{ rooms.previous_page_number }},
+                                             'view': getView()})">&laquo;</a></li>
             {% else %}
                 <li class="arrow unavailable"><a href="">&laquo;</a></li>
             {% endif %}
             {% for page in rooms.paginator.page_range %}
                 {% if page == rooms.number %}
-                <li class="current"><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
-                        {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
-                        'region': this.selectedIndex,
-                        'p': {{ page }}})">{{ page }}</a></li>
+                    <li class="current"><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                            {'toggle':getSort(),
+                            'region': document.getElementById('region_select').selectedIndex,
+                            'p': {{ page }},
+                            'view': getView()})">{{ page }}</a></li>
                 {% else %}
                     <li><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
-                        {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
-                        'region': this.selectedIndex,
-                        'p': {{ page }}})">{{ page }}</a></li>
+                            {'toggle':getSort(),
+                            'region': document.getElementById('region_select').selectedIndex,
+                            'p': {{ page }}})">{{ page }}</a></li>
                 {% endif %}
             {% endfor %}
             {% if rooms.has_next %}
                 <li class="arrow"><a href="#"
                                      onclick="Dajaxice.room.rooms_list(Dajax.process,
-                                             {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
-                                             'region': this.selectedIndex,
-                                             'p': {{ rooms.next_page_number }}})">&raquo;</a></li>
+                                             {'toggle':getSort(),
+                                             'region': document.getElementById('region_select').selectedIndex,
+                                             'p': {{ rooms.next_page_number }},
+                                             'view': getView()})">&raquo;</a></li>
             {% else %}
                 <li class="arrow unavailable"><a href="">&raquo;</a></li>
             {% endif %}

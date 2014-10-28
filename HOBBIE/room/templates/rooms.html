@@ -4,28 +4,59 @@
 {% block rooms %}
     {% dajaxice_js_import %}
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/rooms.js" %}"></script>
     <div class="large-9 columns body-div-color">
-        <div class="row vertical-align">
-            <div class="large-5 columns text-right">по дате публикации</div>
-            <div class="large-2 columns text-center">
-                <div class="switch">
-                    <input id="exampleCheckboxSwitch" name="toggle"
-                           onclick="Dajaxice.room.rooms_list(Dajax.process,
-                        {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
+        <div>
+            <div class="small-2 large-4 columns text-left">
+                <h3>Комнаты: <a href="/rooms/makeroom/">Создать комнату</a></h3>
+            </div>
+            <div class="small-4 large-4 columns">
+                <div class="switch-toggle panel">
+                    <input id="by_date" name="view" type="radio" checked="">
+                    <label for="by_date" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                        {'toggle': 'by_date',
                         'region': document.getElementById('region_select').selectedIndex,
-                        'p': 1})"
-                           type="checkbox" {{ toggle }}>
-                    <label for="exampleCheckboxSwitch"></label>
+                        'p': 1,
+                        'view': getView()})">по дате публикации</label>
+
+                    <input id="by_people" name="view" type="radio">
+                    <label for="by_people" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                        {'toggle': 'by_people',
+                        'region': document.getElementById('region_select').selectedIndex,
+                        'p': 1,
+                        'view': getView()})">по количеству участников</label>
+
+                    <a class="button"></a>
                 </div>
             </div>
-            <div class="large-5 columns text-left">по количеству участников</div>
+            <div class="small-6 large-4 columns">
+                <div class="switch-toggle switch-3 panel">
+                    <input id="gallery_view" name="view3" type="radio" checked>
+                    <label for="gallery_view" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                                             {'toggle':getSort(),
+                                             'region': document.getElementById('region_select').selectedIndex,
+                                             'p': 1,
+                                             'view': 'gallery_view'})">Галерея</label>
+                    <input id="table_view" name="view3" type="radio">
+                    <label for="table_view" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                                             {'toggle':getSort(),
+                                             'region': document.getElementById('region_select').selectedIndex,
+                                             'p': 1,
+                                             'view': 'table_view'})">Таблица</label>
+                    <input id="list_view" name="view3" type="radio">
+                    <label for="list_view" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                                             {'toggle':getSort(),
+                                             'region': document.getElementById('region_select').selectedIndex,
+                                             'p': 1,
+                                             'view': 'list_view'})">Лист</label>
+                    <a class="button"></a>
+                </div>
+            </div>
         </div>
 
-        <h3>Комнаты: </h3>
 
-        <p><a href="/rooms/makeroom/">Создать комнату</a></p>
+        <div id="rooms" class="row">
 
-        <div id="rooms">
             <ul class="small-block-grid-3">
                 {% for room in rooms %}
                     <li>
@@ -49,31 +80,34 @@
                         {% if rooms.has_previous %}
                             <li class="arrow"><a href="#"
                                                  onclick="Dajaxice.room.rooms_list(Dajax.process,
-                                                         {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
-                                                         'region': this.selectedIndex,
-                                                         'p': {{ rooms.previous_page_number }}})">&laquo;</a></li>
+                                                         {'toggle':getSort(),
+                                                         'region': document.getElementById('region_select').selectedIndex,
+                                                         'p': {{ rooms.previous_page_number }},
+                                                         'view': getView()})">&laquo;</a></li>
                         {% else %}
                             <li class="arrow unavailable"><a href="">&laquo;</a></li>
                         {% endif %}
                         {% for page in rooms.paginator.page_range %}
                             {% if page == rooms.number %}
                                 <li class="current"><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
-                                        {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
-                                        'region': this.selectedIndex,
-                                        'p': {{ page }}})">{{ page }}</a></li>
+                                        {'toggle':getSort(),
+                                        'region': document.getElementById('region_select').selectedIndex,
+                                        'p': {{ page }},
+                                        'view': getView()})">{{ page }}</a></li>
                             {% else %}
                                 <li><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
-                                        {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
-                                        'region': this.selectedIndex,
+                                        {'toggle':getSort(),
+                                        'region': document.getElementById('region_select').selectedIndex,
                                         'p': {{ page }}})">{{ page }}</a></li>
                             {% endif %}
                         {% endfor %}
                         {% if rooms.has_next %}
                             <li class="arrow"><a href="#"
                                                  onclick="Dajaxice.room.rooms_list(Dajax.process,
-                                                         {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
-                                                         'region': this.selectedIndex,
-                                                         'p': {{ rooms.next_page_number }}})">&raquo;</a></li>
+                                                         {'toggle':getSort(),
+                                                         'region': document.getElementById('region_select').selectedIndex,
+                                                         'p': {{ rooms.next_page_number }},
+                                                         'view': getView()})">&raquo;</a></li>
                         {% else %}
                             <li class="arrow unavailable"><a href="">&raquo;</a></li>
                         {% endif %}
@@ -88,9 +122,10 @@
     <div class="large-3 columns">
         <label>Выберите область
             <select id="region_select" onchange="Dajaxice.room.rooms_list(Dajax.process,
-                        {'toggle':$('#exampleCheckboxSwitch').is(':checked'),
-                        'region': this.selectedIndex,
-                        'p': 1})">
+                        {'toggle':getSort(),
+                        'region': document.getElementById('region_select').selectedIndex,
+                        'p': 1,
+                        'view': getView()})">
                 <option value="all">Все</option>
                 {% for region in regions_list %}
                     <option value="{{ region.region_id }}">{{ region.region_name }}</option>

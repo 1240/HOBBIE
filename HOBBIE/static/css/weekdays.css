@@ -15,9 +15,8 @@
 .room-circle {
     width: 155px;
     height: 155px;
-    background-color: #e5e5ff;
+    background-color: #E7E7E7;
     border-radius: 100%;
-
     padding-top: 15px;
     text-align: center;
 }
