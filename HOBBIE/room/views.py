@@ -22,7 +22,7 @@ def rooms(request):
         rooms = Room.objects.order_by("-room_create_date")
     else:
         rooms = Room.objects.order_by("-room_people_count")
-    current_page = Paginator(object_list=rooms, per_page=2)
+    current_page = Paginator(object_list=rooms, per_page=10)
     args = {}
     args['rooms'] = current_page.page(1)
     args['username'] = auth.get_user(request).username

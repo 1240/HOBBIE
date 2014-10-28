@@ -19,6 +19,7 @@ class Room(models.Model):
     room_people_count = models.IntegerField(default=1)
     room_region = models.ForeignKey(Regions)
     room_open = models.BooleanField(default=True)
+    room_image = models.CharField(null=True, blank=True, max_length=100, verbose_name="Изображение комнаты")
 
 
 class Message(models.Model):

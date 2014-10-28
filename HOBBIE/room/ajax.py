@@ -23,7 +23,7 @@ def rooms_list(request):
     region_index = argv.get('region')
     page_number = argv.get('p')
 
-    per_page = 2
+    per_page = 10
     if region_index and toggle:
         current_page = Paginator(object_list=Room.objects.filter(room_region_id=argv.get('region'))
                                  .order_by("-room_people_count"), per_page=per_page)
