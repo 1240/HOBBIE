@@ -27,12 +27,12 @@
 
                 <div id="messages_list">
                     {% for message in messages %}
-                        <p><strong>НИКНЕЙМ:</strong> {{ message.message_text }} <span style="text-align:right">({{ message.message_datetime }})</span></p>
+                       <p><span style="float:left"></span><strong>НИКНЕЙМ:</strong> {{ message.message_text }} </span><span style="float:right">({{ message.message_datetime }})</span></p>
                     {% endfor %}
                 </div>
                 <hr>
                 <label>Сообщение
-                    <input type="text" id="message_text" placeholder="тест сообщения" maxlength="200"/>
+                    <input type="text" id="message_text" placeholder="текст сообщения" maxlength="200"/>
                     <button class="button" onclick="Dajaxice.room.send_message(Dajax.process,
                             {'room_id': {{ room.id}},
                             'message_text':$('#message_text').val()}); document.getElementById('message_text').value = '';"
