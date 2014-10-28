@@ -23,7 +23,7 @@
 
                 <div id="messages_list">
                     {% for message in messages %}
-                        <p>{{ message.message_datetime }}: {{ message.message_text }}</p>
+                        <p><strong>НИКНЕЙМ:</strong> {{ message.message_text }} <span style="text-align:right">({{ message.message_datetime }})</span></p>
                     {% endfor %}
                 </div>
                 <hr>
