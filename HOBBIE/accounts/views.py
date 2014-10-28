@@ -28,12 +28,7 @@ def edit(request):
     return render_to_response('edit.html', args)
 
 def user_page(request, username):
-    name = {}
-    name['user'] = request.user
-    name['username'] = auth.get_user(request).username
-    name['id_email'] = request.user.email
-    name['first_name'] = request.user.first_name
-    name['last_name'] = request.user.last_name
-    name['date_of_birth'] = request.user.date_of_birth
+    argv = {}
+    argv['user'] = auth.get_user(request)
 
-    return render_to_response('user_page.html', name)
+    return render_to_response('user_page.html', argv)

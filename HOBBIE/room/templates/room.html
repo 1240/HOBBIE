@@ -4,31 +4,38 @@
 {% block rooms %}
     {% dajaxice_js_import %}
     <!--<script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>-->
-    <script type="text/javascript" src="/js/jquery.dajax.core.js" charset="utf-8"></script>
+    <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+
     <div id="chat">
-    <div class="container-div">
-    <a href="/rooms/join/{{ room.id }}/">Вступить</a><a href="/rooms/leave/{{ room.id }}/">Покинуть</a>
-    <a href="/rooms/invite/{{ room.id }}/">Пригласить</a>
+        <div class="container-div">
+            <a href="/rooms/join/{{ room.id }}/">Вступить</a><a href="/rooms/leave/{{ room.id }}/">Покинуть</a>
+            <a href="/rooms/invite/{{ room.id }}/">Пригласить</a>
 
-    <h4>{{ room.room_title }}</h4>
-    <h6>Дата создания: {{ room.room_create_date }}</h6>
-    <p>{{ room.room_text }}</p>
-    <p>В комнате {{ room.room_people_count }} человек</p>
-    <hr>
-    <div>
-        <p>Обсуждение</p>
-        {% for message in messages %}
-            <p>{{ message.message_datetime }}: {{ message.message_text }}</p>
-        {% endfor %}
-        <hr>
-        <form method="post">
-            {% csrf_token %}
-            {{ form }}
-            <input type="button" class="btn btn-default" value="Написать сообщение"
-                    onclick="Dajaxice.room.chat(Dajax.process, {'room_id':'{{ room.id }}'})">
+            <h4>{{ room.room_title }}</h4>
+            <h6>Дата создания: {{ room.room_create_date }}</h6>
 
-        </form>
-    </div>
-    </div>
+            <p>{{ room.room_text }}</p>
+
+            <p>В комнате {{ room.room_people_count }} человек</p>
+            <hr>
+            <div>
+                <p>Обсуждение</p>
+
+                <div id="messages_list">
+                    {% for message in messages %}
+                        <p>{{ message.message_datetime }}: {{ message.message_text }}</p>
+                    {% endfor %}
+                </div>
+                <hr>
+                <label>Сообщение
+                    <input type="text" id="message_text" placeholder="тест сообщения" maxlength="200"/>
+                    <button class="button" onclick="Dajaxice.room.send_message(Dajax.process,
+                            {'room_id': {{ room.id}},
+                            'message_text':$('#message_text').val()})"
+                            >Отправить</button>
+
+                </label>
+            </div>
+        </div>
     </div>
 {% endblock %}

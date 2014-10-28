@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 import json
+
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
-from room.models import Room,Message
-from room.forms import MessageForm
 from django.core.context_processors import csrf
-from django.db.models import fields
+
+from room.models import Room, Message
+from room.forms import MessageForm
+
 
 _author__ = '1240'
-
 
 
 @dajaxice_register
@@ -40,15 +41,16 @@ def rooms_list(request):
 
     return dajax.json()
 
-def chat(request,room_id=0):
+
+def chat(request, room_id=0):
     json_string = request.POST.get('argv')
     argv = json.loads(json_string)
 
     form = MessageForm
     if form.is_valid():
-            message = form.save(commit=False)
-            message.message_room = Room.objects.get(id=room_id)
-            form.save()
+        message = form.save(commit=False)
+        message.message_room = Room.objects.get(id=room_id)
+        form.save()
 
     args = {}
 
@@ -58,4 +60,24 @@ def chat(request,room_id=0):
 
     dajax = Dajax()
     dajax.assign('#chat', 'innerHTML', render_to_string('chat.html', args))
+    return dajax.json()
+
+
+@dajaxice_register
+def send_message(request):
+    json_string = request.POST.get('argv')
+    argv = json.loads(json_string)
+
+    room_id = argv.get('room_id')
+    message_text = argv.get('message_text')
+    room = Room.objects.get(id=room_id)
+    message = Message(message_text=message_text, message_room=room)
+    message.save()
+
+    messages = Message.objects.filter(message_room_id=room_id).order_by('message_datetime')
+
+    args = {}
+    args['messages'] = messages
+    dajax = Dajax()
+    dajax.assign('#messages_list', 'innerHTML', render_to_string('messages_list.html', args))
     return dajax.json()

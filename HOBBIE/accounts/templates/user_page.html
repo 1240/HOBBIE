@@ -6,9 +6,9 @@
         <form action="" method="post">
              <div class ="label round secondary"><a href="/account/edit/">Редактировать страницу</a></div>
             {% csrf_token %}
-            <h3>{{ first_name }} {{ last_name }} ({{ username }})</h3>
-            <h5>Email: {{ id_email }}</h5>
-            <h5>День рождения: {{ date_of_birth }}</h5>
+            <h3>{{ user.first_name }} {{  user.last_name }} ({{  user.username }})</h3>
+            <h5>Email: {{  user.email }}</h5>
+            <h5>День рождения: {{  user.date_of_birth }}</h5>
             <br>
         </form>
     </div>
