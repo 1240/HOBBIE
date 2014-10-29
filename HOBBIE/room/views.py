@@ -87,6 +87,10 @@ def f(x):
         'a14': 'img/14.png',
         'a15': 'img/15.png',
         'a16': 'img/16.png',
+        'a17': 'img/17.png',
+        'a18': 'img/18.png',
+        'a19': 'img/19.png',
+        'a20': 'img/20.png',
     }[x]
 
 
