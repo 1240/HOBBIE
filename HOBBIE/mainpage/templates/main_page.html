@@ -11,7 +11,7 @@
         <hr>
     </div>
     <hr>
-    <!--<div class="container-div">
+    <div class="container-div">
         <div class="cols b-select-city">
             <div class="col-8">
                 <div class="b-map">
@@ -27,8 +27,8 @@
                 <div class="col-2">
                     {% for region in regions %}
                         <a href="{{ region.region_url }}" id="{{ region.region_id }}" data-iscity=""
-                           title="{{ region.region_title }}" class="map-region" onmouseover="addHover('
-        {{ region.region_id }}')"
+                           title="{{ region.region_title }}" class="map-region"
+                           onmouseover="addHover('{{ region.region_id }}')"
                            onmouseout="deleteHover('{{ region.region_id }}')" data-state="">
                             {{ region.region_name }}
                         </a>
@@ -41,8 +41,8 @@
                 <div class="clear"></div>
             </div>
         </div>
-    </div> -->
+    </div>
     <div>
-        <object data="{% static 'img/map1.svg' %}" type="image/svg+xml"></object>
+        <object data="{% static 'img/map2.svg' %}" type="image/svg+xml"></object>
     </div>
 {% endblock %}
