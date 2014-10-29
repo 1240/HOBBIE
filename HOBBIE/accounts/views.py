@@ -19,7 +19,7 @@ def edit(request):
             form.save()
             args = {}
             args['user'] = auth.get_user(request)
-            return render_to_response('user_page.html', args)
+            return redirect('/account/%s/' % auth.get_user(request).username, args)
         else:
             args['form'] = UserChangeForm(request.POST)
         args['form'] = form
@@ -29,5 +29,5 @@ def edit(request):
 def user_page(request, username):
     args = {}
     args['user'] = auth.get_user(request)
-
+    args['username'] = auth.get_user(request).username
     return render_to_response('user_page.html', args)

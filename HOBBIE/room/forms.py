@@ -6,6 +6,7 @@ from mainpage.models import Regions
 from room.models import Message, Room
 
 
+
 __author__ = '1240'
 
 
@@ -19,5 +20,4 @@ class RoomForm(ModelForm):
     class Meta():
         model = Room
         fields = ['room_title', 'room_text', 'room_to_date','room_open']
-
 

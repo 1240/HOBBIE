@@ -57,6 +57,7 @@ def makeroom(request):
     args2 = {}
     args2.update(csrf(request))
     args2['form'] = room_form
+
     return render_to_response('makeroom.html', args2)
 
 
@@ -65,9 +66,32 @@ def addroom(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             room=form.save(commit=False)
+            room.room_image=request.POST.get('args')
+            img_choice=request.POST.get('action_image')
+            room.room_image=f(img_choice)
             room.room_region_id=1 ###сделать
             form.save()
     return redirect('/rooms/all/')
+
+def f(x):
+    return {
+        'a1': 'img/1.png',
+        'a2': 'img/2.png',
+        'a3': 'img/3.png',
+        'a4': 'img/4.png',
+        'a5': 'img/5.png',
+        'a6': 'img/6.png',
+        'a7': 'img/7.png',
+        'a8': 'img/8.png',
+        'a9': 'img/9.png',
+        'a10': 'img/10.png',
+        'a11': 'img/11.png',
+        'a12': 'img/12.png',
+        'a13': 'img/13.png',
+        'a14': 'img/14.png',
+        'a15': 'img/15.png',
+        'a16': 'img/16.png',
+    }[x]
 
 
 def joinroom(request, room_id):
