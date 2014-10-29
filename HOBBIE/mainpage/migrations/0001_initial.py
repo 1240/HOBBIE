@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Cities',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
-                ('city_name', models.CharField(max_length=100, verbose_name='Название города')),
-                ('city_id', models.CharField(max_length=100, verbose_name='ИД города')),
-                ('city_title', models.CharField(max_length=100, verbose_name='Заголовок')),
-                ('city_url', models.CharField(max_length=100, verbose_name='Ссылка')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('city_name', models.CharField(verbose_name='Название города', max_length=100)),
+                ('city_id', models.CharField(verbose_name='ИД города', max_length=100)),
+                ('city_title', models.CharField(verbose_name='Заголовок', max_length=100)),
+                ('city_url', models.CharField(verbose_name='Ссылка', max_length=100)),
             ],
             options={
                 'db_table': 'cities',
@@ -27,11 +27,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Regions',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
-                ('region_name', models.CharField(max_length=100, verbose_name='Название области')),
-                ('region_id', models.CharField(max_length=100, verbose_name='ИД региона')),
-                ('region_title', models.CharField(max_length=100, verbose_name='Заголовок')),
-                ('region_url', models.CharField(max_length=100, verbose_name='Ссылка')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('region_name', models.CharField(verbose_name='Название области', max_length=100)),
+                ('region_id', models.CharField(verbose_name='ИД региона', max_length=100)),
+                ('region_title', models.CharField(verbose_name='Заголовок', max_length=100)),
+                ('region_url', models.CharField(verbose_name='Ссылка', max_length=100)),
+                ('is_west', models.BooleanField(verbose_name='Западная часть?', default=True)),
             ],
             options={
                 'db_table': 'regions',
