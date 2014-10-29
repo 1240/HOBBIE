@@ -14,22 +14,26 @@
             <a href="/rooms/invite/{{ room.id }}/">Пригласить</a>
 
             <h4>{{ room.room_title }}</h4>
+
             <div>
-            <img src="{% static room.room_image %}">
+            <span><img src="{% static room.room_image %}"></span><span><h6><strong>Дата мероприятия:</strong> {{ room.room_to_date }}</h6></span>
             </div>
-            <h6>Дата создания: {{ room.room_create_date }}</h6>
+            <h6 style="float:right"><strong>Дата создания: </strong>{{ room.room_create_date }}</h6>
 
             <p>{{ room.room_text }}</p>
 
-            <p>В комнате {{ room.room_people_count }} человек</p>
+            <p><strong>В комнате </strong> {{ room.room_people_count }} человек</p>
             <hr>
             <div>
-                <p>Обсуждение</p>
+                <h5><strong>Обсуждение</strong></h5>
 
                 <div id="messages_list">
                     {% for message in messages %}
-                       <p><span style="float:left"></span><strong>НИКНЕЙМ:</strong> {{ message.message_text }} </span><span style="float:right">({{ message.message_datetime }})</span></p>
+                        <p>
+                        <strong>НИКНЕЙМ:</strong> {{ message.message_text }}
+                        <span style="float:right">({{ message.message_datetime }})</span></p>
                     {% endfor %}
+
                 </div>
                 <hr>
                 <label>Сообщение
