@@ -3,8 +3,13 @@
 {% block user_page %}
 
     <div class="large-offset-3 large-6 columns">
-        <form action="" method="post">
+        <form enctype="multipart/form-data" action="" method="post">
+            <br>
+            <br>
+            <br>
              <div class ="label round secondary"><a href="/account/edit/">Редактировать страницу</a></div>
+            <br>
+            <img src="{{user.avatar.url}}" width="200"/>
             {% csrf_token %}
             <h3>{{ user.first_name }} {{  user.last_name }} ({{  user.username }})</h3>
             <h5>Email: {{  user.email }}</h5>

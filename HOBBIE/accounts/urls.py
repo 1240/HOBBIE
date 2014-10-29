@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 _author__ = '1240'
+from django.conf.urls import patterns, include, url
 from django.conf.urls import url, patterns
+from django.conf import settings
 
 __author__ = '1240'
 

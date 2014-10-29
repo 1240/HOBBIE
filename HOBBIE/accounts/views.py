@@ -14,7 +14,7 @@ def edit(request):
     args['form'] = UserChangeForm(instance=request.user)
     args['username'] = auth.get_user(request).username
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
+        form = UserChangeForm(request.POST,request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             args = {}
