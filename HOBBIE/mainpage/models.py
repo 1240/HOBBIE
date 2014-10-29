@@ -11,7 +11,7 @@ class Regions(models.Model):
     region_id = models.CharField(max_length=100, verbose_name="ИД региона")
     region_title = models.CharField(max_length=100, verbose_name="Заголовок")
     region_url = models.CharField(max_length=100, verbose_name="Ссылка")
-    is_west = models.BooleanField(verbose_name="Западная часть?")
+    is_west = models.BooleanField(verbose_name="Западная часть?", default=True)
 
 
 class Cities(models.Model):
