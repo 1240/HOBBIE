@@ -9,7 +9,11 @@
             <br>
              <div class ="label round secondary"><a href="/account/edit/">Редактировать страницу</a></div>
             <br>
-            <img src="{{user.avatar.url}}" width="200"/>
+            {% if user.avatar %}
+                <img src="{{user.avatar.url}}" width="200">
+            {% else %}
+                <h5>Аватар не загружен</h5>
+            {% endif %}
             {% csrf_token %}
             <h3>{{ user.first_name }} {{  user.last_name }} ({{  user.username }})</h3>
             <h5>Email: {{  user.email }}</h5>
