@@ -8,8 +8,6 @@
         <hr>
         <p>Описание сервиса</p>
         <hr>
-        <p>Формы регистрации</p>
-        <hr>
     </div>
     <hr>
     <div class="container-div">
@@ -19,7 +17,8 @@
 
                     <div class="map-svg map-svg_west">
                         <object data="{% static 'img/map2.svg' %}" type="image/svg+xml"></object>
-                        <a class="to-west" href="/main/main_west" title="Перейти на европейскую часть России">← Европейская часть</a>
+                        <a class="to-west" href="/main/main_west" title="Перейти на европейскую часть России">←
+                            Европейская часть</a>
                     </div>
                 </div>
             </div>
@@ -28,15 +27,15 @@
 
                 <div class="col-2">
                     {% for region in regions %}
-                        <a href="{{ region.region_url }}" id="{{ region.region_id }}" data-iscity=""
+                        <a href="/rooms{{ region.region_url }}" id="{{ region.region_id }}" data-iscity=""
                            title="{{ region.region_title }}" class="map-region"
                            onmouseover="addHover('{{ region.region_id }}')"
                            onmouseout="deleteHover('{{ region.region_id }}')" data-state="">
                             {{ region.region_name }}
                         </a>
                         {% if  region.region_id == 'region_630660' %}
-                        </div>
-                        <div class="col-2">
+                            </div>
+                            <div class="col-2">
                         {% endif %}
                     {% endfor %}
                     </div>

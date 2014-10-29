@@ -8,8 +8,6 @@
         <hr>
         <p>Описание сервиса</p>
         <hr>
-        <p>Формы регистрации</p>
-        <hr>
     </div>
     <hr>
     <div class="container-div">
@@ -28,7 +26,7 @@
 
                 <div class="col-2">
                     {% for region in regions %}
-                        <a href="{{ region.region_url }}" id="{{ region.region_id }}" data-iscity=""
+                        <a href="/rooms{{ region.region_url }}" id="{{ region.region_id }}" data-iscity=""
                            title="{{ region.region_title }}" class="map-region"
                            onmouseover="addHover('{{ region.region_id }}')"
                            onmouseout="deleteHover('{{ region.region_id }}')" data-state="">

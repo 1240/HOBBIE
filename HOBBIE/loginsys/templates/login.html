@@ -3,8 +3,11 @@
 {% block login %}
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/authenty.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.css" %}">
-
+    <div class="row text-center b-map">
+        <hr>
+        <p>Описание сервиса</p>
+        <hr>
+    </div>
     <div class="authenty signin-alt section-content" style="height: 495px;">
         <div class="row">
             {% if is_authenticated %}

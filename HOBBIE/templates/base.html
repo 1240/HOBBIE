@@ -6,6 +6,8 @@
     <title>Weekdays</title>
     <link rel="stylesheet" type="text/css" href="{% static "css/foundation.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/weekdays.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/authenty.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/toggle-switch.css" %}">
     <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
     <script type="text/javascript" src="{% static "js/foundation/foundation.js" %}"></script>
@@ -45,6 +47,7 @@
                     <li><a href="/auth/logout">Выйти</a></li>
                 {% else %}
                     <li><a href="/auth/login">Войти</a></li>
+                    <li><a href="/auth/register/">Зарегистрироваться</a></li>
                 {% endif %}
             </ul>
 
@@ -59,8 +62,6 @@
 
 </div>
 <!-- /navigation -->
-
-<hr>
 
 {% block map %}{% endblock %}
 {% block rooms %}{% endblock %}

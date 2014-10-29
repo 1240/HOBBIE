@@ -139,7 +139,11 @@
                         'view': getView()})">
                 <option value="all">Все</option>
                 {% for region in regions_list %}
-                    <option value="{{ region.region_id }}">{{ region.region_name }}</option>
+                    {% if region.region_url == region_id %}
+                    <option selected value="{{ region.region_url }}">{{ region.region_name }}</option>
+                    {% else %}
+                    <option value="{{ region.region_url }}">{{ region.region_name }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
         </label>

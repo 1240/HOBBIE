@@ -1,33 +1,27 @@
 # Create your views here.
-from django import forms
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator
-from django.db.models import fields
 from django.shortcuts import render_to_response, redirect
-from django.template.loader import select_template
+
 from mainpage.models import Regions
-
 from room.forms import MessageForm, RoomForm
-
 from room.models import Room, Message
 
 
-def rooms(request):
-    if 'toggle' in request.GET:
-        checked = 'checked'
+def rooms(request, region_name='all'):
+    if (region_name == 'all'):
+        current_page = Paginator(object_list=Room.objects.order_by("-room_create_date"), per_page=10)
     else:
-        checked = 'notchecked'
-    if (checked == 'notchecked'):
-        rooms = Room.objects.order_by("-room_create_date")
-    else:
-        rooms = Room.objects.order_by("-room_people_count")
-    current_page = Paginator(object_list=rooms, per_page=10)
+        region = Regions.objects.filter(region_url='/' + region_name)
+        current_page = Paginator(object_list=Room.objects.filter(room_region=region)
+                                 .order_by("-room_create_date"), per_page=10)
     args = {}
     args['rooms'] = current_page.page(1)
     args['username'] = auth.get_user(request).username
-    args['toggle'] = checked
+    args['toggle'] = 'notchecked'
     args['regions_list'] = Regions.objects.all()
+    args['region_id'] = '/' + region_name
     return render_to_response('rooms.html', args)
 
 
@@ -40,6 +34,7 @@ def room(request, room_id=1):
     args['form'] = message_form
     args['username'] = auth.get_user(request).username
     return render_to_response('room.html', args)
+
 
 '''
 def addmessage(request, room_id):
@@ -65,13 +60,14 @@ def addroom(request):
     if request.POST:
         form = RoomForm(request.POST)
         if form.is_valid():
-            room=form.save(commit=False)
-            room.room_image=request.POST.get('args')
-            img_choice=request.POST.get('action_image')
-            room.room_image=f(img_choice)
-            room.room_region_id=1 ###сделать
+            room = form.save(commit=False)
+            room.room_image = request.POST.get('args')
+            img_choice = request.POST.get('action_image')
+            room.room_image = f(img_choice)
+            room.room_region_id = 1  # ##сделать
             form.save()
     return redirect('/rooms/all/')
+
 
 def f(x):
     return {
