@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block map %}
+    <script type="text/javascript" src="{% static "js/jquery/jquery.svg.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/map.js" %}"></script>
+    <link href="{% static "css/map.css" %}" rel="stylesheet" type="text/css">
+    <div class="row text-center b-map">
+        <hr>
+        <p>Описание сервиса</p>
+        <hr>
+        <p>Формы регистрации</p>
+        <hr>
+    </div>
+    <hr>
+    <div class="container-div">
+        <div class="cols b-select-city">
+            <div class="col-8">
+                <div class="b-map">
+
+                    <div class="map-svg map-svg_west">
+                        <object data="{% static 'img/map1.svg' %}" type="image/svg+xml"></object>
+                        <a href="/main/main_east" class="to-east" title="Перейти на восточную часть России">Восточная часть →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 b-cities">
+                <div class="clear"></div>
+
+                <div class="col-2">
+                    {% for region in regions %}
+                        <a href="{{ region.region_url }}" id="{{ region.region_id }}" data-iscity=""
+                           title="{{ region.region_title }}" class="map-region"
+                           onmouseover="addHover('{{ region.region_id }}')"
+                           onmouseout="deleteHover('{{ region.region_id }}')" data-state="">
+                            {{ region.region_name }}
+                        </a>
+                        {% if  region.region_id == 'region_636370' %}
+                        </div>
+                        <div class="col-2">
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

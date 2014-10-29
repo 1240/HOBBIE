@@ -3,6 +3,7 @@
 {% block map %}
     <script type="text/javascript" src="{% static "js/jquery/jquery.svg.js" %}"></script>
     <script type="text/javascript" src="{% static "js/map.js" %}"></script>
+    <link href="{% static "css/map.css" %}" rel="stylesheet" type="text/css">
     <div class="row text-center b-map">
         <hr>
         <p>Описание сервиса</p>
@@ -17,7 +18,8 @@
                 <div class="b-map">
 
                     <div class="map-svg map-svg_west">
-                        <object data="{% static 'img/map1.svg' %}" type="image/svg+xml"></object>
+                        <object data="{% static 'img/map2.svg' %}" type="image/svg+xml"></object>
+                        <a class="to-west" href="/main/main_west" title="Перейти на европейскую часть России">← Европейская часть</a>
                     </div>
                 </div>
             </div>
@@ -32,7 +34,7 @@
                            onmouseout="deleteHover('{{ region.region_id }}')" data-state="">
                             {{ region.region_name }}
                         </a>
-                        {% if  region.region_id == 'region_636370' %}
+                        {% if  region.region_id == 'region_630660' %}
                         </div>
                         <div class="col-2">
                         {% endif %}
@@ -41,8 +43,5 @@
                 <div class="clear"></div>
             </div>
         </div>
-    </div>
-    <div>
-        <object data="{% static 'img/map2.svg' %}" type="image/svg+xml"></object>
     </div>
 {% endblock %}
