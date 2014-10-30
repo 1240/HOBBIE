@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'accounts',
     'dajaxice',
     'dajax',
+    'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (

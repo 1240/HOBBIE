@@ -64,7 +64,7 @@ def addroom(request):
             room.room_image = request.POST.get('args')
             img_choice = request.POST.get('action_image')
             room.room_image = f(img_choice)
-            room.room_region_id = 1  # ##сделать
+            room.room_region_id = 1  # TODO
             form.save()
     return redirect('/rooms/all/')
 

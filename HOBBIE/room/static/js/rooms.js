@@ -30,3 +30,9 @@ function getSort() {
         return 'by_date'
     }
 }
+
+$(document).ready(function () {
+    $('#id_room_to_date').fdatetimepicker({
+        format: 'mm-dd-yyyy hh:ii'
+    });
+})

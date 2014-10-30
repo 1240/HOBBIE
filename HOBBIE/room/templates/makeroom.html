@@ -1,33 +1,70 @@
 {% extends 'base.html' %}
 {% block rooms %}
-{% load staticfiles %}
-   <div class="container-div">
-   <p>Создать новую комнату</p>
+    {% load widget_tweaks %}
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static "js/rooms.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/foundation/bootstrap-datetimepicker.ru.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/datepicker/foundation-datepicker.css" %}">
 
-   <form action="/rooms/addroom/" method="post">
+
+    <div class="container-div">
+        <p>Создать новую комнату</p>
+
+        <form action="/rooms/addroom/" method="post">
             {% csrf_token %}
             {{ form }}
             <div>Изображение комнаты</div>
-        <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
-             <li><input id='r1' type="radio" name="action_image" value="a1"><img src="{% static "img/1.png" %}" onclick="document.getElementById('r1').checked='checked';"></li>
-             <li><input id='r2' type="radio" name="action_image" value="a2" checked="checked"><img src="{% static "img/2.png" %}" onclick="document.getElementById('r2').checked='checked';"></li>
-             <li><input id='r3' type="radio" name="action_image" value="a3"><img src="{% static "img/3.png" %}" onclick="document.getElementById('r3').checked='checked';"></li>
-             <li><input id='r4' type="radio" name="action_image" value="a4"><img src="{% static "img/4.png" %}" onclick="document.getElementById('r4').checked='checked';"></li>
-             <li><input id='r5' type="radio" name="action_image" value="a5"><img src="{% static "img/5.png" %}" onclick="document.getElementById('r5').checked='checked';"></li>
-             <li><input id='r6' type="radio" name="action_image" value="a6"><img src="{% static "img/6.png" %}" onclick="document.getElementById('r6').checked='checked';"></li>
-             <li><input id='r7' type="radio" name="action_image" value="a7"><img src="{% static "img/7.png" %}" onclick="document.getElementById('r7').checked='checked';"></li>
-             <li><input id='r8' type="radio" name="action_image" value="a8"><img src="{% static "img/8.png" %}" onclick="document.getElementById('r8').checked='checked';"></li>
-             <li><input id='r9' type="radio" name="action_image" value="a9"><img src="{% static "img/9.png" %}" onclick="document.getElementById('r9').checked='checked';"></li>
-             <li><input id='r10' type="radio" name="action_image" value="a10"><img src="{% static "img/10.png" %}" onclick="document.getElementById('r10').checked='checked';"></li>
-             <li><input id='r11' type="radio" name="action_image" value="a11"><img src="{% static "img/11.png" %}" onclick="document.getElementById('r11').checked='checked';"></li>
-             <li><input id='r12' type="radio" name="action_image" value="a12"><img src="{% static "img/12.png" %}" onclick="document.getElementById('r12').checked='checked';"></li>
-             <li><input id='r13' type="radio" name="action_image" value="a13"><img src="{% static "img/13.png" %}" onclick="document.getElementById('r13').checked='checked';"></li>
-             <li><input id='r14' type="radio" name="action_image" value="a14"><img src="{% static "img/14.png" %}" onclick="document.getElementById('r14').checked='checked';"></li>
-             <li><input id='r15' type="radio" name="action_image" value="a15"><img src="{% static "img/15.png" %}" onclick="document.getElementById('r15').checked='checked';"></li>
-             <li><input id='r16' type="radio" name="action_image" value="a16"><img src="{% static "img/16.png" %}" onclick="document.getElementById('r16').checked='checked';"></li>
-        </ul>
+            <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+                <li><input id='r1' type="radio" name="action_image" value="a1"><img src="{% static "img/1.png" %}"
+                                                                                    onclick="document.getElementById('r1').checked='checked';">
+                </li>
+                <li><input id='r2' type="radio" name="action_image" value="a2" checked="checked"><img
+                        src="{% static "img/2.png" %}" onclick="document.getElementById('r2').checked='checked';"></li>
+                <li><input id='r3' type="radio" name="action_image" value="a3"><img src="{% static "img/3.png" %}"
+                                                                                    onclick="document.getElementById('r3').checked='checked';">
+                </li>
+                <li><input id='r4' type="radio" name="action_image" value="a4"><img src="{% static "img/4.png" %}"
+                                                                                    onclick="document.getElementById('r4').checked='checked';">
+                </li>
+                <li><input id='r5' type="radio" name="action_image" value="a5"><img src="{% static "img/5.png" %}"
+                                                                                    onclick="document.getElementById('r5').checked='checked';">
+                </li>
+                <li><input id='r6' type="radio" name="action_image" value="a6"><img src="{% static "img/6.png" %}"
+                                                                                    onclick="document.getElementById('r6').checked='checked';">
+                </li>
+                <li><input id='r7' type="radio" name="action_image" value="a7"><img src="{% static "img/7.png" %}"
+                                                                                    onclick="document.getElementById('r7').checked='checked';">
+                </li>
+                <li><input id='r8' type="radio" name="action_image" value="a8"><img src="{% static "img/8.png" %}"
+                                                                                    onclick="document.getElementById('r8').checked='checked';">
+                </li>
+                <li><input id='r9' type="radio" name="action_image" value="a9"><img src="{% static "img/9.png" %}"
+                                                                                    onclick="document.getElementById('r9').checked='checked';">
+                </li>
+                <li><input id='r10' type="radio" name="action_image" value="a10"><img src="{% static "img/10.png" %}"
+                                                                                      onclick="document.getElementById('r10').checked='checked';">
+                </li>
+                <li><input id='r11' type="radio" name="action_image" value="a11"><img src="{% static "img/11.png" %}"
+                                                                                      onclick="document.getElementById('r11').checked='checked';">
+                </li>
+                <li><input id='r12' type="radio" name="action_image" value="a12"><img src="{% static "img/12.png" %}"
+                                                                                      onclick="document.getElementById('r12').checked='checked';">
+                </li>
+                <li><input id='r13' type="radio" name="action_image" value="a13"><img src="{% static "img/13.png" %}"
+                                                                                      onclick="document.getElementById('r13').checked='checked';">
+                </li>
+                <li><input id='r14' type="radio" name="action_image" value="a14"><img src="{% static "img/14.png" %}"
+                                                                                      onclick="document.getElementById('r14').checked='checked';">
+                </li>
+                <li><input id='r15' type="radio" name="action_image" value="a15"><img src="{% static "img/15.png" %}"
+                                                                                      onclick="document.getElementById('r15').checked='checked';">
+                </li>
+                <li><input id='r16' type="radio" name="action_image" value="a16"><img src="{% static "img/16.png" %}"
+                                                                                      onclick="document.getElementById('r16').checked='checked';">
+                </li>
+            </ul>
             <input type="submit" class="btn btn-default" value="Создать комнату">
-   </form>
+        </form>
 
-   </div>
+    </div>
 {% endblock %}
