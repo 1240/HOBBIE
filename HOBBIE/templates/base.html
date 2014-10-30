@@ -31,7 +31,7 @@
 
             <section class="middle tab-bar-section">
                 <a href="/">
-                    <img src="{% static 'img/logo.png' %}">
+                    <img src="{% static "img/along.png" %}">
                 </a>
             </section>
 
@@ -46,7 +46,9 @@
 
             <div class="text-center color-white">
                 {% if user.username %}
-                    <div class="circular"></div>
+                    <div class="circular">
+
+                    </div>
                     <br>
                     <h5>{{ user.username }}</h5>
                     <h6>{{ user.email }}</h6>

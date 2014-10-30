@@ -8,15 +8,16 @@
 
     <div id="chat">
         <div class="container-div">
-            <a href="/rooms/edit/{{ room.id }}/">Редактировать</a>
+            <a href="/rooms/editroom/{{ room.id }}/">Редактировать</a>
             <a href="/rooms/join/{{ room.id }}/">Вступить</a>
             <a href="/rooms/leave/{{ room.id }}/">Покинуть</a>
             <a href="/rooms/invite/{{ room.id }}/">Пригласить</a>
+            <a href="/rooms/all/">К списку комнат</a>
 
             <h4>{{ room.room_title }}</h4>
 
             <div>
-            <span><img src="{% static room.room_image %}"></span><span><h6><strong>Дата мероприятия:</strong> {{ room.room_to_date }}</h6></span>
+            <span><img src="{% static room.room_image %}" class="roomimage"></span><span><h6><strong>Дата мероприятия:</strong> {{ room.room_to_date }}</h6></span>
             </div>
             <h6 style="float:right"><strong>Дата создания: </strong>{{ room.room_create_date }}</h6>
 
