@@ -19,23 +19,15 @@
     <div class="large-9 columns body-div-color">
         <div>
             <div class="small-2 large-4 columns text-left">
-                <h3>Комнаты: </h3><h4><a href="/rooms/makeroom/">Создать комнату</a></h4>
+                <h4><a href="/rooms/makeroom/">Создать комнату</a></h4>
             </div>
             <div class="small-4 large-4 columns">
                 <div class="switch-toggle panel">
                     <input id="by_date" name="view" type="radio" checked="">
-                    <label for="by_date" onclick="Dajaxice.room.rooms_list(Dajax.process,
-                        {'toggle': 'by_date',
-                        'region': document.getElementById('region_select').selectedIndex,
-                        'p': 1,
-                        'view': getView()})">по дате публикации</label>
+                    <label for="by_date" style="color: #ffffff" onclick="ajaxSort('by_date')">по дате публикации</label>
 
                     <input id="by_people" name="view" type="radio">
-                    <label for="by_people" onclick="Dajaxice.room.rooms_list(Dajax.process,
-                        {'toggle': 'by_people',
-                        'region': document.getElementById('region_select').selectedIndex,
-                        'p': 1,
-                        'view': getView()})">по количеству участников</label>
+                    <label for="by_people" onclick="ajaxSort('by_people')">по количеству участников</label>
 
                     <a class="button"></a>
                 </div>
@@ -43,23 +35,11 @@
             <div class="small-6 large-4 columns">
                 <div class="switch-toggle switch-3 panel">
                     <input id="gallery_view" name="view3" type="radio" checked>
-                    <label for="gallery_view" onclick="Dajaxice.room.rooms_list(Dajax.process,
-                                             {'toggle':getSort(),
-                                             'region': document.getElementById('region_select').selectedIndex,
-                                             'p': 1,
-                                             'view': 'gallery_view'})">Галерея</label>
+                    <label for="gallery_view" style="color: #ffffff" onclick="ajaxView('gallery_view')">Галерея</label>
                     <input id="table_view" name="view3" type="radio">
-                    <label for="table_view" onclick="Dajaxice.room.rooms_list(Dajax.process,
-                                             {'toggle':getSort(),
-                                             'region': document.getElementById('region_select').selectedIndex,
-                                             'p': 1,
-                                             'view': 'table_view'})">Таблица</label>
+                    <label for="table_view" onclick="ajaxView('table_view')">Таблица</label>
                     <input id="list_view" name="view3" type="radio">
-                    <label for="list_view" onclick="Dajaxice.room.rooms_list(Dajax.process,
-                                             {'toggle':getSort(),
-                                             'region': document.getElementById('region_select').selectedIndex,
-                                             'p': 1,
-                                             'view': 'list_view'})">Лист</label>
+                    <label for="list_view" onclick="ajaxView('list_view')">Лист</label>
                     <a class="button"></a>
                 </div>
             </div>
@@ -100,7 +80,8 @@
                         {% endif %}
                         {% for page in rooms.paginator.page_range %}
                             {% if page == rooms.number %}
-                                <li class="current"><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                                <li class="current"><a href="#" style="color: #ffffff !important;"
+                                                       onclick="Dajaxice.room.rooms_list(Dajax.process,
                                         {'toggle':getSort(),
                                         'region': document.getElementById('region_select').selectedIndex,
                                         'p': {{ page }},
@@ -109,7 +90,8 @@
                                 <li><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
                                         {'toggle':getSort(),
                                         'region': document.getElementById('region_select').selectedIndex,
-                                        'p': {{ page }}})">{{ page }}</a></li>
+                                        'p': {{ page }},
+                                        'view': getView()})">{{ page }}</a></li>
                             {% endif %}
                         {% endfor %}
                         {% if rooms.has_next %}
@@ -132,12 +114,9 @@
     </div>
     <div class="large-3 columns">
         <label>Выберите область
-            <select id="region_select" onchange="Dajaxice.room.rooms_list(Dajax.process,
-                        {'toggle':getSort(),
-                        'region': document.getElementById('region_select').selectedIndex,
-                        'p': 1,
-                        'view': getView()})">
-                <option value="all">Все</option>
+            <select id="region_select"
+                    onchange="window.location.replace('/rooms' + $( '#region_select option:selected' ).val())">
+                <option value="/all">Все</option>
                 {% for region in regions_list %}
                     {% if region.region_url == region_id %}
                     <option selected value="{{ region.region_url }}">{{ region.region_name }}</option>

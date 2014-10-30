@@ -35,4 +35,32 @@ $(document).ready(function () {
     $('#id_room_to_date').fdatetimepicker({
         format: 'mm-dd-yyyy hh:ii'
     });
-})
+});
+
+function ajaxView(view) {
+    views = ['gallery_view', 'table_view', 'list_view'];
+    Dajaxice.room.rooms_list(Dajax.process,
+        {'toggle': getSort(),
+            'region': document.getElementById('region_select').selectedIndex,
+            'p': 1,
+            'view': view});
+    $("label[for='" + view + "']").css('color', 'white');
+    views.splice( $.inArray(view, views), 1 );
+    $.each(views, function(i, val ) {
+      $("label[for='" + val + "']").css('color', 'inherit');
+    });
+}
+
+function ajaxSort(sort) {
+    sorts = ['by_people', 'by_date'];
+    Dajaxice.room.rooms_list(Dajax.process,
+        {'toggle': sort,
+            'region': document.getElementById('region_select').selectedIndex,
+            'p': 1,
+            'view': getView()});
+    $("label[for='" + sort + "']").css('color', 'white');
+    sorts.splice( $.inArray(sort, sorts), 1 );
+    $.each(sorts, function(i, val ) {
+      $("label[for='" + val + "']").css('color', 'inherit');
+    });
+}

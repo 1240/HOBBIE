@@ -35,7 +35,8 @@
             {% endif %}
             {% for page in rooms.paginator.page_range %}
                 {% if page == rooms.number %}
-                    <li class="current"><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
+                    <li class="current"><a href="#" style="color: #ffffff !important;"
+                                           onclick="Dajaxice.room.rooms_list(Dajax.process,
                             {'toggle':getSort(),
                             'region': document.getElementById('region_select').selectedIndex,
                             'p': {{ page }},
