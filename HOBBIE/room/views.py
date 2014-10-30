@@ -104,3 +104,24 @@ def joinroom(request, room_id):
 
 def invite(request, room_id):
     return redirect('/rooms/get/%s/' % room_id)
+
+def editroom(request,room_id=0):
+    args = {}
+    args.update(csrf(request))
+    args['form'] = RoomForm()    #TODO начальное автозаполнение при редактировании
+
+    if request.method == 'POST':
+        form = RoomForm(request.POST)
+        if form.is_valid():
+            room = form.save(commit=False)
+            room.room_image = request.POST.get('args')
+            img_choice = request.POST.get('action_image')
+            room.room_image = f(img_choice)
+            room.room_region_id = 1  # TODO выбор региона публикации комнаты
+            form.save()
+            return redirect('/account/%s/' % auth.get_user(request).username, args)
+            return redirect('/rooms/all/%d/' % room_id)
+        else:
+            args['form'] = RoomForm(request.POST)
+        args['form'] = form
+    return render_to_response('editroom.html', args)
