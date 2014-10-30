@@ -1,0 +1,53 @@
+<!--
+<div class="text-center color-white">
+    <a href="auth/login"><h3>Войти</h3></a>
+</div>
+<div class="normal-signin">
+    <div class="form-main">
+        <form id="login_form" id="login_form" method="post" action="/auth/login/" role="form">
+            <div class="form-group color-white">
+                {% if login_error %}
+                    <p><strong>{{ login_error }}</strong></p>
+                {% endif %}
+                {% csrf_token %}
+                <div class="un-wrap">
+                    <i class="fa fa-envelope"></i>
+                    <input type="text" name="username" class="form-control"
+                           placeholder="Email"
+                           required>
+                </div>
+                <div class="pw-wrap">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" name="password" class="form-control"
+                           placeholder="Пароль"
+                           required>
+                </div>
+                <div class="row top-buffer">
+                    <button onclick="Dajaxice.accounts.login(Dajax.process)" class="btn btn-block signin">Войти</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+-->
+<a href="//127.0.0.1:8000/auth/login">Войти</a>
+<fieldset class="title">
+    <legend>ИЛИ</legend>
+</fieldset>
+<div class="authenty signin-alt section-content">
+    <div class="sns-signin">
+        <a href="#" class="vk">
+            Войти через VK
+        </a>
+        <br>
+        <a href="#" class="google-plus">
+            Войти через Google+</a>
+    </div>
+</div>
+<fieldset class="title">
+    <legend>ИЛИ</legend>
+</fieldset>
+<a href="/auth/register/" id="forgot_from_2">
+    <i class="fa fa-plus"></i> Создать аккаунт
+</a>

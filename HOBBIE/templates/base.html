@@ -1,7 +1,10 @@
 {% load staticfiles %}
+{% load dajaxice_templatetags %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    {% dajaxice_js_import %}
+    <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
     <meta charset="UTF-8">
     <title>Weekdays</title>
     <link rel="stylesheet" type="text/css" href="{% static "css/ff/css/foundation.css" %}">
@@ -27,7 +30,9 @@
             </section>
 
             <section class="middle tab-bar-section">
-                <h1 class="title"><img src="{% static "img/along.png" %}"></h1>
+                <a href="/">
+                    <img src="{% static 'img/logo.png' %}">
+                </a>
             </section>
 
             <section class="right-small">
@@ -81,52 +86,7 @@
                         <button class="left-off-button">fff</button>
                     </div>
                 {% else %}
-                    <div class="text-center color-white">
-                        <a href="auth/login"><h3>Войти</h3></a>
-                    </div>
-                    <div class="normal-signin">
-                        <div class="form-main">
-                            <form id="login_form" id="login_form" method="post" action="/auth/login/" role="form">
-                                <div class="form-group color-white">
-                                    {% csrf_token %}
-                                    {% if login_error %}
-                                        <p><strong>{{ login_error }}</strong></p>
-                                    {% endif %}
-                                    <div class="un-wrap">
-                                        <i class="fa fa-envelope"></i>
-                                        <input type="text" name="username" class="form-control"
-                                               placeholder="Email"
-                                               required>
-                                    </div>
-                                    <div class="pw-wrap">
-                                        <i class="fa fa-lock"></i>
-                                        <input type="password" name="password" class="form-control"
-                                               placeholder="Пароль"
-                                               required>
-                                    </div>
-                                    <div class="row top-buffer">
-                                        <button type="submit" class="btn btn-block signin">Войти</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <fieldset class="title">
-                        <legend>ИЛИ</legend>
-                    </fieldset>
-                    <div class="sns-signin">
-                        <a href="#" class="vk"><i
-                                class="fa fa-vk"></i><span>Войти через VK</span></a>
-                        <br>
-                        <a href="#" class="google-plus"><i
-                                class="fa fa-google-plus"></i><span>Войти через Google+</span></a>
-                    </div>
-                    <fieldset class="title">
-                        <legend>ИЛИ</legend>
-                    </fieldset>
-                        <a href="/auth/register/" id="forgot_from_2">
-                            <i class="fa fa-plus"></i> Создать аккаунт
-                        </a>
+                    {% include "sidebar_login.html" %}
                 {% endif %}
             </div>
         </aside>
@@ -154,7 +114,7 @@
             </ul>
         </aside>
 
-        <section class="main-section">
+        <section class="main-section" style="min-height: 1000px">
             {% block map %}{% endblock %}
             {% block rooms %}{% endblock %}
             {% block login %}{% endblock %}
