@@ -207,3 +207,7 @@ fieldset.title legend {
     padding: 5px 10px;
     background: transparent;
 }
+
+label :checked {
+    background-color: #6d655c;
+}
