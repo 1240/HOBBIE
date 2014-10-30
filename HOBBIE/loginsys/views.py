@@ -11,7 +11,7 @@ from accounts.forms import UserCreationForm
 def login(request):
     args = {}
     args.update(csrf(request))
-    args['username'] = auth.get_user(request).username
+    args['user'] = auth.get_user(request)
     args['is_authenticated'] = auth.get_user(request).is_authenticated()
     if request.POST:
         username = request.POST.get('username', '')

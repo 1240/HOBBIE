@@ -37,14 +37,14 @@
 
             <!-- Right Nav Section -->
             <ul class="right">
-                {% if username %}
+                {% if user.username %}
                     <li>
-                        <a href="#" title="{{ username }}">
+                        <a href="#" title="{{ user.username }}">
                             <img src="http://cs606017.vk.me/v606017802/6def/wf3hHo1sZtY.jpg"
                                  style="width:49px; margin-top: -15px;">
                         </a>
                     </li>
-                    <li><a href="/account/{{ username }}/" title="{{ username }}">{{ username }}</a></li>
+                    <li><a href="/account/{{ user.username }}/" title="{{ user.username }}">{{ user.username }}</a></li>
                     <li><a href="#">Сообщения</a></li>
                     <li><a href="#">Приглашения</a></li>
                     <li><a href="/auth/logout">Выйти</a></li>
