@@ -54,23 +54,23 @@
             font-weight: bold;
         }
         .tooltip_bg{
-        fill: rgb(52, 73, 94);
+        fill: #6d655c;
         opacity: 0.85;
         }
 
 
 
         /* Region */
-        .map-region {
-            fill: rgb(52, 73, 94);
+               .map-region {
+            fill: #6d655c;
             stroke-width: 1.1px; /* @fix Chrome render artefact + 0.1 */
-            stroke: rgb(111, 121, 130);
+            stroke: #9a8d6d;
             cursor: pointer;
         }
 
             .map-region:hover,
             .map-region[data-state='hover'] {
-                fill: rgb(0, 207, 175);
+                fill: #9a8d6d;
             }
 
         /* Point */
@@ -81,7 +81,7 @@
 
             .map-city-point:hover,
             .map-city-point[data-state='hover'] {
-                fill: rgb(0, 207, 175);
+                fill: #9a8d6d;
             }
 
         /* Name city */
