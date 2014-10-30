@@ -61,12 +61,11 @@ def addroom(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             room = form.save(commit=False)
-            room.room_image = request.POST.get('args')
             img_choice = request.POST.get('action_image')
             room.room_image = f(img_choice)
             room.room_region_id = 1  # TODO
             form.save()
-    return redirect('/rooms/all/')
+    return redirect('/rooms/get/%d' % room.id)
 
 
 def f(x):
@@ -105,7 +104,7 @@ def joinroom(request, room_id):
 def invite(request, room_id):
     return redirect('/rooms/get/%s/' % room_id)
 
-def editroom(request,room_id=0):
+def editroom(request,room_id): #нихуя не работает ептить - создает новую комнату вместо редактирвоания
     args = {}
     args.update(csrf(request))
     args['form'] = RoomForm()    #TODO начальное автозаполнение при редактировании
@@ -113,14 +112,11 @@ def editroom(request,room_id=0):
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
-            room = form.save(commit=False)
-            room.room_image = request.POST.get('args')
-            img_choice = request.POST.get('action_image')
-            room.room_image = f(img_choice)
-            room.room_region_id = 1  # TODO выбор региона публикации комнаты
             form.save()
-            return redirect('/account/%s/' % auth.get_user(request).username, args)
-            return redirect('/rooms/all/%d/' % room_id)
+            img_choice = request.POST.get('action_image')
+            Room.objects[room_id].room_image = f(img_choice)
+            Room.objects[room_id].room_region_id = 1  # TODO выбор региона публикации комнаты
+            return redirect('/rooms/get/%d' % room.id)
         else:
             args['form'] = RoomForm(request.POST)
         args['form'] = form
