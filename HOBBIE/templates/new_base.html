@@ -1,0 +1,76 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Weekdays</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/foundation.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/foundation-datepicker.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/weekdays.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/authenty.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/toggle-switch.css" %}">
+    <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/foundation/foundation.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/foundation/foundation-datepicker.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/foundation/foundation-datetimepicker.js" %}"></script>
+    <script src="{% static "js/vendor/modernizr.js" %}"></script>
+</head>
+<body>
+<!-- Navigation -->
+<div class="contain-to-grid sticky">
+
+    <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+            <li class="name"></li>
+            <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+        </ul>
+
+        <section class="top-bar-section">
+
+            <div class="logo-wrapper hide-for-small-only">
+                <div class="logo">
+                    <a href="/">
+                        <img src="{% static "img/logo.gif" %}"></a>
+                </div>
+            </div>
+
+            <!-- Right Nav Section -->
+            <ul class="right">
+                {% if username %}
+                    <li>
+                        <a href="#" title="{{ username }}">
+                            <img src="http://cs606017.vk.me/v606017802/6def/wf3hHo1sZtY.jpg"
+                                 style="width:49px; margin-top: -15px;">
+                        </a>
+                    </li>
+                    <li><a href="/account/{{ username }}/" title="{{ username }}">{{ username }}</a></li>
+                    <li><a href="#">Сообщения</a></li>
+                    <li><a href="#">Приглашения</a></li>
+                    <li><a href="/auth/logout">Выйти</a></li>
+                {% else %}
+                    <li><a href="/auth/login">Войти</a></li>
+                    <li><a href="/auth/register/">Зарегистрироваться</a></li>
+                {% endif %}
+            </ul>
+
+            <!-- Left Nav Section -->
+            <ul class="left">
+                <li class="name"><h3>WE ARE LEGION</h3>
+                </li>
+            </ul>
+
+        </section>
+    </nav>
+
+</div>
+<!-- /navigation -->
+
+{% block map %}{% endblock %}
+{% block rooms %}{% endblock %}
+{% block login %}{% endblock %}
+{% block user_page %}{% endblock %}
+{% block edit %}{% endblock %}
+
+</body>
+</html>
