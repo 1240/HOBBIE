@@ -12,7 +12,7 @@ def edit(request):
     args = {}
     args.update(csrf(request))
     args['form'] = UserChangeForm(instance=request.user)
-    args['username'] = auth.get_user(request).username
+    args['user'] = auth.get_user(request)
     if request.method == 'POST':
         form = UserChangeForm(request.POST,request.FILES, instance=request.user)
         if form.is_valid():
@@ -29,5 +29,4 @@ def edit(request):
 def user_page(request, username):
     args = {}
     args['user'] = auth.get_user(request)
-    args['username'] = auth.get_user(request).username
     return render_to_response('user_page.html', args)

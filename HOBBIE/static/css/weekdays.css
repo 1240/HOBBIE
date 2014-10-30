@@ -3,7 +3,7 @@
     height:100px;
 }
 :focus::-webkit-input-placeholder {
-    color:transparent;
+    color: transparent;
 }
 
 .body-div-color {
@@ -97,7 +97,7 @@
     float: left
 }
 
-.col-2 a{
+.col-2 a {
     color: #2285a2;
 }
 
@@ -157,5 +157,53 @@
 }
 
 a:hover {
-    color: rgb(0, 207, 175) !important;
+    /*color: rgb(0, 207, 175) !important;*/
+    color: #9a8d6d !important;
+}
+
+.circular {
+    width: 140px;
+    margin: 0 auto;
+    height: 140px;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    background: url(http://cs606017.vk.me/v606017802/6dec/kVGSXViwGC0.jpg) no-repeat;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+.color-white {
+    color: #ffffff !important;
+}
+
+a, h1, h2, h3, h4, h5, h6{
+    color: inherit !important;
+}
+
+.left-off-button{
+    border: 2px solid #9a8d6d;
+    border-radius: 20px;
+}
+
+.left-off-button :hover{
+    color: #9a8d6d;
+    border: 0;
+    border-radius: 0;
+}
+
+fieldset.title {
+    border-top: 1px solid #aaa;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    display: block;
+    text-align: center;
+    padding: 0;
+}
+
+fieldset.title legend {
+    padding: 5px 10px;
+    background: transparent;
 }

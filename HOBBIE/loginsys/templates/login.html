@@ -12,7 +12,7 @@
         <div class="row">
             {% if is_authenticated %}
                 <div class="container-div center">
-                    Что такое, {{ username }}? Вы же уже авторизорваны.
+                    Что такое, {{ user.username }}? Вы же уже авторизорваны.
                     Впрочем, всегда можно <a href="/auth/logout">выйти</a>.<br/><br/>
                 </div>
             {% else %}
@@ -52,7 +52,7 @@
                 <div class=" medium-2 small-1 columns">
                     <div class="horizontal-divider"></div>
                 </div>
-                <div class="medium-4 columns">
+                <div class="medium-4 columns color-white">
                     <div class="sns-signin">
                         <a href="#" class="vk"><i
                                 class="fa fa-vk"></i><span>Войти через VK</span></a>
@@ -67,7 +67,7 @@
                     <a href="/auth/register/" id="forgot_from_2">
                         <i class="fa fa-plus"></i> Создать аккаунт
                     </a>
-                </div>.
+                </div>
             {% endif %}
             </div>
     </div>

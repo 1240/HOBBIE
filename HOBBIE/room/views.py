@@ -18,7 +18,7 @@ def rooms(request, region_name='all'):
                                  .order_by("-room_create_date"), per_page=10)
     args = {}
     args['rooms'] = current_page.page(1)
-    args['username'] = auth.get_user(request).username
+    args['user'] = auth.get_user(request)
     args['toggle'] = 'notchecked'
     args['regions_list'] = Regions.objects.all()
     args['region_id'] = '/' + region_name
@@ -32,7 +32,7 @@ def room(request, room_id=1):
     args['room'] = Room.objects.get(id=room_id)
     args['messages'] = Message.objects.filter(message_room_id=room_id).order_by('message_datetime')
     args['form'] = message_form
-    args['username'] = auth.get_user(request).username
+    args['user'] = auth.get_user(request)
     return render_to_response('room.html', args)
 
 

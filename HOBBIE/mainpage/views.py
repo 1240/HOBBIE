@@ -17,7 +17,7 @@ def home(request):
         t = get_template('main_west.html')
     c = Context({
         "width": 621,
-        "username": auth.get_user(request).username,
+        "user": auth.get_user(request),
         "regions": regions,
         "id_user": auth.get_user(request).id,
     })
