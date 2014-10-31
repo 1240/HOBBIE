@@ -162,13 +162,13 @@ a:hover {
 }
 
 .circular {
-    width: 140px;
+    width: 160px;
     margin: 0 auto;
-    height: 140px;
-    border-radius: 150px;
-    -webkit-border-radius: 150px;
-    -moz-border-radius: 150px;
-    background: url(http://cs606017.vk.me/v606017802/6dec/kVGSXViwGC0.jpg) no-repeat;
+    height: 160px;
+    border-radius: 170px;
+    -webkit-border-radius: 170px;
+    -moz-border-radius: 170px;
+    background: url(http://cs606017.vk.me/v606017802/6dec/kVGSXViwGC0.jpg) round;
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
@@ -201,6 +201,21 @@ fieldset.title {
     display: block;
     text-align: center;
     padding: 0;
+}
+
+.holder{
+ position:relative;
+}
+.block{
+    position:absolute;
+
+    display:none;
+    color: #000000;
+
+}
+
+.holder:hover .block{
+    display:block;
 }
 
 fieldset.title legend {
