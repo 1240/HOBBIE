@@ -19,6 +19,9 @@
             <div>
             <span><img src="{% static room.room_image %}" class="roomimage"></span><span><h6><strong>Дата мероприятия:</strong> {{ room.room_to_date }}</h6></span>
             </div>
+            <h6>
+                Создатель комнаты: {{ room.room_creator.username }}
+            </h6>
             <h6 style="float:right"><strong>Дата создания: </strong>{{ room.room_create_date }}</h6>
 
             <p>{{ room.room_text }}</p>

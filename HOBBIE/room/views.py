@@ -64,7 +64,10 @@ def addroom(request):
             img_choice = request.POST.get('action_image')
             room.room_image = f(img_choice)
             room.room_region_id = 1  # TODO
+            room.room_creator = auth.get_user(request)
             form.save()
+        else:
+            redirect('/rooms/addroom/')
     return redirect('/rooms/get/%d' % room.id)
 
 
