@@ -134,8 +134,10 @@ def editroom(request,room_id): #нихуя не работает ептить - 
         if form.is_valid():
             form.save()
             img_choice = request.POST.get('action_image')
-            Room.objects.get(id=room_id).room_image = f(img_choice)
-            Room.objects.get(id=room_id).room_region_id = 1  # TODO выбор региона публикации комнаты
+            room = Room.objects.get(id=room_id)
+            room.room_image = f(img_choice)
+            room.room_region_id = 1  # TODO выбор региона публикации комнаты
+            room.save()
             return redirect('/rooms/get/%s' % room_id)
         else:
             args['form'] = RoomForm(request.POST)
