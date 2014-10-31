@@ -46,9 +46,24 @@
 
             <div class="text-center color-white">
                 {% if user.username %}
-                    <div class="circular">
 
+                   <div class='holder'>
+                   <div class="circular"  style="background: url({{ user.avatar.url }}) round; position: relative" >
+                    <div class='block' style="color: #ffffff">
+                    <a href="/"><aside class="fa fa-times-circle" title="Удалить фотографию" style="color:#000000;position: absolute;width:20px; left: 70px;">
+                    </aside>
+                    </a>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    <a href="/"><i class="fa fa-upload" title="Загрузить новую фотографию" style="position: absolute;background: rgba(0, 0, 0, 0.5);width:100px;left:30px;"> Загрузить
+                    </i></a>
                     </div>
+                    </div>
+                    </div>
+
                     <br>
                     <h5>{{ user.username }}</h5>
                     <h6>{{ user.email }}</h6>
