@@ -130,13 +130,13 @@ def editroom(request,room_id): #нихуя не работает ептить - 
     args['form'] = RoomForm(instance=Room.objects.get(id=room_id))    #TODO начальное автозаполнение при редактировании
 
     if request.method == 'POST':
-        form = RoomForm(request.POST)
+        form = RoomForm(request.POST, instance=Room.objects.get(id=room_id))
         if form.is_valid():
             form.save()
             img_choice = request.POST.get('action_image')
-            Room.objects[room_id].room_image = f(img_choice)
-            Room.objects[room_id].room_region_id = 1  # TODO выбор региона публикации комнаты
-            return redirect('/rooms/get/%d' % room.id)
+            Room.objects.get(id=room_id).room_image = f(img_choice)
+            Room.objects.get(id=room_id).room_region_id = 1  # TODO выбор региона публикации комнаты
+            return redirect('/rooms/get/%s' % room_id)
         else:
             args['form'] = RoomForm(request.POST)
         args['form'] = form
