@@ -33,6 +33,7 @@ def room(request, room_id=1):
     args['messages'] = Message.objects.filter(message_room_id=room_id).order_by('message_datetime')
     args['form'] = message_form
     args['user'] = auth.get_user(request)
+    args['users_in_room'] = Room.objects.get(id=room_id).user_set.all()
     return render_to_response('room.html', args)
 
 
@@ -66,9 +67,12 @@ def addroom(request):
             room.room_region_id = 1  # TODO
             room.room_creator = auth.get_user(request)
             form.save()
+            user = auth.get_user(request)
+            room = Room.objects.get(id=room.id)
+            user.room.add(room)
         else:
-            redirect('/rooms/addroom/')
-    return redirect('/rooms/get/%d' % room.id)
+            return redirect('/rooms/all/')
+    return redirect('/rooms/get/%s' % room.id)
 
 
 def f(x):
@@ -101,16 +105,29 @@ def f(x):
 
 
 def joinroom(request, room_id):
+    user = auth.get_user(request)
+    room = Room.objects.get(id=room_id)
+    user.room.add(room)
+    room.room_people_count += 1
+    room.save()
+    return redirect('/rooms/get/%s/' % room_id)
+
+
+def leave(request, room_id):
+    auth.get_user(request).room.remove(Room.objects.get(id=room_id))
+    room = Room.objects.get(id=room_id)
+    room.room_people_count -= 1
+    room.save()
     return redirect('/rooms/get/%s/' % room_id)
 
 
 def invite(request, room_id):
     return redirect('/rooms/get/%s/' % room_id)
 
-def editroom(request,room_id): #нихуя не работает ептить - создает новую комнату вместо редактирвоания
+def editroom(request,room_id): #нихуя не работает ептить - создает новую комнату вместо редактирвоания (САША ПОПРАВИЛ :))
     args = {}
     args.update(csrf(request))
-    args['form'] = RoomForm()    #TODO начальное автозаполнение при редактировании
+    args['form'] = RoomForm(instance=Room.objects.get(id=room_id))    #TODO начальное автозаполнение при редактировании
 
     if request.method == 'POST':
         form = RoomForm(request.POST)

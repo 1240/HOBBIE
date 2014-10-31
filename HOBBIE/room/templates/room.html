@@ -9,24 +9,28 @@
     <div id="chat">
         <div class="container-div">
             <a href="/rooms/editroom/{{ room.id }}/">Редактировать</a>
-            <a href="/rooms/join/{{ room.id }}/">Вступить</a>
-            <a href="/rooms/leave/{{ room.id }}/">Покинуть</a>
-            <a href="/rooms/invite/{{ room.id }}/">Пригласить</a>
+            {% if user in users_in_room %}
+                <a href="/rooms/leave/{{ room.id }}/">Покинуть</a>
+                <a href="/rooms/invite/{{ room.id }}/">Пригласить</a>
+            {% else %}
+                <a href="/rooms/join/{{ room.id }}/">Вступить</a>
+            {% endif %}
             <a href="/rooms/all/">К списку комнат</a>
 
             <h4>{{ room.room_title }}</h4>
 
             <div>
-            <span><img src="{% static room.room_image %}" class="roomimage"></span><span><h6><strong>Дата мероприятия:</strong> {{ room.room_to_date }}</h6></span>
+                <span><img src="{% static room.room_image %}" class="roomimage"></span><span><h6><strong>Дата
+                мероприятия:</strong> {{ room.room_to_date }}</h6></span>
             </div>
-            <h6>
-                Создатель комнаты: {{ room.room_creator.username }}
-            </h6>
             <h6 style="float:right"><strong>Дата создания: </strong>{{ room.room_create_date }}</h6>
 
             <p>{{ room.room_text }}</p>
 
-            <p><strong>В комнате </strong> {{ room.room_people_count }} человек</p>
+            <p><strong>В комнате </strong> {{ room.room_people_count }} человек:</p>
+        {% for user_name in users_in_room %}
+        {{ user_name.username }} |
+        {% endfor %}
             <hr>
             <div>
                 <h5><strong>Обсуждение</strong></h5>
@@ -34,8 +38,8 @@
                 <div id="messages_list">
                     {% for message in messages %}
                         <p>
-                        <strong>НИКНЕЙМ:</strong> {{ message.message_text }}
-                        <span style="float:right">({{ message.message_datetime }})</span></p>
+                            <strong>НИКНЕЙМ:</strong> {{ message.message_text }}
+                            <span style="float:right">({{ message.message_datetime }})</span></p>
                     {% endfor %}
 
                 </div>
@@ -43,9 +47,10 @@
                 <label>Сообщение
                     <input type="text" id="message_text" placeholder="текст сообщения" maxlength="200"/>
                     <button class="button" onclick="Dajaxice.room.send_message(Dajax.process,
-                            {'room_id': {{ room.id}},
+                            {'room_id': {{ room.id }},
                             'message_text':$('#message_text').val()}); document.getElementById('message_text').value = '';"
-                            >Отправить</button>
+                            >Отправить
+                    </button>
 
                 </label>
             </div>

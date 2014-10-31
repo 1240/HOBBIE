@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^rooms/addroom/$', 'room.views.addroom'),
     url(r'^rooms/join/(?P<room_id>\d+)/$', 'room.views.joinroom'),
     url(r'^rooms/invite/(?P<room_id>\d+)/$', 'room.views.invite'),
+    url(r'^rooms/leave/(?P<room_id>\d+)/$', 'room.views.leave'),
     url(r'^rooms/editroom/(?P<room_id>\d+)/$', 'room.views.editroom'),
     url(r'^rooms/(?P<region_name>\w+)/$', 'room.views.rooms'),
 
