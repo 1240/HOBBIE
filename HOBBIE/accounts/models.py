@@ -38,6 +38,7 @@ class User(AbstractBaseUser):
     date_of_birth = models.DateField(verbose_name='День рождения',  blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    friends = models.ManyToManyField("self", blank=True, null=True)
     #TODO сообщения, дурзья, комнаты
 
     objects = UserManager()
