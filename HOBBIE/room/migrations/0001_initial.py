@@ -31,10 +31,10 @@ class Migration(migrations.Migration):
                 ('room_title', models.CharField(verbose_name='Название комнаты', max_length=100)),
                 ('room_text', models.TextField(verbose_name='Описание комнаты')),
                 ('room_create_date', models.DateTimeField(default=datetime.datetime.now)),
-                ('room_to_date', models.DateTimeField(null=True, verbose_name='Дата удаления комнаты', blank=True)),
+                ('room_to_date', models.DateTimeField(null=True, blank=True, verbose_name='Дата мероприятия')),
                 ('room_people_count', models.IntegerField(default=1)),
-                ('room_open', models.BooleanField(verbose_name='Открытая/закрытая комната', default=True)),
-                ('room_image', models.CharField(null=True, verbose_name='Изображение комнаты', max_length=100, blank=True)),
+                ('room_open', models.BooleanField(default=True, verbose_name='Открытая/закрытая комната')),
+                ('room_image', models.CharField(null=True, blank=True, verbose_name='Изображение комнаты', max_length=100)),
                 ('room_region', models.ForeignKey(to='mainpage.Regions')),
             ],
             options={

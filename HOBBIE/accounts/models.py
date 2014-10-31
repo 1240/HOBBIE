@@ -2,6 +2,8 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
+from room.models import Room
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -31,15 +33,16 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
         db_index=True)
-    username = models.CharField(verbose_name='username',  max_length=255, unique=True)
-    avatar = models.ImageField(verbose_name='Аватар',  upload_to='images/%Y/%m/%d', blank=True, null=True)
-    first_name = models.CharField(verbose_name='Имя',  max_length=255, blank=True)
-    last_name = models.CharField(verbose_name='Фамилия',  max_length=255, blank=True)
-    date_of_birth = models.DateField(verbose_name='День рождения',  blank=True, null=True)
+    username = models.CharField(verbose_name='username', max_length=255, unique=True)
+    avatar = models.ImageField(verbose_name='Аватар', upload_to='images/%Y/%m/%d', blank=True, null=True)
+    first_name = models.CharField(verbose_name='Имя', max_length=255, blank=True)
+    last_name = models.CharField(verbose_name='Фамилия', max_length=255, blank=True)
+    date_of_birth = models.DateField(verbose_name='День рождения', blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     friends = models.ManyToManyField("self", blank=True, null=True)
-    #TODO сообщения, дурзья, комнаты
+    room = models.ManyToManyField(Room, blank=True, null=True)
+    # TODO сообщения
 
     objects = UserManager()
 

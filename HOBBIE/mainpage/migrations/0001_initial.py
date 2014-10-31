@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('region_id', models.CharField(verbose_name='ИД региона', max_length=100)),
                 ('region_title', models.CharField(verbose_name='Заголовок', max_length=100)),
                 ('region_url', models.CharField(verbose_name='Ссылка', max_length=100)),
-                ('is_west', models.BooleanField(verbose_name='Западная часть?', default=True)),
+                ('is_west', models.BooleanField(default=True, verbose_name='Западная часть?')),
             ],
             options={
                 'db_table': 'regions',

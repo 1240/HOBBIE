@@ -5,7 +5,6 @@ from django.db import models
 
 
 # Create your models here.
-from accounts.models import User
 from mainpage.models import Regions
 
 
@@ -19,9 +18,8 @@ class Room(models.Model):
     room_to_date = models.DateTimeField(null=True, blank=True, verbose_name="Дата мероприятия")
     room_people_count = models.IntegerField(default=1)
     room_region = models.ForeignKey(Regions)
-    room_open = models.BooleanField(default=True,verbose_name="Открытая/закрытая комната")
+    room_open = models.BooleanField(default=True, verbose_name="Открытая/закрытая комната")
     room_image = models.CharField(null=True, blank=True, max_length=100, verbose_name="Изображение комнаты")
-    room_creator = models.ForeignKey(User)
 
 
 class Message(models.Model):
