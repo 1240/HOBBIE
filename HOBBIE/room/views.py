@@ -125,7 +125,7 @@ def invite(request, room_id):
     return redirect('/rooms/get/%s/' % room_id)
 
 def editroom(request,room_id): #нихуя не работает ептить - создает новую комнату вместо редактирвоания (САША ПОПРАВИЛ :))
-    args = {}
+    args = {}                                                                                 # САША МАЛОДЕЦ)))
     args.update(csrf(request))
     args['form'] = RoomForm(instance=Room.objects.get(id=room_id))    #TODO начальное автозаполнение при редактировании
 
