@@ -241,3 +241,8 @@ label :checked {
     height: 5.8125rem;
     background: white;
 }
+
+.switch-toggle {
+    width: 400px;
+    margin: 0 auto;
+}

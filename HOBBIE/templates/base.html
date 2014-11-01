@@ -89,9 +89,9 @@
                     </div>
                     <hr>
                     <ul class="side-nav color-white">
-                        <li><a href="#">Ваши комнаты</a></li>
-                        <li><a href="#">Сообщения</a></li>
-                        <li><a href="#">Друзья</a></li>
+                        <li><a href="//127.0.0.1:8000/account/rooms">Ваши комнаты</a></li>
+                        <li><a href="//127.0.0.1:8000/rooms/all">Все комнаты</a></li>
+                        <li><a href="//127.0.0.1:8000/account/friends">Друзья</a></li>
                         <li><a href="#">Приглашения</a></li>
                     </ul>
                     <hr>
@@ -140,11 +140,18 @@
         </aside>
 
         <section class="main-section" style="min-height: 1000px">
+            <div>
+                <hr>
+                {{ header_text }}
+                <hr>
+            </div>
             {% block map %}{% endblock %}
             {% block rooms %}{% endblock %}
             {% block login %}{% endblock %}
             {% block user_page %}{% endblock %}
             {% block edit %}{% endblock %}
+            {% block user_rooms %}{% endblock %}
+            {% block user_friends %}{% endblock %}
         </section>
 
         <a class="exit-off-canvas"></a>

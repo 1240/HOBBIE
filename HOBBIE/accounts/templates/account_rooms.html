@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load dajaxice_templatetags %}
+{% load staticfiles %}
+{% block user_rooms %}
+    {% dajaxice_js_import %}
+    <br>
+    <br>
+    <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/account_rooms.js" %}"></script>
+    <div class="body-div-color">
+        <br>
+
+        <div>
+            <div class="small-6 large-6 columns">
+                <div class="switch-toggle panel">
+                    <input id="by_date" name="view" type="radio" checked="">
+                    <label for="by_date" style="color: #ffffff" onclick="ajaxSort('by_date')">по дате публикации</label>
+
+                    <input id="by_people" name="view" type="radio">
+                    <label for="by_people" onclick="ajaxSort('by_people')">по количеству участников</label>
+
+                    <a class="button"></a>
+                </div>
+            </div>
+            <div class="small-6 large-6 columns">
+                <div class="switch-toggle switch-3 panel">
+                    <input id="gallery_view" name="view3" type="radio" checked>
+                    <label for="gallery_view" style="color: #ffffff" onclick="ajaxView('gallery_view')">Галерея</label>
+                    <input id="table_view" name="view3" type="radio">
+                    <label for="table_view" onclick="ajaxView('table_view')">Таблица</label>
+                    <input id="list_view" name="view3" type="radio">
+                    <label for="list_view" onclick="ajaxView('list_view')">Лист</label>
+                    <a class="button"></a>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="rooms" class="row">
+
+            <ul class="small-block-grid-3">
+                {% for room in rooms %}
+                    <li>
+                        <a href="/rooms/get/{{ room.id }}">
+                            <div class="room-rect">
+                                <h6>{{ room.room_title }}</h6>
+                                <!-- <p>{{ room.room_create_date }}</p>-->
+                                <div class="room-circle">
+                                    <img src="{% static room.room_image %}" class="roomimage">
+
+                                    <p>В комнате:{{ room.room_people_count }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="row">
+                <div class="large-3 large-offset-5 columns">
+                    <ul class="pagination">
+                        {% if rooms.has_previous %}
+                            <li class="arrow"><a href="#"
+                                                 onclick="Dajaxice.accounts.rooms_list(Dajax.process,
+                                                         {'toggle':getSort(),
+                                                         'p': {{ rooms.previous_page_number }},
+                                                         'view': getView()})">&laquo;</a></li>
+                        {% else %}
+                            <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                        {% endif %}
+                        {% for page in rooms.paginator.page_range %}
+                            {% if page == rooms.number %}
+                                <li class="current"><a href="#" style="color: #ffffff !important;"
+                                                       onclick="Dajaxice.accounts.rooms_list(Dajax.process,
+                                                               {'toggle':getSort(),
+                                                               'p': {{ page }},
+                                                               'view': getView()})">{{ page }}</a></li>
+                            {% else %}
+                                <li><a href="#" onclick="Dajaxice.accounts.rooms_list(Dajax.process,
+                                        {'toggle':getSort(),
+                                        'p': {{ page }},
+                                        'view': getView()})">{{ page }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if rooms.has_next %}
+                            <li class="arrow"><a href="#"
+                                                 onclick="Dajaxice.accounts.rooms_list(Dajax.process,
+                                                         {'toggle':getSort(),
+                                                         'p': {{ rooms.next_page_number }},
+                                                         'view': getView()})">&raquo;</a></li>
+                        {% else %}
+                            <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}
