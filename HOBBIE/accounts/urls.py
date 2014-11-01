@@ -11,6 +11,7 @@ __author__ = '1240'
 urlpatterns = patterns('',
     url(r'^edit/', 'accounts.views.edit'),
     url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
-
+    url(r'^friends/', 'accounts.views.friends'),
+    url(r'^rooms/', 'accounts.views.rooms'),
     url(r'^(?P<username>\w+)/', 'accounts.views.user_page'),
 )
