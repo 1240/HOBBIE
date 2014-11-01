@@ -19,10 +19,11 @@
     <div class="large-9 columns body-div-color">
     <br>
         <div>
-            <div class="small-2 large-4 columns text-left">
-                <h4><a href="/rooms/makeroom/">Создать комнату</a></h4>
+            <div class="row">
+                <div class="small-3 large-centered columns"> <h4><a href="/rooms/makeroom/" class="button [radius round]">Создать комнату</a></h4></div>
             </div>
-            <div class="small-4 large-4 columns">
+            <div class="row">
+            <div class="small-6 large-8 columns">
                 <div class="switch-toggle panel">
                     <input id="by_date" name="view" type="radio" checked="">
                     <label for="by_date" style="color: #ffffff" onclick="ajaxSort('by_date')">по дате публикации</label>
@@ -43,6 +44,7 @@
                     <label for="list_view" onclick="ajaxView('list_view')">Лист</label>
                     <a class="button"></a>
                 </div>
+            </div>
             </div>
         </div>
 
