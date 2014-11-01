@@ -6,30 +6,41 @@
 
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
 
-    <div id="chat">
-        <div class="container-div">
-            <a href="/rooms/editroom/{{ room.id }}/">Редактировать</a>
-            {% if user in users_in_room %}
-                <a href="/rooms/leave/{{ room.id }}/">Покинуть</a>
-                <a href="/rooms/invite/{{ room.id }}/">Пригласить</a>
-            {% else %}
-                <a href="/rooms/join/{{ room.id }}/">Вступить</a>
-            {% endif %}
-            <a href="/rooms/all/">К списку комнат</a>
 
-            <h4>{{ room.room_title }}</h4>
+        <div class="container-div" style="margin-top: 20px;">
+
+            <div class="row text-center b-map">
+            <a href="/rooms/all/" class="button [tiny small large]">К списку комнат</a>
+            <a href="/rooms/editroom/{{ room.id }}/" class="button [tiny small large]">Редактировать</a>
+            {% if user in users_in_room %}
+                <a href="/rooms/leave/{{ room.id }}/" class="button [tiny small large]">Покинуть</a>
+                <a href="/rooms/invite/{{ room.id }}/" class="button [tiny small large]">Пригласить</a>
+            {% else %}
+                <a href="/rooms/join/{{ room.id }}/" class="button [tiny small large]">Вступить</a>
+            {% endif %}
+            </div>
 
             <div>
-                <span><img src="{% static room.room_image %}" class="roomimage"></span><span><h6><strong>Дата
-                мероприятия:</strong> {{ room.room_to_date }}</h6></span>
+            <div class="row">
+                <div class="small-2 large-2 columns"><img src="{% static room.room_image %}" class="roomimage"></div>
+                <div class="small-4 large-4 columns">
+                    <h3><strong>{{ room.room_title }}</strong></h3>
+                    <p><strong>Дата мероприятия:</strong> {{ room.room_to_date }}</p>
+                </div>
+                <div class="small-6 large-4 columns">
+                    <strong>Комнату создал</strong> Вася {{ room.room_create_date }}
+                </div>
             </div>
-            <h6 style="float:right"><strong>Дата создания: </strong>{{ room.room_create_date }}</h6>
-
+            </div>
+        <div class="panel callout radius">
+            <h5>Описание комнаты</h5>
             <p>{{ room.room_text }}</p>
+        </div>
 
-            <p><strong>В комнате </strong> {{ room.room_people_count }} человек:</p>
+
+        <strong>В комнате </strong> {{ room.room_people_count }} человек:
         {% for user_name in users_in_room %}
-        {{ user_name.username }} |
+        <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a> |
         {% endfor %}
             <hr>
             <div>
@@ -44,6 +55,7 @@
 
                 </div>
                 <hr>
+            {% if user in users_in_room %}
                 <label>Сообщение
                     <input type="text" id="message_text" placeholder="текст сообщения" maxlength="200"/>
                     <button class="button" onclick="Dajaxice.room.send_message(Dajax.process,
@@ -53,7 +65,8 @@
                     </button>
 
                 </label>
+            {% endif %}
             </div>
         </div>
-    </div>
+
 {% endblock %}
