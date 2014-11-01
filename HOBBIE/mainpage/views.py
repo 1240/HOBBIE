@@ -6,7 +6,7 @@ from django.template import Context
 from django.template.loader import get_template
 from django.contrib import auth
 from mainpage.models import Regions
-
+from accounts.forms import UserChangeForm
 
 def home(request):
     if 'main_east' == request.COOKIES.get('world'):
@@ -20,6 +20,7 @@ def home(request):
         "user": auth.get_user(request),
         "regions": regions,
         "id_user": auth.get_user(request).id,
+
     })
     svg = t.render(c)
     r = HttpResponse(svg)
@@ -37,3 +38,4 @@ def main_west(request):
     r = redirect('/')
     r.set_cookie('world', 'main_west')
     return r
+

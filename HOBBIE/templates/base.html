@@ -22,6 +22,22 @@
 </head>
 <body>
 <!-- Navigation -->
+<a href="#x" class="overlay" id="win1"></a>
+   <div class="popup">
+     <h2>Загрузка новой фотографии</h2>
+       <br>
+    <a class="close"title="Закрыть" href="#close"></a>
+    </div>
+<a href="#x" class="overlay" id="win2"></a>
+   <div class="popup" style="max-width: 540px">
+     <h2>Предупреждение</h2>
+      Вы уверены, что хотите удалить фотографию?
+       <br>
+       <br>
+       <br>
+       <input type="button" class="button" style="width: 140px; left: 350px" value="Удалить">
+    <a class="close"title="Закрыть" href="#close"></a>
+    </div>
 <div class="off-canvas-wrap">
     <div class="inner-wrap">
         <nav class="tab-bar">
@@ -54,7 +70,7 @@
                     <div class='holder'>
                         <div class="circular" style="background: url({{ user.avatar.url }}) round; position: relative">
                             <div class='block' style="color: #ffffff">
-                                <a href="/">
+                                <a href="#win2">
                                     <aside class="fa fa-times-circle" title="Удалить фотографию"
                                            style="color:#000000;position: absolute;width:20px; left: 70px;">
                                     </aside>
@@ -64,7 +80,7 @@
                                 <br>
                                 <br>
                                 <br>
-                                <a href="/"><i class="fa fa-upload" title="Загрузить новую фотографию"
+                                <a href="#win1"><i class="fa fa-upload" title="Загрузить новую фотографию"
                                                style="position: absolute;background: rgba(0, 0, 0, 0.5);width:100px;left:30px;">
                                     Загрузить
                                 </i></a>
