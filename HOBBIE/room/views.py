@@ -53,6 +53,7 @@ def makeroom(request):
     args2 = {}
     args2.update(csrf(request))
     args2['form'] = room_form
+    args2['regions_list'] = Regions.objects.all()
 
     return render_to_response('makeroom.html', args2)
 

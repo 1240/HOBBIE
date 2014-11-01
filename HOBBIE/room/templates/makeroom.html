@@ -7,6 +7,23 @@
    <form action="/rooms/addroom/" method="post">
             {% csrf_token %}
             {{ form }}
+         <div>
+            <div><strong>Доступ в комнату</strong></div>
+                <div class="switch">
+                    <input id="openCheckboxSwitch" type="checkbox">
+                    открытая <label for="openCheckboxSwitch"></label> закрытая (вход только по приглашениям)
+                </div>
+         </div>
+         <label><strong>Выберите регион для публикации комнаты</strong>
+            <select id="region_select">
+                <option value="/all">Все</option>
+                {% for region in regions_list %}
+
+                    <option value="{{ region.region_url }}">{{ region.region_name }}</option>
+                    
+                {% endfor %}
+            </select>
+        </label>
             <div>Изображение комнаты</div>
         <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
              <li><input id='r1' type="radio" name="action_image" value="a1"><img src="{% static "img/1.png" %}" onclick="document.getElementById('r1').checked='checked';"class="roomimage"></li>
