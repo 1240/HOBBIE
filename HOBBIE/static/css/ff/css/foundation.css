@@ -4405,7 +4405,7 @@ dialog {
   height: 2.8125rem;
   position: absolute;
   top: 0;
-  border-right: solid 1px #1a1a1a;
+  /*border-right: solid 1px #1a1a1a;*/
   left: 0; }
 
 .right-small {
@@ -4413,7 +4413,7 @@ dialog {
   height: 2.8125rem;
   position: absolute;
   top: 0;
-  border-left: solid 1px #1a1a1a;
+  /*border-left: solid 1px #1a1a1a;*/
   right: 0; }
 
 .tab-bar-section {
@@ -4452,7 +4452,7 @@ dialog {
     top: 50%;
     margin-top: -0.5rem;
     left: 0.90625rem;
-    box-shadow: 0 0px 0 1px white, 0 7px 0 1px white, 0 14px 0 1px white;
+    box-shadow: 0 0px 0 1px #9a8d6d, 0 7px 0 1px #9a8d6d, 0 14px 0 1px #9a8d6d;
     width: 1rem; }
   .tab-bar .menu-icon span:hover:after {
     box-shadow: 0 0px 0 1px #b3b3b3, 0 7px 0 1px #b3b3b3, 0 14px 0 1px #b3b3b3; }

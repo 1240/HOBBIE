@@ -30,8 +30,12 @@
             </section>
 
             <section class="middle tab-bar-section">
-                <a href="/">
-                    <img src="{% static "img/logo.png" %}">
+                <a href="/" style="margin-top: 20px">
+                    <div class="circular-logo"
+                         style="margin-top: 10px;
+                                 margin-bottom: 40px;
+                                 background-image: url({% static "img/logo.png" %})">
+                    </div>
                 </a>
             </section>
 
@@ -47,21 +51,25 @@
             <div class="text-center color-white">
                 {% if user.username %}
 
-                   <div class='holder'>
-                   <div class="circular"  style="background: url({{ user.avatar.url }}) round; position: relative" >
-                    <div class='block' style="color: #ffffff">
-                    <a href="/"><aside class="fa fa-times-circle" title="Удалить фотографию" style="color:#000000;position: absolute;width:20px; left: 70px;">
-                    </aside>
-                    </a>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                    <a href="/"><i class="fa fa-upload" title="Загрузить новую фотографию" style="position: absolute;background: rgba(0, 0, 0, 0.5);width:100px;left:30px;"> Загрузить
-                    </i></a>
-                    </div>
-                    </div>
+                    <div class='holder'>
+                        <div class="circular" style="background: url({{ user.avatar.url }}) round; position: relative">
+                            <div class='block' style="color: #ffffff">
+                                <a href="/">
+                                    <aside class="fa fa-times-circle" title="Удалить фотографию"
+                                           style="color:#000000;position: absolute;width:20px; left: 70px;">
+                                    </aside>
+                                </a>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <a href="/"><i class="fa fa-upload" title="Загрузить новую фотографию"
+                                               style="position: absolute;background: rgba(0, 0, 0, 0.5);width:100px;left:30px;">
+                                    Загрузить
+                                </i></a>
+                            </div>
+                        </div>
                     </div>
 
                     <br>
