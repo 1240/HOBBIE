@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response, redirect
 from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room, Message
+import re
 
 
 def rooms(request, region_name='all'):
@@ -34,18 +35,15 @@ def room(request, room_id=1):
     args['form'] = message_form
     args['user'] = auth.get_user(request)
     args['users_in_room'] = Room.objects.get(id=room_id).user_set.all()
+    if args['room'].room_region_id==0:
+        args['room_region']='Все регионы'
+    else:
+        args['room_region']=Regions.objects.get(id=args['room'].room_region_id).region_name
+    if args['room'].room_open==True:
+        args['openclose']='открытая'
+    else:
+        args['openclose']='закрытая'
     return render_to_response('room.html', args)
-
-
-'''
-def addmessage(request, room_id):
-    if request.POST:
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            message = form.save(commit=False)
-            message.message_room = Room.objects.get(id=room_id)
-            form.save()
-    return redirect('/rooms/get/%s/' % room_id)'''
 
 
 def makeroom(request):
@@ -57,6 +55,19 @@ def makeroom(request):
 
     return render_to_response('makeroom.html', args2)
 
+def is_date(a): # определяет, является ли строка от datepicker корректной датой
+    match=re.search(r'\d+.\d+.\d+',a)
+    if match:
+        return True
+    else:
+        return False
+
+def is_time(a):
+    match=re.search(r'\d+.\d+',a)
+    if match:
+        return True
+    else:
+        return False
 
 def addroom(request):
     if request.POST:
@@ -65,7 +76,13 @@ def addroom(request):
             room = form.save(commit=False)
             img_choice = request.POST.get('action_image')
             room.room_image = f(img_choice)
-            room.room_region_id = 1  # TODO
+            room.room_region_id = request.POST.get('region_select')
+            if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
+                room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
+            if request.POST.get('openclose'):
+                room.room_open=False
+            else:
+                room.room_open=True
             room.room_creator = auth.get_user(request)
             form.save()
             user = auth.get_user(request)
@@ -128,7 +145,18 @@ def invite(request, room_id):
 def editroom(request,room_id): #нихуя не работает ептить - создает новую комнату вместо редактирвоания (САША ПОПРАВИЛ :))
     args = {}                                                                                 # САША МАЛОДЕЦ)))
     args.update(csrf(request))
-    args['form'] = RoomForm(instance=Room.objects.get(id=room_id))    #TODO начальное автозаполнение при редактировании
+    args['form'] = RoomForm(instance=Room.objects.get(id=room_id))
+    if Room.objects.get(id=room_id).room_open:
+        args['open']= ''
+    else:
+        args['open']= 'checked'
+
+    args['nofimage']=re.search(r'\d+',Room.objects.get(id=room_id).room_image).group() #
+    if Room.objects.get(id=room_id).room_to_date:
+        args['ydate']=Room.objects.get(id=room_id).room_to_date.date().isoformat()
+        args['ytime']=Room.objects.get(id=room_id).room_to_date.time() # почему то на 3 часа уменьшает
+    args['roomreg']=args['date']=Room.objects.get(id=room_id).room_region_id
+    args['regions_list'] = Regions.objects.all()
 
     if request.method == 'POST':
         form = RoomForm(request.POST, instance=Room.objects.get(id=room_id))
@@ -137,7 +165,13 @@ def editroom(request,room_id): #нихуя не работает ептить - 
             img_choice = request.POST.get('action_image')
             room = Room.objects.get(id=room_id)
             room.room_image = f(img_choice)
-            room.room_region_id = 1  # TODO выбор региона публикации комнаты
+            room.room_region_id = request.POST.get('region_select')
+            if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
+                room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
+            if request.POST.get('openclose'):
+                room.room_open=False
+            else:
+                room.room_open=True
             room.save()
             return redirect('/rooms/get/%s' % room_id)
         else:

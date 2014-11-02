@@ -2,22 +2,22 @@
 
 {% block user_page %}
 
-    <div class="large-offset-3 large-6 columns">
+    <div class="container-div">
         <form enctype="multipart/form-data" action="" method="post">
-            <br>
-            <br>
-            <br>
-             <div class ="label round secondary"><a href="/account/edit/">Редактировать страницу</a></div>
+            {% if user.name_image %}
+                <img src="{{ user.name_image.url }}">
+            {% endif %}
+            <div class="label round secondary"><a href="/account/edit/">Редактировать</a></div>
             <br>
             {% if user.avatar %}
-                <img src="{{user.avatar.url}}" width="200">
+                <img src="{{ user.avatar.url }}" width="200">
             {% else %}
                 <h5>Аватар не загружен</h5>
             {% endif %}
             {% csrf_token %}
-            <h3>{{ user.first_name }} {{  user.last_name }} ({{  user.username }})</h3>
-            <h5>Email: {{  user.email }}</h5>
-            <h5>День рождения: {{  user.date_of_birth }}</h5>
+            <h3>{{ user.first_name }} {{ user.last_name }} ({{ user.username }})</h3>
+            <h5>Email: {{ user.email }}</h5>
+            <h5>День рождения: {{ user.date_of_birth }}</h5>
             <br>
         </form>
     </div>

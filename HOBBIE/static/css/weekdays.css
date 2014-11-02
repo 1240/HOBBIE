@@ -180,7 +180,17 @@ a:hover {
     height: 100px;
     border-radius: 100px;
     background-repeat: no-repeat;
-    background-position: -35px 30px;
+    background-position: center center;
+    background-color: #6d655c;;
+}
+.circular-friend {
+    width: 100px;
+    margin: 0 auto;
+    height: 100px;
+    border-radius: 100px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
     background-color: #6d655c;;
 }
 
@@ -189,7 +199,7 @@ a:hover {
 }
 
 a, h1, h2, h3, h4, h5, h6{
-    color: inherit !important;
+    color: inherit;
 }
 
 .left-off-button{
