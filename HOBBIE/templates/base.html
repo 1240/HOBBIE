@@ -30,14 +30,14 @@
     <h2>Загрузка новой фотографии</h2>
     <br>
     <h5>Вы можете загрузить изображение в формате JPG,GIF или PNG.</h5>
-        <form enctype="multipart/form-data" action="" method="post">
+        <form enctype="multipart/form-data" action="/" method="post">
             {% csrf_token %}
             {{ form1 }}
             <br>
             <button class="button" type="submit" style="left: 400px">Сохранить</button>
         </form>
 
-    <a class="close" title="Закрыть" href="/"></a>
+    <a class="close" title="Закрыть" href="#close"></a>
 </div>
 <a href="#x" class="overlay" id="win2"></a>
 
@@ -82,7 +82,7 @@
                     <div class='holder'>
                         <div class="circular" style="background: url({{ user.avatar.url }}) round; position: relative">
                             <div class='block' style="color: #ffffff">
-                                <a href="#win2">
+                                <a href="/#win2">
                                     <aside class="fa fa-times-circle" title="Удалить фотографию"
                                            style="color:#000000;position: absolute;width:20px; left: 70px;">
                                     </aside>
@@ -92,7 +92,7 @@
                                 <br>
                                 <br>
                                 <br>
-                                <a href="#win1"><i class="fa fa-upload" title="Загрузить новую фотографию"
+                                <a href="/#win1"><i class="fa fa-upload" title="Загрузить новую фотографию"
                                                    style="position: absolute;background: rgba(0, 0, 0, 0.5);width:100px;left:30px;">
                                     Загрузить
                                 </i></a>
