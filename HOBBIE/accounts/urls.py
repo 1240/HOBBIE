@@ -14,4 +14,6 @@ urlpatterns = patterns('',
     url(r'^friends/', 'accounts.views.friends'),
     url(r'^rooms/', 'accounts.views.rooms'),
     url(r'^(?P<username>\w+)/', 'accounts.views.user_page'),
+
+
 )

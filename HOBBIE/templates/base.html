@@ -22,12 +22,21 @@
 </head>
 <body>
 <!-- Navigation -->
-<a href="#x" class="overlay" id="win1"></a>
-   <div class="popup">
-     <h2>Загрузка новой фотографии</h2>
+<form enctype="multipart/form-data" action="/" method="post">
+<a href="#x" class="overlay" id="win"></a>
+   <div class="popup" style="max-height: 300px">
+            {% csrf_token %}
+       <h2>Загрузка новой фотографии</h2>
+       <h5>Вы можете загрузить изображение в формате JPG,GIF или PNG.</h5>
        <br>
-    <a class="close"title="Закрыть" href="#close"></a>
-    </div>
+            {{ form.avatar }}
+            <br>
+            <button class="button" type="submit" style="left: 400px">Сохранить</button>
+
+    <a class="close"title="Закрыть" href="/"></a>
+ </div>
+</form>
+
 <a href="#x" class="overlay" id="win2"></a>
    <div class="popup" style="max-width: 540px">
      <h2>Предупреждение</h2>
@@ -80,7 +89,7 @@
                                 <br>
                                 <br>
                                 <br>
-                                <a href="#win1"><i class="fa fa-upload" title="Загрузить новую фотографию"
+                                <a href="//127.0.0.1:8000/#win"><i class="fa fa-upload" title="Загрузить новую фотографию"
                                                style="position: absolute;background: rgba(0, 0, 0, 0.5);width:100px;left:30px;">
                                     Загрузить
                                 </i></a>
