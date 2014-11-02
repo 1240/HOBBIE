@@ -46,17 +46,6 @@ def room(request, room_id=1):
     return render_to_response('room.html', args)
 
 
-'''
-def addmessage(request, room_id):
-    if request.POST:
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            message = form.save(commit=False)
-            message.message_room = Room.objects.get(id=room_id)
-            form.save()
-    return redirect('/rooms/get/%s/' % room_id)'''
-
-
 def makeroom(request):
     room_form = RoomForm
     args2 = {}
