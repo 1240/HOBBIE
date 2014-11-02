@@ -14,12 +14,12 @@ def home(request):
     args = {}
     args.update(csrf(request))
     if request.method == 'POST':
-        form = UserAvatarChangeForm(request.POST, request.FILES, instance=request.user)
-        if form.is_valid():
-            form.save()
+        form1 = UserAvatarChangeForm(request.POST, request.FILES, instance=request.user)
+        if form1.is_valid():
+            form1.save()
         else:
-            args['form'] = UserAvatarChangeForm(request.POST)
-        args['form'] = form
+            args['form1'] = UserAvatarChangeForm(request.POST)
+        args['form1'] = form1
     if 'main_east' == request.COOKIES.get('world'):
         regions = Regions.objects.filter(is_west=False)
         t = get_template('main_east.html')
@@ -32,7 +32,7 @@ def home(request):
         "user": auth.get_user(request),
         "regions": regions,
         "id_user": auth.get_user(request).id,
-        "form":UserChangeForm(),
+        "form1":UserAvatarChangeForm(),
 
     })
     c.update(csrf(request))
