@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response, redirect
 from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room, Message
+import re
 
 
 def rooms(request, region_name='all'):
@@ -34,6 +35,14 @@ def room(request, room_id=1):
     args['form'] = message_form
     args['user'] = auth.get_user(request)
     args['users_in_room'] = Room.objects.get(id=room_id).user_set.all()
+    if args['room'].room_region_id==0:
+        args['room_region']='Все регионы'
+    else:
+        args['room_region']=Regions.objects.get(id=args['room'].room_region_id).region_name
+    if args['room'].room_open==True:
+        args['openclose']='открытая'
+    else:
+        args['openclose']='закрытая'
     return render_to_response('room.html', args)
 
 
@@ -57,6 +66,19 @@ def makeroom(request):
 
     return render_to_response('makeroom.html', args2)
 
+def is_date(a):
+    match=re.search(r'\d+.\d+.\d+',a)
+    if match:
+        return True
+    else:
+        return False
+
+def is_time(a):
+    match=re.search(r'\d+.\d+',a)
+    if match:
+        return True
+    else:
+        return False
 
 def addroom(request):
     if request.POST:
@@ -65,7 +87,13 @@ def addroom(request):
             room = form.save(commit=False)
             img_choice = request.POST.get('action_image')
             room.room_image = f(img_choice)
-            room.room_region_id = 1  # TODO
+            room.room_region_id = request.POST.get('region_select')
+            if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
+                room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
+            if request.POST.get('openclose'):
+                room.room_open=False
+            else:
+                room.room_open=True
             room.room_creator = auth.get_user(request)
             form.save()
             user = auth.get_user(request)
