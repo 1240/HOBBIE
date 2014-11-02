@@ -66,7 +66,7 @@ def makeroom(request):
 
     return render_to_response('makeroom.html', args2)
 
-def is_date(a):
+def is_date(a): # определяет, является ли строка от datepicker корректной датой
     match=re.search(r'\d+.\d+.\d+',a)
     if match:
         return True
@@ -156,7 +156,18 @@ def invite(request, room_id):
 def editroom(request,room_id): #нихуя не работает ептить - создает новую комнату вместо редактирвоания (САША ПОПРАВИЛ :))
     args = {}                                                                                 # САША МАЛОДЕЦ)))
     args.update(csrf(request))
-    args['form'] = RoomForm(instance=Room.objects.get(id=room_id))    #TODO начальное автозаполнение при редактировании
+    args['form'] = RoomForm(instance=Room.objects.get(id=room_id))
+    if Room.objects.get(id=room_id).room_open:
+        args['open']= ''
+    else:
+        args['open']= 'checked'
+
+    args['nofimage']=Room.objects.get(id=room_id).room_image #
+    if Room.objects.get(id=room_id).room_to_date:
+        args['ydate']=Room.objects.get(id=room_id).room_to_date.date()
+        args['ytime']=Room.objects.get(id=room_id).room_to_date.time()
+    args['roomreg']=args['date']=Room.objects.get(id=room_id).room_region_id
+    args['regions_list'] = Regions.objects.all()
 
     if request.method == 'POST':
         form = RoomForm(request.POST, instance=Room.objects.get(id=room_id))
@@ -165,7 +176,13 @@ def editroom(request,room_id): #нихуя не работает ептить - 
             img_choice = request.POST.get('action_image')
             room = Room.objects.get(id=room_id)
             room.room_image = f(img_choice)
-            room.room_region_id = 1  # TODO выбор региона публикации комнаты
+            room.room_region_id = request.POST.get('region_select')
+            if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
+                room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
+            if request.POST.get('openclose'):
+                room.room_open=False
+            else:
+                room.room_open=True
             room.save()
             return redirect('/rooms/get/%s' % room_id)
         else:
