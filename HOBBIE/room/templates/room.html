@@ -7,55 +7,26 @@
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
 
 
-        <div class="container-div" style="margin-top: 20px;">
-
-            <div class="row text-center b-map">
-            <a href="/rooms/all/" class="button [tiny small large]">К списку комнат</a>
-            <a href="/rooms/editroom/{{ room.id }}/" class="button [tiny small large]">Редактировать</a>
-            {% if user in users_in_room %}
-                <a href="/rooms/leave/{{ room.id }}/" class="button [tiny small large]">Покинуть</a>
-                <a href="/rooms/invite/{{ room.id }}/" class="button [tiny small large]">Пригласить</a>
-            {% else %}
-                <a href="/rooms/join/{{ room.id }}/" class="button [tiny small large]">Вступить</a>
-            {% endif %}
-            </div>
-
-            <div>
-            <div class="row">
-                <div class="small-2 large-2 columns"><img src="{% static room.room_image %}" class="roomimage"></div>
-                <div class="small-5 large-5 columns">
-                    <h3><strong>{{ room.room_title }}</strong></h3>
-                    <p><strong>Дата мероприятия:</strong>
-                        {% if room.room_to_date %}
-                        {{ room.room_to_date }}
-                        {% else %}
-                        не указана
-                        {% endif %}
-                    </p>
+        <div class="row" style="margin-top: 20px;">
+             <div class="small-8 columns">
+                <div class="row">
+                    <div class="small-3 large-3 columns">
+                        <img src="{% static room.room_image %}" class="roomimage">
+                    </div>
+                    <br>
+                    <div class="small-9 large-9 columns">
+                        <h3><strong>{{ room.room_title }}</strong></h3>
+                    </div>
                 </div>
-                <div class="small-5 large-5 columns">
-                    <strong>Комнату создал</strong> Уася{{ room.room_creator }} {{ room.room_create_date }}
-                    {{ room_region }} <br>
-                    Комната  {{ openclose }}
-                </div>
-            </div>
-            </div>
-        <div class="panel callout radius">
-            <h5>Описание комнаты</h5>
-            <p>{{ room.room_text }}</p>
-        </div>
+                    <div class="panel callout radius">
+                        <p>{{ room.room_text }}</p>
+                    </div>
 
+                    <div>
+                        <h5><strong>Обсуждение</strong></h5>
 
-        <strong>В комнате </strong> {{ room.room_people_count }} человек:
-        {% for user_name in users_in_room %}
-        <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a> |
-        {% endfor %}
-            <hr>
-            <div>
-                <h5><strong>Обсуждение</strong></h5>
-
-                <div id="messages_list">
-                    {% for message in messages %}
+                        <div id="messages_list">
+                        {% for message in messages %}
                         <div class="row">
                             <div class="small-9 large-9 columns">
                                  <strong>НИКНЕЙМ:</strong> {{ message.message_text }}
@@ -64,12 +35,12 @@
                                 ({{ message.message_datetime }})
                             </div>
                         </div>
-                    {% endfor %}
+                        {% endfor %}
 
-                </div>
-                <hr>
-            {% if user in users_in_room %}
-                <label>Сообщение
+                    </div>
+                    <hr>
+                    {% if user in users_in_room %}
+                    <label>Сообщение
                     <input type="text" id="message_text" placeholder="текст сообщения" maxlength="200"/>
                     <button class="button" onclick="Dajaxice.room.send_message(Dajax.process,
                             {'room_id': {{ room.id }},
@@ -77,9 +48,56 @@
                             >Отправить
                     </button>
 
-                </label>
-            {% endif %}
+                    </label>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="small-4 columns">
+                <div><a href="/rooms/editroom/{{ room.id }}/" class="button [tiny small large]">Редактировать</a>
+                    <a href="/rooms/all/" class="button [tiny small large]">Вернуться к списку комнат</a></div>
+
+                {% if user in users_in_room %}
+                <div><a href="/rooms/leave/{{ room.id }}/" class="button [tiny small large]">Покинуть</a>
+                <a href="/rooms/invite/{{ room.id }}/" class="button [tiny small large]">Пригласить</a></div>
+                {% else %}
+                <div><a href="/rooms/join/{{ room.id }}/" class="button [tiny small large]">Вступить</a></div>
+                {% endif %}
+                <h4>Информация о комнате</h4>
+                <p><strong>Дата мероприятия:</strong>
+                        {% if room.room_to_date %}
+                        {{ room.room_to_date }}
+                        {% else %}
+                        не указана
+                        {% endif %}
+                </p>
+                <p><strong>Комнату создал</strong> Уася{{ room.room_creator }} {{ room.room_create_date }}</p>
+                <p>{{ room_region }}</p>
+                <p>Комната  <strong>{{ openclose }}</strong></p>
+                <strong>В комнате </strong> {{ room.room_people_count }} человек:
+                {% for user_name in users_in_room %}
+                <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a> |
+                {% endfor %}
             </div>
         </div>
+
+
+            <div>
+            <div class="row">
+                <div class="small-2 large-2 columns"></div>
+                <div class="small-5 large-5 columns">
+
+
+                </div>
+                <div class="small-5 large-5 columns">
+
+                </div>
+            </div>
+            </div>
+
+
+
+
+
+
 
 {% endblock %}
