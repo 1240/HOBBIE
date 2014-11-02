@@ -31,11 +31,6 @@ function getSort() {
     }
 }
 
-$(document).ready(function () {
-    $('#id_room_to_date').fdatetimepicker({
-        format: 'mm-dd-yyyy hh:ii'
-    });
-});
 
 function ajaxView(view) {
     views = ['gallery_view', 'table_view', 'list_view'];

@@ -18,5 +18,5 @@ class MessageForm(ModelForm):
 class RoomForm(ModelForm):
     class Meta():
         model = Room
-        fields = ['room_title', 'room_text']
+        fields = ['room_title', 'room_text', 'room_to_date']
 
