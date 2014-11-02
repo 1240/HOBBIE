@@ -1,4 +1,11 @@
 
 {% for message in messages %}
-    <p><span style="float:left"></span><strong>НИКНЕЙМ:</strong> {{ message.message_text }} </span><span style="float:right">({{ message.message_datetime }})</span></p>
+                        <div class="row">
+                            <div class="small-9 large-9 columns">
+                                 <strong>НИКНЕЙМ:</strong> {{ message.message_text }}
+                            </div>
+                            <div class="small-3 large-3 columns">
+                                ({{ message.message_datetime }})
+                            </div>
+                        </div>
 {% endfor %}

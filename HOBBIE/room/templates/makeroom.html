@@ -2,7 +2,7 @@
 {% block rooms %}
 {% load staticfiles %}
    <div class="container-div">
-   <h2>Создать новую комнату</h2>
+   <h2>Создание новой комнаты</h2>
 
    <form action="/rooms/addroom/" method="post">
             {% csrf_token %}
@@ -10,21 +10,35 @@
          <div>
             <div><strong>Доступ в комнату</strong></div>
                 <div class="switch">
-                    <input id="openCheckboxSwitch" type="checkbox">
+                    <input id="openCheckboxSwitch" type="checkbox" name="openclose">
                     открытая <label for="openCheckboxSwitch"></label> закрытая (вход только по приглашениям)
                 </div>
          </div>
-         <label><strong>Выберите регион для публикации комнаты</strong>
-            <select id="region_select">
-                <option value="/all">Все</option>
-                {% for region in regions_list %}
+   <div style="margin-top: 10px;">
+    <div class="row">
+                <div class="small-3 large-3 columns">
+                    <label for="meetingdate"><strong>Дата встречи :</strong> </label><input id="meetingdate" name="mdate" type="date" />
+                </div>
+                <div class="small-3 large-3 columns">
+                   <label for="meetingtime"><strong>Время встречи :</strong></label><input id="meetingtime" name="mtime" type="time" />
+                </div>
+                <div class="small-6 large-6 columns">
+                   <label><strong>Выберите регион для публикации комнаты</strong>
+                    <select name="region_select">
+                     <option value="0">Все</option>
+                        {% for region in regions_list %}
+                        <option value="{{ region.id }}">{{ region.region_name }}</option>
+                        {% endfor %}
+                    </select>
+                   </label>
+                </div>
+            </div>
 
-                    <option value="{{ region.region_url }}">{{ region.region_name }}</option>
 
-                {% endfor %}
-            </select>
-        </label>
-            <div>Изображение комнаты</div>
+   </div>
+
+
+            <div><strong>Выберите соответствующее изображение для комнаты</strong></div>
         <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
              <li><input id='r1' type="radio" name="action_image" value="a1"><img src="{% static "img/1.png" %}" onclick="document.getElementById('r1').checked='checked';"class="roomimage"></li>
              <li><input id='r2' type="radio" name="action_image" value="a2" checked="checked"><img src="{% static "img/2.png" %}" onclick="document.getElementById('r2').checked='checked';"class="roomimage"></li>
