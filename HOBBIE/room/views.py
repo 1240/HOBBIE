@@ -162,10 +162,10 @@ def editroom(request,room_id): #нихуя не работает ептить - 
     else:
         args['open']= 'checked'
 
-    args['nofimage']=Room.objects.get(id=room_id).room_image #
+    args['nofimage']=re.search(r'\d+',Room.objects.get(id=room_id).room_image).group() #
     if Room.objects.get(id=room_id).room_to_date:
-        args['ydate']=Room.objects.get(id=room_id).room_to_date.date()
-        args['ytime']=Room.objects.get(id=room_id).room_to_date.time()
+        args['ydate']=Room.objects.get(id=room_id).room_to_date.date().isoformat()
+        args['ytime']=Room.objects.get(id=room_id).room_to_date.time() # почему то на 3 часа уменьшает
     args['roomreg']=args['date']=Room.objects.get(id=room_id).room_region_id
     args['regions_list'] = Regions.objects.all()
 
