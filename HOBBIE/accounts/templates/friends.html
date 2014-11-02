@@ -1,4 +1,27 @@
 {% extends 'base.html' %}
 {% block user_friends %}
-TA DA
+    {% for friend in friends %}
+        <div class="row">
+            <div class="small-3 columns">
+                <a href="/../{{ friend.username }}" style="margin-top: 20px">
+                    <div class="circular-friend"
+                         style="background-image: url({{ friend.avatar.url }})">
+                    </div>
+                </a>
+            </div>
+            <div class="small-6 columns">
+                <h5>{{ friend.username }}</h5>
+                <h6>{{ friend.email }}</h6>
+            </div>
+            <div class="small-3 columns">
+                <ul class="inline-list">
+                    <li><a href="#">Пригласить в комнату</a></li>
+                    <li><a href="//127.0.0.1:8000/account/rooms">Посмотреть друзей</a></li>
+                    <li><a href="//127.0.0.1:8000/rooms/all">Посмотреть комнаты</a></li>
+                    <li><a href="//127.0.0.1:8000/account/friends">Написать сообщение</a></li>
+                </ul>
+            </div>
+        </div>
+        <br/>
+    {% endfor %}
 {% endblock %}
