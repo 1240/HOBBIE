@@ -19,7 +19,8 @@ function roomsSort() {
         {'toggle': $('#by_date').is(':checked'),
             'region': document.getElementById('region_select').selectedIndex,
             'p': 1,
-            'view': getView()});
+            'view': getView(),
+            'search_string': $('#search_string').val()});
 }
 
 function getSort() {
@@ -38,11 +39,12 @@ function ajaxView(view) {
         {'toggle': getSort(),
             'region': document.getElementById('region_select').selectedIndex,
             'p': 1,
-            'view': view});
+            'view': view,
+            'search_string': $('#search_string').val()});
     $("label[for='" + view + "']").css('color', 'white');
-    views.splice( $.inArray(view, views), 1 );
-    $.each(views, function(i, val ) {
-      $("label[for='" + val + "']").css('color', 'inherit');
+    views.splice($.inArray(view, views), 1);
+    $.each(views, function (i, val) {
+        $("label[for='" + val + "']").css('color', 'inherit');
     });
 }
 
@@ -52,10 +54,11 @@ function ajaxSort(sort) {
         {'toggle': sort,
             'region': document.getElementById('region_select').selectedIndex,
             'p': 1,
-            'view': getView()});
+            'view': getView(),
+            'search_string': $('#search_string').val()});
     $("label[for='" + sort + "']").css('color', 'white');
-    sorts.splice( $.inArray(sort, sorts), 1 );
-    $.each(sorts, function(i, val ) {
-      $("label[for='" + val + "']").css('color', 'inherit');
+    sorts.splice($.inArray(sort, sorts), 1);
+    $.each(sorts, function (i, val) {
+        $("label[for='" + val + "']").css('color', 'inherit');
     });
 }
