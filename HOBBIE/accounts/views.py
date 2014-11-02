@@ -36,7 +36,8 @@ def friends(request):
     user = auth.get_user(request)
     args['user'] = user
     args['friends'] = user.friends.all()
-    return render_to_response('friends.html')
+    args['header'] = 'Ваши друзья '
+    return render_to_response('friends.html', args)
 
 
 def rooms(request):

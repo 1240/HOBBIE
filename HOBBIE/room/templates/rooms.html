@@ -7,44 +7,44 @@
     <script type="text/javascript" src="{% static "js/rooms.js" %}"></script>
     <!-- NAVI -->
     <div class="row text-center b-map">
-    <div class="large-3 columns"><a href="#"><img src="{% static "img/catall.png" %}" width="180px"></a>
+        <div class="large-3 columns"><a href="#"><img src="{% static "img/catall.png" %}" width="180px"></a>
+        </div>
+        <div class="large-3 columns"><a href="#"><img src="{% static "img/catcomm.png" %}" width="180px"></a>
+        </div>
+        <div class="large-3 columns"><a href="#"><img src="{% static "img/catsport.png" %}" width="180px"></a>
+        </div>
+        <div class="large-3 columns"><a href="#"><img src="{% static "img/catcult.png" %}" width="180px"></a>
+        </div>
     </div>
-    <div class="large-3 columns"><a href="#"><img src="{% static "img/catcomm.png" %}" width="180px"></a>
-    </div>
-    <div class="large-3 columns"><a href="#"><img src="{% static "img/catsport.png" %}" width="180px"></a>
-    </div>
-    <div class="large-3 columns"><a href="#"><img src="{% static "img/catcult.png" %}" width="180px"></a>
-    </div>
-</div>
     <div class="large-9 columns body-div-color">
-    <br>
+        <br>
+
         <div>
             <div class="row">
-                <div class="small-3 large-centered columns"> <h4><a href="/rooms/makeroom/" class="button [radius round]">Создать комнату</a></h4></div>
-            </div>
-            <div class="row">
-            <div class="small-6 large-8 columns">
-                <div class="switch-toggle panel">
-                    <input id="by_date" name="view" type="radio" checked="">
-                    <label for="by_date" style="color: #ffffff" onclick="ajaxSort('by_date')">по дате публикации</label>
+                <div class="small-6 large-8 columns">
+                    <div class="switch-toggle panel">
+                        <input id="by_date" name="view" type="radio" checked="">
+                        <label for="by_date" style="color: #ffffff" onclick="ajaxSort('by_date')">по дате
+                            публикации</label>
 
-                    <input id="by_people" name="view" type="radio">
-                    <label for="by_people" onclick="ajaxSort('by_people')">по количеству участников</label>
+                        <input id="by_people" name="view" type="radio">
+                        <label for="by_people" onclick="ajaxSort('by_people')">по количеству участников</label>
 
-                    <a class="button"></a>
+                        <a class="button"></a>
+                    </div>
                 </div>
-            </div>
-            <div class="small-6 large-4 columns">
-                <div class="switch-toggle switch-3 panel">
-                    <input id="gallery_view" name="view3" type="radio" checked>
-                    <label for="gallery_view" style="color: #ffffff" onclick="ajaxView('gallery_view')">Галерея</label>
-                    <input id="table_view" name="view3" type="radio">
-                    <label for="table_view" onclick="ajaxView('table_view')">Таблица</label>
-                    <input id="list_view" name="view3" type="radio">
-                    <label for="list_view" onclick="ajaxView('list_view')">Лист</label>
-                    <a class="button"></a>
+                <div class="small-6 large-4 columns">
+                    <div class="switch-toggle switch-3 panel">
+                        <input id="gallery_view" name="view3" type="radio" checked>
+                        <label for="gallery_view" style="color: #ffffff"
+                               onclick="ajaxView('gallery_view')">Галерея</label>
+                        <input id="table_view" name="view3" type="radio">
+                        <label for="table_view" onclick="ajaxView('table_view')">Таблица</label>
+                        <input id="list_view" name="view3" type="radio">
+                        <label for="list_view" onclick="ajaxView('list_view')">Лист</label>
+                        <a class="button"></a>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
 
@@ -85,10 +85,10 @@
                             {% if page == rooms.number %}
                                 <li class="current"><a href="#" style="color: #ffffff !important;"
                                                        onclick="Dajaxice.room.rooms_list(Dajax.process,
-                                        {'toggle':getSort(),
-                                        'region': document.getElementById('region_select').selectedIndex,
-                                        'p': {{ page }},
-                                        'view': getView()})">{{ page }}</a></li>
+                                                               {'toggle':getSort(),
+                                                               'region': document.getElementById('region_select').selectedIndex,
+                                                               'p': {{ page }},
+                                                               'view': getView()})">{{ page }}</a></li>
                             {% else %}
                                 <li><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
                                         {'toggle':getSort(),
@@ -116,15 +116,19 @@
         </div>
     </div>
     <div class="large-3 columns">
+        <div class="row">
+            <div class="large-centered columns"><h4><a href="/rooms/makeroom/" class="button [radius round]">Создать
+                комнату</a></h4></div>
+        </div>
         <label>Выберите область
             <select id="region_select"
                     onchange="window.location.replace('/rooms' + $( '#region_select option:selected' ).val())">
                 <option value="/all">Все</option>
                 {% for region in regions_list %}
                     {% if region.region_url == region_id %}
-                    <option selected value="{{ region.region_url }}">{{ region.region_name }}</option>
+                        <option selected value="{{ region.region_url }}">{{ region.region_name }}</option>
                     {% else %}
-                    <option value="{{ region.region_url }}">{{ region.region_name }}</option>
+                        <option value="{{ region.region_url }}">{{ region.region_name }}</option>
                     {% endif %}
                 {% endfor %}
             </select>
