@@ -15,18 +15,29 @@
                 </div>
          </div>
    <div style="margin-top: 10px;">
-   <label for="meetingdate"><strong>Дата встречи :</strong> </label><input id="meetingdate" name="mdate" type="date" />
-   <label for="meetingtime"><strong>Время встречи :</strong></label><input id="meetingtime" name="mtime" type="time" />
+    <div class="row">
+                <div class="small-3 large-3 columns">
+                    <label for="meetingdate"><strong>Дата встречи :</strong> </label><input id="meetingdate" name="mdate" type="date" />
+                </div>
+                <div class="small-3 large-3 columns">
+                   <label for="meetingtime"><strong>Время встречи :</strong></label><input id="meetingtime" name="mtime" type="time" />
+                </div>
+                <div class="small-6 large-6 columns">
+                   <label><strong>Выберите регион для публикации комнаты</strong>
+                    <select name="region_select">
+                     <option value="0">Все</option>
+                        {% for region in regions_list %}
+                        <option value="{{ region.id }}">{{ region.region_name }}</option>
+                        {% endfor %}
+                    </select>
+                   </label>
+                </div>
+            </div>
+
+
    </div>
 
-         <label><strong>Выберите регион для публикации комнаты</strong>
-            <select name="region_select">
-                <option value="0">Все</option>
-                {% for region in regions_list %}
-                    <option value="{{ region.id }}">{{ region.region_name }}</option>
-                {% endfor %}
-            </select>
-        </label>
+
             <div><strong>Выберите соответствующее изображение для комнаты</strong></div>
         <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
              <li><input id='r1' type="radio" name="action_image" value="a1"><img src="{% static "img/1.png" %}" onclick="document.getElementById('r1').checked='checked';"class="roomimage"></li>
