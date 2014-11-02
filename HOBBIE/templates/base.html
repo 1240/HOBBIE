@@ -29,7 +29,15 @@
 <div class="popup">
     <h2>Загрузка новой фотографии</h2>
     <br>
-    <a class="close" title="Закрыть" href="#close"></a>
+    <h5>Вы можете загрузить изображение в формате JPG,GIF или PNG.</h5>
+        <form enctype="multipart/form-data" action="" method="post">
+            {% csrf_token %}
+            {{ form1 }}
+            <br>
+            <button class="button" type="submit" style="left: 400px">Сохранить</button>
+        </form>
+
+    <a class="close" title="Закрыть" href="/"></a>
 </div>
 <a href="#x" class="overlay" id="win2"></a>
 
