@@ -39,3 +39,13 @@ class UserChangeForm(forms.ModelForm):
 
     def clean_password(self):
         return self.initial["password"]
+
+class UserAvatarChangeForm(forms.ModelForm):
+    #password = ReadOnlyPasswordHashField()
+
+    class Meta:
+        model = User
+        fields = ['avatar']
+
+    def clean_password(self):
+        return self.initial["password"]

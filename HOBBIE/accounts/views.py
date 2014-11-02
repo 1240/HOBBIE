@@ -61,3 +61,4 @@ def rooms(request):
     args['toggle'] = 'notchecked'
     args['user'] = user
     return render_to_response('account_rooms.html', args)
+

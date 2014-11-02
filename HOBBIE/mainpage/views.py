@@ -4,14 +4,26 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import Context
 from django.template.loader import get_template
+from django.core.context_processors import csrf
 from django.contrib import auth
 from mainpage.models import Regions
 from accounts.forms import UserChangeForm
+from accounts.forms import UserAvatarChangeForm
 
 def home(request):
+    args = {}
+    args.update(csrf(request))
+    if request.method == 'POST':
+        form1 = UserAvatarChangeForm(request.POST, request.FILES, instance=request.user)
+        if form1.is_valid():
+            form1.save()
+        else:
+            args['form1'] = UserAvatarChangeForm(request.POST)
+        args['form1'] = form1
     if 'main_east' == request.COOKIES.get('world'):
         regions = Regions.objects.filter(is_west=False)
         t = get_template('main_east.html')
+
     else:
         regions = Regions.objects.filter(is_west=True)
         t = get_template('main_west.html')
@@ -20,12 +32,15 @@ def home(request):
         "user": auth.get_user(request),
         "regions": regions,
         "id_user": auth.get_user(request).id,
+        "form1":UserAvatarChangeForm(),
 
     })
+    c.update(csrf(request))
     svg = t.render(c)
     r = HttpResponse(svg)
+
     r['Content-Type'] = "image/svg+xml"
-    return HttpResponse(r)
+    return HttpResponse(r,args)
 
 
 def main_east(request):
