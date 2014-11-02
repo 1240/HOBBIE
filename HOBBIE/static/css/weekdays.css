@@ -321,6 +321,7 @@ font:22px 'Trebuchet MS', Helvetica, sans-serif;
 }
 /*** Формируем стили модального окна ***/
 .popup {
+
 top: 0;
 right: 0;
 left: 0;
