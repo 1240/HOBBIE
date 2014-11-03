@@ -5,7 +5,13 @@
     {% dajaxice_js_import %}
 
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+    <script type="text/javascript">
+        function refresh() {
+            Dajaxice.room.get_messages(Dajax.process, {'room_id': {{ room.id }}});
+        }
+        setInterval(refresh,2000)
 
+    </script>
 
         <div class="row" style="margin-top: 20px;">
              <div class="small-8 columns">
@@ -48,6 +54,7 @@
                             >Отправить
                     </button>
 
+
                     </label>
                     {% endif %}
                 </div>
@@ -73,8 +80,8 @@
                         не указана
                         {% endif %}
                 </p>
-                <p><strong>Комнату создал</strong>
-                    <a href="/account/{{ creator }}/">{{ creator}}</a>
+                <p>Комнату создал
+                   <strong> <a href="/account/{{ creator }}/">{{ creator}}</a></strong>
                     {{ room.room_create_date }}</p>
                 <p>{{ room_region }}</p>
                 <p>Комната  <strong>{{ openclose }}</strong></p>

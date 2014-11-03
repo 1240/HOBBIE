@@ -79,6 +79,14 @@ def send_message(request):
     message = Message(message_text=message_text, message_room=room)
     message.save()
 
+    return get_messages(request)
+
+@dajaxice_register
+def get_messages(request):
+    json_string = request.POST.get('argv')
+    argv = json.loads(json_string)
+
+    room_id = argv.get('room_id')
     messages = Message.objects.filter(message_room_id=room_id).order_by('message_datetime')
 
     args = {}
@@ -86,7 +94,4 @@ def send_message(request):
     dajax = Dajax()
     dajax.assign('#messages_list', 'innerHTML', render_to_string('messages_list.html', args))
     return dajax.json()
-
-def get_messages():
-    pass
 
