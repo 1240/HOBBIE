@@ -14,7 +14,7 @@
                     открытая <label for="openCheckboxSwitch"></label> закрытая (вход только по приглашениям)
                 </div>
             </div>
-            <div style="margin-top: 10px;">
+           <!-- <div style="margin-top: 10px;">
                 <div class="row">
                     <div class="small-3 large-3 columns">
                         <label for="meetingdate"><strong>Дата встречи :</strong> </label><input id="meetingdate"
@@ -27,7 +27,13 @@
                                                                                                 value="{{ ytime }}"/>
                     </div>
                     <div class="small-6 large-6 columns">
-                        <label><strong>Выберите регион для публикации комнаты</strong>
+
+                    </div>
+                </div>
+
+
+            </div>-->
+            <label><strong>Выберите регион для публикации комнаты</strong>
                             <select name="region_select">
                                 <option value="0">Все</option>
                                 {% for region in regions_list %}
@@ -39,12 +45,6 @@
                                 {% endfor %}
                             </select>
                         </label>
-                    </div>
-                </div>
-
-
-            </div>
-
 
             <div><strong>Выберите соответствующее изображение для комнаты</strong></div>
             <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
@@ -152,7 +152,7 @@
             $(function () {
                 window.prettyPrint && prettyPrint();
                 $('#id_room_to_date').fdatetimepicker({
-                    format: 'mm-dd-yyyy hh:ii'
+                    format: 'dd.mm.yyyy hh:ii'
                 });
             });
         </script>

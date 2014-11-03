@@ -77,8 +77,8 @@ def addroom(request):
             img_choice = request.POST.get('action_image')
             room.room_image = f(img_choice)
             room.room_region_id = request.POST.get('region_select')
-            if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
-                room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
+           # if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
+             #   room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
             if request.POST.get('openclose'):
                 room.room_open=False
             else:
@@ -151,11 +151,11 @@ def editroom(request,room_id): #нихуя не работает ептить - 
     else:
         args['open']= 'checked'
 
-    args['nofimage']=re.search(r'\d+',Room.objects.get(id=room_id).room_image).group() #
-    if Room.objects.get(id=room_id).room_to_date:
-        args['ydate']=Room.objects.get(id=room_id).room_to_date.date().isoformat()
-        args['ytime']=Room.objects.get(id=room_id).room_to_date.time() # почему то на 3 часа уменьшает
-    args['roomreg']=args['date']=Room.objects.get(id=room_id).room_region_id
+    args['nofimage']=re.search(r'\d+',Room.objects.get(id=room_id).room_image).group()
+    #if Room.objects.get(id=room_id).room_to_date:
+     #   args['ydate']=Room.objects.get(id=room_id).room_to_date.date().isoformat()
+      #  args['ytime']=Room.objects.get(id=room_id).room_to_date.time() # почему то на 3 часа уменьшает
+    args['roomreg']=Room.objects.get(id=room_id).room_region_id
     args['regions_list'] = Regions.objects.all()
 
     if request.method == 'POST':
@@ -166,8 +166,8 @@ def editroom(request,room_id): #нихуя не работает ептить - 
             room = Room.objects.get(id=room_id)
             room.room_image = f(img_choice)
             room.room_region_id = request.POST.get('region_select')
-            if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
-                room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
+            #if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
+             #   room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
             if request.POST.get('openclose'):
                 room.room_open=False
             else:
