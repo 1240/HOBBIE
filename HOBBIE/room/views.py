@@ -12,9 +12,11 @@ import re
 
 def rooms(request, region_name='all'):
     if (region_name == 'all'):
+        region_title = 'по всей России'
         current_page = Paginator(object_list=Room.objects.order_by("-room_create_date"), per_page=10)
     else:
         region = Regions.objects.filter(region_url='/' + region_name)
+        region_title = region[0].region_title
         current_page = Paginator(object_list=Room.objects.filter(room_region=region)
                                  .order_by("-room_create_date"), per_page=10)
     args = {}
@@ -23,6 +25,7 @@ def rooms(request, region_name='all'):
     args['toggle'] = 'notchecked'
     args['regions_list'] = Regions.objects.all()
     args['region_id'] = '/' + region_name
+    args['header'] = 'Комнаты ' + region_title
     return render_to_response('rooms.html', args)
 
 
