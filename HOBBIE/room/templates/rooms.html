@@ -140,13 +140,13 @@
             </select>
         </div>
 
-        <label>Поиск по названию комнаты </label>
+        <label>Поиск по названию комнаты или ключевым словам </label>
 
         <div class="row">
             <div class="large-12 columns">
                 <div class="row collapse">
                     <div class="small-10 columns">
-                        <input type="text" id=search_string placeholder="Название комнаты" maxlength="200"
+                        <input type="text" id=search_string placeholder="Ключевые слова" maxlength="200"
                                onchange="Dajaxice.room.rooms_list(Dajax.process,
                            {'toggle':getSort(),
                            'region': document.getElementById('region_select').selectedIndex,

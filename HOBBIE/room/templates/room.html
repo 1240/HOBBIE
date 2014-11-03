@@ -72,6 +72,9 @@
                 {% else %}
                 <div><a href="/rooms/join/{{ room.id }}/" class="button [tiny small large]">Вступить</a></div>
                 {% endif %}
+                <div class="panel callout radius">
+                        <p><strong>Ключевые слова:</strong> {{ room.hash_tags }}</p>
+                </div>
                 <h4>Информация о комнате</h4>
                 <p><strong>Дата мероприятия:</strong>
                         {% if room.room_to_date %}
@@ -87,11 +90,9 @@
                 <p>Комната  <strong>{{ openclose }}</strong></p>
                 <strong>В комнате </strong> {{ room.room_people_count }} человек:
                 {% for user_name in users_in_room %}
-                <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a> |
+                <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a> 
                 {% endfor %}
-                <div class="panel callout radius">
-                        <p><strong>Хэш-теги:</strong>{{ room.hash_tags }}</p>
-                    </div>
+
             </div>
         </div>
 
@@ -108,11 +109,5 @@
                 </div>
             </div>
             </div>
-
-
-
-
-
-
 
 {% endblock %}
