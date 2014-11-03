@@ -89,6 +89,9 @@
                 {% for user_name in users_in_room %}
                 <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a> |
                 {% endfor %}
+                <div class="panel callout radius">
+                        <p><strong>Хэш-теги:</strong>{{ room.hash_tags }}</p>
+                    </div>
             </div>
         </div>
 
