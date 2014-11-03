@@ -6,10 +6,8 @@ from dajaxice.decorators import dajaxice_register
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.template.loader import render_to_string
-from django.core.context_processors import csrf
 
 from room.models import Room, Message
-from room.forms import MessageForm
 
 
 _author__ = '1240'
@@ -33,18 +31,18 @@ def rooms_list(request):
     q = None
     if region_index:
         q_aux = Q(room_region_id=region_index)
-        q = ( q_aux & q ) if bool( q ) else q_aux
+        q = ( q_aux & q ) if bool(q) else q_aux
         if (search_string != None):
             for word in search_string.split():
-                q_aux = Q( room_title__icontains = word ) | Q( room_text__icontains = word ) & Q(room_region_id=region_index)
-                q = ( q_aux & q ) if bool( q ) else q_aux
+                q_aux = Q(room_title__icontains=word) | Q(hash_tags__icontains=word) & Q(room_region_id=region_index)
+                q = ( q_aux & q ) if bool(q) else q_aux
         current_page = Paginator(object_list=Room.objects.filter(q)
                                  .order_by(toggles[toggle]), per_page=per_page)
     else:
         if (search_string != None):
             for word in search_string.split():
-                q_aux = Q( room_title__icontains = word ) | Q( room_text__icontains = word )
-                q = ( q_aux & q ) if bool( q ) else q_aux
+                q_aux = Q(room_title__icontains=word) | Q(hash_tags__icontains=word)
+                q = ( q_aux & q ) if bool(q) else q_aux
         if (q == None):
             current_page = Paginator(object_list=Room.objects.all()
                                      .order_by(toggles[toggle]), per_page=per_page)
@@ -80,6 +78,7 @@ def send_message(request):
     message.save()
 
     return get_messages(request)
+
 
 @dajaxice_register
 def get_messages(request):
