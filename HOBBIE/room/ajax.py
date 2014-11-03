@@ -86,3 +86,7 @@ def send_message(request):
     dajax = Dajax()
     dajax.assign('#messages_list', 'innerHTML', render_to_string('messages_list.html', args))
     return dajax.json()
+
+def get_messages():
+    pass
+
