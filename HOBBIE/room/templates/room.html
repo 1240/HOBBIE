@@ -53,12 +53,15 @@
                 </div>
             </div>
             <div class="small-4 columns">
-                <div><a href="/rooms/editroom/{{ room.id }}/" class="button [tiny small large]">Редактировать</a>
-                    <a href="/rooms/all/" class="button [tiny small large]">Вернуться к списку комнат</a></div>
+
+                <div><a href="/rooms/all/" class="button [tiny small large]">Вернуться к списку комнат</a></div>
 
                 {% if user in users_in_room %}
                 <div><a href="/rooms/leave/{{ room.id }}/" class="button [tiny small large]">Покинуть</a>
                 <a href="/rooms/invite/{{ room.id }}/" class="button [tiny small large]">Пригласить</a></div>
+                {% if is_creator.is_creator %}
+                <div><a href="/rooms/editroom/{{ room.id }}/" class="button [tiny small large]">Редактировать</a></div>
+                {% endif %}
                 {% else %}
                 <div><a href="/rooms/join/{{ room.id }}/" class="button [tiny small large]">Вступить</a></div>
                 {% endif %}
@@ -70,7 +73,9 @@
                         не указана
                         {% endif %}
                 </p>
-                <p><strong>Комнату создал</strong> Уася{{ room.room_creator }} {{ room.room_create_date }}</p>
+                <p><strong>Комнату создал</strong>
+                    <a href="/account/{{ creator }}/">{{ creator}}</a>
+                    {{ room.room_create_date }}</p>
                 <p>{{ room_region }}</p>
                 <p>Комната  <strong>{{ openclose }}</strong></p>
                 <strong>В комнате </strong> {{ room.room_people_count }} человек:

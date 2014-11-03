@@ -34,11 +34,20 @@ def room(request, room_id=1):
     message_form = MessageForm
     args = {}
     args.update(csrf(request))
-    args['room'] = Room.objects.get(id=room_id)
+    user=auth.get_user(request)
+    room=Room.objects.get(id=room_id)
+    args['room'] = room
     args['messages'] = Message.objects.filter(message_room_id=room_id).order_by('message_datetime')
     args['form'] = message_form
-    args['user'] = auth.get_user(request)
-    args['users_in_room'] = Room.objects.get(id=room_id).user_set.all()
+    args['user'] = user
+    usinroom=Room.objects.get(id=room_id).user_set.all()
+    args['users_in_room'] = usinroom
+    for x in UserRoom.objects.filter(room=room):
+        if x.is_creator:
+            args['creator']=x.user.username
+            break
+    if user in usinroom:
+        args['is_creator'] = UserRoom.objects.get(room=room,user=user)
     if args['room'].room_region_id==0:
         args['room_region']='Все регионы'
     else:
@@ -159,8 +168,13 @@ def leave(request, room_id):
 def invite(request, room_id):
     return redirect('/rooms/get/%s/' % room_id)
 
-def editroom(request,room_id): #нихуя не работает ептить - создает новую комнату вместо редактирвоания (САША ПОПРАВИЛ :))
-    args = {}                                                                                 # САША МАЛОДЕЦ)))
+def editroom(request,room_id):
+    user = auth.get_user(request)
+    room = Room.objects.get(id=room_id)
+    user_room = UserRoom.objects.get(room=room, user=user)
+    if not user_room.is_creator:   #если юзер не создатель, не пускать редактировать
+        return redirect('/rooms/get/%s' % room_id)
+    args = {}
     args.update(csrf(request))
     args['form'] = RoomForm(instance=Room.objects.get(id=room_id))
     if Room.objects.get(id=room_id).room_open:
