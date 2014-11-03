@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator
 from django.shortcuts import render_to_response, redirect
+from accounts.models import UserRoom
 
 from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
@@ -86,11 +87,15 @@ def addroom(request):
                 room.room_open=False
             else:
                 room.room_open=True
-            room.room_creator = auth.get_user(request)
             form.save()
             user = auth.get_user(request)
             room = Room.objects.get(id=room.id)
-            user.room.add(room)
+            user_room = UserRoom(
+                room=room,
+                user=user,
+                is_creator=True
+            )
+            user_room.save()
         else:
             return redirect('/rooms/all/')
     return redirect('/rooms/get/%s' % room.id)
@@ -128,16 +133,25 @@ def f(x):
 def joinroom(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
-    user.room.add(room)
-    room.room_people_count += 1
+    #user.room.add(room)
+    user_room = UserRoom(
+        room=room,
+        user=user,
+        is_creator=False
+    )
+    user_room.save()
+    room.room_people_count = len(UserRoom.objects.filter(room=room))
     room.save()
     return redirect('/rooms/get/%s/' % room_id)
 
 
 def leave(request, room_id):
-    auth.get_user(request).room.remove(Room.objects.get(id=room_id))
+    user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
-    room.room_people_count -= 1
+    #auth.get_user(request).room.remove(Room.objects.get(id=room_id))
+    user_room = UserRoom.objects.get(room=room, user=user)
+    user_room.delete()
+    room.room_people_count = len(UserRoom.objects.filter(room=room))
     room.save()
     return redirect('/rooms/get/%s/' % room_id)
 

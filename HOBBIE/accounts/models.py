@@ -43,7 +43,7 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     friends = models.ManyToManyField("self", blank=True, null=True)
-    room = models.ManyToManyField(Room, blank=True, null=True)
+    room = models.ManyToManyField(Room,  through='UserRoom', null=True)
     # TODO сообщения
 
     objects = UserManager()
@@ -69,3 +69,9 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+
+class UserRoom(models.Model):
+    room = models.ForeignKey(Room)
+    user = models.ForeignKey(User)
+    is_creator = models.BooleanField(default=False)
