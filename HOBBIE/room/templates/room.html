@@ -34,10 +34,10 @@
                         <div id="messages_list">
                         {% for message in messages %}
                         <div class="row">
-                            <div class="small-6 medium-7 large-8 columns">
+                            <div class="small-6 medium-7 large-7 columns">
                                  <strong>НИКНЕЙМ:</strong> {{ message.message_text }}
                             </div>
-                            <div class="small-6 medium-5 large-4 columns">
+                            <div class="small-6 medium-5 large-5 columns">
                                 ({{ message.message_datetime }})
                             </div>
                         </div>
@@ -90,24 +90,12 @@
                 <p>Комната  <strong>{{ openclose }}</strong></p>
                 <strong>В комнате </strong> {{ room.room_people_count }} человек:
                 {% for user_name in users_in_room %}
-                <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a> 
+                <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a>
                 {% endfor %}
 
             </div>
         </div>
 
 
-            <div>
-            <div class="row">
-                <div class="small-2 large-2 columns"></div>
-                <div class="small-5 large-5 columns">
-
-
-                </div>
-                <div class="small-5 large-5 columns">
-
-                </div>
-            </div>
-            </div>
 
 {% endblock %}
