@@ -34,10 +34,10 @@
                         <div id="messages_list">
                         {% for message in messages %}
                         <div class="row">
-                            <div class="small-6 medium-7 large-8 columns">
-                                 <strong>НИКНЕЙМ:</strong> {{ message.message_text }}
+                            <div class="small-6 medium-7 large-7 columns">
+                                 <strong><a href="/account/{{ message.message_author }}/">{{ message.message_author }}</a>: </strong> {{ message.message_text }}
                             </div>
-                            <div class="small-6 medium-5 large-4 columns">
+                            <div class="small-6 medium-5 large-5 columns">
                                 ({{ message.message_datetime }})
                             </div>
                         </div>
@@ -50,7 +50,10 @@
                     <input type="text" id="message_text" placeholder="текст сообщения" maxlength="200"/>
                     <button class="button" onclick="Dajaxice.room.send_message(Dajax.process,
                             {'room_id': {{ room.id }},
-                            'message_text':$('#message_text').val()}); document.getElementById('message_text').value = '';"
+                            'message_text':$('#message_text').val(),
+                            'message_author': '{{ user.username }}'
+                            });
+                            document.getElementById('message_text').value = '';"
                             >Отправить
                     </button>
 
@@ -72,6 +75,9 @@
                 {% else %}
                 <div><a href="/rooms/join/{{ room.id }}/" class="button [tiny small large]">Вступить</a></div>
                 {% endif %}
+                <div class="panel callout radius">
+                        <p><strong>Ключевые слова:</strong> {{ room.hash_tags }}</p>
+                </div>
                 <h4>Информация о комнате</h4>
                 <p><strong>Дата мероприятия:</strong>
                         {% if room.room_to_date %}
@@ -87,28 +93,11 @@
                 <p>Комната  <strong>{{ openclose }}</strong></p>
                 <strong>В комнате </strong> {{ room.room_people_count }} человек:
                 {% for user_name in users_in_room %}
-                <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a> |
+                <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a>
                 {% endfor %}
+
             </div>
         </div>
-
-
-            <div>
-            <div class="row">
-                <div class="small-2 large-2 columns"></div>
-                <div class="small-5 large-5 columns">
-
-
-                </div>
-                <div class="small-5 large-5 columns">
-
-                </div>
-            </div>
-            </div>
-
-
-
-
 
 
 

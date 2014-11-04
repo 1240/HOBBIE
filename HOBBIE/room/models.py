@@ -29,4 +29,5 @@ class Message(models.Model):
 
     message_text = models.TextField(verbose_name="Текст сообщения")
     message_datetime = models.DateTimeField(default=datetime.datetime.now)
+    message_author = models.CharField(null=True,max_length=40)
     message_room = models.ForeignKey(Room)
