@@ -75,3 +75,4 @@ class UserRoom(models.Model):
     room = models.ForeignKey(Room)
     user = models.ForeignKey(User)
     is_creator = models.BooleanField(default=False)
+    can_edit = models.BooleanField(default=False)

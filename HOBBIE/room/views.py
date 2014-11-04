@@ -102,7 +102,8 @@ def addroom(request):
             user_room = UserRoom(
                 room=room,
                 user=user,
-                is_creator=True
+                is_creator=True,
+                can_edit=True
             )
             user_room.save()
         else:
@@ -146,7 +147,8 @@ def joinroom(request, room_id):
     user_room = UserRoom(
         room=room,
         user=user,
-        is_creator=False
+        is_creator=False,
+        can_edit=False
     )
     user_room.save()
     room.room_people_count = len(UserRoom.objects.filter(room=room))
