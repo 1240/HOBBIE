@@ -20,7 +20,7 @@
         <br>
 
         <div class="text-center">
-            <div class="small-2 large-4 columns">
+            <div class="small-6 large-6 columns">
                 <div class="switch-toggle panel">
                     <input id="by_date" name="view" type="radio" checked="">
                     <label for="by_date" style="color: #ffffff" onclick="ajaxSort('by_date')">по дате
@@ -32,10 +32,7 @@
                     <a class="button"></a>
                 </div>
             </div>
-            <div class="small-4 large-4 columns">
-
-            </div>
-            <div class="small-6 large-4 columns">
+            <div class="small-6 large-6 columns">
                 <div class="switch-toggle switch-3 panel right" style="width: 30%">
                     <input id="gallery_view" name="view3" type="radio" checked>
                     <label for="gallery_view" style="color: #ffffff"
@@ -59,14 +56,17 @@
                             <div class="room-rect">
                                 <h6>{{ room.room_title }}</h6>
                                 <!-- <p>{{ room.room_create_date }}</p>-->
-                                <div class="room-circle">
+                                <div class="room-circle"
+                                     style="border-color: {% cycle '#E7E7E7 #E7E7E7 #E7E7E7 #44c7db' '#E7E7E7 #E7E7E7 #44c7db #E7E7E7' '#E7E7E7 #44c7db #E7E7E7 #E7E7E7' '#44c7db #E7E7E7 #E7E7E7 #E7E7E7' %}">
                                     <img src="{% static room.room_image %}" class="roomimage">
-
+                                    {{ iterator.next }}
                                     <p>В комнате:{{ room.room_people_count }}</p>
                                 </div>
                             </div>
                         </a>
                     </li>
+                {% empty %}
+                    Извинте, в вашем регионе нету комнат, пока...
                 {% endfor %}
             </ul>
             <div class="row">
@@ -123,7 +123,7 @@
     </div>
     <div class="large-3 columns">
         <a href="/rooms/makeroom/"
-                   class="button [radius round]">Создать комнату</a>
+           class="button [radius round]">Создать комнату</a>
         <label>Выберите область </label>
 
         <div class="small-12 columns">

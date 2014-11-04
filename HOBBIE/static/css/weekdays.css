@@ -20,9 +20,11 @@
 }
 
 .room-circle {
-    width: 155px;
-    height: 155px;
-    background-color: #E7E7E7;
+    width: 165px;
+    border-style: solid;
+    border-width: 5px;
+    height: 165px;
+    background-color: #f8f8f8;
     border-radius: 100%;
     padding-top: 15px;
     text-align: center;
@@ -153,12 +155,12 @@
 
 .map-region:hover,
 .map-region[data-state='hover'] {
-    color: rgb(0, 207, 175);
+    color: #44c7db;
 }
 
 a:hover {
     /*color: rgb(0, 207, 175) !important;*/
-    color: #9a8d6d !important;
+    color: #44c7db !important;
 }
 
 .circular {
@@ -181,7 +183,7 @@ a:hover {
     border-radius: 100px;
     background-repeat: no-repeat;
     background-position: center center;
-    background-color: #6d655c;;
+    background-color: #45c8d9;;
 }
 .circular-friend {
     width: 100px;
@@ -203,12 +205,12 @@ a, h1, h2, h3, h4, h5, h6{
 }
 
 .left-off-button{
-    border: 2px solid #9a8d6d;
+    border: 2px solid #252932;
     border-radius: 20px;
 }
 
 .left-off-button :hover{
-    color: #9a8d6d;
+    color: #252932;
     border: 0;
     border-radius: 0;
 }

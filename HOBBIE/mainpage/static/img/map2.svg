@@ -54,42 +54,42 @@
             font-weight: bold;
         }
         .tooltip_bg{
-        fill: #6d655c;
-        opacity: 0.85;
+        fill: #252932;
+        opacity: 0.55;
         }
 
 
 
         /* Region */
-               .map-region {
-            fill: #6d655c;
+        .map-region {
+            fill: #eeeeee;
             stroke-width: 1.1px; /* @fix Chrome render artefact + 0.1 */
-            stroke: #9a8d6d;
+            stroke: #cccccc;
             cursor: pointer;
         }
 
             .map-region:hover,
             .map-region[data-state='hover'] {
-                fill: #9a8d6d;
+                fill: #44c7db;
             }
 
         /* Point */
         .map-city-point {
-            fill: rgb(255, 255, 255);
+            fill: #44c7db;
             cursor: pointer;
         }
 
             .map-city-point:hover,
             .map-city-point[data-state='hover'] {
-                fill: #9a8d6d;
+                fill: #252932;
             }
 
         /* Name city */
         .map-city-name {
             font-family: Helvetica, Arial, sans-serif;
             font-size: 18px;
-            color: #ADADAD;
-            fill: rgb(255, 255, 255);
+            color: #44c7db;
+            fill: #252932;
             display: none;
             cursor: pointer;
         }

@@ -4,7 +4,8 @@
     <div class="row">
         <div class="small-3 columns">
             <a href="/rooms/get/{{ room.id }}">
-                <div class="room-circle">
+                <div class="room-circle"
+                     style="border-color: {% cycle '#E7E7E7 #E7E7E7 #E7E7E7 #44c7db' '#E7E7E7 #E7E7E7 #44c7db #E7E7E7' '#E7E7E7 #44c7db #E7E7E7 #E7E7E7' '#44c7db #E7E7E7 #E7E7E7 #E7E7E7' %}">
 
                     <img src="{% static room.room_image %}" class="roomimage">
 
