@@ -1,6 +1,7 @@
 from PIL import ImageFont
 from PIL import Image
 from PIL import ImageDraw
+from django.contrib.gis.geoip import GeoIP
 
 __author__ = '1240'
 

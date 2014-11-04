@@ -6,11 +6,14 @@ from django.template import Context
 from django.template.loader import get_template
 from django.core.context_processors import csrf
 from django.contrib import auth
+from django_geoip.models import IpRange
 from mainpage.models import Regions
-from accounts.forms import UserChangeForm
 from accounts.forms import UserAvatarChangeForm
 
+ip = "37.113.83.1"
+
 def home(request):
+    geoip_record = IpRange.objects.by_ip(ip)
     args = {}
     args.update(csrf(request))
     if request.method == 'POST':
@@ -32,15 +35,15 @@ def home(request):
         "user": auth.get_user(request),
         "regions": regions,
         "id_user": auth.get_user(request).id,
-        "form1":UserAvatarChangeForm(),
-
+        "form1": UserAvatarChangeForm(),
+        "ip": geoip_record.region,
     })
     c.update(csrf(request))
     svg = t.render(c)
     r = HttpResponse(svg)
 
     r['Content-Type'] = "image/svg+xml"
-    return HttpResponse(r,args)
+    return HttpResponse(r, args)
 
 
 def main_east(request):
