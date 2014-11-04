@@ -73,8 +73,9 @@ def send_message(request):
 
     room_id = argv.get('room_id')
     message_text = argv.get('message_text')
+    message_author = argv.get('message_author')
     room = Room.objects.get(id=room_id)
-    message = Message(message_text=message_text, message_room=room)
+    message = Message(message_text=message_text, message_room=room,message_author=message_author)
     message.save()
 
     return get_messages(request)
