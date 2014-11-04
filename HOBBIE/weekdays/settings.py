@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'accounts',
     'dajaxice',
     'dajax',
+    'django_geoip',
 )
 
 MIDDLEWARE_CLASSES = (
