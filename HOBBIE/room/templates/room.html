@@ -76,7 +76,13 @@
                 <div><a href="/rooms/join/{{ room.id }}/" class="button [tiny small large]">Вступить</a></div>
                 {% endif %}
                 <div class="panel callout radius">
-                        <p><strong>Ключевые слова:</strong> {{ room.hash_tags }}</p>
+                        <p><strong>Ключевые слова: </strong>
+                            {% if room.hash_tags  %}
+                            {{ room.hash_tags }}
+                            {% else %}
+                                не указаны
+                            {% endif %}
+                        </p>
                 </div>
                 <h4>Информация о комнате</h4>
                 <p><strong>Дата мероприятия:</strong>
