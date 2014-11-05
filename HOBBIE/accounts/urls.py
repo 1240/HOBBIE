@@ -9,6 +9,7 @@ from django.conf import settings
 __author__ = '1240'
 
 urlpatterns = patterns('',
+    url(r'^users/$', 'accounts.views.users'),
     url(r'^edit/', 'accounts.views.edit'),
     url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
     url(r'^friends/', 'accounts.views.friends'),

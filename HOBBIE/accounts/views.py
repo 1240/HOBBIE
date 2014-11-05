@@ -10,6 +10,7 @@ from accounts.models import User
 from utils.utils import create_image
 
 
+
 def edit(request):
     args = {}
     args.update(csrf(request))
@@ -20,9 +21,9 @@ def edit(request):
         if form.is_valid():
             form.save()
             user = User.objects.get(id=auth.get_user(request).id)
-            f = open(create_image('%s %s' % (user.first_name, user.last_name), user.first_name,  W=500), 'rb')
+            f = open(create_image('%s %s' % (user.first_name, user.last_name), user.first_name, W=500), 'rb')
             name_image = File(f)
-            user.name_image.save(user.username+'_name.png', name_image)
+            user.name_image.save(user.username + '_name.png', name_image)
             f = open(create_image(user.username, user.username), 'rb')
             username_image = File(f)
             user.username_image.save(user.username + '.png', username_image)
@@ -48,7 +49,7 @@ def friends(request):
     user = auth.get_user(request)
     args['user'] = user
     args['friends'] = user.friends.all()
-    args['header'] = 'Ваши друзья '
+    args['header'] = 'Ваши друзья'
     return render_to_response('friends.html', args)
 
 
@@ -62,3 +63,10 @@ def rooms(request):
     args['user'] = user
     return render_to_response('account_rooms.html', args)
 
+
+def users(request):
+    args = {}
+    args['users'] = User.objects.all()
+    args['user'] = auth.get_user(request)
+    args['header'] = 'Поиск человека'
+    return render_to_response('users.html', args)
