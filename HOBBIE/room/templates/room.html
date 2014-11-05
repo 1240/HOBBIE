@@ -9,7 +9,11 @@
         function refresh() {
             Dajaxice.room.get_messages(Dajax.process, {'room_id': {{ room.id }}});
         }
-        setInterval(refresh, 2000)
+        function scrolling() {
+
+            document.getElementById('messages_list').scrollTop=9999;
+        }
+        setInterval(refresh, 2000);
 
     </script>
     <br/>
@@ -64,7 +68,7 @@
                                                'message_author': '{{ user.username }}'
                                                });
                                                document.getElementById('message_text').value = '';
-                                               document.getElementById('messages_list').scrollTop=9999;"
+                                               setTimeout(scrolling,1000)"
                                             class="button postfix">
                                         <i class="fa fa-send"></i>
                                     </a>
@@ -81,7 +85,9 @@
 
             {% if user in users_in_room %}
                 <div><a href="/rooms/leave/{{ room.id }}/" class="button [tiny small large]">Покинуть</a>
-                    <a href="/rooms/invite/{{ room.id }}/" class="button [tiny small large]">Пригласить</a></div>
+                    <a href="/rooms/invite/{{ room.id }}/" class="button [tiny small large]">Пригласить</a>
+
+                </div>
                 {% if is_creator.is_creator %}
                     <div><a href="/rooms/editroom/{{ room.id }}/" class="button [tiny small large]">Редактировать</a>
                     </div>
