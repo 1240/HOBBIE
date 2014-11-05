@@ -45,7 +45,7 @@ def home(request):
         "regions": regions,
         "id_user": auth.get_user(request).id,
         "user_avatar_change_form": UserAvatarChangeForm(),
-        "ip": region[0].region_name,
+        "current_region": region[0],
     })
     c.update(csrf(request))
     svg = t.render(c)
