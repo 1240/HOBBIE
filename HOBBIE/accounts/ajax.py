@@ -5,8 +5,10 @@ from dajaxice.decorators import dajaxice_register
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import redirect, render_to_response
 from django.template.loader import render_to_string
+from accounts.models import User
 from room.models import Room, Message
 
 __author__ = '1240'
@@ -64,5 +66,34 @@ def rooms_list(request):
 
     dajax = Dajax()
     dajax.assign('#rooms', 'innerHTML', render)
+
+    return dajax.json()
+
+
+
+@dajaxice_register
+def users_search(request):
+    json_string = request.POST.get('argv')
+    argv = json.loads(json_string)
+    search_string = argv.get('search_string')
+    page_number = argv.get('p')
+    per_page = 10
+    q = None
+    if (search_string != None):
+        for word in search_string.split():
+            q_aux = Q(username__icontains=word) | Q(first_name__icontains=word) | Q(last_name__icontains=word)
+            q = ( q_aux & q ) if bool(q) else q_aux
+    if (q == None):
+        current_page = Paginator(object_list=User.objects.all(), per_page=per_page)
+    else:
+        current_page = Paginator(object_list=User.objects.filter(q), per_page=per_page)
+
+    args = {}
+    args['users'] = current_page.page(page_number)
+
+    render = render_to_string('users_list.html', args)
+
+    dajax = Dajax()
+    dajax.assign('#users', 'innerHTML', render)
 
     return dajax.json()

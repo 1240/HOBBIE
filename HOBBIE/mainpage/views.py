@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import HttpResponse
 
 # Create your views here.
@@ -14,15 +15,23 @@ ip = "37.113.83.1"
 
 def home(request):
     geoip_record = IpRange.objects.by_ip(ip)
+    q = None
+    search_string = geoip_record.region.name.split(' ')[0]
+    if (search_string != None):
+        for word in search_string.split():
+            q_aux = Q(region_name__icontains=word) | Q(region_title__icontains=word)
+            q = ( q_aux & q ) if bool(q) else q_aux
+    region = Regions.objects.filter(q)
+
     args = {}
     args.update(csrf(request))
     if request.method == 'POST':
-        form1 = UserAvatarChangeForm(request.POST, request.FILES, instance=request.user)
-        if form1.is_valid():
-            form1.save()
+        user_avatar_change_form = UserAvatarChangeForm(request.POST, request.FILES, instance=request.user)
+        if user_avatar_change_form.is_valid():
+            user_avatar_change_form.save()
         else:
-            args['form1'] = UserAvatarChangeForm(request.POST)
-        args['form1'] = form1
+            args['user_avatar_change_form'] = UserAvatarChangeForm(request.POST)
+        args['user_avatar_change_form'] = user_avatar_change_form
     if 'main_east' == request.COOKIES.get('world'):
         regions = Regions.objects.filter(is_west=False)
         t = get_template('main_east.html')
@@ -35,8 +44,8 @@ def home(request):
         "user": auth.get_user(request),
         "regions": regions,
         "id_user": auth.get_user(request).id,
-        "form1": UserAvatarChangeForm(),
-        "ip": geoip_record.region,
+        "user_avatar_change_form": UserAvatarChangeForm(),
+        "current_region": region[0],
     })
     c.update(csrf(request))
     svg = t.render(c)

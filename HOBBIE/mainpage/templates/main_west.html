@@ -23,7 +23,14 @@
             </div>
             <div class="col-4 b-cities">
                 <div class="clear"></div>
-
+                    <h3>
+                        <a href="/rooms{{ current_region.region_url }}" id="{{ current_region.region_id }}" data-iscity=""
+                           title="{{ current_region.region_title }}" class="map-region"
+                           onmouseover="addHover('{{ current_region.region_id }}')"
+                           onmouseout="deleteHover('{{ current_region.region_id }}')" data-state="">
+                            {{ current_region.region_name }}
+                        </a>
+                    </h3>
                 <div class="col-2">
                     {% for region in regions %}
                         <a href="/rooms{{ region.region_url }}" id="{{ region.region_id }}" data-iscity=""

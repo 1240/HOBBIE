@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load dajaxice_templatetags %}
+{% block users %}
+    {% dajaxice_js_import %}
+    <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+    <div class="row">
+        <div class="row collapse">
+            <div class="small-10 columns">
+                <input type="text" id=search_string placeholder="Поиск по ФИО пользователя или по его usernam'у "
+                       maxlength="200"
+                       onchange="Dajaxice.accounts.users_search(Dajax.process,
+                           {'search_string': $('#search_string').val(),
+                           'p': 1})"/>
+            </div>
+            <div class="small-2 columns">
+                <a href="#"
+                   onchange="Dajaxice.accounts.users_search(Dajax.process,
+                           {'search_string': $('#search_string').val(),
+                           'p': 1})" class="button postfix"><i
+                        class="fa fa-search"></i>
+                </a>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div id="users" class="row">
+        {% for user in users %}
+            <div class="row">
+                <div class="small-3 columns">
+                    <a href="../{{ user.username }}" style="margin-top: 20px">
+                        <div class="circular-user"
+                             style="background-image: url({{ user.avatar.url }})">
+                        </div>
+                    </a>
+                </div>
+                <div class="small-6 columns">
+                    <a href="../{{ user.username }}">
+                        <h5>{{ user.username }}</h5>
+                    </a>
+                    <h5>{{ user.first_name }} {{ user.second_name }}</h5>
+                    <h6>{{ user.email }}</h6>
+                </div>
+                <div class="small-3 columns">
+                    <ul class="inline-list">
+                        <li><a href="#">Пригласить в комнату</a></li>
+                        <li><a href="//127.0.0.1:8000/account/rooms">Посмотреть друзей</a></li>
+                        <li><a href="//127.0.0.1:8000/rooms/all">Посмотреть комнаты</a></li>
+                        <li><a href="//127.0.0.1:8000/account/users">Написать сообщение</a></li>
+                    </ul>
+                </div>
+            </div>
+            <br/>
+        {% endfor %}
+    </div>
+{% endblock %}

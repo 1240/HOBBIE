@@ -9,101 +9,112 @@
         function refresh() {
             Dajaxice.room.get_messages(Dajax.process, {'room_id': {{ room.id }}});
         }
-        setInterval(refresh,2000)
+        setInterval(refresh, 2000)
 
     </script>
-
-        <div class="row" style="margin-top: 20px;">
-             <div class="small-8 columns">
-                <div class="row">
-                    <div class="small-3 large-3 columns">
-                        <img src="{% static room.room_image %}" class="roomimage">
-                    </div>
-                    <br>
-                    <div class="small-9 large-9 columns">
-                        <h3><strong>{{ room.room_title }}</strong></h3>
-                    </div>
+    <br/>
+    <div>
+        <div class="small-8 columns">
+            <div class="row">
+                <div class="small-3 large-3 columns">
+                    <img src="{% static room.room_image %}" class="roomimage">
                 </div>
-                    <div class="panel callout radius">
-                        <p>{{ room.room_text }}</p>
-                    </div>
+                <br>
 
-                    <div>
-                        <h5><strong>Обсуждение</strong></h5>
+                <div class="small-9 large-9 columns">
+                    <h3><strong>{{ room.room_title }}</strong></h3>
+                </div>
+            </div>
+            <div class="panel callout radius">
+                <p>{{ room.room_text }}</p>
+            </div>
 
-                        <div id="messages_list">
-                        {% for message in messages %}
+            <div>
+                <h5><strong>Обсуждение</strong></h5>
+
+                <div id="messages_list">
+                    {% for message in messages %}
                         <div class="row">
                             <div class="small-6 medium-7 large-7 columns">
-                                 <strong><a href="/account/{{ message.message_author }}/">{{ message.message_author }}</a>: </strong> {{ message.message_text }}
+                                <strong><a
+                                        href="/account/{{ message.message_author }}/">{{ message.message_author }}</a>:
+                                </strong> {{ message.message_text }}
                             </div>
                             <div class="small-6 medium-5 large-5 columns">
                                 ({{ message.message_datetime }})
                             </div>
                         </div>
-                        {% endfor %}
+                    {% endfor %}
 
-                    </div>
-                    <hr>
-                    {% if user in users_in_room %}
-                    <label>Сообщение
-                    <input type="text" id="message_text" placeholder="текст сообщения" maxlength="200"/>
-                    <button class="button" onclick="Dajaxice.room.send_message(Dajax.process,
-                            {'room_id': {{ room.id }},
-                            'message_text':$('#message_text').val(),
-                            'message_author': '{{ user.username }}'
-                            });
-                            document.getElementById('message_text').value = '';"
-                            >Отправить
-                    </button>
-
-
-                    </label>
-                    {% endif %}
                 </div>
-            </div>
-            <div class="small-4 columns">
-
-                <div><a href="/rooms/all/" class="button [tiny small large]">Вернуться к списку комнат</a></div>
-
+                <hr>
                 {% if user in users_in_room %}
-                <div><a href="/rooms/leave/{{ room.id }}/" class="button [tiny small large]">Покинуть</a>
-                <a href="/rooms/invite/{{ room.id }}/" class="button [tiny small large]">Пригласить</a></div>
-                {% if is_creator.is_creator %}
-                <div><a href="/rooms/editroom/{{ room.id }}/" class="button [tiny small large]">Редактировать</a></div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div class="row collapse">
+                                <div class="small-10 columns">
+                                        <input type="text" id="message_text" placeholder="Текст сообщения"
+                                               maxlength="200"/>
+                                </div>
+                                <div class="small-2 columns">
+                                    <a href="#"
+                                       onclick="Dajaxice.room.send_message(Dajax.process,
+                                               {'room_id': {{ room.id }},
+                                               'message_text':$('#message_text').val(),
+                                               'message_author': '{{ user.username }}'
+                                               });
+                                               document.getElementById('message_text').value = '';"
+                                            class="button postfix">
+                                        <i class="fa fa-send"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% endif %}
-                {% else %}
-                <div><a href="/rooms/join/{{ room.id }}/" class="button [tiny small large]">Вступить</a></div>
-                {% endif %}
-                <div class="panel callout radius">
-                        <p><strong>Ключевые слова: </strong>
-                            {% if room.hash_tags  %}
-                            {{ room.hash_tags }}
-                            {% else %}
-                                не указаны
-                            {% endif %}
-                        </p>
-                </div>
-                <h4>Информация о комнате</h4>
-                <p><strong>Дата мероприятия:</strong>
-                        {% if room.room_to_date %}
-                        {{ room.room_to_date }}
-                        {% else %}
-                        не указана
-                        {% endif %}
-                </p>
-                <p>Комнату создал
-                   <strong> <a href="/account/{{ creator }}/">{{ creator}}</a></strong>
-                    {{ room.room_create_date }}</p>
-                <p>{{ room_region }}</p>
-                <p>Комната  <strong>{{ openclose }}</strong></p>
-                <strong>В комнате </strong> {{ room.room_people_count }} человек:
-                {% for user_name in users_in_room %}
-                <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a>
-                {% endfor %}
-
             </div>
         </div>
+        <div class="small-4 columns">
+
+            <div><a href="/rooms/all/" class="button [tiny small large]">Вернуться к списку комнат</a></div>
+
+            {% if user in users_in_room %}
+                <div><a href="/rooms/leave/{{ room.id }}/" class="button [tiny small large]">Покинуть</a>
+                    <a href="/rooms/invite/{{ room.id }}/" class="button [tiny small large]">Пригласить</a></div>
+                {% if is_creator.is_creator %}
+                    <div><a href="/rooms/editroom/{{ room.id }}/" class="button [tiny small large]">Редактировать</a>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div><a href="/rooms/join/{{ room.id }}/" class="button [tiny small large]">Вступить</a></div>
+            {% endif %}
+            <div class="panel callout radius">
+                <p><strong>Ключевые слова:</strong> {{ room.hash_tags }}</p>
+            </div>
+            <h4>Информация о комнате</h4>
+
+            <p><strong>Дата мероприятия:</strong>
+                {% if room.room_to_date %}
+                    {{ room.room_to_date }}
+                {% else %}
+                    не указана
+                {% endif %}
+            </p>
+
+            <p>Комнату создал
+                <strong> <a href="/account/{{ creator }}/">{{ creator }}</a></strong>
+                {{ room.room_create_date }}</p>
+
+            <p>{{ room_region }}</p>
+
+            <p>Комната <strong>{{ openclose }}</strong></p>
+            <strong>В комнате </strong> {{ room.room_people_count }} человек:
+            {% for user_name in users_in_room %}
+                <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a>
+            {% endfor %}
+
+        </div>
+    </div>
 
 
 
