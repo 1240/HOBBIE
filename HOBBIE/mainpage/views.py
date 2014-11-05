@@ -11,9 +11,13 @@ from django_geoip.models import IpRange
 from mainpage.models import Regions
 from accounts.forms import UserAvatarChangeForm
 
-ip = "37.113.83.1"
+kirov_ip = "37.113.83.1"
+localhost_ip = "127.0.0.1"
 
 def home(request):
+    ip = get_client_ip(request)
+    if get_client_ip(request) == localhost_ip:
+        ip = kirov_ip
     geoip_record = IpRange.objects.by_ip(ip)
     q = None
     search_string = geoip_record.region.name.split(' ')[0]
@@ -66,3 +70,11 @@ def main_west(request):
     r.set_cookie('world', 'main_west')
     return r
 
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
