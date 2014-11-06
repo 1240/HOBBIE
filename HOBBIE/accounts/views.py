@@ -37,10 +37,9 @@ def edit(request):
     return render_to_response('edit.html', args)
 
 
-def user_page(request, username):
-    args = {}
-    args['user'] = auth.get_user(request)
-    return render_to_response('user_page.html', args)
+def user_page(request,username):
+
+    return render_to_response('user_page.html', {'account': User.objects.get(username = username),'user':auth.get_user(request)})
 
 
 def friends(request):

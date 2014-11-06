@@ -7,17 +7,17 @@
 
             <div class="label round secondary"><a href="/account/edit/">Редактировать</a></div>
             <br>
-            {% if user.avatar %}
-                {% thumbnail user.avatar "100x100" as im %}
+            {% if account.avatar %}
+                {% thumbnail account.avatar "100x100" as im %}
                     <img src="{{ im.url }}">
                 {% endthumbnail %}
             {% else %}
                 <h5>Аватар не загружен</h5>
             {% endif %}
             {% csrf_token %}
-            <h3>{{ user.first_name }} {{ user.last_name }} ({{ user.username }})</h3>
-            <h5>Email: {{ user.email }}</h5>
-            <h5>День рождения: {{ user.date_of_birth }}</h5>
+            <h3>{{ account.first_name }} {{ account.last_name }} ({{ account.username }})</h3>
+            <h5>Email: {{ account.email }}</h5>
+            <h5>День рождения: {{ account.date_of_birth }}</h5>
             <br>
         </form>
     </div>
