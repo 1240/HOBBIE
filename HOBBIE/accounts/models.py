@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import math
+
+from PIL import Image
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
@@ -34,7 +37,8 @@ class User(AbstractBaseUser):
         unique=True,
         db_index=True)
     username = models.CharField(verbose_name='username', max_length=255, unique=True)
-    avatar = models.ImageField(verbose_name='Аватар', upload_to='images/%Y/%m/%d', blank=True, null=True, default='/media/images/avatar.jpg')
+    avatar = models.ImageField(verbose_name='Аватар', upload_to='images/%Y/%m/%d', blank=True, null=True,
+                               default='/media/images/avatar.jpg')
     name_image = models.ImageField(upload_to='images/name_image/%Y/%m/%d', blank=True, null=True)
     username_image = models.ImageField(upload_to='images/username_image/%Y/%m/%d', blank=True, null=True)
     first_name = models.CharField(verbose_name='Имя', max_length=255, blank=True)
@@ -43,7 +47,7 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     friends = models.ManyToManyField("self", blank=True, null=True)
-    room = models.ManyToManyField(Room,  through='UserRoom', null=True)
+    room = models.ManyToManyField(Room, through='UserRoom', null=True)
     # TODO сообщения
 
     objects = UserManager()
@@ -65,6 +69,24 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+    def save(self, size=(225, 225)):
+        if not self.id and not self.source:
+            return
+        super(User, self).save()
+        filename = str(self.avatar.path)
+        image = Image.open(filename)
+
+        W, H = image.size
+        offset = round(math.fabs(W - H) / 2)
+        if W > H:
+            box = (offset, 0, offset + H, H)
+        else:
+            box = (0, offset, W, offset + W)
+        image = image.crop(box)
+        image.thumbnail(size, Image.ANTIALIAS)
+        image.save(filename)
+
 
     @property
     def is_staff(self):

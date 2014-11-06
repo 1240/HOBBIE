@@ -33,7 +33,7 @@
 
     <form enctype="multipart/form-data" action="/" method="post">
         {% csrf_token %}
-        {{ form1 }}
+        {{ user_avatar_change_form }}
         <br>
         <button class="button" type="submit" style="left: 400px">Сохранить</button>
     </form>
@@ -103,7 +103,9 @@
 
                     <br>
                     {% if user.username_image %}
-                        <img src="{{ user.username_image.url }}">
+                        <a href="//127.0.0.1:8000/account/{{ user.username }}">
+                            <img src="{{ user.username_image.url }}">
+                        </a>
                     {% endif %}
 
                     <h6>{{ user.email }}</h6>
