@@ -95,7 +95,7 @@ def get_messages(request):
     args = {}
     args['messages'] = messages
     for i in args['messages']:
-        if i.message_datetime == datetime.datetime.now():
+        if i.message_datetime.date() == datetime.datetime.today().date():
             i.message_datetime = i.message_datetime.time()
         else:
             i.message_datetime = i.message_datetime.date()
