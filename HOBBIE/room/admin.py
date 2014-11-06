@@ -1,10 +1,11 @@
 from django.contrib import admin
 # Register your models here.
-from room.models import Room, Message
+from accounts.models import UserRoom
+from room.models import Room
 
 
 class RoomMessage(admin.StackedInline):
-    model = Message
+    model = UserRoom
     extra = 1
 
 

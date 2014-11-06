@@ -8,9 +8,6 @@ from django.db import models
 from mainpage.models import Regions
 
 
-
-
-
 class Room(models.Model):
     class Meta():
         db_table = 'room'
@@ -24,6 +21,7 @@ class Room(models.Model):
     room_region = models.ForeignKey(Regions)
     room_open = models.BooleanField(default=True, verbose_name="Открытая/закрытая комната")
     room_image = models.CharField(null=True, blank=True, max_length=100, verbose_name="Изображение комнаты")
+
 
 class Category(models.Model):
     class Meta():
@@ -39,11 +37,3 @@ class CategoryRooms(models.Model):
     room = models.ForeignKey(Room)
     category = models.ForeignKey(Category)
 
-class Message(models.Model):
-    class Meta():
-        db_table = 'message'
-
-    message_text = models.TextField(verbose_name="Текст сообщения")
-    message_datetime = models.DateTimeField(default=datetime.datetime.now)
-    message_author = models.CharField(null=True, max_length=40)
-    message_room = models.ForeignKey(Room)
