@@ -4,6 +4,7 @@ import datetime
 
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
+from django.contrib import auth
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.template.loader import render_to_string
@@ -75,7 +76,7 @@ def send_message(request):
 
     room_id = argv.get('room_id')
     message_text = argv.get('message_text')
-    message_author = argv.get('message_author')
+    message_author = auth.get_user(request)
     room = Room.objects.get(id=room_id)
     message = UserRoom(message_text=message_text, room=room, user=message_author)
     message.save()
@@ -89,7 +90,7 @@ def get_messages(request):
     argv = json.loads(json_string)
 
     room_id = argv.get('room_id')
-    messages = UserRoom.objects.filter(room_id=room_id).order_by('message_datetime')
+    messages = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False).order_by('message_datetime')
 
     args = {}
     args['messages'] = messages

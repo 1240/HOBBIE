@@ -40,7 +40,7 @@ def room(request, room_id=1):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
     args['room'] = room
-    args['messages'] = UserRoom.objects.filter(room_id=room_id).order_by('message_datetime')
+    args['messages'] = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False).order_by('message_datetime')
     for i in args['messages']:
         if i.message_datetime == datetime.datetime.now():
             i.message_datetime = i.message_datetime.time()
@@ -55,7 +55,7 @@ def room(request, room_id=1):
             args['creator'] = x.user.username
             break
     if user in usinroom:
-        args['is_creator'] = UserRoom.objects.get(room=room, user=user)
+        args['is_creator'] = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
     if args['room'].room_region_id == 0:
         args['room_region'] = 'Все регионы'
     else:
@@ -171,7 +171,7 @@ def leave(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
     # auth.get_user(request).room.remove(Room.objects.get(id=room_id))
-    user_room = UserRoom.objects.get(room=room, user=user)
+    user_room = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
     user_room.delete()
     room.room_people_count = len(UserRoom.objects.filter(room=room))
     room.save()
