@@ -6,7 +6,19 @@ from django.db import models
 
 # Create your models here.
 from mainpage.models import Regions
+from accounts.models import User
 
+class Category(models.Model):
+    class Meta():
+        db_table = 'category'
+    category_title=models.CharField(max_length=40)
+    category_room_count=models.IntegerField(default=0)
+    category_image=models.ImageField(upload_to='images/category_images/', blank=True, null=True)
+    category_rooms = models.ManyToManyField(Room,  through='CategoryRooms', null=True)
+
+class CategoryRooms(models.Model):
+    room=models.ForeignKey(Room)
+    category=models.ForeignKey(Category)
 
 class Room(models.Model):
     class Meta():
@@ -29,5 +41,5 @@ class Message(models.Model):
 
     message_text = models.TextField(verbose_name="Текст сообщения")
     message_datetime = models.DateTimeField(default=datetime.datetime.now)
-    message_author = models.CharField(null=True, max_length=40)
+    message_author = models.ForeignKey(User)
     message_room = models.ForeignKey(Room)
