@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.template.loader import render_to_string
 
 from room.models import Room, Message
+import datetime
 
 
 _author__ = '1240'
@@ -91,6 +92,11 @@ def get_messages(request):
 
     args = {}
     args['messages'] = messages
+    for i in  args['messages']:
+        if i.message_datetime==datetime.datetime.now():
+            i.message_datetime=i.message_datetime.time()
+        else:
+            i.message_datetime=i.message_datetime.date()
     dajax = Dajax()
     dajax.assign('#messages_list', 'innerHTML', render_to_string('messages_list.html', args))
     return dajax.json()

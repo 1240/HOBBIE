@@ -9,6 +9,7 @@ from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room, Message
 import re
+import datetime
 
 
 def rooms(request, region_name='all'):
@@ -21,6 +22,7 @@ def rooms(request, region_name='all'):
         current_page = Paginator(object_list=Room.objects.filter(room_region=region)
                                  .order_by("-room_create_date"), per_page=10)
     args = {}
+
     args['rooms'] = current_page.page(1)
     args['user'] = auth.get_user(request)
     args['toggle'] = 'notchecked'
@@ -38,6 +40,11 @@ def room(request, room_id=1):
     room=Room.objects.get(id=room_id)
     args['room'] = room
     args['messages'] = Message.objects.filter(message_room_id=room_id).order_by('message_datetime')
+    for i in  args['messages']:
+        if i.message_datetime==datetime.datetime.now():
+            i.message_datetime=i.message_datetime.time()
+        else:
+            i.message_datetime=i.message_datetime.date()
     args['form'] = message_form
     args['user'] = user
     usinroom=Room.objects.get(id=room_id).user_set.all()
@@ -174,7 +181,7 @@ def editroom(request,room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
     user_room = UserRoom.objects.get(room=room, user=user)
-    if not user_room.is_creator:   #если юзер не создатель, не пускать редактировать
+    if not user_room.is_creator:
         return redirect('/rooms/get/%s' % room_id)
     args = {}
     args.update(csrf(request))

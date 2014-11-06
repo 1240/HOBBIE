@@ -39,12 +39,12 @@
                 <div id="messages_list">
                     {% for message in messages %}
                         <div class="row">
-                            <div class="small-6 medium-7 large-7 columns">
+                            <div class="small-7 medium-8 large-9 columns">
                                 <strong><a
                                         href="/account/{{ message.message_author }}/">{{ message.message_author }}</a>:
                                 </strong> {{ message.message_text }}
                             </div>
-                            <div class="small-6 medium-5 large-5 columns">
+                            <div class="small-5 medium-4 large-3 columns">
                                 ({{ message.message_datetime }})
                             </div>
                         </div>

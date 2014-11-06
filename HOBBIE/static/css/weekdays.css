@@ -1,7 +1,8 @@
 #messages_list {
-    max-height: 250px;
+    max-height: 700px;
     overflow:auto;
 }
+
 .roomimage {
     width:100px;
     height:100px;
