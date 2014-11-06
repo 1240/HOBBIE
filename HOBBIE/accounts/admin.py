@@ -1,5 +1,3 @@
-from django.contrib import admin
-
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.contrib.auth.models import Group
@@ -12,7 +10,6 @@ from accounts.forms import UserChangeForm, UserCreationForm
 class UserAdmin(UserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
-
 
     list_display = ('email', 'username', 'is_admin',)
     list_filter = ('is_admin',)
@@ -31,6 +28,7 @@ class UserAdmin(UserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
+
 
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)

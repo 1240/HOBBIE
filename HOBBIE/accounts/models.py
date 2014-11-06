@@ -71,7 +71,14 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-    def save(self, size=(225, 225)):
+
+
+
+
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+
+        size=(225, 225)
         if not self.id and not self.source:
             return
         super(User, self).save()
@@ -87,6 +94,7 @@ class User(AbstractBaseUser):
         image = image.crop(box)
         image.thumbnail(size, Image.ANTIALIAS)
         image.save(filename)
+        super().save(force_insert, force_update, using, update_fields)
 
 
     @property

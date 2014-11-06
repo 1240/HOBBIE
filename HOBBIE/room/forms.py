@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from django import forms
 from django.forms import ModelForm
-from django.forms.widgets import DateTimeInput
 
-from room.models import Message, Room
+from accounts.models import UserRoom
+
+from room.models import Room
 
 
 __author__ = '1240'
@@ -11,7 +11,7 @@ __author__ = '1240'
 
 class MessageForm(ModelForm):
     class Meta():
-        model = Message
+        model = UserRoom
         fields = ['message_text']
 
 

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
 from django.contrib import auth
@@ -8,8 +9,9 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import redirect, render_to_response
 from django.template.loader import render_to_string
+
 from accounts.models import User
-from room.models import Room, Message
+
 
 __author__ = '1240'
 
@@ -32,6 +34,7 @@ def login(request):
             return render_to_response('login.html', args)
     else:
         return render_to_response('login.html', args)
+
 
 @dajaxice_register
 def rooms_list(request):
@@ -68,7 +71,6 @@ def rooms_list(request):
     dajax.assign('#rooms', 'innerHTML', render)
 
     return dajax.json()
-
 
 
 @dajaxice_register

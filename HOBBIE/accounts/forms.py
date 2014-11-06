@@ -3,8 +3,8 @@ _author__ = '1240'
 
 # -*- coding: utf-8 -*-
 from django import forms
+
 from accounts.models import User
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 
 class UserCreationForm(forms.ModelForm):
@@ -31,7 +31,7 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
-    #password = ReadOnlyPasswordHashField()
+    # password = ReadOnlyPasswordHashField()
 
     class Meta:
         model = User
@@ -40,8 +40,9 @@ class UserChangeForm(forms.ModelForm):
     def clean_password(self):
         return self.initial["password"]
 
+
 class UserAvatarChangeForm(forms.ModelForm):
-    #password = ReadOnlyPasswordHashField()
+    # password = ReadOnlyPasswordHashField()
 
     class Meta:
         model = User

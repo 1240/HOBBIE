@@ -14,6 +14,7 @@ from accounts.forms import UserAvatarChangeForm
 kirov_ip = "37.113.83.1"
 localhost_ip = "127.0.0.1"
 
+
 def home(request):
     ip = get_client_ip(request)
     if get_client_ip(request) == localhost_ip:

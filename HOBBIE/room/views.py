@@ -1,15 +1,16 @@
 # Create your views here.
+import re
+import datetime
+
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator
 from django.shortcuts import render_to_response, redirect
-from accounts.models import UserRoom
 
+from accounts.models import UserRoom
 from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
-from room.models import Room, Message
-import re
-import datetime
+from room.models import Room
 
 
 def rooms(request, region_name='all'):
@@ -36,33 +37,33 @@ def room(request, room_id=1):
     message_form = MessageForm
     args = {}
     args.update(csrf(request))
-    user=auth.get_user(request)
-    room=Room.objects.get(id=room_id)
+    user = auth.get_user(request)
+    room = Room.objects.get(id=room_id)
     args['room'] = room
-    args['messages'] = Message.objects.filter(message_room_id=room_id).order_by('message_datetime')
-    for i in  args['messages']:
-        if i.message_datetime==datetime.datetime.now():
-            i.message_datetime=i.message_datetime.time()
+    args['messages'] = UserRoom.objects.filter(room_id=room_id).order_by('message_datetime')
+    for i in args['messages']:
+        if i.message_datetime == datetime.datetime.now():
+            i.message_datetime = i.message_datetime.time()
         else:
-            i.message_datetime=i.message_datetime.date()
+            i.message_datetime = i.message_datetime.date()
     args['form'] = message_form
     args['user'] = user
-    usinroom=Room.objects.get(id=room_id).user_set.all()
+    usinroom = Room.objects.get(id=room_id).user_set.all()
     args['users_in_room'] = usinroom
     for x in UserRoom.objects.filter(room=room):
         if x.is_creator:
-            args['creator']=x.user.username
+            args['creator'] = x.user.username
             break
     if user in usinroom:
-        args['is_creator'] = UserRoom.objects.get(room=room,user=user)
-    if args['room'].room_region_id==0:
-        args['room_region']='Все регионы'
+        args['is_creator'] = UserRoom.objects.get(room=room, user=user)
+    if args['room'].room_region_id == 0:
+        args['room_region'] = 'Все регионы'
     else:
-        args['room_region']=Regions.objects.get(id=args['room'].room_region_id).region_name
-    if args['room'].room_open==True:
-        args['openclose']='открытая'
+        args['room_region'] = Regions.objects.get(id=args['room'].room_region_id).region_name
+    if args['room'].room_open == True:
+        args['openclose'] = 'открытая'
     else:
-        args['openclose']='закрытая'
+        args['openclose'] = 'закрытая'
     return render_to_response('room.html', args)
 
 
@@ -75,19 +76,22 @@ def makeroom(request):
 
     return render_to_response('makeroom.html', args2)
 
-def is_date(a): # определяет, является ли строка от datepicker корректной датой
-    match=re.search(r'\d+.\d+.\d+',a)
+
+def is_date(a):  # определяет, является ли строка от datepicker корректной датой
+    match = re.search(r'\d+.\d+.\d+', a)
     if match:
         return True
     else:
         return False
 
+
 def is_time(a):
-    match=re.search(r'\d+.\d+',a)
+    match = re.search(r'\d+.\d+', a)
     if match:
         return True
     else:
         return False
+
 
 def addroom(request):
     if request.POST:
@@ -97,12 +101,12 @@ def addroom(request):
             img_choice = request.POST.get('action_image')
             room.room_image = f(img_choice)
             room.room_region_id = request.POST.get('region_select')
-           # if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
-             #   room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
+            # if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
+            # room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
             if request.POST.get('openclose'):
-                room.room_open=False
+                room.room_open = False
             else:
-                room.room_open=True
+                room.room_open = True
             form.save()
             user = auth.get_user(request)
             room = Room.objects.get(id=room.id)
@@ -150,7 +154,7 @@ def f(x):
 def joinroom(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
-    #user.room.add(room)
+    # user.room.add(room)
     user_room = UserRoom(
         room=room,
         user=user,
@@ -166,7 +170,7 @@ def joinroom(request, room_id):
 def leave(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
-    #auth.get_user(request).room.remove(Room.objects.get(id=room_id))
+    # auth.get_user(request).room.remove(Room.objects.get(id=room_id))
     user_room = UserRoom.objects.get(room=room, user=user)
     user_room.delete()
     room.room_people_count = len(UserRoom.objects.filter(room=room))
@@ -177,7 +181,8 @@ def leave(request, room_id):
 def invite(request, room_id):
     return redirect('/rooms/get/%s/' % room_id)
 
-def editroom(request,room_id):
+
+def editroom(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
     user_room = UserRoom.objects.get(room=room, user=user)
@@ -187,15 +192,15 @@ def editroom(request,room_id):
     args.update(csrf(request))
     args['form'] = RoomForm(instance=Room.objects.get(id=room_id))
     if Room.objects.get(id=room_id).room_open:
-        args['open']= ''
+        args['open'] = ''
     else:
-        args['open']= 'checked'
+        args['open'] = 'checked'
 
-    args['nofimage']=re.search(r'\d+',Room.objects.get(id=room_id).room_image).group()
-    #if Room.objects.get(id=room_id).room_to_date:
-     #   args['ydate']=Room.objects.get(id=room_id).room_to_date.date().isoformat()
-      #  args['ytime']=Room.objects.get(id=room_id).room_to_date.time() # почему то на 3 часа уменьшает
-    args['roomreg']=Room.objects.get(id=room_id).room_region_id
+    args['nofimage'] = re.search(r'\d+', Room.objects.get(id=room_id).room_image).group()
+    # if Room.objects.get(id=room_id).room_to_date:
+    #   args['ydate']=Room.objects.get(id=room_id).room_to_date.date().isoformat()
+    #  args['ytime']=Room.objects.get(id=room_id).room_to_date.time() # почему то на 3 часа уменьшает
+    args['roomreg'] = Room.objects.get(id=room_id).room_region_id
     args['regions_list'] = Regions.objects.all()
 
     if request.method == 'POST':
@@ -207,11 +212,11 @@ def editroom(request,room_id):
             room.room_image = f(img_choice)
             room.room_region_id = request.POST.get('region_select')
             #if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
-             #   room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
+            #   room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
             if request.POST.get('openclose'):
-                room.room_open=False
+                room.room_open = False
             else:
-                room.room_open=True
+                room.room_open = True
             room.save()
             return redirect('/rooms/get/%s' % room_id)
         else:

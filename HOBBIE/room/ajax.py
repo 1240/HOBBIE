@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+import datetime
 
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
@@ -7,8 +8,8 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.template.loader import render_to_string
 
-from room.models import Room, Message
-import datetime
+from accounts.models import UserRoom
+from room.models import Room
 
 
 _author__ = '1240'
@@ -76,7 +77,7 @@ def send_message(request):
     message_text = argv.get('message_text')
     message_author = argv.get('message_author')
     room = Room.objects.get(id=room_id)
-    message = Message(message_text=message_text, message_room=room,message_author=message_author)
+    message = UserRoom(message_text=message_text, room=room, user=message_author)
     message.save()
 
     return get_messages(request)
@@ -88,15 +89,15 @@ def get_messages(request):
     argv = json.loads(json_string)
 
     room_id = argv.get('room_id')
-    messages = Message.objects.filter(message_room_id=room_id).order_by('message_datetime')
+    messages = UserRoom.objects.filter(room_id=room_id).order_by('message_datetime')
 
     args = {}
     args['messages'] = messages
-    for i in  args['messages']:
-        if i.message_datetime==datetime.datetime.now():
-            i.message_datetime=i.message_datetime.time()
+    for i in args['messages']:
+        if i.message_datetime == datetime.datetime.now():
+            i.message_datetime = i.message_datetime.time()
         else:
-            i.message_datetime=i.message_datetime.date()
+            i.message_datetime = i.message_datetime.date()
     dajax = Dajax()
     dajax.assign('#messages_list', 'innerHTML', render_to_string('messages_list.html', args))
     return dajax.json()

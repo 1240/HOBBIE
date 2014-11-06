@@ -10,7 +10,6 @@ from accounts.models import User
 from utils.utils import create_image
 
 
-
 def edit(request):
     args = {}
     args.update(csrf(request))

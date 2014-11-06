@@ -8,8 +8,8 @@
             <div class="label round secondary"><a href="/account/edit/">Редактировать</a></div>
             <br>
             {% if user.avatar %}
-                {% thumbnail  user.avatar "100x100" as im %}
-                <img src="{{ im.url }}">
+                {% thumbnail user.avatar "100x100" as im %}
+                    <img src="{{ im.url }}">
                 {% endthumbnail %}
             {% else %}
                 <h5>Аватар не загружен</h5>

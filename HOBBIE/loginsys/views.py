@@ -44,12 +44,12 @@ def register(request):
         if newuser_from.is_valid():
             newuser_from.save()
             newuser = auth.authenticate(username=newuser_from.cleaned_data['email'],
-                                             password=newuser_from.cleaned_data['password2'])
+                                        password=newuser_from.cleaned_data['password2'])
             auth.login(request, newuser)
             user = User.objects.get(id=auth.get_user(request).id)
-            f = open(create_image('%s %s' % (user.first_name, user.last_name), user.first_name,  W=500), 'rb')
+            f = open(create_image('%s %s' % (user.first_name, user.last_name), user.first_name, W=500), 'rb')
             name_image = File(f)
-            user.name_image.save(user.username+'_name.png', name_image)
+            user.name_image.save(user.username + '_name.png', name_image)
             f = open(create_image(user.username, user.username), 'rb')
             username_image = File(f)
             user.username_image.save(user.username + '.png', username_image)
