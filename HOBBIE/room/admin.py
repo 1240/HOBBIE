@@ -2,12 +2,12 @@ from django.contrib import admin
 # Register your models here.
 from accounts.models import UserRoom
 from room.models import Room
+from room.models import Category,CategoryRooms
 
 
 class RoomMessage(admin.StackedInline):
     model = UserRoom
     extra = 1
-
 
 class RoomAdmin(admin.ModelAdmin):
     fields = ['room_title', 'room_text', 'room_to_date', 'room_region']
