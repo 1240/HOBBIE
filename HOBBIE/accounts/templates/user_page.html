@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
-
+{% load thumbnail %}
 {% block user_page %}
 
     <div class="container-div">
         <form enctype="multipart/form-data" action="" method="post">
-            {% if user.name_image %}
-                <img src="{{ user.name_image.url }}">
-            {% endif %}
+
             <div class="label round secondary"><a href="/account/edit/">Редактировать</a></div>
             <br>
             {% if user.avatar %}
-                <img src="{{ user.avatar.url }}" width="200">
+                {% thumbnail  user.avatar "100x100" as im %}
+                <img src="{{ im.url }}">
+                {% endthumbnail %}
             {% else %}
                 <h5>Аватар не загружен</h5>
             {% endif %}
