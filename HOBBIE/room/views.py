@@ -48,7 +48,9 @@ def room(request, room_id=1):
             i.message_datetime = i.message_datetime.date()
     args['form'] = message_form
     args['user'] = user
-    usinroom = Room.objects.get(id=room_id).user_set.all()
+    usinroom = []
+    for userroom in UserRoom.objects.filter(room_id=room_id,message_text__isnull=True):
+        usinroom.append(userroom.user)
     args['users_in_room'] = usinroom
     for x in UserRoom.objects.filter(room=room):
         if x.is_creator:
@@ -162,7 +164,10 @@ def joinroom(request, room_id):
         can_edit=False
     )
     user_room.save()
-    room.room_people_count = len(UserRoom.objects.filter(room=room))
+    usinroom = []
+    for userroom in UserRoom.objects.filter(room_id=room_id,message_text__isnull=True):
+        usinroom.append(userroom.user)
+    room.room_people_count = len(usinroom)
     room.save()
     return redirect('/rooms/get/%s/' % room_id)
 
@@ -173,7 +178,10 @@ def leave(request, room_id):
     # auth.get_user(request).room.remove(Room.objects.get(id=room_id))
     user_room = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
     user_room.delete()
-    room.room_people_count = len(UserRoom.objects.filter(room=room))
+    usinroom = []
+    for userroom in UserRoom.objects.filter(room_id=room_id,message_text__isnull=True):
+        usinroom.append(userroom.user)
+    room.room_people_count = len(usinroom)
     room.save()
     return redirect('/rooms/get/%s/' % room_id)
 
