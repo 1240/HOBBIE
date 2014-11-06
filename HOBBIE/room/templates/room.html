@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 {% load dajaxice_templatetags %}
 {% load staticfiles %}
 {% block rooms %}
@@ -40,14 +41,21 @@
                     {% for message in messages %}
                         <div class="row">
                             <div class="small-7 medium-8 large-9 columns">
-                                <strong><a
-                                        href="/account/{{ message.user.username }}/">{{ message.user.username }}</a>:
+                                <strong>
+                                    <a href="/account/{{ message.user.username }}/">
+                                        {% thumbnail message.user.avatar "45x45" as im %}
+                                        <img src="{{ im.url }}" alt="{{ message.user.username }}"/>
+                                        {% endthumbnail %}
+                                        {{ message.user.username }}
+
+                                </a>:
                                 </strong> {{ message.message_text }}
                             </div>
                             <div class="small-5 medium-4 large-3 columns">
                                 ({{ message.message_datetime }})
                             </div>
                         </div>
+                        <br/>
                     {% endfor %}
 
                 </div>
