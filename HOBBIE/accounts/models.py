@@ -40,6 +40,10 @@ class User(AbstractBaseUser):
     username = models.CharField(verbose_name='username', max_length=255, unique=True)
     avatar = models.ImageField(verbose_name='Аватар', upload_to='images/%Y/%m/%d', blank=True, null=True,
                                default='/media/images/avatar.jpg')
+    avatar_chat = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, null=True,
+                               default='/media/images/avatar.jpg')
+    main_avatar = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, null=True,
+                               default='/media/images/avatar.jpg')
     name_image = models.ImageField(upload_to='images/name_image/%Y/%m/%d', blank=True, null=True)
     username_image = models.ImageField(upload_to='images/username_image/%Y/%m/%d', blank=True, null=True)
     first_name = models.CharField(verbose_name='Имя', max_length=255, blank=True)
@@ -71,13 +75,7 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-
-
-
-
-
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-
         size=(225, 225)
         if not self.id and not self.source:
             return
