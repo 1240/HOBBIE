@@ -32,6 +32,13 @@ class Category(models.Model):
     category_image = models.ImageField(upload_to='images/category_images/', blank=True, null=True)
     category_rooms = models.ManyToManyField(Room, through='CategoryRooms', null=True)
 
+class RoomImage(models.Model):
+    class Meta():
+        db_table = 'roomimage'
+
+    roomimage_image = models.ImageField(upload_to='images/category_images/', blank=True, null=True)
+    roomimage_category = models.ForeignKey(Category)
+
 class CategoryRooms(models.Model):
     room = models.ForeignKey(Room)
     category = models.ForeignKey(Category)
