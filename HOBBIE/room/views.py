@@ -11,6 +11,7 @@ from accounts.models import UserRoom
 from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room
+from room.models import Category
 
 
 def rooms(request, region_name='all'):
@@ -30,6 +31,7 @@ def rooms(request, region_name='all'):
     args['regions_list'] = Regions.objects.all()
     args['region_id'] = '/' + region_name
     args['header'] = 'Комнаты ' + region_title
+    args['categories']=Category.objects.all()
     return render_to_response('rooms.html', args)
 
 

@@ -7,14 +7,10 @@
     <script type="text/javascript" src="{% static "js/rooms.js" %}"></script>
     <!-- NAVI -->
     <div class="row text-center b-map">
-        <div class="large-3 columns"><a href="#"><img src="{% static "img/catall.png" %}" width="180px"></a>
-        </div>
-        <div class="large-3 columns"><a href="#"><img src="{% static "img/catcomm.png" %}" width="180px"></a>
-        </div>
-        <div class="large-3 columns"><a href="#"><img src="{% static "img/catsport.png" %}" width="180px"></a>
-        </div>
-        <div class="large-3 columns"><a href="#"><img src="{% static "img/catcult.png" %}" width="180px"></a>
-        </div>
+        {% for category in categories %}
+            <div class="large-3 columns"><a href="/{{ category.category_title }}/"><img src="{% static category.category_image.url %}" width="180px"></a>
+            </div>
+        {% endfor %}
     </div>
     <div class="large-9 columns body-div-color">
         <br>

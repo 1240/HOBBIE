@@ -9,6 +9,9 @@ class RoomMessage(admin.StackedInline):
     model = UserRoom
     extra = 1
 
+class CategoryAdmin(admin.ModelAdmin):
+    fields = ['category_title', 'category_image']
+
 class RoomAdmin(admin.ModelAdmin):
     fields = ['room_title', 'room_text', 'room_to_date', 'room_region']
     inlines = [RoomMessage]
@@ -16,3 +19,4 @@ class RoomAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Room, RoomAdmin)
+admin.site.register(Category, CategoryAdmin)
