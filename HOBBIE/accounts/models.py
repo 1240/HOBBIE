@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 import datetime
+import os
 
 from PIL import Image
 from django.db import models
@@ -39,11 +40,11 @@ class User(AbstractBaseUser):
         db_index=True)
     username = models.CharField(verbose_name='username', max_length=255, unique=True)
     avatar = models.ImageField(verbose_name='Аватар', upload_to='images/%Y/%m/%d', blank=True, null=True,
-                               default='/media/images/avatar.jpg')
+                               default='images/avatar.jpg')
     avatar_chat = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, null=True,
-                               default='/media/images/avatar.jpg')
+                               default='images/avatar.jpg')
     main_avatar = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, null=True,
-                               default='/media/images/avatar.jpg')
+                               default='images/avatar.jpg')
     name_image = models.ImageField(upload_to='images/name_image/%Y/%m/%d', blank=True, null=True)
     username_image = models.ImageField(upload_to='images/username_image/%Y/%m/%d', blank=True, null=True)
     first_name = models.CharField(verbose_name='Имя', max_length=255, blank=True)
@@ -77,9 +78,6 @@ class User(AbstractBaseUser):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         size=(225, 225)
-        if not self.id and not self.source:
-            return
-        super(User, self).save()
         filename = str(self.avatar.path)
         image = Image.open(filename)
 
