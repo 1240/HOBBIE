@@ -11,7 +11,7 @@ from accounts.models import UserRoom
 from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room
-from room.models import Category
+from room.models import Category,RoomImage
 
 
 def rooms(request, region_name='all'):
@@ -73,12 +73,12 @@ def room(request, room_id=1):
 
 def makeroom(request):
     room_form = RoomForm
-    args2 = {}
-    args2.update(csrf(request))
-    args2['form'] = room_form
-    args2['regions_list'] = Regions.objects.all()
-
-    return render_to_response('makeroom.html', args2)
+    args = {}
+    args.update(csrf(request))
+    args['form'] = room_form
+    args['regions_list'] = Regions.objects.all()
+    args['images']=RoomImage.objects.all()
+    return render_to_response('makeroom.html', args)
 
 
 def is_date(a):  # определяет, является ли строка от datepicker корректной датой
