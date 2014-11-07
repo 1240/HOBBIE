@@ -4,8 +4,9 @@
 
     <div class="container-div">
         <form enctype="multipart/form-data" action="" method="post">
-
-            <div class="label round secondary"><a href="/account/edit/">Редактировать</a></div>
+            {% if account.username == user.username %}
+                <div class="label round secondary"><a href="/account/edit/">Редактировать</a></div>
+            {% endif %}
             <br>
             {% if account.avatar %}
                 {% thumbnail account.avatar "100x100" as im %}
