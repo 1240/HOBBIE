@@ -2,7 +2,7 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from django.core.files import File
 from django.core.paginator import Paginator
-from django.shortcuts import redirect, render_to_response
+from django.shortcuts import redirect, render_to_response, render
 
 # Create your views here.
 from accounts.forms import UserChangeForm
@@ -37,9 +37,10 @@ def edit(request):
     return render_to_response('edit.html', args)
 
 
-def user_page(request,username):
-
-    return render_to_response('user_page.html', {'account': User.objects.get(username = username),'user':auth.get_user(request)})
+def user_page(request, username):
+    args = {}
+    args['account'] = User.objects.get(username=username)
+    return render(request, 'user_page.html', args)
 
 
 def friends(request):
