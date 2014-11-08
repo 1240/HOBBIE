@@ -81,7 +81,9 @@ def get_images_list(request):
         'by_cult_ent': 4,
     }
     args = {}
-    args['images']=RoomImage.objects.filter(roomimage_category_id=toggles[toggle])
+    imgs=RoomImage.objects.filter(roomimage_category_id=toggles[toggle])
+    args['images']=imgs
+    args['image_first_id']=imgs[0].id
 
     render =  render_to_string('image_choice_list.html', args)
     dajax = Dajax()

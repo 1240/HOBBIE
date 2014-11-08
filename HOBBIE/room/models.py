@@ -23,6 +23,7 @@ class Room(models.Model):
     room_image = models.CharField(null=True, blank=True, max_length=100, verbose_name="Изображение комнаты")
 
 
+
 class Category(models.Model):
     class Meta():
         db_table = 'category'

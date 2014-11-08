@@ -29,7 +29,7 @@
                     </select>
        </label>
             <div><strong>Выберите соответствующее изображение для комнаты</strong></div>
-        <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+       <!-- <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
 
              <li><input id='r1' type="radio" name="action_image" value="a1"><img src="{% static "img/1.png" %}" onclick="document.getElementById('r1').checked='checked';"class="roomimage"></li>
              <li><input id='r2' type="radio" name="action_image" value="a2" checked="checked"><img src="{% static "img/2.png" %}" onclick="document.getElementById('r2').checked='checked';"class="roomimage"></li>
@@ -55,23 +55,23 @@
              <li><input id='r22' type="radio" name="action_image" value="a22"><img src="{% static "img/22.png" %}" onclick="document.getElementById('r22').checked='checked';"class="roomimage"></li>
              <li><input id='r23' type="radio" name="action_image" value="a23"><img src="{% static "img/23.png" %}" onclick="document.getElementById('r23').checked='checked';"class="roomimage"></li>
              <li><input id='r24' type="radio" name="action_image" value="a24"><img src="{% static "img/24.png" %}" onclick="document.getElementById('r24').checked='checked';"class="roomimage"></li>
-        </ul>
+        </ul>-->
         <div class="panel callout radius">
 
                 <div class="switch-toggle switch-4 panel">
-                    <input id="cat_common" name="view" type="radio" checked="">
+                    <input id="cat_common" name="view" type="radio" checked="" value="common">
                     <label for="cat_common" onclick="Dajaxice.room.get_images_list(Dajax.process,
                                                         {'toggle': 'by_common'});">Общее</label>
 
-                    <input id="cat_communication" name="view" type="radio">
+                    <input id="cat_communication" name="view" type="radio" value="communication">
                     <label for="cat_communication" onclick="Dajaxice.room.get_images_list(Dajax.process,
                                                         {'toggle': 'by_communication'});">Общение</label>
 
-                    <input id="cat_sports" name="view" type="radio">
+                    <input id="cat_sports" name="view" type="radio" value="sports">
                     <label for="cat_sports" onclick="Dajaxice.room.get_images_list(Dajax.process,
                                                         {'toggle': 'by_sports'});">Спорт</label>
 
-                    <input id="cat_cult_ent" name="view" type="radio">
+                    <input id="cat_cult_ent" name="view" type="radio" value="cult_ent">
                     <label for="cat_cult_ent" onclick="Dajaxice.room.get_images_list(Dajax.process,
                                                         {'toggle': 'by_cult_ent'});">Культура/Развлечения</label>
 
@@ -82,7 +82,10 @@
 
                 {% for image in images %}
                 <li>
-                    <input id='r{{ image.id }}' type="radio" name="action_image{{ image.id }}" value="a{{ image.id }}">
+                    <input id='r{{ image.id }}' type="radio" name="action_image" value="{{ image.roomimage_image.url }}"
+                            {% if image_first_id == image.id %}
+                            checked
+                            {% endif %}>
                     <img src="{% static image.roomimage_image.url %}" onclick="document.getElementById('r{{ image.id }}').checked='checked';"class="roomimage">
                 </li>
                 {% endfor %}
