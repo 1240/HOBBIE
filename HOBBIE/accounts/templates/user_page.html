@@ -31,17 +31,26 @@
                  <br>
             <div class="column" style="width:150px">
                  <h6>Никнейм: </h6>
-                 <h6>День рождения: </h6>
+                {% if account.date_of_birth %}
+                    <h6>День рождения: </h6>
+                 {% endif %}
                  <br>
                  <h6>Email: </h6>
             </div>
                 <div class="column" style="width:250px">
                  <h6>{{ account.username }}</h6>
-                 <h6>{{ account.date_of_birth }}</h6>
+                     {% if account.date_of_birth %}
+                    <h6>{{ account.date_of_birth }}</h6>
+                    {% endif %}
                  <br>
                  <h6>{{ account.email }}</h6>
                 </div>
         </div>
+         <div class="col" style="width:200px">
+             <h4 style="margin: 0px; padding: 0">Комнаты</h4>
+             <hr style="margin: 0px; width: 400px">
+
+         </div>
         </form>
     </div>
 
