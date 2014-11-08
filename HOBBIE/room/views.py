@@ -77,25 +77,8 @@ def makeroom(request):
     args.update(csrf(request))
     args['form'] = room_form
     args['regions_list'] = Regions.objects.all()
-    args['images']=RoomImage.objects.all()
+    args['images']=RoomImage.objects.filter(roomimage_category_id=1)
     return render_to_response('makeroom.html', args)
-
-
-def is_date(a):  # определяет, является ли строка от datepicker корректной датой
-    match = re.search(r'\d+.\d+.\d+', a)
-    if match:
-        return True
-    else:
-        return False
-
-
-def is_time(a):
-    match = re.search(r'\d+.\d+', a)
-    if match:
-        return True
-    else:
-        return False
-
 
 def addroom(request):
     if request.POST:
@@ -105,8 +88,7 @@ def addroom(request):
             img_choice = request.POST.get('action_image')
             room.room_image = f(img_choice)
             room.room_region_id = request.POST.get('region_select')
-            # if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
-            # room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
+
             if request.POST.get('openclose'):
                 room.room_open = False
             else:

@@ -1,0 +1,11 @@
+{% load static %}
+<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
+
+{% for image in images %}
+<li>
+    <input id='r{{ image.id }}' type="radio" name="action_image{{ image.id }}" value="a{{ image.id }}">
+    <img src="{% static image.roomimage_image.url %}" onclick="document.getElementById('r{{ image.id }}').checked='checked';"class="roomimage">
+</li>
+{% endfor %}
+
+</ul>
