@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block rooms %}
+{% load dajaxice_templatetags %}
 {% load staticfiles %}
+
+    {% dajaxice_js_import %}
+
+    <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
    <div class="container-div">
    <h2>Создание новой комнаты</h2>
 
@@ -53,27 +58,37 @@
         </ul>
         <div class="panel callout radius">
 
-
                 <div class="switch-toggle switch-4 panel">
                     <input id="cat_common" name="view" type="radio" checked="">
-                    <label for="cat_common" onclick="ajaxSort2('by_сommon')">Общее</label>
+                    <label for="cat_common" onclick="Dajaxice.room.get_images_list(Dajax.process,
+                                                        {'toggle': 'by_common'});">Общее</label>
 
                     <input id="cat_communication" name="view" type="radio">
-                    <label for="cat_communication" onclick="ajaxSort2('by_сommunication')">Общение</label>
+                    <label for="cat_communication" onclick="Dajaxice.room.get_images_list(Dajax.process,
+                                                        {'toggle': 'by_communication'});">Общение</label>
 
                     <input id="cat_sports" name="view" type="radio">
-                    <label for="cat_sports" onclick="ajaxSort2('by_sports')">Спорт</label>
+                    <label for="cat_sports" onclick="Dajaxice.room.get_images_list(Dajax.process,
+                                                        {'toggle': 'by_sports'});">Спорт</label>
 
                     <input id="cat_cult_ent" name="view" type="radio">
-                    <label for="cat_cult_ent" onclick="ajaxSort2('by_cult_ent')">Культура/Развлечения</label>
+                    <label for="cat_cult_ent" onclick="Dajaxice.room.get_images_list(Dajax.process,
+                                                        {'toggle': 'by_cult_ent'});">Культура/Развлечения</label>
 
                     <a class="button"></a>
                 </div>
-        <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
-            {% for image in images %}
-                <li><input id='r{{ image.id }}' type="radio" name="action_image2" value="a{{ image.id }}"><img src="{% static image.roomimage_image.url %}" onclick="document.getElementById('r{{ image.id }}').checked='checked';"class="roomimage"></li>
-            {% endfor %}
-        </ul>
+        <div id="imagechoicelist">
+            <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
+
+                {% for image in images %}
+                <li>
+                    <input id='r{{ image.id }}' type="radio" name="action_image{{ image.id }}" value="a{{ image.id }}">
+                    <img src="{% static image.roomimage_image.url %}" onclick="document.getElementById('r{{ image.id }}').checked='checked';"class="roomimage">
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
         </div>
 
 

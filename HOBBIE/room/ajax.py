@@ -10,7 +10,7 @@ from django.db.models import Q
 from django.template.loader import render_to_string
 
 from accounts.models import UserRoom
-from room.models import Room
+from room.models import Room,Category,RoomImage
 
 
 _author__ = '1240'
@@ -68,6 +68,26 @@ def rooms_list(request):
 
     return dajax.json()
 
+@dajaxice_register
+def get_images_list(request):
+    json_string = request.POST.get('argv')
+    argv = json.loads(json_string)
+    toggle = argv.get('toggle')
+
+    toggles = {
+        'by_common': 1,
+        'by_communication': 2,
+        'by_sports': 3,
+        'by_cult_ent': 4,
+    }
+    args = {}
+    args['images']=RoomImage.objects.filter(roomimage_category_id=toggles[toggle])
+
+    render =  render_to_string('image_choice_list.html', args)
+    dajax = Dajax()
+    dajax.assign('#imagechoicelist', 'innerHTML',render)
+
+    return dajax.json()
 
 @dajaxice_register
 def send_message(request):
