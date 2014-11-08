@@ -415,7 +415,7 @@ embed, iframe {
 }
 
 .close:hover {
-    background-color: rgba(252, 20, 0, 0.8);
+    background-color: rgba(0, 0, 255, 0.8);
     /* крутим кнопку при наведении */
     -webkit-transform: rotate(360deg);
     -moz-transform: rotate(360deg);
@@ -427,4 +427,43 @@ embed, iframe {
 /* опционально при добавлении вложений */
 .popup p, .popup div {
     margin-bottom: 10px;
+}
+
+
+/* Задание стилей левого столбца */
+#left {
+     float:left; /* Установка обтекания */
+     width:250px; /* Установка ширины столбца */
+     background:#aeddff; /* Установка фонового цвета */
+
+}
+
+/* Задание стилей правого столбца */
+#right {
+     float:right; /* Установка обтекания */
+     width:300px; /* Установка ширины столбца */
+     background:#ffecbe; /* Установка фонового цвета */
+     height: 300px; /* Установка высоты столбца */
+}
+
+/* Задание стилей среднего столбца */
+#center {
+     margin-left:300px; /* Установка отступа */
+     margin-right:400px; /* Установка отступа */
+     background:#beffc0; /* Установка фонового цвета */
+     height: 300px; /* Установка высоты столбца */
+}
+
+.col {
+ float:left;
+ width:150px;
+ margin-right:10px;
+    .colomn {
+        float:left;
+        width:150px;
+        margin-right:10px;
+
+
+}
+
 }
