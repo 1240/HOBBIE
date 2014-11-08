@@ -4,22 +4,53 @@
 
     <div class="container-div">
         <form enctype="multipart/form-data" action="" method="post">
-            {% if account.username == user.username %}
-                <div class="label round secondary"><a href="/account/edit/">Редактировать</a></div>
-            {% endif %}
-            <br>
-            {% if account.avatar %}
-                {% thumbnail account.avatar "100x100" as im %}
+        {% if account.username_image %}
+         <img src="{{ account.username_image.url }}">
+         {% endif %}
+        <br>
+      <div class="col" style="width:260px">
+          {% if account.avatar %}
+                {% thumbnail account.avatar "250x250" as im %}
                     <img src="{{ im.url }}">
                 {% endthumbnail %}
             {% else %}
                 <h5>Аватар не загружен</h5>
             {% endif %}
-            {% csrf_token %}
-            <h3>{{ account.first_name }} {{ account.last_name }} ({{ account.username }})</h3>
-            <h5>Email: {{ account.email }}</h5>
-            <h5>День рождения: {{ account.date_of_birth }}</h5>
-            <br>
+         <br>
+         {% if account.username == user.username %}
+                <div class="label round secondary" style="left: 10px;width: 230px" ><a href="/account/edit/">Редактировать страницу</a></div>
+             {% else %}
+             <br>
+              <input type="button" class="button" style="width: 230px; left: 10px" value="Пригласить">
+            {% endif %}
+      </div>
+
+        <div class="col" style="width:400px">
+                 <h4 style="margin: 0px; padding: 0">{{ account.first_name }} {{ account.last_name }}</h4>
+                <hr style="margin: 0px; width: 400px">
+                 <br>
+            <div class="column" style="width:150px">
+                 <h6>Никнейм: </h6>
+                {% if account.date_of_birth %}
+                    <h6>День рождения: </h6>
+                 {% endif %}
+                 <br>
+                 <h6>Email: </h6>
+            </div>
+                <div class="column" style="width:250px">
+                 <h6>{{ account.username }}</h6>
+                     {% if account.date_of_birth %}
+                    <h6>{{ account.date_of_birth }}</h6>
+                    {% endif %}
+                 <br>
+                 <h6>{{ account.email }}</h6>
+                </div>
+        </div>
+         <div class="col" style="width:200px">
+             <h4 style="margin: 0px; padding: 0">Комнаты</h4>
+             <hr style="margin: 0px; width: 400px">
+
+         </div>
         </form>
     </div>
 
