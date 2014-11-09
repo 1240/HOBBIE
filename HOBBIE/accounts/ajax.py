@@ -11,6 +11,7 @@ from django.shortcuts import redirect, render_to_response
 from django.template.loader import render_to_string
 
 from accounts.models import User
+from room.models import Room
 
 
 __author__ = '1240'
@@ -38,6 +39,7 @@ def login(request):
 
 @dajaxice_register
 def rooms_list(request):
+    user = auth.get_user(request)
     json_string = request.POST.get('argv')
     argv = json.loads(json_string)
 
@@ -51,10 +53,10 @@ def rooms_list(request):
         'by_people': '-room_people_count',
     }
     if region_index:
-        current_page = Paginator(object_list=auth.get_user(request).room.all()
+        current_page = Paginator(object_list=Room.objects.filter(user=user, userroom__message_text__isnull=True)
                                  .order_by(toggles[toggle]), per_page=per_page)
     else:
-        current_page = Paginator(object_list=auth.get_user(request).room.all()
+        current_page = Paginator(object_list=Room.objects.filter(user=user, userroom__message_text__isnull=True)
                                  .order_by(toggles[toggle]), per_page=per_page)
     views = {
         'gallery_view': 'rooms_ul.html',
