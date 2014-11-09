@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render_to_response, render
 
 # Create your views here.
 from accounts.forms import UserChangeForm
-from accounts.models import User
+from accounts.models import User, UserRoom
 from utils.utils import create_image
 
 
@@ -54,6 +54,10 @@ def friends(request):
 
 def rooms(request):
     user = auth.get_user(request)
+    '''usinroom = []
+    for userroom in UserRoom.objects.filter(user_id=user.id, message_text__isnull=True):
+        usinroom.append(userroom.room)
+    current_page = Paginator(object_list=usinroom, per_page=10)'''
     current_page = Paginator(object_list=user.room.all()
                              .order_by("-room_create_date"), per_page=10)
     args = {}
