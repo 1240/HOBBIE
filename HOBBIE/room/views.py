@@ -11,7 +11,7 @@ from accounts.models import UserRoom
 from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room
-from room.models import Category,RoomImage
+from room.models import Category,RoomImage,CategoryRooms
 
 
 def rooms(request, region_name='all'):
@@ -48,6 +48,14 @@ def room(request, room_id=1):
             i.message_datetime = i.message_datetime.time()
         else:
             i.message_datetime = i.message_datetime.date()
+    categories={
+        1:'Общая',
+        2:'Общение',
+        3:'Спорт',
+        4:'Культура/Развлечения'
+    }
+    category_room=CategoryRooms.objects.get(room=room)
+    args['categ']=categories[category_room.category.id]
     args['form'] = message_form
     args['user'] = user
     usinroom = []
@@ -77,7 +85,10 @@ def makeroom(request):
     args.update(csrf(request))
     args['form'] = room_form
     args['regions_list'] = Regions.objects.all()
-    args['images']=RoomImage.objects.filter(roomimage_category_id=1)
+    imgs=RoomImage.objects.filter(roomimage_category_id=1)
+    args['images']=imgs
+    args['image_first_id']=imgs[0].id
+
     return render_to_response('makeroom.html', args)
 
 def addroom(request):
@@ -85,9 +96,23 @@ def addroom(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             room = form.save(commit=False)
-            img_choice = request.POST.get('action_image')
-            room.room_image = f(img_choice)
+            #img_choice = request.POST.get('action_image')
+           # room.room_image = f(img_choice)
             room.room_region_id = request.POST.get('region_select')
+            categ=request.POST.get('view')
+            categories={
+                'common':1,
+                'communication':2,
+                'sports':3,
+                'cult_ent':4
+            }
+            category=Category.objects.get(id=categories[categ])
+            imgid=request.POST.get('action_image')
+            room.room_image=imgid
+
+            category.category_room_count+=1
+            category.save()
+
 
             if request.POST.get('openclose'):
                 room.room_open = False
@@ -96,6 +121,8 @@ def addroom(request):
             form.save()
             user = auth.get_user(request)
             room = Room.objects.get(id=room.id)
+            category_room=CategoryRooms(room=room,category=category)
+            category_room.save()
             user_room = UserRoom(
                 room=room,
                 user=user,
@@ -108,7 +135,7 @@ def addroom(request):
     return redirect('/rooms/get/%s' % room.id)
 
 
-def f(x):
+'''def f(x):
     return {
         'a1': 'img/1.png',
         'a2': 'img/2.png',
@@ -134,7 +161,7 @@ def f(x):
         'a22': 'img/22.png',
         'a23': 'img/23.png',
         'a24': 'img/24.png',
-    }[x]
+    }[x]'''
 
 
 def joinroom(request, room_id):
@@ -178,7 +205,7 @@ def editroom(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
     user_room = UserRoom.objects.get(room=room, user=user)
-    if not user_room.is_creator:
+    if not user_room.can_edit:
         return redirect('/rooms/get/%s' % room_id)
     args = {}
     args.update(csrf(request))
@@ -188,23 +215,43 @@ def editroom(request, room_id):
     else:
         args['open'] = 'checked'
 
-    args['nofimage'] = re.search(r'\d+', Room.objects.get(id=room_id).room_image).group()
-    # if Room.objects.get(id=room_id).room_to_date:
-    #   args['ydate']=Room.objects.get(id=room_id).room_to_date.date().isoformat()
-    #  args['ytime']=Room.objects.get(id=room_id).room_to_date.time() # почему то на 3 часа уменьшает
+    args['nofimage'] = Room.objects.get(id=room_id).room_image
+
     args['roomreg'] = Room.objects.get(id=room_id).room_region_id
     args['regions_list'] = Regions.objects.all()
+    category_room=CategoryRooms.objects.get(room=room)
+    args['categ']=category_room.category.id
+    imgs=RoomImage.objects.filter(roomimage_category_id=category_room.category.id)
+    args['images']=imgs
+
 
     if request.method == 'POST':
         form = RoomForm(request.POST, instance=Room.objects.get(id=room_id))
         if form.is_valid():
             form.save()
-            img_choice = request.POST.get('action_image')
+            #img_choice = request.POST.get('action_image')
             room = Room.objects.get(id=room_id)
-            room.room_image = f(img_choice)
+            #room.room_image = f(img_choice)
             room.room_region_id = request.POST.get('region_select')
-            #if is_date(request.POST.get('mdate')) and is_time(request.POST.get('mtime')):
-            #   room.room_to_date=request.POST.get('mdate')+' '+request.POST.get('mtime')
+            categ=request.POST.get('view')
+            categories={
+                'common':1,
+                'communication':2,
+                'sports':3,
+                'cult_ent':4
+            }
+            category=Category.objects.get(id=categories[categ])
+            imgid=request.POST.get('action_image')
+            room.room_image=imgid
+            category_room=CategoryRooms.objects.get(room=room)
+            if category_room.category!=category:
+                #Category.objects.get(id=category_room.category.id).category_room_count-=1
+                category_room.category=category
+                #category.category_room_count+=1
+
+            #category.category_room_count+=1    если категория прежняя, ниче не делать, если изменилась +1
+            category.save()
+            category_room.save()
             if request.POST.get('openclose'):
                 room.room_open = False
             else:
