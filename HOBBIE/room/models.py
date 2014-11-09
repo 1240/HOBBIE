@@ -12,11 +12,11 @@ class Room(models.Model):
     class Meta():
         db_table = 'room'
 
-    room_title = models.CharField(max_length=100, verbose_name="Название комнаты")
+    room_title = models.CharField(max_length=100, verbose_name="Название комнаты (краткое описание вашего предложения)")
     room_text = models.TextField(verbose_name="Описание комнаты")
-    hash_tags = models.TextField(verbose_name="#Tags (укажите через пробел)", blank=True, null=True)
+    hash_tags = models.TextField(verbose_name="Ключевые слова - для того, чтобы людям было проще найти вашу комнату (укажите через пробел)", blank=True, null=True)
     room_create_date = models.DateTimeField(default=datetime.datetime.now)
-    room_to_date = models.DateTimeField(null=True, blank=True, verbose_name="Дата мероприятия")
+    room_to_date = models.DateTimeField(null=True, blank=True, verbose_name="Дата мероприятия (указывать не обязательно)")
     room_people_count = models.IntegerField(default=1)
     room_region = models.ForeignKey(Regions)
     room_open = models.BooleanField(default=True, verbose_name="Открытая/закрытая комната")

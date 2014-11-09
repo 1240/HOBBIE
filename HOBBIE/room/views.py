@@ -48,6 +48,14 @@ def room(request, room_id=1):
             i.message_datetime = i.message_datetime.time()
         else:
             i.message_datetime = i.message_datetime.date()
+    categories={
+        1:'Общая',
+        2:'Общение',
+        3:'Спорт',
+        4:'Культура/Развлечения'
+    }
+    category_room=CategoryRooms.objects.get(room=room)
+    args['categ']=categories[category_room.category.id]
     args['form'] = message_form
     args['user'] = user
     usinroom = []
