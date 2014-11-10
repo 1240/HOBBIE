@@ -1,31 +1,11 @@
-.loading {
-  display: inline-block;
-  margin: 5em;
-  border-width: 30px;
-  border-radius: 50%;
-  -webkit-animation: spin 1s linear infinite;
-     -moz-animation: spin 1s linear infinite;
-       -o-animation: spin 1s linear infinite;
-          animation: spin 1s linear infinite;
-  }
+@media screen and (min-width: 1600px) {
+    #cat {width: 200px;}
+}
 
-.style-1 {
-  border-style: solid;
-  border-color: #444 transparent;
-  }
+@media screen and (min-width: 1600px) {
+    #room {width: 200px;}
+}
 
-.style-2 {
-  border-style: double;
-  border-color: #444 transparent;
-  }
 
-.style-3 {
-  border-style: solid;
-  border-color: #444 #fff #fff;
-  }
-
-/* Base styles */
-html {
-  background: #eee url('http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/billie_holiday.png');
-  text-align: center;
-  }
+.large-25 {
+    width: 25%; }
