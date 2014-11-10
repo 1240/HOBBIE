@@ -429,41 +429,38 @@ embed, iframe {
     margin-bottom: 10px;
 }
 
-
 /* Задание стилей левого столбца */
 #left {
-     float:left; /* Установка обтекания */
-     width:250px; /* Установка ширины столбца */
-     background:#aeddff; /* Установка фонового цвета */
+    float: left; /* Установка обтекания */
+    width: 250px; /* Установка ширины столбца */
+    background: #aeddff; /* Установка фонового цвета */
 
 }
 
 /* Задание стилей правого столбца */
 #right {
-     float:right; /* Установка обтекания */
-     width:300px; /* Установка ширины столбца */
-     background:#ffecbe; /* Установка фонового цвета */
-     height: 300px; /* Установка высоты столбца */
+    float: right; /* Установка обтекания */
+    width: 300px; /* Установка ширины столбца */
+    background: #ffecbe; /* Установка фонового цвета */
+    height: 300px; /* Установка высоты столбца */
 }
 
 /* Задание стилей среднего столбца */
 #center {
-     margin-left:300px; /* Установка отступа */
-     margin-right:400px; /* Установка отступа */
-     background:#beffc0; /* Установка фонового цвета */
-     height: 300px; /* Установка высоты столбца */
+    margin-left: 300px; /* Установка отступа */
+    margin-right: 400px; /* Установка отступа */
+    background: #beffc0; /* Установка фонового цвета */
+    height: 300px; /* Установка высоты столбца */
 }
 
 .col {
- float:left;
- width:150px;
- margin-right:10px;
-    .colomn {
-        float:left;
-        width:150px;
-        margin-right:10px;
-
-
+    float: left;
+    width: 150px;
+    margin-right: 10px;
 }
 
+.colomn {
+    float: left;
+    width: 150px;
+    margin-right: 10px;
 }
