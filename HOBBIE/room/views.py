@@ -4,15 +4,13 @@ import datetime
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator
-from django.core.urlresolvers import reverse
-from django.shortcuts import render_to_response, redirect, get_object_or_404
-from django.views.generic import RedirectView
+from django.shortcuts import render_to_response, redirect
 
 from accounts.models import UserRoom
 from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room
-from room.models import Category,RoomImage,CategoryRooms
+from room.models import Category, RoomImage, CategoryRooms
 
 
 def rooms(request, region_name='all', category_name='all'):
@@ -131,8 +129,10 @@ def addroom(request):
             category = Category.objects.get(id=categories[categ])
             imgid = request.POST.get('action_image')
             room.room_image = imgid
-
-            category.category_room_count += 1
+            if category.id == 1:
+                category.category_room_count = len(CategoryRooms.objects.all())
+            else:
+                category.category_room_count += 1
             category.save()
 
             if request.POST.get('openclose'):

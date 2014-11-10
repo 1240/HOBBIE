@@ -11,9 +11,16 @@
     <!-- NAVI -->
     <div class="row text-center b-map">
         {% for category in categories %}
-            <div class="large-3 columns"><a href="../{{ category.category_title }}/"><img
-                    src="{% static category.category_image.url %}" width="100%"></a>
-            </div>
+            {% if category.id == 1 %}
+                <div class="large-3 columns"><a href="../all/"><img
+                        src="{% static category.category_image.url %}" width="100%"></a>
+                </div>
+            {% else %}
+                <div class="large-3 columns"><a href="../{{ category.category_title }}/"><img
+                        src="{% static category.category_image.url %}" width="100%"></a>
+                </div>
+            {% endif %}
+
         {% endfor %}
     </div>
     <div class="large-9 columns body-div-color">
