@@ -66,5 +66,5 @@ def rooms(request):
 def users(request):
     args = {}
     args['users'] = User.objects.all()
-    args['header'] = 'Поиск человека'
+    args['header'] = 'Поиск пользователя'
     return render(request, 'users.html', args)
