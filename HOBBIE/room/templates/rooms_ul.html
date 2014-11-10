@@ -1,10 +1,10 @@
 {% load static %}
-<ul class="small-block-grid-3">
+<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
     {% for room in rooms %}
         <li>
             <a href="/rooms/get/{{ room.id }}">
                 <div class="room-rect">
-                    <h6>{{ room.room_title }}</h6>
+                    <h6 style="white-space: nowrap">{{ room.room_title }}</h6>
                     <!-- <p>{{ room.room_create_date }}</p>-->
                     <div class="room-circle"
                          style="border-color: {% cycle '#E7E7E7 #E7E7E7 #E7E7E7 #44c7db' '#E7E7E7 #E7E7E7 #44c7db #E7E7E7' '#E7E7E7 #44c7db #E7E7E7 #E7E7E7' '#44c7db #E7E7E7 #E7E7E7 #E7E7E7' %}">
@@ -17,8 +17,9 @@
         </li>
     {% endfor %}
 </ul>
-<div class="row">
-    <div class="large-3 large-offset-5 columns">
+<br/>
+<div class="row clearfix">
+    <div class="small-3 small-centered columns">
         <ul class="pagination">
             {% if rooms.has_previous %}
                 <li class="arrow"><a href="#"
@@ -34,16 +35,16 @@
                 {% if page == rooms.number %}
                     <li class="current"><a href="#" style="color: #ffffff !important;"
                                            onclick="Dajaxice.room.rooms_list(Dajax.process,
-                            {'toggle':getSort(),
-                            'region': document.getElementById('region_select').selectedIndex,
-                            'p': {{ page }},
-                            'view': getView()})">{{ page }}</a></li>
+                                                   {'toggle':getSort(),
+                                                   'region': document.getElementById('region_select').selectedIndex,
+                                                   'p': {{ page }},
+                                                   'view': getView()})">{{ page }}</a></li>
                 {% else %}
                     <li><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
                             {'toggle':getSort(),
                             'region': document.getElementById('region_select').selectedIndex,
                             'p': {{ page }},
-                                        'view': getView()})">{{ page }}</a></li>
+                            'view': getView()})">{{ page }}</a></li>
                 {% endif %}
             {% endfor %}
             {% if rooms.has_next %}
