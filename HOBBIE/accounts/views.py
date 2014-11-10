@@ -60,13 +60,11 @@ def rooms(request):
     args = {}
     args['rooms'] = current_page.page(1)
     args['toggle'] = 'notchecked'
-    args['user'] = user
-    return render_to_response('account_rooms.html', args)
+    return render(request, 'account_rooms.html', args)
 
 
 def users(request):
     args = {}
     args['users'] = User.objects.all()
-    args['user'] = auth.get_user(request)
     args['header'] = 'Поиск человека'
-    return render_to_response('users.html', args)
+    return render(request, 'users.html', args)

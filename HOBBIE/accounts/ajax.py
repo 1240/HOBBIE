@@ -83,11 +83,11 @@ def users_search(request):
     page_number = argv.get('p')
     per_page = 10
     q = None
-    if (search_string != None):
+    if search_string is not None:
         for word in search_string.split():
             q_aux = Q(username__icontains=word) | Q(first_name__icontains=word) | Q(last_name__icontains=word)
             q = ( q_aux & q ) if bool(q) else q_aux
-    if (q == None):
+    if q == None:
         current_page = Paginator(object_list=User.objects.all(), per_page=per_page)
     else:
         current_page = Paginator(object_list=User.objects.filter(q), per_page=per_page)
