@@ -20,9 +20,15 @@ _author__ = '1240'
 def rooms_list(request):
     json_string = request.POST.get('argv')
     argv = json.loads(json_string)
-
+    categories = {
+        'common': '1',
+        'communications': '2',
+        'sports': '3',
+        'cult_ent': '4',
+    }
     toggle = argv.get('toggle')
     region_index = argv.get('region')
+    category_name = argv.get('category_name')
     page_number = argv.get('p')
     view = argv.get('view')
     search_string = argv.get('search_string')
@@ -32,12 +38,14 @@ def rooms_list(request):
         'by_people': '-room_people_count',
     }
     q = None
+    q_aux = Q(category__category_title__in=categories) if category_name == 'all' else Q(category__category_title=category_name)
+    q = ( q_aux & q ) if bool(q) else q_aux
     if region_index:
         q_aux = Q(room_region_id=region_index)
         q = ( q_aux & q ) if bool(q) else q_aux
         if (search_string != None):
             for word in search_string.split():
-                q_aux = Q(room_title__icontains=word) | Q(hash_tags__icontains=word) & Q(room_region_id=region_index)
+                q_aux = Q(room_title__icontains=word) | Q(hash_tags__icontains=word)
                 q = ( q_aux & q ) if bool(q) else q_aux
         current_page = Paginator(object_list=Room.objects.filter(q)
                                  .order_by(toggles[toggle]), per_page=per_page)
@@ -47,7 +55,7 @@ def rooms_list(request):
                 q_aux = Q(room_title__icontains=word) | Q(hash_tags__icontains=word)
                 q = ( q_aux & q ) if bool(q) else q_aux
         if (q == None):
-            current_page = Paginator(object_list=Room.objects.all()
+            current_page = Paginator(object_list=Room.objects.filter(category__category_title__in=category_name)
                                      .order_by(toggles[toggle]), per_page=per_page)
         else:
             current_page = Paginator(object_list=Room.objects.filter(q)

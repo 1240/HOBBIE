@@ -4,6 +4,7 @@
 {% block users %}
     {% dajaxice_js_import %}
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/user.css" %}">
     <div class="row">
         <div class="row collapse">
             <div class="small-10 columns">
@@ -29,7 +30,7 @@
             <div class="row">
                 <div class="small-3 columns">
                     <a href="../{{ user.username }}" style="margin-top: 20px">
-                        <div class="circular-user"
+                        <div class="circular-friend"
                              style="background-image: url({{ user.avatar.url }})">
                         </div>
                     </a>

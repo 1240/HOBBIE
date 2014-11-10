@@ -11,6 +11,7 @@ from django.shortcuts import redirect, render_to_response
 from django.template.loader import render_to_string
 
 from accounts.models import User
+from room.models import Room
 
 
 __author__ = '1240'
@@ -38,6 +39,7 @@ def login(request):
 
 @dajaxice_register
 def rooms_list(request):
+    user = auth.get_user(request)
     json_string = request.POST.get('argv')
     argv = json.loads(json_string)
 
@@ -51,10 +53,10 @@ def rooms_list(request):
         'by_people': '-room_people_count',
     }
     if region_index:
-        current_page = Paginator(object_list=auth.get_user(request).room.all()
+        current_page = Paginator(object_list=Room.objects.filter(user=user, userroom__message_text__isnull=True)
                                  .order_by(toggles[toggle]), per_page=per_page)
     else:
-        current_page = Paginator(object_list=auth.get_user(request).room.all()
+        current_page = Paginator(object_list=Room.objects.filter(user=user, userroom__message_text__isnull=True)
                                  .order_by(toggles[toggle]), per_page=per_page)
     views = {
         'gallery_view': 'rooms_ul.html',
@@ -81,11 +83,11 @@ def users_search(request):
     page_number = argv.get('p')
     per_page = 10
     q = None
-    if (search_string != None):
+    if search_string is not None:
         for word in search_string.split():
             q_aux = Q(username__icontains=word) | Q(first_name__icontains=word) | Q(last_name__icontains=word)
             q = ( q_aux & q ) if bool(q) else q_aux
-    if (q == None):
+    if q == None:
         current_page = Paginator(object_list=User.objects.all(), per_page=per_page)
     else:
         current_page = Paginator(object_list=User.objects.filter(q), per_page=per_page)

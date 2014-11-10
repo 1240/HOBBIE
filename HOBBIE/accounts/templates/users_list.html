@@ -1,8 +1,9 @@
+{% load static %}
 {% for user in users %}
     <div class="row">
         <div class="small-3 columns">
             <a href="../{{ user.username }}" style="margin-top: 20px">
-                <div class="circular-user"
+                <div class="circular-friend"
                      style="background-image: url({{ user.avatar.url }})">
                 </div>
             </a>

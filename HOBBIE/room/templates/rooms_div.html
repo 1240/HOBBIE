@@ -2,7 +2,7 @@
 <br/>
 {% for room in rooms %}
     <div class="row">
-        <div class="small-3 columns">
+        <div class="small-4 columns">
             <a href="/rooms/get/{{ room.id }}">
                 <div class="room-circle"
                      style="border-color: {% cycle '#E7E7E7 #E7E7E7 #E7E7E7 #44c7db' '#E7E7E7 #E7E7E7 #44c7db #E7E7E7' '#E7E7E7 #44c7db #E7E7E7 #E7E7E7' '#44c7db #E7E7E7 #E7E7E7 #E7E7E7' %}">
@@ -12,7 +12,7 @@
                 </div>
             </a>
         </div>
-        <div class="small-9 columns">
+        <div class="small-8 columns">
             <h3><a href="/rooms/get/{{ room.id }}">{{ room.room_title }}</a></h3>
 
             <p>В комнате: {{ room.room_people_count }} человек</p>
@@ -22,8 +22,9 @@
     </div>
     <br>
 {% endfor %}
-<div class="row">
-    <div class="large-3 large-offset-5 columns">
+<br/>
+<div class="row clearfix">
+    <div class="small-3 small-centered columns">
         <ul class="pagination">
             {% if rooms.has_previous %}
                 <li class="arrow"><a href="#"
@@ -39,10 +40,10 @@
                 {% if page == rooms.number %}
                     <li class="current"><a href="#" style="color: #ffffff !important;"
                                            onclick="Dajaxice.room.rooms_list(Dajax.process,
-                            {'toggle':getSort(),
-                            'region': document.getElementById('region_select').selectedIndex,
-                            'p': {{ page }},
-                            'view': getView()})">{{ page }}</a></li>
+                                                   {'toggle':getSort(),
+                                                   'region': document.getElementById('region_select').selectedIndex,
+                                                   'p': {{ page }},
+                                                   'view': getView()})">{{ page }}</a></li>
                 {% else %}
                     <li><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
                             {'toggle':getSort(),
