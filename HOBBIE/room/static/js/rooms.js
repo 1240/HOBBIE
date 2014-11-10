@@ -20,7 +20,8 @@ function roomsSort() {
             'region': document.getElementById('region_select').selectedIndex,
             'p': 1,
             'view': getView(),
-            'search_string': $('#search_string').val()});
+            'search_string': $('#search_string').val(),
+            'category_name': document.URL.split('/')[document.URL.split('/').length-2]});
 }
 
 function getSort() {
@@ -40,7 +41,8 @@ function ajaxView(view) {
             'region': document.getElementById('region_select').selectedIndex,
             'p': 1,
             'view': view,
-            'search_string': $('#search_string').val()});
+            'search_string': $('#search_string').val(),
+            'category_name': document.URL.split('/')[document.URL.split('/').length-2]});
     $("label[for='" + view + "']").css('color', 'white');
     views.splice($.inArray(view, views), 1);
     $.each(views, function (i, val) {
@@ -55,7 +57,8 @@ function ajaxSort(sort) {
             'region': document.getElementById('region_select').selectedIndex,
             'p': 1,
             'view': getView(),
-            'search_string': $('#search_string').val()});
+            'search_string': $('#search_string').val(),
+            'category_name': document.URL.split('/')[document.URL.split('/').length-2]});
     $("label[for='" + sort + "']").css('color', 'white');
     sorts.splice($.inArray(sort, sorts), 1);
     $.each(sorts, function (i, val) {

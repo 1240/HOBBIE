@@ -2,13 +2,16 @@
 {% load dajaxice_templatetags %}
 {% load staticfiles %}
 {% block rooms %}
+    <div class="text-center">
+        <h1></h1>
+    </div>
     {% dajaxice_js_import %}
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
     <script type="text/javascript" src="{% static "js/rooms.js" %}"></script>
     <!-- NAVI -->
     <div class="row text-center b-map">
         {% for category in categories %}
-            <div class="large-3 columns"><a href="{{ category.category_title }}/"><img
+            <div class="large-3 columns"><a href="../{{ category.category_title }}/"><img
                     src="{% static category.category_image.url %}" width="100%"></a>
             </div>
         {% endfor %}
@@ -81,7 +84,9 @@
                                                          'region': document.getElementById('region_select').selectedIndex,
                                                          'p': {{ rooms.previous_page_number }},
                                                          'view': getView(),
-                                                         'search_string': $('#search_string').val()})">&laquo;</a></li>
+                                                         'search_string': $('#search_string').val(),
+                                                         'category_name': document.URL.split('/')[document.URL.split('/').length-2]})">&laquo;</a>
+                            </li>
                         {% else %}
                             <li class="arrow unavailable"><a href="">&laquo;</a></li>
                         {% endif %}
@@ -93,7 +98,8 @@
                                                                'region': document.getElementById('region_select').selectedIndex,
                                                                'p': {{ page }},
                                                                'view': getView(),
-                                                               'search_string': $('#search_string').val()})">{{ page }}</a>
+                                                               'search_string': $('#search_string').val(),
+                                                               'category_name': document.URL.split('/')[document.URL.split('/').length-2]})">{{ page }}</a>
                                 </li>
                             {% else %}
                                 <li><a href="#" onclick="Dajaxice.room.rooms_list(Dajax.process,
@@ -101,7 +107,9 @@
                                         'region': document.getElementById('region_select').selectedIndex,
                                         'p': {{ page }},
                                         'view': getView(),
-                                        'search_string': $('#search_string').val()})">{{ page }}</a></li>
+                                        'search_string': $('#search_string').val(),
+                                        'category_name': document.URL.split('/')[document.URL.split('/').length-2]})">{{ page }}</a>
+                                </li>
                             {% endif %}
                         {% endfor %}
                         {% if rooms.has_next %}
@@ -111,7 +119,9 @@
                                                          'region': document.getElementById('region_select').selectedIndex,
                                                          'p': {{ rooms.next_page_number }},
                                                          'view': getView(),
-                                                         'search_string': $('#search_string').val()})">&raquo;</a></li>
+                                                         'search_string': $('#search_string').val(),
+                                                         'category_name': document.URL.split('/')[document.URL.split('/').length-2]})">&raquo;</a>
+                            </li>
                         {% else %}
                             <li class="arrow unavailable"><a href="">&raquo;</a></li>
                         {% endif %}
@@ -154,7 +164,8 @@
                            'region': document.getElementById('region_select').selectedIndex,
                            'p': 1,
                            'view': getView(),
-                           'search_string': $('#search_string').val()})"/>
+                           'search_string': $('#search_string').val(),
+            'category_name': document.URL.split('/')[document.URL.split('/').length-2]})"/>
                     </div>
                     <div class="small-2 columns">
                         <a href="#"
@@ -163,7 +174,8 @@
                            'region': document.getElementById('region_select').selectedIndex,
                            'p': 1,
                            'view': getView(),
-                           'search_string': $('#search_string').val()})" class="button postfix"><i
+                           'search_string': $('#search_string').val(),
+            'category_name': document.URL.split('/')[document.URL.split('/').length-2]})" class="button postfix"><i
                                 class="fa fa-search"></i>
                         </a>
                     </div>
