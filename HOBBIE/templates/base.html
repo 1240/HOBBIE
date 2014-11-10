@@ -107,8 +107,9 @@
                             <img src="{{ user.username_image.url }}">
                         </a>
                     {% endif %}
-
-                    <h6>{{ user.email }}</h6>
+                    <a href="//127.0.0.1:8000/account/{{ user.username }}">
+                        <h6>{{ user.email }}</h6>
+                    </a>
                     <h6>Кировская обл.</h6>
 
                     <div class="row">
