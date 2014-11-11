@@ -6,6 +6,8 @@
     {% dajaxice_js_import %}
 
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/datepicker/foundation-datepicker.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/datepicker/foundation-datepicker.less" %}">
     <script type="text/javascript">
         function refresh() {
             Dajaxice.room.get_messages(Dajax.process, {'room_id': {{ room.id }}});
@@ -89,20 +91,24 @@
         <div class="small-4 columns">
 
             <div>
-               <a href="/rooms/all/" class="button expand"><i class="fa fa-level-up"></i> Вернуться к списку комнат</a>
+                <a href="/rooms/all/" class="button expand"><i class="fa fa-level-up"></i> Вернуться к списку комнат</a>
             </div>
             <ul class="button-group">
                 {% if user in users_in_room %}
 
-                    <li><a href="/rooms/leave/{{ room.id }}/" class="button"><i class="fa fa-sign-out"></i> Покинуть</a></li>
-                    <li><a href="/rooms/invite/{{ room.id }}/" class="button"><i class="fa fa-plus"></i> Пригласить</a></li>
+                    <li><a href="/rooms/leave/{{ room.id }}/" class="button"><i class="fa fa-sign-out"></i> Покинуть</a>
+                    </li>
+                    <li><a href="/rooms/invite/{{ room.id }}/" class="button"><i class="fa fa-plus"></i> Пригласить</a>
+                    </li>
 
                     {% if is_creator.is_creator %}
-                        <li><a href="/rooms/editroom/{{ room.id }}/" class="button"><i class="fa fa-edit"></i> Редактировать</a>
+                        <li><a href="/rooms/editroom/{{ room.id }}/" class="button"><i class="fa fa-edit"></i>
+                            Редактировать</a>
                         </li>
                     {% endif %}
                 {% else %}
-                    <li><a href="/rooms/join/{{ room.id }}/" class="button"><i class="fa fa-sign-in"></i> Вступить</a></li>
+                    <li><a href="/rooms/join/{{ room.id }}/" class="button"><i class="fa fa-sign-in"></i> Вступить</a>
+                    </li>
                 {% endif %}
             </ul>
             <div class="panel callout radius">
