@@ -5,32 +5,36 @@
     <script type="text/javascript" src="{% static "js/map.js" %}"></script>
     <link href="{% static "css/map.css" %}" rel="stylesheet" type="text/css">
     <div class="row text-center b-map">
-        <p>Не с кем пойти в кино? Друзья не хотят идти с тобой в поход? Или ты просто хочешь найти единомышленников и провести время с компанией веселых людей. Тогда этот сайт для тебя. Ты можешь создать комнату и предложить другим людям совместное занятие или же найти комнату исходя из своих интересов. </p>
+        <p>Не с кем пойти в кино? Друзья не хотят идти с тобой в поход? Или ты просто хочешь найти единомышленников и
+            провести время с компанией веселых людей. Тогда этот сайт для тебя. Ты можешь создать комнату и предложить
+            другим людям совместное занятие или же найти комнату исходя из своих интересов. </p>
         <hr>
-        <p>Перейди к <a href="rooms/all/"><strong>Всероссийскому списку комнат</strong></a> или выбери нужный тебе регион. </p>
+        <p>Перейди к <a href="rooms/all/"><strong>Всероссийскому списку комнат</strong></a> или выбери нужный тебе
+            регион. </p>
     </div>
     <hr>
     <div class="container-div">
         <div class="cols b-select-city">
-            <div class="col-8">
+            <div class="columns large-8">
                 <div class="b-map">
 
                     <div class="map-svg map-svg_west">
                         <object data="{% static 'img/map1.svg' %}" type="image/svg+xml"></object>
-                        <a href="/main/main_east" class="to-east" title="Перейти на восточную часть России">Восточная часть →</a>
+                        <a href="/main/main_east" class="to-east" title="Перейти на восточную часть России">Восточная
+                            часть →</a>
                     </div>
                 </div>
             </div>
-            <div class="col-4 b-cities">
+            <div class="columns large-4 b-cities">
                 <div class="clear"></div>
-                    <h3>
-                        <a href="/rooms{{ current_region.region_url }}" id="{{ current_region.region_id }}" data-iscity=""
-                           title="{{ current_region.region_title }}" class="map-region"
-                           onmouseover="addHover('{{ current_region.region_id }}')"
-                           onmouseout="deleteHover('{{ current_region.region_id }}')" data-state="">
-                            {{ current_region.region_name }}
-                        </a>
-                    </h3>
+
+                <a href="/rooms{{ current_region.region_url }}" id="{{ current_region.region_id }}" data-iscity=""
+                   title="{{ current_region.region_title }}" class="map-region"
+                   onmouseover="addHover('{{ current_region.region_id }}')"
+                   onmouseout="deleteHover('{{ current_region.region_id }}')" data-state="">
+                    <h3>{{ current_region.region_name }}</h3>
+                </a>
+
                 <div class="col-2">
                     {% for region in regions %}
                         <a href="/rooms{{ region.region_url }}" id="{{ region.region_id }}" data-iscity=""
@@ -40,8 +44,8 @@
                             {{ region.region_name }}
                         </a>
                         {% if  region.region_id == 'region_636370' %}
-                        </div>
-                        <div class="col-2">
+                            </div>
+                            <div class="col-2">
                         {% endif %}
                     {% endfor %}
                     </div>
