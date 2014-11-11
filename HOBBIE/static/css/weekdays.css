@@ -258,8 +258,8 @@ label :checked {
 }
 
 .tab-bar {
-    height: 5.8125rem;
-    background: white;
+    height: 7.8125rem;
+    background: #f8f8f8;
 }
 
 .switch-toggle {
