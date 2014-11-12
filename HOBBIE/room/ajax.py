@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 
 from accounts.models import UserRoom
 from room.models import Room,Category,RoomImage
+from django.utils import timezone
 
 
 _author__ = '1240'
@@ -106,9 +107,11 @@ def send_message(request):
 
     room_id = argv.get('room_id')
     message_text = argv.get('message_text')
+    #if len(message_text)>3:
     message_author = auth.get_user(request)
     room = Room.objects.get(id=room_id)
     message = UserRoom(message_text=message_text, room=room, user=message_author)
+
     message.save()
 
     return get_messages(request)
@@ -125,7 +128,7 @@ def get_messages(request):
     args = {}
     args['messages'] = messages
     for i in args['messages']:
-        if i.message_datetime.date() == datetime.datetime.today().date():
+        if i.message_datetime.date() == timezone.datetime.today().date():
             i.message_datetime = i.message_datetime.time()
         else:
             i.message_datetime = i.message_datetime.date()

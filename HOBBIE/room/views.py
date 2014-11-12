@@ -11,7 +11,8 @@ from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room
 from room.models import Category, RoomImage, CategoryRooms
-import re
+from django.utils import timezone
+
 
 
 def rooms(request, region_name='all', category_name='all'):
@@ -64,7 +65,8 @@ def room(request, room_id=1):
     args['room'] = room
     args['messages'] = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False).order_by('message_datetime')
     for i in args['messages']:
-        if i.message_datetime.date() == datetime.datetime.today().date():
+
+        if i.message_datetime.date() == timezone.datetime.today().date():
             i.message_datetime = i.message_datetime.time()
         else:
             i.message_datetime = i.message_datetime.date()
@@ -97,13 +99,6 @@ def room(request, room_id=1):
     else:
         args['openclose'] = 'закрытая'
     return render_to_response('room.html', args)
-
-def is_datetime(a): # определяет, является ли строка от datepicker корректной датой и временем
-    match=re.search(r'\d+.\d+.\d+\s+\d+.\d+', a)
-    if match:
-        return True
-    else:
-        return False
 
 
 def makeroom(request):

@@ -1,14 +1,18 @@
 {% load static %}
-<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
 
-{% for image in images %}
-<li>
-    <input id='r{{ image.id }}' type="radio" name="action_image" value="{{ image.roomimage_image.url }}"
-                            {% if image_first_id == image.id %}
-                            checked
-                            {% endif %}>
-    <img src="{% static image.roomimage_image.url %}" onclick="document.getElementById('r{{ image.id }}').checked='checked';"class="roomimage">
-</li>
-{% endfor %}
+                    <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
 
-</ul>
+                        {% for image in images %}
+                            <li>
+                                <input id='r{{ image.id }}' type="radio" name="action_image"
+                                       value="{{ image.roomimage_image.url }}"
+                                        {% if image_first_id == image.id %}
+                                       checked
+                                        {% endif %}>
+                                <img src="{% static image.roomimage_image.url %}"
+                                     onclick="document.getElementById('r{{ image.id }}').checked='checked';"
+                                     class="th">
+                            </li>
+                        {% endfor %}
+
+                    </ul>
