@@ -72,12 +72,12 @@
                                 </div>
                                 <div class="small-2 columns">
                                     <a href="#"
-                                       onclick="Dajaxice.room.send_message(Dajax.process,
+                                       onclick="if ($('#message_text').val().length>3) {Dajaxice.room.send_message(Dajax.process,
                                                {'room_id': {{ room.id }},
                                                'message_text':$('#message_text').val()
                                                });
                                                document.getElementById('message_text').value = '';
-                                               setTimeout(scrolling,200)"
+                                               setTimeout(scrolling,200)}"
                                        class="button postfix">
                                         <i class="fa fa-send"></i>
                                     </a>

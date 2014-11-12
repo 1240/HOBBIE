@@ -31,10 +31,9 @@
                 {{ form.hash_tags }}
 
             </div>
-
-            <div class="small-5">
-                <label style="white-space: nowrap" for="id_room_to_date"><strong>Дата мероприятия (указывать не
-                    обязательно):</strong></label>
+            <div>
+            <div class="small-4 columns">
+                <label style="white-space: nowrap" for="id_room_to_date"><strong>Дата мероприятия:</strong></label>
 
                 <div class="row date collapse" data-date-format="dd-mm-yyyy hh:ii">
                     <div class="small-9 columns">
@@ -45,20 +44,8 @@
                     </div>
                 </div>
             </div>
-
-            <div>
-                <div><strong>Доступ в комнату</strong></div>
-                <div class="switch">
-                    <input id="openCheckboxSwitch" type="checkbox" name="openclose">
-
-                    открытая
-                    <label for="openCheckboxSwitch"></label>
-                    закрытая (вход только по приглашениям)
-
-                </div>
-            </div>
-            <br>
-            <label><strong>Выберите регион для публикации комнаты</strong>
+            <div class="small-4 columns">
+                <label><strong>Выберите регион для публикации</strong>
                 <select name="region_select">
                     <option value="0">Все</option>
                     {% for region in regions_list %}
@@ -66,7 +53,21 @@
                     {% endfor %}
                 </select>
             </label>
+            </div>
+            <div >
+                <div><strong>Доступ в комнату</strong></div>
+                <div class="switch">
+                    <input id="openCheckboxSwitch" type="checkbox" name="openclose">
 
+                    открытая
+                    <label for="openCheckboxSwitch"></label>
+                    по приглашениям
+
+                </div>
+            </div>
+            </div>
+
+            <br>
             <div><strong>Выберите соответствующее изображение для комнаты</strong></div>
 
             <div class="panel callout radius">

@@ -8,6 +8,7 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 from room.models import Room
+from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
@@ -100,4 +101,4 @@ class UserRoom(models.Model):
     is_creator = models.BooleanField(default=False)
     can_edit = models.BooleanField(default=False)
     message_text = models.TextField(verbose_name="Текст сообщения", null=True, blank=True)
-    message_datetime = models.DateTimeField(default=datetime.datetime.now)
+    message_datetime = models.DateTimeField(default=timezone.now())
