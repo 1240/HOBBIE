@@ -9,10 +9,36 @@
 
    <div class="container-div">
    <h2>Создание новой комнаты</h2>
-
+   <br>
    <form action="/rooms/addroom/" method="post">
             {% csrf_token %}
-            {{ form }}
+
+           <div>
+              <label for="id_room_title"><strong>Введите название вашей новой комнаты:</strong></label>
+              {{ form.room_title }}
+           </div>
+           <div>
+              <label for="id_room_text"><strong>Введите описание комнаты:</strong></label>
+              {{ form.room_text }}
+           </div>
+           <div>
+
+              <label for="id_hash_tags"><strong>Ключевые слова - для того, чтобы людям было проще найти вашу комнату (укажите через пробел):</strong></label>
+              {{ form.hash_tags }}
+
+           </div>
+           <div class="row">
+           <div class="small-6 columns">
+              <label for="id_room_to_date"><strong>Дата мероприятия (указывать не обязательно):</strong></label>
+              {{ form.room_to_date }}
+
+                       <!--TODO: Иконка календаря-->
+
+               </div>
+
+           </div>
+
+
          <div>
             <div><strong>Доступ в комнату</strong></div>
                 <div class="switch" >
