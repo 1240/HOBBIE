@@ -36,8 +36,11 @@ def edit(request):
 
 
 def user_page(request, username):
+    user = User.objects.get(username=username)
+    current_page = Paginator(Room.objects.filter(user=user, userroom__message_text__isnull=True), per_page=10)
     args = {}
-    args['account'] = User.objects.get(username=username)
+    args['rooms'] = current_page.page(1)
+    args['account'] = user
     return render(request, 'user_page.html', args)
 
 

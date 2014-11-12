@@ -455,12 +455,13 @@ embed, iframe {
 
 .col {
     float: left;
-    width: 150px;
+    width: 400px;
     margin-right: 10px;
 }
 
-.colomn {
-    float: left;
-    width: 150px;
-    margin-right: 10px;
-}
+
+.center {
+    width: 740px; /* Ширина элемента в пикселах */
+    padding: 10px; /* Поля вокруг текста */
+    margin: auto; /* Выравниваем по центру */
+   }
