@@ -10,7 +10,7 @@
         <br>
       <div class="col" style="width:260px">
           {% if account.avatar %}
-                {% thumbnail account.avatar "250x250" as im %}
+                {% thumbnail account.avatar "260x260" as im %}
                     <img src="{{ im.url }}">
                 {% endthumbnail %}
             {% else %}
@@ -18,7 +18,7 @@
             {% endif %}
          <br>
          {% if account.username == user.username %}
-                <div class="label round secondary" style="left: 10px;width: 230px" ><a href="/account/edit/">Редактировать страницу</a></div>
+                <a href="/account/edit/" class="button expand">Редактировать страницу</a>
              {% else %}
              <br>
               <input type="button" class="button" style="width: 230px; left: 10px" value="Пригласить">

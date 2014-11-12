@@ -41,11 +41,6 @@ class User(AbstractBaseUser):
     username = models.CharField(verbose_name='username', max_length=255, unique=True)
     avatar = models.ImageField(verbose_name='Аватар', upload_to='images/%Y/%m/%d', blank=True, null=True,
                                default='images/avatar.jpg')
-    avatar_chat = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, null=True,
-                               default='images/avatar.jpg')
-    main_avatar = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, null=True,
-                               default='images/avatar.jpg')
-    name_image = models.ImageField(upload_to='images/name_image/%Y/%m/%d', blank=True, null=True)
     username_image = models.ImageField(upload_to='images/username_image/%Y/%m/%d', blank=True, null=True)
     first_name = models.CharField(verbose_name='Имя', max_length=255, blank=True)
     last_name = models.CharField(verbose_name='Фамилия', max_length=255, blank=True)

@@ -6,13 +6,15 @@
     {% dajaxice_js_import %}
 
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/datepicker/foundation-datepicker.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/datepicker/foundation-datepicker.less" %}">
     <script type="text/javascript">
         function refresh() {
             Dajaxice.room.get_messages(Dajax.process, {'room_id': {{ room.id }}});
         }
         function scrolling() {
 
-            document.getElementById('messages_list').scrollTop=9999;
+            document.getElementById('messages_list').scrollTop = 9999;
         }
         setInterval(refresh, 2000);
 
@@ -44,11 +46,11 @@
                                 <strong>
                                     <a href="/account/{{ message.user.username }}/">
                                         {% thumbnail message.user.avatar "45x45" as im %}
-                                        <img src="{{ im.url }}" alt="{{ message.user.username }}"/>
+                                            <img src="{{ im.url }}" alt="{{ message.user.username }}"/>
                                         {% endthumbnail %}
                                         {{ message.user.username }}
 
-                                </a>:
+                                    </a>:
                                 </strong> {{ message.message_text }}
                             </div>
                             <div class="small-5 medium-4 large-3 columns">
@@ -65,8 +67,8 @@
                         <div class="large-12 columns">
                             <div class="row collapse">
                                 <div class="small-10 columns">
-                                        <input type="text" id="message_text" placeholder="Текст сообщения"
-                                               maxlength="200"/>
+                                    <input type="text" id="message_text" placeholder="Текст сообщения"
+                                           maxlength="200"/>
                                 </div>
                                 <div class="small-2 columns">
                                     <a href="#"
@@ -76,7 +78,7 @@
                                                });
                                                document.getElementById('message_text').value = '';
                                                setTimeout(scrolling,200)"
-                                            class="button postfix">
+                                       class="button postfix">
                                         <i class="fa fa-send"></i>
                                     </a>
                                 </div>
@@ -88,20 +90,27 @@
         </div>
         <div class="small-4 columns">
 
-            <div><a href="/rooms/all/" class="button [tiny small large]">Вернуться к списку комнат</a></div>
+            <div>
+                <a href="/rooms/all/" class="button expand"><i class="fa fa-level-up"></i> Вернуться к списку комнат</a>
+            </div>
+            <ul class="button-group">
+                {% if user in users_in_room %}
 
-            {% if user in users_in_room %}
-                <div><a href="/rooms/leave/{{ room.id }}/" class="button [tiny small large]">Покинуть</a>
-                    <a href="/rooms/invite/{{ room.id }}/" class="button [tiny small large]">Пригласить</a>
+                    <li><a href="/rooms/leave/{{ room.id }}/" class="button"><i class="fa fa-sign-out"></i> Покинуть</a>
+                    </li>
+                    <li><a href="/rooms/invite/{{ room.id }}/" class="button"><i class="fa fa-plus"></i> Пригласить</a>
+                    </li>
 
-                </div>
-                {% if is_creator.is_creator %}
-                    <div><a href="/rooms/editroom/{{ room.id }}/" class="button [tiny small large]">Редактировать</a>
-                    </div>
+                    {% if is_creator.is_creator %}
+                        <li><a href="/rooms/editroom/{{ room.id }}/" class="button"><i class="fa fa-edit"></i>
+                            Редактировать</a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li><a href="/rooms/join/{{ room.id }}/" class="button"><i class="fa fa-sign-in"></i> Вступить</a>
+                    </li>
                 {% endif %}
-            {% else %}
-                <div><a href="/rooms/join/{{ room.id }}/" class="button [tiny small large]">Вступить</a></div>
-            {% endif %}
+            </ul>
             <div class="panel callout radius">
                 <p><strong>Ключевые слова:</strong> {{ room.hash_tags }}</p>
             </div>
@@ -120,6 +129,7 @@
                 {{ room.room_create_date }}</p>
 
             <p>{{ room_region }}</p>
+
             <p>Категория: <strong>{{ categ }} </strong></p>
 
             <p>Комната <strong>{{ openclose }}</strong></p>
