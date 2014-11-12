@@ -1,41 +1,55 @@
 {% extends 'base.html' %}
 {% block rooms %}
-{% load dajaxice_templatetags %}
-{% load staticfiles %}
+    {% load dajaxice_templatetags %}
+    {% load staticfiles %}
 
     {% dajaxice_js_import %}
 
-   <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+    <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
 
-   <div class="container-div">
-   <h2>Создание новой комнаты</h2>
+    <div class="container-div">
+        <h2>Создание новой комнаты</h2>
 
-   <form action="/rooms/addroom/" method="post">
+        <form action="/rooms/addroom/" method="post">
             {% csrf_token %}
-            {{ form }}
-         <div>
-            <div><strong>Доступ в комнату</strong></div>
-                <div class="switch" >
-                    <input id="openCheckboxSwitch" type="checkbox" name="openclose">
+            {{ form.room_title }}
+            {{ form.room_text }}
 
-                        открытая
-                        <label for="openCheckboxSwitch"></label>
-                         закрытая (вход только по приглашениям)
-
+            <div class="row date collapse" id="dp3" data-date="12-02-2012 10:22"
+                 data-date-format="dd-mm-yyyy hh:ii">
+                <div class="small-9 columns">
+                    {{ form.room_to_date }}
                 </div>
-         </div>
-        <br>
-       <label><strong>Выберите регион для публикации комнаты</strong>
-                    <select name="region_select">
-                     <option value="0">Все</option>
-                        {% for region in regions_list %}
+                <div class="small-3 columns">
+                    <span class="postfix">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </div>
+
+            </div>
+            {{ form.hash_tags }}
+            <div>
+                <div><strong>Доступ в комнату</strong></div>
+                <div class="switch">
+                    <input id="openCheckboxSwitch" type="checkbox" name="openclose">
+                    открытая
+                    <label for="openCheckboxSwitch"></label>
+                    закрытая (вход только по приглашениям)
+                </div>
+            </div>
+            <br>
+            <label><strong>Выберите регион для публикации комнаты</strong>
+                <select name="region_select">
+                    <option value="0">Все</option>
+                    {% for region in regions_list %}
                         <option value="{{ region.id }}">{{ region.region_name }}</option>
-                        {% endfor %}
-                    </select>
-       </label>
+                    {% endfor %}
+                </select>
+            </label>
+
             <div><strong>Выберите соответствующее изображение для комнаты</strong></div>
 
-        <div class="panel callout radius">
+            <div class="panel callout radius">
 
                 <div class="switch-toggle switch-4 panel">
                     <input id="cat_common" name="view" type="radio" checked="" value="common">
@@ -56,34 +70,34 @@
 
                     <a class="button"></a>
                 </div>
-        <div id="imagechoicelist">
-            <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
+                <div id="imagechoicelist">
+                    <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
 
-                {% for image in images %}
-                <li>
-                    <input id='r{{ image.id }}' type="radio" name="action_image" value="{{ image.roomimage_image.url }}"
-                            {% if image_first_id == image.id %}
-                            checked
-                            {% endif %}>
-                    <img src="{% static image.roomimage_image.url %}" onclick="document.getElementById('r{{ image.id }}').checked='checked';"class="roomimage">
-                </li>
-                {% endfor %}
+                        {% for image in images %}
+                            <li>
+                                <input id='r{{ image.id }}' type="radio" name="action_image"
+                                       value="{{ image.roomimage_image.url }}"
+                                        {% if image_first_id == image.id %}
+                                       checked
+                                        {% endif %}>
+                                <img src="{% static image.roomimage_image.url %}"
+                                     onclick="document.getElementById('r{{ image.id }}').checked='checked';"
+                                     class="roomimage">
+                            </li>
+                        {% endfor %}
 
-            </ul>
-        </div>
-        </div>
+                    </ul>
+                </div>
+            </div>
 
 
             <button type="submit" class="btn btn-default">Создать комнату</button>
-   </form>
-   <script>
+        </form>
+        <script>
             $(function () {
-                window.prettyPrint && prettyPrint();
-                $('#id_room_to_date').fdatetimepicker({
-                    format: 'dd.mm.yyyy hh:ii'
-                });
+                $('#dp3').fdatetimepicker({closeButton:true});
             });
-   </script>
+        </script>
 
-   </div>
+    </div>
 {% endblock %}
