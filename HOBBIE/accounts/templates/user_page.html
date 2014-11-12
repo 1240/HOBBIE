@@ -1,15 +1,27 @@
 {% extends 'base.html' %}
+{% load dajaxice_templatetags %}
 {% load thumbnail %}
 {% block user_page %}
+{% load staticfiles %}
+    {% dajaxice_js_import %}
+
+
 
     <div class="container-div">
         <form enctype="multipart/form-data" action="" method="post">
-        {% if account.username_image %}
-         <img src="{{ account.username_image.url }}">
-         {% endif %}
+
+
+    <div class="center">
+
+        <div class="center" style="width: 280px">
+            {% if account.username_image %}
+                <img src="{{ account.username_image.url }}">
+            {% endif %}
         <br>
-      <div class="col" style="width:260px">
-          {% if account.avatar %}
+        </div>
+
+        <div class="col" style="width: 270px">
+            {% if account.avatar %}
                 {% thumbnail account.avatar "260x260" as im %}
                     <img src="{{ im.url }}">
                 {% endthumbnail %}
@@ -17,41 +29,67 @@
                 <h5>Аватар не загружен</h5>
             {% endif %}
          <br>
-         {% if account.username == user.username %}
-                <a href="/account/edit/" class="button expand">Редактировать страницу</a>
-             {% else %}
+            {% if account.username == user.username %}
+                <a href="/account/edit/" class="button expand" style="width: 260px">Редактировать страницу</a>
+            {% else %}
              <br>
-              <input type="button" class="button" style="width: 230px; left: 10px" value="Пригласить">
+                <input type="button" class="button" style="width: 230px; left: 10px" value="Пригласить в комнату">
+             <br>
+                <input type="button" class="button" style="width: 230px; left: 10px" value="Добавить в друзья">
             {% endif %}
-      </div>
+        </div>
 
-        <div class="col" style="width:400px">
-                 <h4 style="margin: 0px; padding: 0">{{ account.first_name }} {{ account.last_name }}</h4>
-                <hr style="margin: 0px; width: 400px">
-                 <br>
-            <div class="column" style="width:150px">
-                 <h6>Никнейм: </h6>
-                {% if account.date_of_birth %}
-                    <h6>День рождения: </h6>
-                 {% endif %}
-                 <br>
-                 <h6>Email: </h6>
-            </div>
-                <div class="column" style="width:250px">
-                 <h6>{{ account.username }}</h6>
+        <div class="col">
+            <h4 style="margin: 0px; padding: 0">{{ account.first_name }} {{ account.last_name }}</h4>
+            <hr style="margin: 0px; width: 400px">
+            <br>
+                <div class="col" style="width:150px; margin-left: 25px">
+                    <h6>Никнейм: </h6>
                      {% if account.date_of_birth %}
-                    <h6>{{ account.date_of_birth }}</h6>
-                    {% endif %}
-                 <br>
-                 <h6>{{ account.email }}</h6>
+                        <h6>День рождения: </h6>
+                     {% endif %}
+                    <br>
+                    <h6>Email: </h6>
+                </div>
+                <div class="col" style="width:200px">
+                    <h6>{{ account.username }}</h6>
+                     {% if account.date_of_birth %}
+                        <h6>{{ account.date_of_birth }}</h6>
+                     {% endif %}
+                    <br>
+                    <h6>{{ account.email }}</h6>
                 </div>
         </div>
-         <div class="col" style="width:200px">
-             <h4 style="margin: 0px; padding: 0">Комнаты</h4>
-             <hr style="margin: 0px; width: 400px">
+    </div>
 
-         </div>
+    <div class="center" style="width: 1000px; margin-left: 10px; float: right">
+
+        <h4>Комнаты</h4>
+        <div id="rooms" class="row">
+        <ul class="small-block-grid-3">
+        {% for room in rooms %}
+
+                        <a href="/rooms/get/{{ room.id }}">
+                            <div class="room-rect">
+                                <h6>{{ room.room_title }}</h6>
+                                <!-- <p>{{ room.room_create_date }}</p>-->
+                                <div class="room-circle"
+                                     style="border-color: {% cycle '#E7E7E7 #E7E7E7 #E7E7E7 #44c7db' '#E7E7E7 #E7E7E7 #44c7db #E7E7E7' '#E7E7E7 #44c7db #E7E7E7 #E7E7E7' '#44c7db #E7E7E7 #E7E7E7 #E7E7E7' %}">
+                                    <img src="{% static room.room_image %}" class="roomimage">
+
+                                    <p>В комнате:{{ room.room_people_count }}</p>
+                                </div>
+                            </div>
+                        </a>
+
+        {% endfor %}
+        </ul>
+        </div>
+
+    </div>
+
         </form>
+
     </div>
 
 {% endblock %}
