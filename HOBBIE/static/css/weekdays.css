@@ -4,8 +4,8 @@
 }
 
 .roomimage {
-    width: 100px;
-    height: 100px;
+    <!--width: 100px;
+    height: 100px;-->
 }
 
 :focus::-webkit-input-placeholder {
