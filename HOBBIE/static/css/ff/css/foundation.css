@@ -5514,7 +5514,7 @@ kbd {
     -moz-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
   .switch input:checked + label {
-    background: #46413a; }
+    background: #44c7db; }
   .switch input:checked + label:after {
     left: 2.25rem; }
   .switch label {
@@ -5531,7 +5531,7 @@ kbd {
   .switch label:after {
     background: white; }
   .switch input:checked + label {
-    background: #46413a; }
+    background: #44c7db; }
   .switch.large label {
     width: 5rem;
     height: 2.5rem; }
