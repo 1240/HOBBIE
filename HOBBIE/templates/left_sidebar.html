@@ -1,26 +1,30 @@
 {% load static %}
 {% load thumbnail %}
 <div class='holder'>
-    {% thumbnail user.avatar "160x160" as im %}
-        <div class="circular" style="background: url({{ im.url }}); position: relative">
-            <div class='block' style="color: #ffffff">
-                <a href="/#win2">
-                    <aside class="fa fa-times-circle" title="Удалить фотографию"
-                           style="color:#000000;position: absolute;width:20px; left: 70px;">
-                    </aside>
-                </a>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <a href="/#win1"><i class="fa fa-upload" title="Загрузить новую фотографию"
-                                    style="position: absolute;background: rgba(0, 0, 0, 0.5);width:100px;left:30px;">
-                    Загрузить
-                </i></a>
+    <a href="//127.0.0.1:8000/account/{{ user.username }}">
+        {% thumbnail user.avatar "160x160" as im %}
+            <div class="circular" style="background: url({{ im.url }}); position: relative">
+                <!-- Коля, скопируешь -> удали
+                <div class='block' style="color: #ffffff">
+                    <a href="/#win2">
+                        <aside class="fa fa-times-circle" title="Удалить фотографию"
+                               style="color:#000000;position: absolute;width:20px; left: 70px;">
+                        </aside>
+                    </a>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <a href="/#win1"><i class="fa fa-upload" title="Загрузить новую фотографию"
+                                        style="position: absolute;background: rgba(0, 0, 0, 0.5);width:100px;left:30px;">
+                        Загрузить
+                    </i></a>
+                </div>
+                -->
             </div>
-        </div>
-    {% endthumbnail %}
+        {% endthumbnail %}
+    </a>
 </div>
 
 <br>
