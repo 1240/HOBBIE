@@ -10,7 +10,35 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        {{ form }}
+                    <div>
+                <label for="id_room_title"><strong>Введите название вашей новой комнаты:</strong></label>
+                {{ form.room_title }}
+            </div>
+            <div>
+                <label for="id_room_text"><strong>Введите описание комнаты:</strong></label>
+                {{ form.room_text }}
+            </div>
+            <div>
+
+                <label for="id_hash_tags"><strong>Ключевые слова - для того, чтобы людям было проще найти вашу комнату
+                    (укажите через пробел):</strong></label>
+                {{ form.hash_tags }}
+
+            </div>
+
+            <div class="small-5">
+                <label style="white-space: nowrap" for="id_room_to_date"><strong>Дата мероприятия (указывать не
+                    обязательно):</strong></label>
+
+                <div class="row date collapse" data-date-format="dd-mm-yyyy hh:ii">
+                    <div class="small-9 columns">
+                        {{ form.room_to_date }}
+                    </div>
+                    <div class="small-3 columns">
+                        <span class="postfix" onclick="$('#id_room_to_date').fdatetimepicker('show')"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
         <div>
             <div><strong>Доступ в комнату</strong></div>
             <div class="switch">
