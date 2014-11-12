@@ -116,17 +116,41 @@ def send_message(request):
 
     return get_messages(request)
 
+@dajaxice_register
+def delete_message(request):
+    json_string = request.POST.get('argv')
+    argv = json.loads(json_string)
+
+    message_id = argv.get('message_id')
+    message = UserRoom(id=message_id)
+
+    message.delete()
+
+    return get_messages(request)
 
 @dajaxice_register
 def get_messages(request):
     json_string = request.POST.get('argv')
     argv = json.loads(json_string)
 
+
+    user = auth.get_user(request)
+
+
     room_id = argv.get('room_id')
+    room = Room.objects.get(id=room_id)
     messages = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False).order_by('message_datetime')
+    usinroom = []
+    for userroom in UserRoom.objects.filter(room_id=room_id, message_text__isnull=True):
+        usinroom.append(userroom.user)
 
     args = {}
     args['messages'] = messages
+    args['room_id'] = room_id
+    args['user']=user
+    if user in usinroom:
+        args['is_creator'] = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
+
     for i in args['messages']:
         if i.message_datetime.date() == timezone.datetime.today().date():
             i.message_datetime = i.message_datetime.time()

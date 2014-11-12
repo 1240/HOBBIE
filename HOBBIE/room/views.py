@@ -4,7 +4,7 @@ import datetime
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, render
 
 from accounts.models import UserRoom
 from mainpage.models import Regions
@@ -53,7 +53,7 @@ def rooms(request, region_name='all', category_name='all'):
     args['region_id'] = '/' + region_name
     args['header'] = 'Комнаты ' + region_title
     args['categories'] = Category.objects.all()
-    return render_to_response('rooms.html', args)
+    return render(request, 'rooms.html', args)
 
 
 def room(request, room_id=1):
@@ -90,6 +90,7 @@ def room(request, room_id=1):
             break
     if user in usinroom:
         args['is_creator'] = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
+
     if args['room'].room_region_id == 0:
         args['room_region'] = 'Все регионы'
     else:
@@ -98,7 +99,7 @@ def room(request, room_id=1):
         args['openclose'] = 'открытая'
     else:
         args['openclose'] = 'закрытая'
-    return render_to_response('room.html', args)
+    return render(request, 'room.html', args)
 
 
 def makeroom(request):
@@ -111,7 +112,7 @@ def makeroom(request):
     args['images'] = imgs
     args['image_first_id'] = imgs[0].id
 
-    return render_to_response('makeroom.html', args)
+    return render(request, 'makeroom.html', args)
 
 
 def addroom(request):
@@ -284,4 +285,4 @@ def editroom(request, room_id):
         else:
             args['form'] = RoomForm(request.POST)
         args['form'] = form
-    return render_to_response('editroom.html', args)
+    return render(request, 'editroom.html', args)
