@@ -12,7 +12,7 @@
         function refresh() {
             Dajaxice.room.get_messages(Dajax.process, {'room_id': {{ room.id }}
 
-                                                      });
+            });
         }
         function scrolling() {
             document.getElementById('messages_list').scrollTop = 9999;
@@ -32,10 +32,14 @@
                     <h3><strong>{{ room.room_title }}</strong></h3>
                 </div>
             </div>
-            <div class="panel callout radius">
-                <p>{{ room.room_text }}</p>
-            </div>
-
+            <br/>
+            <br/>
+            <form>
+                <fieldset>
+                    <legend>Описание комнаты</legend>
+                     <p>{{ room.room_text }}</p>
+                </fieldset>
+            </form>
             <div>
                 <h5><strong>Обсуждение</strong></h5>
 
@@ -49,7 +53,6 @@
                                             <img src="{{ im.url }}" alt="{{ message.user.username }}"/>
                                         {% endthumbnail %}
                                         {{ message.user.username }}
-
                                     </a>:
                                 </strong> {{ message.message_text }}
                             </div>
@@ -59,11 +62,12 @@
                             </div>
                             {% if is_creator.is_creator or message.user == user %}
                                 <div class="small-1 column">
-                                    <div class="fa fa-times-circle" onclick="Dajaxice.room.delete_message(Dajax.process,
-                                                   { 'room_id': {{ room.id }},
-                                                    'message_id': {{ message.id }}
-                                                   });"
-                                               style="color:#000000;position: absolute;width:50px; left: 20px; bottom: 5px">
+                                    <div class="fa fa-times-circle"
+                                         onclick="Dajaxice.room.delete_message(Dajax.process,
+                                                 { 'room_id': {{ room.id }},
+                                                 'message_id': {{ message.id }}
+                                                 });"
+                                         style="color:#000000;position: absolute;width:50px; left: 20px; bottom: 5px">
                                     </div>
                                 </div>
                             {% endif %}
@@ -86,7 +90,7 @@
                                        onclick="if ($('#message_text').val().length>3) {
                                                Dajaxice.room.send_message(Dajax.process,
                                                {'room_id': {{ room.id }},
-                                                'message_text':$('#message_text').val()
+                                               'message_text':$('#message_text').val()
 
                                                });
                                                document.getElementById('message_text').value = '';
@@ -125,33 +129,53 @@
                     </li>
                 {% endif %}
             </ul>
-            <div class="panel callout radius">
-                <p><strong>Ключевые слова:</strong> {{ room.hash_tags }}</p>
-            </div>
-            <h4>Информация о комнате</h4>
+            <form>
+                <fieldset>
+                    <legend>Информация о комнате</legend>
+                    <div class="panel callout radius">
+                        <p><strong>Ключевые слова:</strong> {{ room.hash_tags }}</p>
+                    </div>
+                    <h4>Информация о комнате</h4>
 
-            <p><strong>Дата мероприятия:</strong>
-                {% if room.room_to_date %}
-                    {{ room.room_to_date }}
-                {% else %}
-                    не указана
-                {% endif %}
-            </p>
+                    <p><strong>Дата мероприятия:</strong>
+                        {% if room.room_to_date %}
+                            {{ room.room_to_date }}
+                        {% else %}
+                            не указана
+                        {% endif %}
+                    </p>
 
-            <p>Комнату создал
-                <strong> <a href="/account/{{ creator }}/">{{ creator }}</a></strong>
-                {{ room.room_create_date }}</p>
+                    <p>Комнату создал
+                        <strong> <a href="/account/{{ creator }}/">{{ creator }}</a></strong>
+                        {{ room.room_create_date }}</p>
 
-            <p>{{ room_region }}</p>
+                    <p>{{ room_region }}</p>
 
-            <p>Категория: <strong>{{ categ }} </strong></p>
+                    <p>Категория: <strong>{{ categ }} </strong></p>
 
-            <p>Комната <strong>{{ openclose }}</strong></p>
-            <strong>В комнате </strong> {{ room.room_people_count }} человек:
-            {% for user_name in users_in_room %}
-                <a href="/account/{{ user_name.username }}/">{{ user_name.username }}</a>
-            {% endfor %}
+                    <p>Комната <strong>{{ openclose }}</strong></p>
+                </fieldset>
+            </form>
+            <form>
+                <fieldset>
+                    <legend> В комнате {{ room.room_people_count }} человек</legend>
+                    <ul class="small-block-grid-4 medium-block-grid-6 large-block-grid-8">
+                        {% for user in users_in_room %}
+                            <li>
+                                <a href="/account/{{ user.username }}/">
+                                    {% thumbnail user.avatar "45x45" as im %}
+                                        <img src="{{ im.url }}" class="th"/>
+                                    {% endthumbnail %}
+                                    <div>
+                                        <label class="text-center">{{ user.username }}</label>
+                                    </div>
 
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </fieldset>
+            </form>
         </div>
     </div>
 
