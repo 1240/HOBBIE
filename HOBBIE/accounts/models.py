@@ -6,6 +6,7 @@ import os
 from PIL import Image
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django_geoip.models import Region
 
 from room.models import Room
 from django.utils import timezone
@@ -50,7 +51,8 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     friends = models.ManyToManyField("self", blank=True, null=True)
     room = models.ManyToManyField(Room, through='UserRoom', null=True)
-    # TODO сообщения
+    sex = models.BooleanField()
+    region = models.ForeignKey(Region)
 
     objects = UserManager()
 
@@ -101,4 +103,5 @@ class UserRoom(models.Model):
     is_creator = models.BooleanField(default=False)
     can_edit = models.BooleanField(default=False)
     message_text = models.TextField(verbose_name="Текст сообщения", null=True, blank=True)
-    message_datetime = models.DateTimeField(default=timezone.now())
+    message_datetime = models.DateTimeField(default=datetime.datetime.now)
+    invite = models.SmallIntegerField(default=0)

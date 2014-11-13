@@ -6,6 +6,20 @@
         <form enctype="multipart/form-data" action="" method="post">
             {% csrf_token %}
             {{ form }}
+            <div class="small-4 columns">
+                <label><strong>Выберите регион для публикации</strong>
+                <select name="region_select">
+                    <option value="0">Все</option>
+                    {% for region in regions_list %}
+                    {% if region.id == userreg %}
+                        <option selected value="{{ region.id }}">{{ region.region_name }}</option>
+                    {% else %}
+                        <option value="{{ region.id }}">{{ region.region_name }}</option>
+                    {% endif %}
+                {% endfor %}
+                </select>
+            </label>
+            </div>
             <br>
             <button class="button" type="submit">Сохранить</button>
         </form>

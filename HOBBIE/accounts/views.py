@@ -7,20 +7,25 @@ from django.shortcuts import redirect, render_to_response, render
 # Create your views here.
 from accounts.forms import UserChangeForm
 from accounts.models import User, UserRoom
+from mainpage.models import Regions
 from room.models import Room
 from utils.utils import create_image
 
 
 def edit(request):
     args = {}
+    user = auth.get_user(request)
     args.update(csrf(request))
     args['form'] = UserChangeForm(instance=request.user)
-    args['user'] = auth.get_user(request)
+    args['user'] = user
+    args['userreg'] = user.region_id
+    args['regions_list'] = Regions.objects.all()
     if request.method == 'POST':
         form = UserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             user = User.objects.get(id=auth.get_user(request).id)
+            user.region_id = request.POST.get('region_select')
             f = open(create_image(user.username, user.username), 'rb')
             username_image = File(f)
             user.username_image.save(user.username + '.png', username_image)
