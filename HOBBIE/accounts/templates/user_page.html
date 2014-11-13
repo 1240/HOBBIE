@@ -62,7 +62,8 @@
         </div>
     </div>
 
-    <div class="center" style="width: 1000px; margin-left: 10px; float: right">
+ {% if account.username != user.username %}
+    <div class="center" style="width: 1000px;padding: 40px; margin-left: 10px; float: right">
 
         <h4>Комнаты</h4>
         <div id="rooms" class="row">
@@ -82,11 +83,14 @@
                             </div>
                         </a>
 
+
         {% endfor %}
+            <br>
         </ul>
         </div>
 
     </div>
+ {% endif %}
 
         </form>
 

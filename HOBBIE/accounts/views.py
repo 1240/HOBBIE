@@ -37,7 +37,7 @@ def edit(request):
 
 def user_page(request, username):
     user = User.objects.get(username=username)
-    current_page = Paginator(Room.objects.filter(user=user, userroom__message_text__isnull=True), per_page=10)
+    current_page = Paginator(Room.objects.filter(user=user, userroom__message_text__isnull=True).order_by("-room_create_date"), per_page=10)
     args = {}
     args['rooms'] = current_page.page(1)
     args['account'] = user
