@@ -101,4 +101,5 @@ class UserRoom(models.Model):
     is_creator = models.BooleanField(default=False)
     can_edit = models.BooleanField(default=False)
     message_text = models.TextField(verbose_name="Текст сообщения", null=True, blank=True)
-    message_datetime = models.DateTimeField(default=timezone.now())
+    message_datetime = models.DateTimeField(default=datetime.datetime.now)
+    invite = models.SmallIntegerField(default=0)
