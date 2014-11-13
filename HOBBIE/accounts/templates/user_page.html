@@ -7,11 +7,11 @@
 
 
 
-    <div class="container-div">
+
         <form enctype="multipart/form-data" action="" method="post">
 
 
-    <div class="center">
+    <div class="center" style="width: 800px">
 
         <div class="center" style="width: 280px">
             {% if account.username_image %}
@@ -63,10 +63,10 @@
     </div>
 
  {% if account.username != user.username %}
-    <div class="center" style="width: 1000px;padding: 40px; margin-left: 10px; float: right">
+    <div class="center" style="width: 1350px;padding: 10px;  float: left">
 
         <h4>Комнаты</h4>
-        <div id="rooms" class="row">
+
         <ul class="small-block-grid-3">
         {% for room in rooms %}
 
@@ -87,13 +87,13 @@
         {% endfor %}
             <br>
         </ul>
-        </div>
+
 
     </div>
  {% endif %}
 
         </form>
 
-    </div>
+
 
 {% endblock %}
