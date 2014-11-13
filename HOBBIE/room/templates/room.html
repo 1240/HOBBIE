@@ -49,8 +49,8 @@
                             <div class="small-7 medium-8 large-9 columns">
                                 <strong>
                                     <a href="/account/{{ message.user.username }}/">
-                                        {% thumbnail message.user.avatar "45x45" as im %}
-                                            <img src="{{ im.url }}" alt="{{ message.user.username }}"/>
+                                        {% thumbnail message.user.avatar "45x45" as image %}
+                                            <img src="{{ image.url }}" alt="{{ message.user.username }}"/>
                                         {% endthumbnail %}
                                         {{ message.user.username }}
                                     </a>:
@@ -163,8 +163,8 @@
                         {% for user in users_in_room %}
                             <li>
                                 <a href="/account/{{ user.username }}/">
-                                    {% thumbnail user.avatar "45x45" as im %}
-                                        <img src="{{ im.url }}" class="th"/>
+                                    {% thumbnail user.avatar "45x45" as image %}
+                                        <img src="{{ image.url }}" class="th"/>
                                     {% endthumbnail %}
                                     <div>
                                         <label class="text-center">{{ user.username }}</label>
