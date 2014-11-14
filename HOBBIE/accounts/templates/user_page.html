@@ -61,39 +61,25 @@
     </div>
 
 
-    <div class="center" style="width: 100%;padding-bottom: 2%;  float: left">
+    <div class="center" style="width: 100%;padding-bottom: 5%;  float: left">
 
         <h4 style="margin-left: 3%">Друзья</h4>
 
-        <ul class="small-block-grid-3">
+       <ul class="small-block-grid-3">
          {% for friend in friends %}
-        <div class="row">
-            <div class="small-3 columns">
-                <a href="/account/{{ friend.username }}" style="margin-top: 5%">
+          <a href="/account/{{ friend.username }}" style="margin-top: 5%">
+             <div class="room-rect">
+                <h5>{{ friend.username }}</h5>
                     <div class="circular-friend"
                          style="background-image: url({{ friend.avatar.url }})">
                     </div>
-                </a>
-            </div>
-            <div class="small-3 columns">
-                <h5>{{ friend.username }}</h5>
-            </div>
-            <div class="small-3 columns">
-                <ul class="inline-list">
-                    <p><a href="#">Пригласить в комнату</a></p>
-                    <p><a href="/account/rooms">Комнаты</a></p>
-                    <p><a href="/rooms/all">Все комнаты</a></p>
-                    <p><a href="/account/friends">Друзья</a></p>
-                </ul>
-            </div>
-        <hr>
-        </div>
-        <br/>
-    {% endfor %}
-        </ul>
+             </div>
+          </a>
+         {% endfor %}
+       </ul>
     </div>
 
-        <div class="center" style="width: 100%;padding-bottom: 2%;  float: left">
+    <div class="center" style="width: 100%;padding-bottom: 2%;  float: left">
 
         <h4 style="margin-left: 3%">Комнаты</h4>
 
