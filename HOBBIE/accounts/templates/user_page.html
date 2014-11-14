@@ -8,19 +8,17 @@
 
 
 
-        <form enctype="multipart/form-data" action="" method="post">
+    <form enctype="multipart/form-data" action="" method="post">
+    <div class="center" style="width: 60%">
 
-
-    <div class="center" style="width: 800px">
-
-        <div class="center" style="width: 280px">
+        <div class="center" style="width: 29%">
             {% if account.username_image %}
                 <img src="{{ account.username_image.url }}">
             {% endif %}
         <br>
         </div>
 
-        <div class="col" style="width: 270px">
+        <div class="col" style="width: 32%">
             {% if account.avatar %}
                 {% thumbnail account.avatar "260x260" as im %}
                     <img src="{{ im.url }}">
@@ -30,42 +28,74 @@
             {% endif %}
          <br>
             {% if account.username == user.username %}
-                <a href="/account/edit/" class="button expand" style="width: 260px">Редактировать страницу</a>
+                <a href="/account/edit/" class="button expand" style="width: 100%">Редактировать страницу</a>
             {% else %}
              <br>
-                <input type="button" class="button" style="width: 230px; left: 10px" value="Пригласить в комнату">
+                <input type="button" class="button" style="width: 95%; left: 2.5%" value="Пригласить в комнату">
              <br>
-                <input type="button" class="button" style="width: 230px; left: 10px" value="Добавить в друзья">
+                <input type="button" class="button" style="width: 95%; left: 2.5%" value="Добавить в друзья">
             {% endif %}
         </div>
 
         <div class="col">
             <h4 style="margin: 0px; padding: 0">{{ account.first_name }} {{ account.last_name }}</h4>
-            <hr style="margin: 0px; width: 400px">
+            <hr style="margin: 0px; width: 100%">
             <br>
-                <div class="col" style="width:150px; margin-left: 25px">
+                <div class="col" style="width:30%; margin-left: 5%">
                     <h6>Никнейм: </h6>
                      {% if account.date_of_birth %}
                         <h6>День рождения: </h6>
                      {% endif %}
                     <br>
-                    <h6>Email: </h6>
+
                 </div>
-                <div class="col" style="width:200px">
+                <div class="col" style="width:60%">
                     <h6>{{ account.username }}</h6>
                      {% if account.date_of_birth %}
                         <h6>{{ account.date_of_birth }}</h6>
                      {% endif %}
                     <br>
-                    <h6>{{ account.email }}</h6>
+
                 </div>
         </div>
     </div>
 
- {% if account.username != user.username %}
-    <div class="center" style="width: 1350px;padding: 10px;  float: left">
 
-        <h4>Комнаты</h4>
+    <div class="center" style="width: 100%;padding-bottom: 2%;  float: left">
+
+        <h4 style="margin-left: 3%">Друзья</h4>
+
+        <ul class="small-block-grid-3">
+         {% for friend in friends %}
+        <div class="row">
+            <div class="small-3 columns">
+                <a href="/account/{{ friend.username }}" style="margin-top: 5%">
+                    <div class="circular-friend"
+                         style="background-image: url({{ friend.avatar.url }})">
+                    </div>
+                </a>
+            </div>
+            <div class="small-3 columns">
+                <h5>{{ friend.username }}</h5>
+            </div>
+            <div class="small-3 columns">
+                <ul class="inline-list">
+                    <p><a href="#">Пригласить в комнату</a></p>
+                    <p><a href="/account/rooms">Комнаты</a></p>
+                    <p><a href="/rooms/all">Все комнаты</a></p>
+                    <p><a href="/account/friends">Друзья</a></p>
+                </ul>
+            </div>
+        <hr>
+        </div>
+        <br/>
+    {% endfor %}
+        </ul>
+    </div>
+
+        <div class="center" style="width: 100%;padding-bottom: 2%;  float: left">
+
+        <h4 style="margin-left: 3%">Комнаты</h4>
 
         <ul class="small-block-grid-3">
         {% for room in rooms %}
@@ -82,15 +112,11 @@
                                 </div>
                             </div>
                         </a>
-
-
-        {% endfor %}
+       {% endfor %}
             <br>
         </ul>
-
-
     </div>
- {% endif %}
+
 
         </form>
 

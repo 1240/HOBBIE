@@ -45,6 +45,7 @@ def user_page(request, username):
     current_page = Paginator(Room.objects.filter(user=user, userroom__message_text__isnull=True).order_by("-room_create_date"), per_page=10)
     args = {}
     args['rooms'] = current_page.page(1)
+    args['friends'] = user.friends.all()
     args['account'] = user
     return render(request, 'user_page.html', args)
 
