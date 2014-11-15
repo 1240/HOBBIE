@@ -6,7 +6,7 @@ import os
 from PIL import Image
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-from django_geoip.models import Region
+from mainpage.models import Regions
 
 from room.models import Room
 from django.utils import timezone
@@ -52,7 +52,7 @@ class User(AbstractBaseUser):
     friends = models.ManyToManyField("self", blank=True, null=True)
     room = models.ManyToManyField(Room, through='UserRoom', null=True)
     sex = models.BooleanField()
-    region = models.ForeignKey(Region)
+    region = models.ForeignKey(Regions)
 
     objects = UserManager()
 
