@@ -1,28 +1,64 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block edit %}
-
+    <link rel="stylesheet" type="text/css" href="{% static "css/datepicker/foundation-datepicker.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/datepicker/foundation-datepicker.less" %}">
+    <script type="text/javascript" src="{% static "js/ff/foundation/foundation-datepicker.js" %}"></script>
     <div class="large-offset-3 large-6 columns">
         <form enctype="multipart/form-data" action="" method="post">
             {% csrf_token %}
-            {{ form }}
-            <div class="small-4 columns">
-                <label><strong>Выберите регион для публикации</strong>
+            {% if user.avatar %}
+                <img src="{{ user.avatar.url }}">
+            {% else %}
+                <h5>Аватар не загружен</h5>
+            {% endif %}
+            <p>
+                <input id="id_avatar" type="file" class="" name="avatar">
+            </p>
+            <label for="id_username">Имя пользователя</label>
+            {{ form.username }}
+            <label for="id_first_name">Имя</label>
+            {{ form.first_name }}
+            <label for="id_last_name">Фамилия</label>
+            {{ form.last_name }}
+            <label for="id_date_of_birth">Дата рождения</label>
+
+            <div class="row date collapse" data-date-format="dd-mm-yyyy hh:ii">
+                <div class="small-9 columns">
+                    {{ form.date_of_birth }}
+                </div>
+                <div class="small-3 columns">
+                    <span class="postfix" onclick="$('#id_date_of_birth').fdatepicker('show')"><i
+                            class="fa fa-calendar"></i></span>
+                </div>
+            </div>
+
+            <label for="id_email">email</label>
+            {{ form.email }}
+            <label for="id_sex">Пол</label>
+            {{ form.sex }}
+            <br/>
+            <label><strong>Выберите регион для публикации</strong>
                 <select name="region_select">
                     <option value="0">Все</option>
                     {% for region in regions_list %}
-                    {% if region.id == userreg %}
-                        <option selected value="{{ region.id }}">{{ region.region_name }}</option>
-                    {% else %}
-                        <option value="{{ region.id }}">{{ region.region_name }}</option>
-                    {% endif %}
-                {% endfor %}
+                        {% if region.id == userreg %}
+                            <option selected value="{{ region.id }}">{{ region.region_name }}</option>
+                        {% else %}
+                            <option value="{{ region.id }}">{{ region.region_name }}</option>
+                        {% endif %}
+                    {% endfor %}
                 </select>
             </label>
-            </div>
-            <br>
+            <br/>
             <button class="button" type="submit">Сохранить</button>
         </form>
+        <script>
+            $(function () {
+                window.prettyPrint && prettyPrint();
+                $('#id_date_of_birth').fdatepicker();
+            });
+        </script>
     </div>
 
 {% endblock %}

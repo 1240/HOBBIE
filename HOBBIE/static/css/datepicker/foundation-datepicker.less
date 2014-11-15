@@ -12,16 +12,15 @@
  */
 
 @import "build.less";
- 
+
 // real datepicker styles 
-.datetimepicker {
+.datepicker {
 	display:none;
 	position:absolute;
 	padding: 4px;
 	margin-top: 1px;
 	&-inline {
 		width: 220px;
-		display:none;
 	}
 	direction: ltr;
 	&&-rtl {
@@ -119,7 +118,7 @@
 		}
 	}
 
-	th.switch {
+	th.date-switch {
 		width: 145px;
 	}
 
@@ -139,11 +138,10 @@
 		background-color: transparent;
 	}
 }
-
-.datetimepicker-dropdown::before, .datetimepicker-dropdown::after {
+.datepicker-dropdown::before, .datepicker-dropdown::after {
 	display:none;
 }
-.datetimepicker-close {
+.datepicker-close {
 	position:absolute;
 	top:-30px;
 	right:0px;
@@ -151,4 +149,17 @@
 	height:30px;
 	padding:0px;
 	display: none;
+}
+.datepicker td.old, .datepicker td.new {
+	color: #999999;
+}
+.datepicker td.day.disabled {
+	color: #eeeeee;
+}
+.datepicker td.day:hover {
+	background: #d5d5d5;
+	color: #111111;
+}
+.datepicker td.day.old:hover {
+	color: #5c5c5c;
 }

@@ -29,6 +29,7 @@ def edit(request):
             f = open(create_image(user.username, user.username), 'rb')
             username_image = File(f)
             user.username_image.save(user.username + '.png', username_image)
+            user.avatar = form.cleaned_data['avatar']
             user.save()
             args = {}
             args['user'] = auth.get_user(request)

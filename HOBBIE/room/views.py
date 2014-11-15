@@ -229,7 +229,7 @@ def invite(request, room_id):
 def editroom(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
-    user_room = UserRoom.objects.get(room=room, user=user)
+    user_room = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
     if not user_room.can_edit:
         return redirect('/rooms/get/%s' % room_id)
     args = {}
