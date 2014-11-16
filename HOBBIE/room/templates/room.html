@@ -159,17 +159,20 @@
             <form>
                 <fieldset>
                     <legend> В комнате {{ room.room_people_count }} человек</legend>
-                    <ul class="small-block-grid-4 medium-block-grid-6 large-block-grid-8">
+                    <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
                         {% for user in users_in_room %}
                             <li>
                                 <a href="/account/{{ user.username }}/">
-                                    {% thumbnail user.avatar "45x45" as image %}
-                                        <img src="{{ image.url }}" class="th"/>
-                                    {% endthumbnail %}
+                                <div class="text-center" >
+                                    <div>
+                                        {% thumbnail user.avatar "45x45" as image %}
+                                            <img src="{{ image.url }}" class="th" width="20px" height="20px"/>
+                                        {% endthumbnail %}
+                                    </div>
                                     <div>
                                         <label class="text-center">{{ user.username }}</label>
                                     </div>
-
+                                </div>
                                 </a>
                             </li>
                         {% endfor %}

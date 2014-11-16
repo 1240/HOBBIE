@@ -12,7 +12,7 @@ from room.forms import MessageForm, RoomForm
 from room.models import Room
 from room.models import Category, RoomImage, CategoryRooms
 from django.utils import timezone
-
+from django.contrib.auth.decorators import login_required
 
 
 def rooms(request, region_name='all', category_name='all'):
@@ -101,7 +101,7 @@ def room(request, room_id=1):
         args['openclose'] = 'закрытая'
     return render(request, 'room.html', args)
 
-
+@login_required(login_url='/auth/login/')
 def makeroom(request):
     room_form = RoomForm
     args = {}
@@ -110,11 +110,14 @@ def makeroom(request):
     args['regions_list'] = Regions.objects.all()
     imgs = RoomImage.objects.filter(roomimage_category_id=1)
     args['images'] = imgs
+    args['images1'] = imgs1
+    args['images2'] = imgs2
+    args['images3'] = imgs3
     args['image_first_id'] = imgs[0].id
 
     return render(request, 'makeroom.html', args)
 
-
+@login_required(login_url='/auth/login/')
 def addroom(request):
     if request.POST:
         form = RoomForm(request.POST)
@@ -188,7 +191,7 @@ def addroom(request):
         'a24': 'img/24.png',
     }[x]'''
 
-
+@login_required(login_url='/auth/login/')
 def joinroom(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
@@ -207,13 +210,14 @@ def joinroom(request, room_id):
     room.save()
     return redirect('/rooms/get/%s/' % room_id)
 
-
+@login_required(login_url='/auth/login/')
 def leave(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
     # auth.get_user(request).room.remove(Room.objects.get(id=room_id))
     user_room = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
-    user_room.delete()
+    if user_room:
+        user_room.delete()
     usinroom = []
     for userroom in UserRoom.objects.filter(room_id=room_id, message_text__isnull=True):
         usinroom.append(userroom.user)
@@ -221,11 +225,11 @@ def leave(request, room_id):
     room.save()
     return redirect('/rooms/get/%s/' % room_id)
 
-
+@login_required(login_url='/auth/login/')
 def invite(request, room_id):
     return redirect('/rooms/get/%s/' % room_id)
 
-
+@login_required(login_url='/auth/login/')
 def editroom(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
@@ -247,6 +251,7 @@ def editroom(request, room_id):
     category_room = CategoryRooms.objects.get(room=room)
     args['categ'] = category_room.category.id
     imgs = RoomImage.objects.filter(roomimage_category_id=category_room.category.id)
+
     args['images'] = imgs
 
     if request.method == 'POST':
