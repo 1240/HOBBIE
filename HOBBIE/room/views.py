@@ -110,9 +110,7 @@ def makeroom(request):
     args['regions_list'] = Regions.objects.all()
     imgs = RoomImage.objects.filter(roomimage_category_id=1)
     args['images'] = imgs
-    args['images1'] = imgs1
-    args['images2'] = imgs2
-    args['images3'] = imgs3
+
     args['image_first_id'] = imgs[0].id
 
     return render(request, 'makeroom.html', args)
