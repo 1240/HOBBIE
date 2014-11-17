@@ -195,6 +195,7 @@ def addroom(request):
 def joinroom(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
+    
     # user.room.add(room)
     user_room = UserRoom(
         room=room,
@@ -216,8 +217,8 @@ def leave(request, room_id):
     room = Room.objects.get(id=room_id)
     # auth.get_user(request).room.remove(Room.objects.get(id=room_id))
     user_room = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
-    if user_room:
-        user_room.delete()
+
+    user_room.delete() # если нашел
     usinroom = []
     for userroom in UserRoom.objects.filter(room_id=room_id, message_text__isnull=True):
         usinroom.append(userroom.user)
