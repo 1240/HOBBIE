@@ -6,8 +6,10 @@
     {% dajaxice_js_import %}
 
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/ff/foundation/foundation.reveal.js" %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static "css/datetimepicker/foundation-datepicker.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/datetimepicker/foundation-datepicker.less" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/rooms.css" %}">
     <script type="text/javascript">
         function refresh() {
             Dajaxice.room.get_messages(Dajax.process, {'room_id': {{ room.id }}
@@ -21,7 +23,7 @@
     </script>
     <br/>
     <div>
-        <div class="small-8 columns">
+        <div class="large-8 medium-8 columns">
             <div class="row">
                 <div class="small-3 large-3 columns">
                     <img src="{% static room.room_image %}" class="roomimage">
@@ -40,10 +42,11 @@
             </div>
             <br/>
             <br/>
+
             <form>
                 <fieldset>
                     <legend>Описание комнаты</legend>
-                     <p>{{ room.room_text }}</p>
+                    <p>{{ room.room_text }}</p>
                 </fieldset>
             </form>
             <div>
@@ -112,22 +115,44 @@
                 {% endif %}
             </div>
         </div>
-        <div class="small-4 columns">
+        <div class="large-4 medium-4 columns">
 
             <div>
-                <a href="/rooms/all/" class="button expand"><i class="fa fa-level-up"></i> Вернуться к списку комнат</a>
+                <a href="/rooms/all/" class="button expand"><i class="fa fa-level-up"></i>
+                    Вернуться к списку комнат
+                </a>
             </div>
             <ul class="button-group">
                 {% if user in users_in_room %}
 
-                    <li><a href="/rooms/leave/{{ room.id }}/" class="button"><i class="fa fa-sign-out"></i> Покинуть</a>
-                    </li>
-                    <li><a href="/rooms/invite/{{ room.id }}/" class="button"><i class="fa fa-plus"></i> Пригласить</a>
+                    {% if not is_creator.is_creator %}
+                        <li>
+                            <a href="/rooms/leave/{{ room.id }}/" class="button"><i class="fa fa-sign-out"></i>
+                                Покинуть
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a class="button" href="#" data-reveal-id="invite_modal"><i class="fa fa-plus"></i>
+                            Пригласить
+                        </a>
                     </li>
 
                     {% if is_creator.is_creator %}
-                        <li><a href="/rooms/editroom/{{ room.id }}/" class="button"><i class="fa fa-edit"></i>
-                            Редактировать</a>
+                        <li>
+                            <a href="#" class="button"><i class="fa fa-flag"></i>
+                                Назначить помошника
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/rooms/editroom/{{ room.id }}/" class="button"><i class="fa fa-edit"></i>
+                                Редактировать
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="button"><i class="fa fa-remove"></i>
+                                Удалить
+                            </a>
                         </li>
                     {% endif %}
                 {% else %}
@@ -169,16 +194,16 @@
                         {% for user in users_in_room %}
                             <li>
                                 <a href="/account/{{ user.username }}/">
-                                <div class="text-center" >
-                                    <div>
-                                        {% thumbnail user.avatar "45x45" as image %}
-                                            <img src="{{ image.url }}" class="th" width="45px" height="45px"/>
-                                        {% endthumbnail %}
+                                    <div class="text-center">
+                                        <div>
+                                            {% thumbnail user.avatar "45x45" as image %}
+                                                <img src="{{ image.url }}" class="th" width="45px" height="45px"/>
+                                            {% endthumbnail %}
+                                        </div>
+                                        <div>
+                                            <label class="text-center">{{ user.username }}</label>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <label class="text-center">{{ user.username }}</label>
-                                    </div>
-                                </div>
                                 </a>
                             </li>
                         {% endfor %}
@@ -187,7 +212,37 @@
             </form>
         </div>
     </div>
+    <div id="invite_modal" class="reveal-modal" data-reveal>
+        <h2>Приглашения</h2>
 
+        <p class="lead">Выберите пользователей которых хотите пригласить.</p>
 
+        <ul class="small-block-grid-3">
+            {% for friend in friends %}
+                <li>
+                    <div class="multi_checkbox text-center">
+                        {% comment %}style="background-image: url({{ friend.avatar.url }})">{% endcomment %}
+                        <input type="checkbox" class="checkboxLabel"
+                               id="checkbox_{{ friend.username }}"/>
+                        {% thumbnail friend.avatar "100x100" as image %}
+                            <label for="checkbox_{{ friend.username }}"
+                                   style="background: url({{ image.url }}) no-repeat"
+                                   class="multi_checkbox-invite th">
 
+                            </label>
+                            <label>{{ friend.username }}</label>
+                        {% endthumbnail %}
+                        <br/>
+
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <br/>
+        <a href="#"><i class="fa fa-send"></i> Отправить приглашения</a>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+    <script>
+        $(document).foundation();
+    </script>
 {% endblock %}
