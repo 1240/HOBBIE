@@ -29,7 +29,13 @@
                 <br>
 
                 <div class="small-9 large-9 columns">
-                    <h3><strong>{{ room.room_title }}</strong></h3>
+                    <h3><strong>{{ room.room_title }}</strong>
+
+                        {% if user.id == is_creator.user.id %}
+                         <p>   (вы состоите в этой комнате) </p>
+
+                        {% endif %}
+                    </h3>
                 </div>
             </div>
             <br/>

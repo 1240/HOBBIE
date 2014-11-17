@@ -12,6 +12,9 @@ class Regions(models.Model):
     region_url = models.CharField(max_length=100, verbose_name="Ссылка")
     is_west = models.BooleanField(verbose_name="Западная часть?", default=True)
 
+    def __unicode__(self):
+        return self.region_name
+
 
 class Cities(models.Model):
     class Meta():
@@ -22,3 +25,6 @@ class Cities(models.Model):
     city_title = models.CharField(max_length=100, verbose_name="Заголовок")
     city_url = models.CharField(max_length=100, verbose_name="Ссылка")
     city_region = models.ForeignKey(Regions)
+
+    def __unicode__(self):
+        return self.city_name
