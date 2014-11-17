@@ -68,13 +68,21 @@
                     <li>
                         <a href="/rooms/get/{{ room.id }}">
                             <div class="room-rect">
-                                <h6 style="height: 40px">{{ room.room_title }}</h6>
-                                <!-- <p>{{ room.room_create_date }}</p>-->
+                                <h5 style="height: 40px">{{ room.room_title }}</h5>
+
                                 <div class="room-circle"
                                      style="border-color: {% cycle '#E7E7E7 #E7E7E7 #E7E7E7 #44c7db' '#E7E7E7 #E7E7E7 #44c7db #E7E7E7' '#E7E7E7 #44c7db #E7E7E7 #E7E7E7' '#44c7db #E7E7E7 #E7E7E7 #E7E7E7' %}">
-                                    <img src="{% static room.room_image %}" class="roomimage">
+                                    <div style="position: relative">
+                                        <img src="{% static room.room_image %}" class='roomimage' style="z-index: 1;">
+                                        {% if not room.room_open %}
+                                            <div style="position: absolute; bottom: 60px; left: 25px;">
+                                                <img src="{% static 'img/closed.png' %}" width="100px" >
+                                            </div>
 
+                                        {% endif %}
                                     <p>В комнате:{{ room.room_people_count }}</p>
+                                    </div>
+
                                 </div>
                             </div>
                         </a>

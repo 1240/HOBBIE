@@ -62,10 +62,10 @@ def room(request, room_id=1):
     args.update(csrf(request))
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
+    
     args['room'] = room
     args['messages'] = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False).order_by('message_datetime')
     for i in args['messages']:
-
         if i.message_datetime.date() == timezone.datetime.today().date():
             i.message_datetime = i.message_datetime.time()
         else:
