@@ -150,6 +150,9 @@ def get_messages(request):
     args['user']=user
     if user in usinroom:
         args['is_creator'] = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
+        args['you_participant'] = 1
+        if args['is_creator'].can_edit or args['is_creator'].is_creator:
+            args['you_may_edit'] = 1
 
     for i in args['messages']:
         if i.message_datetime.date() == timezone.datetime.today().date():

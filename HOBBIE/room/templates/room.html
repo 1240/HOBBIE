@@ -33,9 +33,10 @@
                 <div class="small-9 large-9 columns">
                     <h3><strong>{{ room.room_title }}</strong>
 
-                        {% if user.id == is_creator.user.id %}
-                         <p>   (вы состоите в этой комнате) </p>
-
+                        {% if you_creator == 1 %}
+                            <p> (вы создали эту комнату) </p>
+                        {% elif you_participant == 1 %}
+                            <p> (вы состоите в этой комнате) </p>
                         {% endif %}
                     </h3>
                 </div>
@@ -69,7 +70,7 @@
                                 ({{ message.message_datetime }})
 
                             </div>
-                            {% if is_creator.is_creator or message.user == user %}
+                            {% if you_may_edit == 1 or message.user == user %}
                                 <div class="small-1 column">
                                     <div class="fa fa-times-circle"
                                          onclick="Dajaxice.room.delete_message(Dajax.process,

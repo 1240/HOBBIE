@@ -79,7 +79,8 @@ def room(request, room_id=1):
     }
     category_room = CategoryRooms.objects.get(room=room)
     args['categ'] = categories[category_room.category.id]
-    args['friends'] = user.friends.all()
+    if user.is_authenticated():
+        args['friends'] = user.friends.all()
     args['form'] = message_form
     args['user'] = user
     usinroom = []
@@ -89,9 +90,16 @@ def room(request, room_id=1):
     for x in UserRoom.objects.filter(room=room):
         if x.is_creator:
             args['creator'] = x.user.username
+            if x.user.id == user.id:
+                args['you_creator'] = 1
             break
+
     if user in usinroom:
         args['is_creator'] = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
+        args['you_participant'] = 1
+        if args['is_creator'].can_edit or args['is_creator'].is_creator:
+            args['you_may_edit'] = 1
+
 
     if args['room'].room_region_id == 0:
         args['room_region'] = 'Все регионы'
@@ -162,40 +170,11 @@ def addroom(request):
             return redirect('/rooms/all/')
     return redirect('/rooms/get/%s' % room.id)
 
-
-'''def f(x):
-    return {
-        'a1': 'img/1.png',
-        'a2': 'img/2.png',
-        'a3': 'img/3.png',
-        'a4': 'img/4.png',
-        'a5': 'img/5.png',
-        'a6': 'img/6.png',
-        'a7': 'img/7.png',
-        'a8': 'img/8.png',
-        'a9': 'img/9.png',
-        'a10': 'img/10.png',
-        'a11': 'img/11.png',
-        'a12': 'img/12.png',
-        'a13': 'img/13.png',
-        'a14': 'img/14.png',
-        'a15': 'img/15.png',
-        'a16': 'img/16.png',
-        'a17': 'img/17.png',
-        'a18': 'img/18.png',
-        'a19': 'img/19.png',
-        'a20': 'img/20.png',
-        'a21': 'img/21.png',
-        'a22': 'img/22.png',
-        'a23': 'img/23.png',
-        'a24': 'img/24.png',
-    }[x]'''
-
 @login_required(login_url='/auth/login/')
 def joinroom(request, room_id):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
-    
+
     # user.room.add(room)
     user_room = UserRoom(
         room=room,
