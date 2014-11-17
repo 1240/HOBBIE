@@ -1,11 +1,20 @@
-@media screen and (min-width: 1600px) {
-    #cat {width: 200px;}
+.multi_checkbox input[type="checkbox"] {
+    display: none;
 }
 
-@media screen and (min-width: 1600px) {
-    #room {width: 200px;}
+.multi_checkbox input[type="checkbox"] + label {
 }
 
+.multi_checkbox input[type="checkbox"]:checked + label {
+    border: solid 4px #44c7db;
+}
 
-.large-25 {
-    width: 25%; }
+.multi_checkbox-invite {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border: solid 4px white;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #6d655c;;
+}

@@ -159,6 +159,10 @@
     width: 975px;
 }
 
+.margin-0 {
+    margin: 0 auto;
+}
+
 .map-region:hover,
 .map-region[data-state='hover'] {
     color: #44c7db;

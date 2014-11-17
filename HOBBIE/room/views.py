@@ -79,6 +79,7 @@ def room(request, room_id=1):
     }
     category_room = CategoryRooms.objects.get(room=room)
     args['categ'] = categories[category_room.category.id]
+    args['friends'] = user.friends.all()
     args['form'] = message_form
     args['user'] = user
     usinroom = []
