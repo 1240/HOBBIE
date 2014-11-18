@@ -22,6 +22,7 @@ def edit(request):
     args['regions_list'] = Regions.objects.all()
     if request.method == 'POST':
         form = UserChangeForm(request.POST, request.FILES, instance=request.user)
+        form.avatar = user.avatar
         if form.is_valid():
             form.save()
             user = User.objects.get(id=auth.get_user(request).id)
@@ -43,7 +44,8 @@ def edit(request):
 
 def user_page(request, username):
     user = User.objects.get(username=username)
-    current_page = Paginator(Room.objects.filter(user=user, userroom__message_text__isnull=True).order_by("-room_create_date"), per_page=10)
+    current_page = Paginator(
+        Room.objects.filter(user=user, userroom__message_text__isnull=True).order_by("-room_create_date"), per_page=10)
     args = {}
     args['rooms'] = current_page.page(1)
     args['friends'] = user.friends.all()
@@ -75,3 +77,13 @@ def users(request):
     args['users'] = User.objects.all()
     args['header'] = 'Поиск пользователя'
     return render(request, 'users.html', args)
+
+
+def invites(request):
+    user = auth.get_user(request)
+    current_page = Paginator(UserRoom.objects.filter(invite=1, user=user)
+                             .order_by("-message_datetime"), per_page=10)
+    args = {}
+    args['header'] = 'Ваши приглашения'
+    args['user_rooms'] = current_page.page(1)
+    return render(request, 'invites.html', args)

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load dajaxice_templatetags %}
+{% load thumbnail %}
+{% load staticfiles %}
+{% block user_page %}
+    <br/>
+    {% for userroom in user_rooms %}
+        <div class="row">
+            <h3>{{ userroom.message_text }}</h3>
+            <label>Время и дата приглашения: {{ userroom.massage_datetime }}</label>
+            <br/>
+
+            <div class="small-4 columns">
+                <a href="/rooms/get/{{ userroom.room.id }}">
+                    <div class="room-circle"
+                         style="border-color: {% cycle '#E7E7E7 #E7E7E7 #E7E7E7 #44c7db' '#E7E7E7 #E7E7E7 #44c7db #E7E7E7' '#E7E7E7 #44c7db #E7E7E7 #E7E7E7' '#44c7db #E7E7E7 #E7E7E7 #E7E7E7' %}">
+
+                        <img src="{% static userroom.room.room_image %}" class="roomimage">
+
+                    </div>
+                </a>
+            </div>
+            <div class="small-8 columns">
+                <h4><a href="/rooms/get/{{ userroom.room.id }}">{{ userroom.room.room_title }}</a></h4>
+
+                <p>В комнате: {{ userroom.room.room_people_count }} человек</p>
+
+                <p>Дата встречи: {{ userroom.room.room_to_date }}</p>
+            </div>
+        </div>
+        <br>
+    {% empty %}
+        <div class="text-center">
+            <br/>
+            Приглашений нет, пока...
+        </div>
+        <br/>
+
+    {% endfor %}
+    <br/>
+    <div class="row clearfix">
+        <div class="small-3 small-centered columns">
+            <ul class="pagination">
+                {% if rooms.has_previous %}
+                    <li class="arrow"><a href="#"
+                                         onclick="Dajaxice.userroom.room.rooms_list(Dajax.process,
+                                                 {'toggle':getSort(),
+                                                 'region': document.getElementById('region_select').selectedIndex,
+                                                 'p': {{ rooms.previous_page_number }},
+                                                 'view': getView()})">&laquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                {% endif %}
+                {% for page in rooms.paginator.page_range %}
+                    {% if page == rooms.number %}
+                        <li class="current"><a href="#" style="color: #ffffff !important;"
+                                               onclick="Dajaxice.userroom.room.rooms_list(Dajax.process,
+                                                       {'toggle':getSort(),
+                                                       'region': document.getElementById('region_select').selectedIndex,
+                                                       'p': {{ page }},
+                                                       'view': getView()})">{{ page }}</a></li>
+                    {% else %}
+                        <li><a href="#" onclick="Dajaxice.userroom.room.rooms_list(Dajax.process,
+                                {'toggle':getSort(),
+                                'region': document.getElementById('region_select').selectedIndex,
+                                'p': {{ page }},
+                                'view': getView()})">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if rooms.has_next %}
+                    <li class="arrow"><a href="#"
+                                         onclick="Dajaxice.userroom.room.rooms_list(Dajax.process,
+                                                 {'toggle':getSort(),
+                                                 'region': document.getElementById('region_select').selectedIndex,
+                                                 'p': {{ rooms.next_page_number }},
+                                                 'view': getView()})">&raquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

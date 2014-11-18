@@ -8,6 +8,7 @@ from django.template.loader import get_template
 from django.core.context_processors import csrf
 from django.contrib import auth
 from django_geoip.models import IpRange
+from accounts.models import UserRoom
 from mainpage.models import Regions
 from accounts.forms import UserAvatarChangeForm
 
@@ -27,7 +28,7 @@ def home(request):
             q_aux = Q(region_name__icontains=word) | Q(region_title__icontains=word)
             q = ( q_aux & q ) if bool(q) else q_aux
     region = Regions.objects.filter(q)
-
+    user = auth.get_user(request)
     args = {}
     args.update(csrf(request))
     if request.method == 'POST':
@@ -50,6 +51,7 @@ def home(request):
         "regions": regions,
         "id_user": auth.get_user(request).id,
         "user_avatar_change_form": UserAvatarChangeForm(),
+        "invite_counts": len(UserRoom.objects.filter(room_id__isnull=False, invite='1', user_id=user.id)),
         "current_region": region[0],
     })
     c.update(csrf(request))

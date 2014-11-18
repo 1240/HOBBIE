@@ -15,6 +15,16 @@
                 </div>
             </a>
         </li>
+    {% empty %}
+        <div class="text-center">
+            <br/>
+            Извинте, в вашем регионе пока нет комнат, соответствующих данной категории,
+            но вы можете <a href="/rooms/makeroom/">
+            <strong>создать первую комнату</strong>
+        </a>!
+        </div>
+        <br/>
+
     {% endfor %}
 </ul>
 <br/>

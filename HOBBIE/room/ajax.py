@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import json
-import datetime
 
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
@@ -8,10 +7,10 @@ from django.contrib import auth
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.template.loader import render_to_string
-
-from accounts.models import UserRoom
-from room.models import Room,Category,RoomImage
 from django.utils import timezone
+
+from accounts.models import UserRoom, User
+from room.models import Room, RoomImage
 
 
 _author__ = '1240'
@@ -39,7 +38,8 @@ def rooms_list(request):
         'by_people': '-room_people_count',
     }
     q = None
-    q_aux = Q(category__category_title__in=categories) if category_name == 'all' else Q(category__category_title=category_name)
+    q_aux = Q(category__category_title__in=categories) if category_name == 'all' else Q(
+        category__category_title=category_name)
     q = ( q_aux & q ) if bool(q) else q_aux
     if region_index:
         q_aux = Q(room_region_id=region_index)
@@ -77,6 +77,7 @@ def rooms_list(request):
 
     return dajax.json()
 
+
 @dajaxice_register
 def get_images_list(request):
     json_string = request.POST.get('argv')
@@ -90,15 +91,16 @@ def get_images_list(request):
         'by_cult_ent': 4,
     }
     args = {}
-    imgs=RoomImage.objects.filter(roomimage_category_id=toggles[toggle])
-    args['images']=imgs
-    args['image_first_id']=imgs[0].id
+    imgs = RoomImage.objects.filter(roomimage_category_id=toggles[toggle])
+    args['images'] = imgs
+    args['image_first_id'] = imgs[0].id
 
-    render =  render_to_string('image_choice_list.html', args)
+    render = render_to_string('image_choice_list.html', args)
     dajax = Dajax()
-    dajax.assign('#imagechoicelist', 'innerHTML',render)
+    dajax.assign('#imagechoicelist', 'innerHTML', render)
 
     return dajax.json()
+
 
 @dajaxice_register
 def send_message(request):
@@ -107,7 +109,7 @@ def send_message(request):
 
     room_id = argv.get('room_id')
     message_text = argv.get('message_text')
-    #if len(message_text)>3:
+    # if len(message_text)>3:
     message_author = auth.get_user(request)
     room = Room.objects.get(id=room_id)
     message = UserRoom(message_text=message_text, room=room, user=message_author)
@@ -115,6 +117,7 @@ def send_message(request):
     message.save()
 
     return get_messages(request)
+
 
 @dajaxice_register
 def delete_message(request):
@@ -128,28 +131,25 @@ def delete_message(request):
 
     return get_messages(request)
 
+
 @dajaxice_register
 def get_messages(request):
     json_string = request.POST.get('argv')
     argv = json.loads(json_string)
 
-
     user = auth.get_user(request)
-
 
     room_id = argv.get('room_id')
     room = Room.objects.get(id=room_id)
-    messages = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False).order_by('message_datetime')
-    usinroom = []
-    for userroom in UserRoom.objects.filter(room_id=room_id, message_text__isnull=True):
-        usinroom.append(userroom.user)
+    messages = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False, invite=0).order_by('message_datetime')
+    usinroom = User.objects.filter(userroom__room_id=room_id, userroom__message_text__isnull=True, userroom__invite=0)
 
     args = {}
     args['messages'] = messages
     args['room_id'] = room_id
-    args['user']=user
+    args['user'] = user
     if user in usinroom:
-        args['is_creator'] = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
+        args['is_creator'] = UserRoom.objects.get(room=room, user=user, message_text__isnull=True, invite=0)
 
     for i in args['messages']:
         if i.message_datetime.date() == timezone.datetime.today().date():
@@ -160,3 +160,21 @@ def get_messages(request):
     dajax.assign('#messages_list', 'innerHTML', render_to_string('messages_list.html', args))
     return dajax.json()
 
+
+@dajaxice_register
+def send_invite(request):
+    json_string = request.POST.get('argv')
+    argv = json.loads(json_string)
+    users = argv.get('users')
+    room_id = argv.get('room_id')
+    user = auth.get_user(request)
+    for user_id in users:
+        user_room = UserRoom(
+            room_id=room_id,
+            user_id=user_id,
+            message_datetime=timezone.datetime.today(),
+            message_text="%s %s - %s пригласил Вас в комнату" %
+                         (user.first_name, user.last_name, user.username),
+            invite=1
+        )
+        user_room.save()

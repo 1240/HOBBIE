@@ -2,109 +2,108 @@
 {% load dajaxice_templatetags %}
 {% load thumbnail %}
 {% block user_page %}
-{% load staticfiles %}
+    {% load staticfiles %}
     {% dajaxice_js_import %}
 
-
-
-
     <form enctype="multipart/form-data" action="" method="post">
-    <div class="center" style="width: 60%">
+        <div class="center" style="width: 60%">
 
-        <div class="center" style="width: 29%">
-            {% if account.username_image %}
-                <img src="{{ account.username_image.url }}">
-            {% endif %}
-        <br>
-        </div>
+            <div class="center" style="width: 29%">
+                {% if account.username_image %}
+                    <img src="{{ account.username_image.url }}">
+                {% endif %}
+                <br>
+            </div>
 
-        <div class="col" style="width: 32%">
-            {% if account.avatar %}
-                {% thumbnail account.avatar "260x260" as im %}
-                    <img src="{{ im.url }}">
-                {% endthumbnail %}
-            {% else %}
-                <h5>Аватар не загружен</h5>
-            {% endif %}
-         <br>
-            {% if account.username == user.username %}
-                <a href="/account/edit/" class="button expand" style="width: 100%">Редактировать страницу</a>
-            {% else %}
-             <br>
-                <input type="button" class="button" style="width: 95%; left: 2.5%" value="Пригласить в комнату">
-             <br>
-                <input type="button" class="button" style="width: 95%; left: 2.5%" value="Добавить в друзья">
-            {% endif %}
-        </div>
+            <div class="col" style="width: 32%">
+                {% if account.avatar %}
+                    {% thumbnail account.avatar "260x260" as im %}
+                        <img src="{{ im.url }}">
+                    {% endthumbnail %}
+                {% else %}
+                    <h5>Аватар не загружен</h5>
+                {% endif %}
+                <br>
+                {% if account.username == user.username %}
+                    <a href="/account/edit/" class="button expand" style="width: 100%">Редактировать страницу</a>
+                {% else %}
+                    <br>
+                    <input type="button" class="button" style="width: 95%; left: 2.5%" value="Пригласить в комнату">
+                    <br>
+                    <input type="button" class="button" style="width: 95%; left: 2.5%" value="Добавить в друзья">
+                {% endif %}
+            </div>
 
-        <div class="col">
-            <h4 style="margin: 0px; padding: 0">{{ account.first_name }} {{ account.last_name }}</h4>
-            <hr style="margin: 0px; width: 100%">
-            <br>
+            <div class="col">
+                <h4 style="margin: 0px; padding: 0">{{ account.first_name }} {{ account.last_name }}</h4>
+                <hr style="margin: 0px; width: 100%">
+                <br>
+
                 <div class="col" style="width:30%; margin-left: 5%">
                     <h6>Никнейм: </h6>
-                     {% if account.date_of_birth %}
+                    {% if account.date_of_birth %}
                         <h6>День рождения: </h6>
-                     {% endif %}
+                    {% endif %}
                     <br>
 
                 </div>
                 <div class="col" style="width:60%">
                     <h6>{{ account.username }}</h6>
-                     {% if account.date_of_birth %}
+                    {% if account.date_of_birth %}
                         <h6>{{ account.date_of_birth }}</h6>
-                     {% endif %}
+                    {% endif %}
                     <br>
 
                 </div>
+            </div>
         </div>
-    </div>
 
 
-    <div class="center" style="width: 100%;padding-bottom: 5%;  float: left">
+        <div class="center" style="width: 100%;padding-bottom: 5%;  float: left">
 
-        <h4 style="margin-left: 3%">Друзья</h4>
+            <h4 style="margin-left: 3%">Друзья</h4>
 
-       <ul class="small-block-grid-3">
-         {% for friend in friends %}
-          <a href="/account/{{ friend.username }}" style="margin-top: 5%">
-             <div class="room-rect">
-                <h5>{{ friend.username }}</h5>
-                    <div class="circular-friend"
-                         style="background-image: url({{ friend.avatar.url }})">
-                    </div>
-             </div>
-          </a>
-         {% endfor %}
-       </ul>
-    </div>
+            <ul class="small-block-grid-3">
+                {% for friend in friends %}
+                    <a href="/account/{{ friend.username }}" style="margin-top: 5%">
+                        <div class="room-rect">
+                            <h5>{{ friend.username }}</h5>
 
-    <div class="center" style="width: 100%;padding-bottom: 2%;  float: left">
-
-        <h4 style="margin-left: 3%">Комнаты</h4>
-
-        <ul class="small-block-grid-3">
-        {% for room in rooms %}
-
-                        <a href="/rooms/get/{{ room.id }}">
-                            <div class="room-rect">
-                                <h6>{{ room.room_title }}</h6>
-                                <!-- <p>{{ room.room_create_date }}</p>-->
-                                <div class="room-circle"
-                                     style="border-color: {% cycle '#E7E7E7 #E7E7E7 #E7E7E7 #44c7db' '#E7E7E7 #E7E7E7 #44c7db #E7E7E7' '#E7E7E7 #44c7db #E7E7E7 #E7E7E7' '#44c7db #E7E7E7 #E7E7E7 #E7E7E7' %}">
-                                    <img src="{% static room.room_image %}" class="roomimage">
-
-                                    <p>В комнате:{{ room.room_people_count }}</p>
-                                </div>
+                            <div class="circular-friend"
+                                 style="background-image: url({{ friend.avatar.url }})">
                             </div>
-                        </a>
-       {% endfor %}
-            <br>
-        </ul>
-    </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="center" style="width: 100%;padding-bottom: 2%;  float: left">
+
+            <h4 style="margin-left: 3%">Комнаты</h4>
+
+            <ul class="small-block-grid-3">
+                {% for room in rooms %}
+
+                    <a href="/rooms/get/{{ room.id }}">
+                        <div class="room-rect">
+                            <h6>{{ room.room_title }}</h6>
+                            <!-- <p>{{ room.room_create_date }}</p>-->
+                            <div class="room-circle"
+                                 style="border-color: {% cycle '#E7E7E7 #E7E7E7 #E7E7E7 #44c7db' '#E7E7E7 #E7E7E7 #44c7db #E7E7E7' '#E7E7E7 #44c7db #E7E7E7 #E7E7E7' '#44c7db #E7E7E7 #E7E7E7 #E7E7E7' %}">
+                                <img src="{% static room.room_image %}" class="roomimage">
+
+                                <p>В комнате:{{ room.room_people_count }}</p>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+                <br>
+            </ul>
+        </div>
 
 
-        </form>
+    </form>
 
 
 

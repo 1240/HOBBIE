@@ -6,6 +6,7 @@
     {% dajaxice_js_import %}
 
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/rooms.js" %}"></script>
     <script type="text/javascript" src="{% static "js/ff/foundation/foundation.reveal.js" %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static "css/datetimepicker/foundation-datepicker.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/datetimepicker/foundation-datepicker.less" %}">
@@ -219,9 +220,11 @@
                         <input type="checkbox" class="checkboxLabel"
                                id="checkbox_{{ friend.username }}"/>
                         {% thumbnail friend.avatar "100x100" as image %}
-                            <label for="checkbox_{{ friend.username }}"
+                            <label for="checkbox_{{ friend.username }}" name="{{ friend.id }}"
                                    style="background: url({{ image.url }}) no-repeat"
-                                   class="multi_checkbox-invite th">
+                                   class="multi_checkbox-invite th"
+                                   onclick="append(this)"
+                                    >
 
                             </label>
                             <label>{{ friend.username }}</label>
@@ -233,10 +236,16 @@
             {% endfor %}
         </ul>
         <br/>
-        <a href="#"><i class="fa fa-send"></i> Отправить приглашения</a>
+        <a href="#" class="button custom-close-reveal-modal" onclick="Dajaxice.room.send_invite(Dajax.process, {
+                'room_id':{{ room.id }},
+                'users' : invited_users
+                });"><i class="fa fa-send"></i> Отправить приглашения</a>
         <a class="close-reveal-modal">&#215;</a>
     </div>
     <script>
         $(document).foundation();
+        $('a.custom-close-reveal-modal').click(function () {
+            $('#invite_modal').foundation('reveal', 'close');
+        });
     </script>
 {% endblock %}

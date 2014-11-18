@@ -1,18 +1,17 @@
 # Create your views here.
-import datetime
 
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator
-from django.shortcuts import render_to_response, redirect, render
+from django.shortcuts import redirect, render
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
-from accounts.models import UserRoom
+from accounts.models import UserRoom, User
 from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room
 from room.models import Category, RoomImage, CategoryRooms
-from django.utils import timezone
-from django.contrib.auth.decorators import login_required
 
 
 def rooms(request, region_name='all', category_name='all'):
@@ -62,10 +61,10 @@ def room(request, room_id=1):
     args.update(csrf(request))
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
-    #if not room.room_open:
-     #   redirect('/rooms/all/all/')
+    # if not room.room_open:
+    #   redirect('/rooms/all/all/')
     args['room'] = room
-    args['messages'] = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False).order_by('message_datetime')
+    args['messages'] = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False, invite=0).order_by('message_datetime')
     for i in args['messages']:
         if i.message_datetime.date() == timezone.datetime.today().date():
             i.message_datetime = i.message_datetime.time()
@@ -82,16 +81,14 @@ def room(request, room_id=1):
     args['friends'] = user.friends.all()
     args['form'] = message_form
     args['user'] = user
-    usinroom = []
-    for userroom in UserRoom.objects.filter(room_id=room_id, message_text__isnull=True):
-        usinroom.append(userroom.user)
+    usinroom = User.objects.filter(userroom__room_id=room_id, userroom__message_text__isnull=True, userroom__invite=0)
     args['users_in_room'] = usinroom
     for x in UserRoom.objects.filter(room=room):
         if x.is_creator:
             args['creator'] = x.user.username
             break
     if user in usinroom:
-        args['is_creator'] = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
+        args['is_creator'] = UserRoom.objects.get(room=room, user=user, message_text__isnull=True, invite=0)
 
     if args['room'].room_region_id == 0:
         args['room_region'] = 'Все регионы'
@@ -102,6 +99,7 @@ def room(request, room_id=1):
     else:
         args['openclose'] = 'закрытая'
     return render(request, 'room.html', args)
+
 
 @login_required(login_url='/auth/login/')
 def makeroom(request):
@@ -116,6 +114,7 @@ def makeroom(request):
     args['image_first_id'] = imgs[0].id
 
     return render(request, 'makeroom.html', args)
+
 
 @login_required(login_url='/auth/login/')
 def addroom(request):
@@ -191,6 +190,7 @@ def addroom(request):
         'a24': 'img/24.png',
     }[x]'''
 
+
 @login_required(login_url='/auth/login/')
 def joinroom(request, room_id):
     user = auth.get_user(request)
@@ -210,6 +210,7 @@ def joinroom(request, room_id):
     room.save()
     return redirect('/rooms/get/%s/' % room_id)
 
+
 @login_required(login_url='/auth/login/')
 def leave(request, room_id):
     user = auth.get_user(request)
@@ -225,9 +226,11 @@ def leave(request, room_id):
     room.save()
     return redirect('/rooms/get/%s/' % room_id)
 
+
 @login_required(login_url='/auth/login/')
 def invite(request, room_id):
     return redirect('/rooms/get/%s/' % room_id)
+
 
 @login_required(login_url='/auth/login/')
 def editroom(request, room_id):
