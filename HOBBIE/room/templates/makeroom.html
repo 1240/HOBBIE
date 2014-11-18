@@ -33,7 +33,7 @@
             </div>
             <div>
             <div class="small-4 columns">
-                <label style="white-space: nowrap" for="id_room_to_date"><strong>Дата мероприятия:</strong></label>
+                <label style="white-space: nowrap" for="id_room_to_date"><strong>Дата мероприятия (не обязательно):</strong></label>
 
                 <div class="row date collapse" data-date-format="dd-mm-yyyy hh:ii">
                     <div class="small-9 columns">
@@ -45,14 +45,18 @@
                 </div>
             </div>
             <div class="small-4 columns">
-                <label><strong>Выберите регион для публикации</strong>
-                <select name="region_select">
-                    <option value="0">Все</option>
-                    {% for region in regions_list %}
+                <label><strong>Выберите регион для публикации комнаты</strong>
+            <select name="region_select">
+                <option value="0">Все</option>
+                {% for region in regions_list %}
+
+
+
                         <option value="{{ region.id }}">{{ region.region_name }}</option>
-                    {% endfor %}
-                </select>
-            </label>
+
+                {% endfor %}
+            </select>
+        </label>
             </div>
             <div >
                 <div><strong>Доступ в комнату</strong></div>

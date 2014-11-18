@@ -16,7 +16,7 @@
         <div class="small-5 medium-4 large-3 columns">
             ({{ message.message_datetime }})
         </div>
-        {% if is_creator.is_creator or message.user == user %}
+        {% if you_may_edit == 1 or message.user == user %}
              <div class="small-1 column">
                    <div class="fa fa-times-circle" onclick="Dajaxice.room.delete_message(Dajax.process,
                                                    { 'room_id': {{ room_id }},
