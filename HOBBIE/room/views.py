@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render_to_response, redirect, render
 
 from accounts.models import UserRoom
+from accounts.models import User
 from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room
