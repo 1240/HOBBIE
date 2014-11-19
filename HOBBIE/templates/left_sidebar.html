@@ -29,11 +29,11 @@
 
 <br>
 {% if user.username_image %}
-    <a href="//127.0.0.1:8000/account/{{ user.username }}">
+    <a href="/account/{{ user.username }}">
         <img src="{{ user.username_image.url }}">
     </a>
 {% endif %}
-<a href="//127.0.0.1:8000/account/{{ user.username }}">
+<a href="/account/{{ user.username }}">
     <h6>{{ user.email }}</h6>
 </a>
 <h6>{{ user.region.region_name }}</h6>

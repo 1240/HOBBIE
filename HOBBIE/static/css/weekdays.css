@@ -469,3 +469,8 @@ embed, iframe {
     padding: 10px; /* Поля вокруг текста */
     margin: auto; /* Выравниваем по центру */
    }
+
+.font-anfisa {
+    font-family: 'Anfisa Grotesk';
+    font-size: 40px;
+}

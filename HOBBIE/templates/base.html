@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/weekdays.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/authenty.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/anfisa.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/toggle-switch.css" %}">
 
 
@@ -109,7 +110,8 @@
 
         <section class="main-section" style="min-height: 1000px">
             <br/>
-            <div class="text-center">
+
+            <div class="text-center font-anfisa">
                 {{ header }}
                 <hr>
             </div>
@@ -129,6 +131,12 @@
 </div>
 <!-- /navigation -->
 
-
+<style>
+    @font-face {
+        font-family: 'anfisa_grotesk';
+        src: url('{% static 'fonts/anfisa_grotesk.ttf' %}');
+        src: local('{% static 'fonts/anfisa_grotesk.ttf' %}');
+    }
+</style>
 </body>
 </html>
