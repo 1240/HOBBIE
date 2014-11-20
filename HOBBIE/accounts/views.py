@@ -16,13 +16,15 @@ def edit(request):
     args = {}
     user = auth.get_user(request)
     args.update(csrf(request))
-    args['form'] = UserChangeForm(instance=request.user)
+    user_change_form = UserChangeForm(instance=request.user)
+    user_change_form.avatar = user.avatar
+    args['form'] = user_change_form
     args['user'] = user
     args['userreg'] = user.region_id
+    args['header'] = 'Редактирование информации - %s' % user.username
     args['regions_list'] = Regions.objects.all()
     if request.method == 'POST':
         form = UserChangeForm(request.POST, request.FILES, instance=request.user)
-        form.avatar = user.avatar
         if form.is_valid():
             form.save()
             user = User.objects.get(id=auth.get_user(request).id)

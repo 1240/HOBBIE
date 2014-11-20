@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 import math
 import datetime
-import os
 
 from PIL import Image
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-from mainpage.models import Regions
 
+from mainpage.models import Regions
 from room.models import Room
-from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
@@ -41,8 +39,7 @@ class User(AbstractBaseUser):
         unique=True,
         db_index=True)
     username = models.CharField(verbose_name='username', max_length=255, unique=True)
-    avatar = models.ImageField(verbose_name='Аватар', upload_to='images/%Y/%m/%d', blank=True, null=True,
-                               default='images/avatar.jpg')
+    avatar = models.ImageField(verbose_name='Аватар', upload_to='images/%Y/%m/%d', default='images/avatar.jpg')
     username_image = models.ImageField(upload_to='images/username_image/%Y/%m/%d', blank=True, null=True)
     first_name = models.CharField(verbose_name='Имя', max_length=255, blank=True)
     last_name = models.CharField(verbose_name='Фамилия', max_length=255, blank=True)
@@ -51,7 +48,7 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     friends = models.ManyToManyField("self", blank=True, null=True)
     room = models.ManyToManyField(Room, through='UserRoom', null=True)
-    sex = models.BooleanField()
+    sex = models.BooleanField(default=True)
     region = models.ForeignKey(Regions)
 
     objects = UserManager()
@@ -75,7 +72,7 @@ class User(AbstractBaseUser):
         return True
 
     def save(self, *args, **kwargs):
-        size=(225, 225)
+        size = (225, 225)
         super(User, self).save()
         filename = str(self.avatar.path)
         image = Image.open(filename)
