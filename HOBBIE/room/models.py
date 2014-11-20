@@ -6,7 +6,7 @@ from django.db import models
 
 # Create your models here.
 from mainpage.models import Regions
-
+from django.utils import timezone
 
 class Room(models.Model):
     class Meta():
@@ -24,7 +24,6 @@ class Room(models.Model):
 
     def __unicode__(self):
             return 'id%s - %s' % (self.id, self.room_title)
-
 
 class Category(models.Model):
     class Meta():

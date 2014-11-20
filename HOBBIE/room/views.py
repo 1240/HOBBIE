@@ -54,6 +54,10 @@ def rooms(request, region_name='all', category_name='all'):
     args['region_id'] = '/' + region_name
     args['header'] = 'Комнаты ' + region_title
     args['categories'] = Category.objects.all()
+    args['rooms_soon'] = Room.objects.filter(room_to_date__gte=timezone.now()).order_by('room_to_date')[:5]
+    for a in args['rooms_soon']:
+        a.room_to_date= a.room_to_date.date()
+
     return render(request, 'rooms.html', args)
 
 
@@ -108,6 +112,9 @@ def room(request, room_id=1):
         args['openclose'] = 'открытая'
     else:
         args['openclose'] = 'закрытая'
+    args['rooms_soon'] = Room.objects.filter(room_to_date__gte=timezone.now()).order_by('room_to_date')[:5]
+    for a in args['rooms_soon']:
+        a.room_to_date= a.room_to_date.date()
     return render(request, 'room.html', args)
 
 
