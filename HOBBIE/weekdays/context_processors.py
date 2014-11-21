@@ -16,10 +16,19 @@ def invite_count(request):
 
 
 def room_soon(request):
-    rooms_soon = Room.objects.filter(room_to_date__gte=timezone.now()).order_by('room_to_date')[:5]
+    rooms_soon = Room.objects.filter(room_to_date__gte=timezone.now()).exclude(room_to_date__day=timezone.now().day).order_by('room_to_date')[:5]
     for a in rooms_soon:
         a.room_to_date = a.room_to_date.date()
 
     return {
         "rooms_soon": rooms_soon
+    }
+
+def room_today(request):
+    rooms_today = Room.objects.filter(room_to_date__day=timezone.now().day).order_by('room_to_date')[:5]
+    for a in rooms_today:
+        a.room_to_date = a.room_to_date.time()
+
+    return {
+        "rooms_today": rooms_today
     }
