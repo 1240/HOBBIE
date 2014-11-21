@@ -1,7 +1,7 @@
 {% load static %}
 {% load thumbnail %}
-<div class='holder'>
-    <a href="//127.0.0.1:8000/account/{{ user.username }}">
+<a href="/account/{{ user.username }}">
+    <div class='holder'>
         {% thumbnail user.avatar "160x160" as im %}
             <div class="circular" style="background: url({{ im.url }}); position: relative">
                 <!-- Коля, скопируешь -> удали
@@ -24,39 +24,35 @@
                 -->
             </div>
         {% endthumbnail %}
-    </a>
-</div>
+    </div>
 
-<br>
-{% if user.username_image %}
-    <a href="/account/{{ user.username }}">
+    <br>
+    {% if user.username_image %}
         <img src="{{ user.username_image.url }}">
-    </a>
-{% endif %}
-<a href="/account/{{ user.username }}">
+    {% endif %}
     <h6>{{ user.email }}</h6>
-</a>
-<h6>{{ user.region.region_name }}</h6>
+    <h6>{{ user.region.region_name }}</h6>
 
-<div class="row">
-    <div class="large-6 small-6 columns">
-        <i class="fa fa-edit"></i>
-        <a href="/account/edit/">edit</a>
-    </div>
-    <div class="large-6 small-6 columns">
-        <i class="fa fa-sign-out"></i>
-        <a href="/auth/logout">выход</a>
-    </div>
-</div>
+</a>
+<ul class="side-nav">
+    <li><a class="color-white" href="/account/edit/"><i class="fa fa-edit"></i> Редактировать</a>
+    </li>
+    <li><a class="color-white" href="/auth/logout"><i class="fa fa-sign-out"></i> Выход</a>
+    </li>
+</ul>
 <hr>
 <ul class="side-nav">
     <li><a class="color-white" href="/account/users"><i class="fa fa-search"></i> Поиск пользователя</a>
     </li>
     <li><a class="color-white" href="/account/rooms"><i class="fa fa-th-large"></i> Мои комнаты</a>
     </li>
+    <li><a class="color-white" href="/rooms{{ user.region.region_url }}"><i class="fa fa-th-large"></i>
+        Комнаты {{ user.region.region_title }}</a>
+    </li>
     <li><a class="color-white" href="/rooms/all"><i class="fa fa-th"></i> Все комнаты</a></li>
     <li><a class="color-white" href="/account/friends"><i class="fa fa-users"></i> Мои друзья</a></li>
-    <li><a class="color-white" href="/account/invites"><i class="fa fa-plus"></i> Мои приглашения <span class="label">{{ invite_counts }}</span></a></li>
+    <li><a class="color-white" href="/account/invites"><i class="fa fa-plus"></i> Мои приглашения <span
+            class="label">{{ invite_counts }}</span></a></li>
 </ul>
 <hr>
 <button onclick="$('#tags').slideUp('slow')">

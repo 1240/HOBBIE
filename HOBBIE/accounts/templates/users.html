@@ -26,32 +26,34 @@
         <hr>
     </div>
     <div id="users" class="row">
-        {% for user in users %}
-            <div class="row">
-                <div class="small-3 columns">
-                    <a href="../{{ user.username }}" style="margin-top: 20px">
-                        <div class="circular-friend"
-                             style="background-image: url({{ user.avatar.url }})">
-                        </div>
-                    </a>
+        {% for user_ in users %}
+            {% if user.username != user_.username or user_.username != "admin" %}
+                <div class="row">
+                    <div class="small-3 columns">
+                        <a href="../{{ user_.username }}" style="margin-top: 20px">
+                            <div class="circular-friend"
+                                 style="background-image: url({{ user_.avatar.url }})">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="small-6 columns">
+                        <a href="../{{ user_.username }}">
+                            <h5>{{ user_.username }}</h5>
+                        </a>
+                        <h5>{{ user_.first_name }} {{ user_.second_name }}</h5>
+                        <h6>{{ user_.email }}</h6>
+                    </div>
+                    <div class="small-3 columns">
+                        <ul class="inline-list">
+                            <li><a href="#">Пригласить в комнату</a></li>
+                            <li><a href="//127.0.0.1:8000/account/rooms">Посмотреть друзей</a></li>
+                            <li><a href="//127.0.0.1:8000/rooms/all">Посмотреть комнаты</a></li>
+                            <li><a href="//127.0.0.1:8000/account/users">Написать сообщение</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="small-6 columns">
-                    <a href="../{{ user.username }}">
-                        <h5>{{ user.username }}</h5>
-                    </a>
-                    <h5>{{ user.first_name }} {{ user.second_name }}</h5>
-                    <h6>{{ user.email }}</h6>
-                </div>
-                <div class="small-3 columns">
-                    <ul class="inline-list">
-                        <li><a href="#">Пригласить в комнату</a></li>
-                        <li><a href="//127.0.0.1:8000/account/rooms">Посмотреть друзей</a></li>
-                        <li><a href="//127.0.0.1:8000/rooms/all">Посмотреть комнаты</a></li>
-                        <li><a href="//127.0.0.1:8000/account/users">Написать сообщение</a></li>
-                    </ul>
-                </div>
-            </div>
-            <br/>
+                <br/>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}

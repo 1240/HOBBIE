@@ -19,7 +19,6 @@ def edit(request):
     user_change_form = UserChangeForm(instance=request.user)
     user_change_form.avatar = user.avatar
     args['form'] = user_change_form
-    args['user'] = user
     args['userreg'] = user.region_id
     args['header'] = 'Редактирование информации - %s' % user.username
     args['regions_list'] = Regions.objects.all()
@@ -41,7 +40,7 @@ def edit(request):
         else:
             args['form'] = UserChangeForm(request.POST)
         args['form'] = form
-    return render_to_response('edit.html', args)
+    return render(request, 'edit.html', args)
 
 
 def user_page(request, username):
@@ -61,7 +60,7 @@ def friends(request):
     args['user'] = user
     args['friends'] = user.friends.all()
     args['header'] = 'Ваши друзья'
-    return render_to_response('friends.html', args)
+    return render(request, 'friends.html', args)
 
 
 def rooms(request):
@@ -71,6 +70,7 @@ def rooms(request):
     args = {}
     args['rooms'] = current_page.page(1)
     args['toggle'] = 'notchecked'
+    args['header'] = 'Ваши комнаты'
     return render(request, 'account_rooms.html', args)
 
 

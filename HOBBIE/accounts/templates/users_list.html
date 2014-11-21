@@ -1,19 +1,19 @@
 {% load static %}
-{% for user in users %}
+{% for user_ in users %}
+    {% if user.username != user_.username or user_.username != "admin" %}
     <div class="row">
         <div class="small-3 columns">
-            <a href="../{{ user.username }}" style="margin-top: 20px">
+            <a href="../{{ user_.username }}" style="margin-top: 20px">
                 <div class="circular-friend"
-                     style="background-image: url({{ user.avatar.url }})">
+                     style="background-image: url({{ user_.avatar.url }})">
                 </div>
             </a>
         </div>
         <div class="small-6 columns">
-            <a href="../{{ user.username }}">
-                <h5>{{ user.username }}</h5>
+            <a href="../{{ user_.username }}">
+                <h5>{{ user_.username }}</h5>
+                <h5>{{ user_.first_name }} {{ user_.second_name }}</h5>
             </a>
-            <h5>{{ user.first_name }} {{ user.second_name }}</h5>
-            <h6>{{ user.email }}</h6>
         </div>
         <div class="small-3 columns">
             <ul class="inline-list">
@@ -25,4 +25,5 @@
         </div>
     </div>
     <br/>
+    {% endif %}
 {% endfor %}
