@@ -89,13 +89,13 @@
             <ul class="off-canvas-list">
                 <li><label>Сегодня:</label></li>
                 {% for room in rooms_today %}
-                <li><a href="#">{{ room.room_title }} ( {{ room.room_to_date }} )</a></li>
+                <li><a href="/rooms/get/{{ room.id }}">{{ room.room_title }} ( {{ room.room_to_date }} )</a></li>
                 {% empty %}
                 <li>   нет событий</li>
                 {% endfor %}
                 <li><label>Скоро:</label></li>
                 {% for room in rooms_soon %}
-                <li><a href="#">{{ room.room_title }} ( {{ room.room_to_date }} )</a></li>
+                <li><a href="/rooms/get/{{ room.id }}">{{ room.room_title }} ( {{ room.room_to_date }} )</a></li>
                 {% empty %}
                 <li>   нет событий</li>
                 {% endfor %}
