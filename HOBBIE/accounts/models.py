@@ -49,12 +49,12 @@ class User(AbstractBaseUser):
     friends = models.ManyToManyField("self", blank=True, null=True)
     room = models.ManyToManyField(Room, through='UserRoom', null=True)
     sex = models.BooleanField(default=True)
-    region = models.ForeignKey(Regions)
+    region = models.ForeignKey(Regions, null=True)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
     def get_full_name(self):
         return '%s %s' % (self.first_name, self.last_name,)

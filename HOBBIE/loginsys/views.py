@@ -2,7 +2,7 @@
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.core.files import File
-from django.shortcuts import redirect, render_to_response
+from django.shortcuts import redirect, render_to_response, render
 
 
 # Create your views here.
@@ -25,9 +25,9 @@ def login(request):
             return redirect('/')
         else:
             args['login_error'] = "Пользователь не найден"
-            return render_to_response('login.html', args)
+            return render(request, 'login.html', args)
     else:
-        return render_to_response('login.html', args)
+        return render(request, 'login.html', args)
 
 
 def logout(request):
@@ -54,10 +54,10 @@ def register(request):
             return redirect('/')
         else:
             args['form'] = newuser_from
-    return render_to_response('register1.html', args)
+    return render(request, 'register1.html', args)
 
 
 def register1(request):
     args = {}
     args.update(csrf(request))
-    return render_to_response('register.html')
+    return render(request, 'register.html')
