@@ -1,10 +1,11 @@
 # Create your views here.
-import datetime
 
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator
-from django.shortcuts import render_to_response, redirect, render
+from django.shortcuts import redirect, render
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 from accounts.models import UserRoom
 from accounts.models import User
@@ -12,8 +13,6 @@ from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room
 from room.models import Category, RoomImage, CategoryRooms
-from django.utils import timezone
-from django.contrib.auth.decorators import login_required
 
 
 def rooms(request, region_name='all', category_name='all'):
@@ -54,9 +53,6 @@ def rooms(request, region_name='all', category_name='all'):
     args['region_id'] = '/' + region_name
     args['header'] = 'Комнаты ' + region_title
     args['categories'] = Category.objects.all()
-    args['rooms_soon'] = Room.objects.filter(room_to_date__gte=timezone.now()).order_by('room_to_date')[:5]
-    for a in args['rooms_soon']:
-        a.room_to_date= a.room_to_date.date()
 
     return render(request, 'rooms.html', args)
 
@@ -68,9 +64,10 @@ def room(request, room_id=1):
     user = auth.get_user(request)
     room = Room.objects.get(id=room_id)
     # if not room.room_open:
-    #   redirect('/rooms/all/all/')
+    # redirect('/rooms/all/all/')
     args['room'] = room
-    args['messages'] = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False, invite=0).order_by('message_datetime')
+    args['messages'] = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False, invite=0).order_by(
+        'message_datetime')
     for i in args['messages']:
         if i.message_datetime.date() == timezone.datetime.today().date():
             i.message_datetime = i.message_datetime.time()
@@ -103,7 +100,6 @@ def room(request, room_id=1):
         if args['is_creator'].can_edit or args['is_creator'].is_creator:
             args['you_may_edit'] = 1
 
-
     if args['room'].room_region_id == 0:
         args['room_region'] = 'Все регионы'
     else:
@@ -112,9 +108,6 @@ def room(request, room_id=1):
         args['openclose'] = 'открытая'
     else:
         args['openclose'] = 'закрытая'
-    args['rooms_soon'] = Room.objects.filter(room_to_date__gte=timezone.now()).order_by('room_to_date')[:5]
-    for a in args['rooms_soon']:
-        a.room_to_date= a.room_to_date.date()
     return render(request, 'room.html', args)
 
 
@@ -178,6 +171,7 @@ def addroom(request):
             return redirect('/rooms/all/')
     return redirect('/rooms/get/%s' % room.id)
 
+
 @login_required(login_url='/auth/login/')
 def joinroom(request, room_id):
     user = auth.get_user(request)
@@ -206,7 +200,7 @@ def leave(request, room_id):
     # auth.get_user(request).room.remove(Room.objects.get(id=room_id))
     user_room = UserRoom.objects.get(room=room, user=user, message_text__isnull=True)
 
-    user_room.delete() # если нашел
+    user_room.delete()  # если нашел
     usinroom = []
     for userroom in UserRoom.objects.filter(room_id=room_id, message_text__isnull=True):
         usinroom.append(userroom.user)

@@ -4489,7 +4489,7 @@ dialog {
   position: absolute;
   overflow-x: hidden;
   overflow-y: auto;
-  background: #46413a;
+  background: #252932;
   z-index: 1001;
   box-sizing: content-box;
   transition: transform 500ms ease 0s;

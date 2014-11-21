@@ -86,28 +86,30 @@
         </aside>
 
         <aside class="right-off-canvas-menu">
-            <ul class="off-canvas-list">
-                <li><label>Скоро:</label></li>
-                {% for room in rooms_soon %}
-                <li><a href="#">{{ room.room_title }} ( {{ room.room_to_date }} )</a></li>
-                {% endfor %}
-                <!--<li class="has-submenu"><a href="#">Саша Попов</a>
-                    <ul class="right-submenu">
-                        <li class="back"><a href="#">Back</a></li>
-                        <li><label>Level 1</label></li>
-                        <li><a href="#">Link 1</a></li>
-                        <li class="has-submenu"><a href="#">Link 2 w/ submenu</a>
-                            <ul class="right-submenu">
-                                <li class="back"><a href="#">Back</a></li>
-                                <li><label>Level 2</label></li>
-                                <li><a href="#">...</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">...</a></li>
-                    </ul>
-                </li>-->
+            <div class="text-center color-white">
+                <ul class="off-canvas-list">
+                    <li><label>Скоро:</label></li>
+                    {% for room in rooms_soon %}
+                        <li><a href="#">{{ room.room_title }} ( {{ room.room_to_date }} )</a></li>
+                    {% endfor %}
+                    <!--<li class="has-submenu"><a href="#">Саша Попов</a>
+                        <ul class="right-submenu">
+                            <li class="back"><a href="#">Back</a></li>
+                            <li><label>Level 1</label></li>
+                            <li><a href="#">Link 1</a></li>
+                            <li class="has-submenu"><a href="#">Link 2 w/ submenu</a>
+                                <ul class="right-submenu">
+                                    <li class="back"><a href="#">Back</a></li>
+                                    <li><label>Level 2</label></li>
+                                    <li><a href="#">...</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">...</a></li>
+                        </ul>
+                    </li>-->
 
-            </ul>
+                </ul>
+            </div>
         </aside>
 
         <section class="main-section" style="min-height: 1000px">

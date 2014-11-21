@@ -7,10 +7,12 @@ from django.template import Context
 from django.template.loader import get_template
 from django.core.context_processors import csrf
 from django.contrib import auth
+from django.utils import timezone
 from django_geoip.models import IpRange
 from accounts.models import UserRoom
 from mainpage.models import Regions
 from accounts.forms import UserAvatarChangeForm
+from room.models import Room
 
 kirov_ip = "37.113.83.1"
 localhost_ip = "127.0.0.1"
@@ -29,6 +31,9 @@ def home(request):
             q = ( q_aux & q ) if bool(q) else q_aux
     region = Regions.objects.filter(q)
     user = auth.get_user(request)
+    rooms_soon = Room.objects.filter(room_to_date__gte=timezone.now()).order_by('room_to_date')[:5]
+    for a in rooms_soon:
+        a.room_to_date = a.room_to_date.date()
     args = {}
     args.update(csrf(request))
     if request.method == 'POST':
@@ -53,6 +58,7 @@ def home(request):
         "user_avatar_change_form": UserAvatarChangeForm(),
         "invite_counts": len(UserRoom.objects.filter(room_id__isnull=False, invite='1', user_id=user.id)),
         "current_region": region[0],
+        "rooms_soon": rooms_soon,
     })
     c.update(csrf(request))
     svg = t.render(c)
