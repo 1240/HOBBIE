@@ -51,6 +51,7 @@ def user_page(request, username):
     args['rooms'] = current_page.page(1)
     args['friends'] = user.friends.all()
     args['account'] = user
+    args['username'] = username.title()
     return render(request, 'user_page.html', args)
 
 

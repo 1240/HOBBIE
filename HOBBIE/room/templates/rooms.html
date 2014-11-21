@@ -8,9 +8,9 @@
     {% dajaxice_js_import %}
     <script type="text/javascript" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
     <script type="text/javascript" src="{% static "js/rooms.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/tags_dd.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/tagsinput/jquery.tagsinput.js" %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static "css/rooms.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "css/tags_dd.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/tagsinput/jquery.tagsinput.css" %}">
     <!-- NAVI -->
     <div class="row text-center b-map">
         {% for category in categories %}
@@ -76,11 +76,11 @@
                                         <img src="{% static room.room_image %}" class='roomimage' style="z-index: 1;">
                                         {% if not room.room_open %}
                                             <div style="position: absolute; bottom: 60px; left: 25px;">
-                                                <img src="{% static 'img/closed.png' %}" width="100px" >
+                                                <img src="{% static 'img/closed.png' %}" width="100px">
                                             </div>
 
                                         {% endif %}
-                                    <p>В комнате:{{ room.room_people_count }}</p>
+                                        <p>В комнате:{{ room.room_people_count }}</p>
                                     </div>
 
                                 </div>
@@ -92,8 +92,8 @@
                         <br/>
                         Извинте, в вашем регионе пока нет комнат, соответствующих данной категории,
                         но вы можете <a href="/rooms/makeroom/">
-                                        <strong>создать первую комнату</strong>
-                                     </a>!
+                        <strong>создать первую комнату</strong>
+                    </a>!
                     </div>
                     <br/>
 
@@ -184,32 +184,28 @@
         <div class="row">
             <div class="large-12 columns">
                 <div class="row collapse">
-                    <div class="small-10 columns">
-                        <input type="text" id=search_string placeholder="Ключевые слова" maxlength="200"
-                               onchange="Dajaxice.room.rooms_list(Dajax.process,
-                           {'toggle':getSort(),
-                           'region': document.getElementById('region_select').selectedIndex,
-                           'p': 1,
-                           'view': getView(),
-                           'search_string': $('#search_string').val(),
-            'category_name': document.URL.split('/')[document.URL.split('/').length-2]})"/>
-                    </div>
-                    <div class="small-2 columns">
-                        <a href="#"
-                           onchange="Dajaxice.room.rooms_list(Dajax.process,
-                           {'toggle':getSort(),
-                           'region': document.getElementById('region_select').selectedIndex,
-                           'p': 1,
-                           'view': getView(),
-                           'search_string': $('#search_string').val(),
-            'category_name': document.URL.split('/')[document.URL.split('/').length-2]})" class="button postfix"><i
-                                class="fa fa-search"></i>
-                        </a>
-                    </div>
+                        <input type="text" name="search_string" id="search_string" placeholder="Ключевые слова"
+                               maxlength="200"/>
                 </div>
                 <hr>
             </div>
         </div>
     </div>
 
+    <script>
+        $('#search_string').tagsInput();
+        $('.tagsinput').keyup(function (event) {
+            if (event.keyCode == 13) {
+                Dajaxice.room.rooms_list(Dajax.process,
+                        {
+                            'toggle': getSort(),
+                            'region': document.getElementById('region_select').selectedIndex,
+                            'p': 1,
+                            'view': getView(),
+                            'search_string': getSearch(),
+                            'category_name': document.URL.split('/')[document.URL.split('/').length - 2]
+                        })
+            }
+        });
+    </script>
 {% endblock %}
