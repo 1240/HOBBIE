@@ -78,20 +78,104 @@
 
                 <div class="switch-toggle switch-4 alert-box secondary round ">
                     <input id="cat_common" name="view" type="radio" checked="" value="common">
-                    <label for="cat_common" onclick="Dajaxice.room.get_images_list(Dajax.process,
-                                                        {'toggle': 'by_common'});">Общее</label>
+                    <label for="cat_common" onclick="
+                        var x = document.getElementsByClassName('imgs1');
+                        var i;
+                        x[0].getElementsByTagName('input')[0].checked = 'checked';
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'inline-block';
+                        }
+                        var x = document.getElementsByClassName('imgs2');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                        var x = document.getElementsByClassName('imgs3');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                        var x = document.getElementsByClassName('imgs4');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                    ">Общее</label>
 
                     <input id="cat_communication" name="view" type="radio" value="communication">
-                    <label for="cat_communication" onclick="Dajaxice.room.get_images_list(Dajax.process,
-                                                        {'toggle': 'by_communication'});">Общение</label>
+                    <label for="cat_communication" onclick="
+                        var x = document.getElementsByClassName('imgs2');
+                        var i;
+                        x[0].getElementsByTagName('input')[0].checked = 'checked';
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'inline-block';
+                        }
+                        var x = document.getElementsByClassName('imgs1');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                        var x = document.getElementsByClassName('imgs3');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                        var x = document.getElementsByClassName('imgs4');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                    ">Общение</label>
 
                     <input id="cat_sports" name="view" type="radio" value="sports">
-                    <label for="cat_sports" onclick="Dajaxice.room.get_images_list(Dajax.process,
-                                                        {'toggle': 'by_sports'});">Спорт</label>
+                    <label for="cat_sports" onclick="
+                        var x = document.getElementsByClassName('imgs3');
+                        var i;
+                        x[0].getElementsByTagName('input')[0].checked = 'checked';
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'inline-block';
+                        }
+                         var x = document.getElementsByClassName('imgs1');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                        var x = document.getElementsByClassName('imgs2');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                        var x = document.getElementsByClassName('imgs4');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                    ">Спорт</label>
 
                     <input id="cat_cult_ent" name="view" type="radio" value="cult_ent">
-                    <label for="cat_cult_ent" onclick="Dajaxice.room.get_images_list(Dajax.process,
-                                                        {'toggle': 'by_cult_ent'});">Культура/Развлечения</label>
+                    <label for="cat_cult_ent" onclick="
+                        var x = document.getElementsByClassName('imgs4');
+                        var i;
+                        x[0].getElementsByTagName('input')[0].checked = 'checked';
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'inline-block';
+                        }
+                         var x = document.getElementsByClassName('imgs1');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                        var x = document.getElementsByClassName('imgs2');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                        var x = document.getElementsByClassName('imgs3');
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = 'none';
+                        }
+                    ">Культура/Развлечения</label>
 
                     <a class="button"></a>
                 </div>
@@ -100,12 +184,51 @@
                     <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
 
                         {% for image in images %}
-                            <li>
+                            <li class="imgs1">
                                 <input id='r{{ image.id }}' type="radio" name="action_image"
                                        value="{{ image.roomimage_image.url }}"
                                         {% if image_first_id == image.id %}
                                        checked
                                         {% endif %}>
+                                <img src="{% static image.roomimage_image.url %}"
+                                     onclick="document.getElementById('r{{ image.id }}').checked='checked';"
+                                     class="th">
+                            </li>
+                        {% endfor %}
+
+
+                    {% for image in images2 %}
+                            <li class='imgs2' style="display: none;">
+                                <input id='r{{ image.id }}' type="radio" name="action_image"
+                                       value="{{ image.roomimage_image.url }}">
+
+                                <img src="{% static image.roomimage_image.url %}"
+                                     onclick="document.getElementById('r{{ image.id }}').checked='checked';"
+                                     class="th">
+                            </li>
+                        {% endfor %}
+
+
+
+                        {% for image in images3 %}
+                            <li class='imgs3' style="display: none;">
+                                <input id='r{{ image.id }}' type="radio" name="action_image"
+                                       value="{{ image.roomimage_image.url }}">
+
+                                <img src="{% static image.roomimage_image.url %}"
+                                     onclick="document.getElementById('r{{ image.id }}').checked='checked';"
+                                     class="th">
+                            </li>
+                        {% endfor %}
+
+
+
+
+                        {% for image in images4 %}
+                            <li class='imgs4' style="display: none;">
+                                <input id='r{{ image.id }}' type="radio" name="action_image"
+                                       value="{{ image.roomimage_image.url }}"
+                                        >
                                 <img src="{% static image.roomimage_image.url %}"
                                      onclick="document.getElementById('r{{ image.id }}').checked='checked';"
                                      class="th">

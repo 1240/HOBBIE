@@ -119,7 +119,13 @@ def makeroom(request):
     args['form'] = room_form
     args['regions_list'] = Regions.objects.all()
     imgs = RoomImage.objects.filter(roomimage_category_id=1)
+    imgs2 = RoomImage.objects.filter(roomimage_category_id=2)
+    imgs3 = RoomImage.objects.filter(roomimage_category_id=3)
+    imgs4 = RoomImage.objects.filter(roomimage_category_id=4)
     args['images'] = imgs
+    args['images2'] = imgs2
+    args['images3'] = imgs3
+    args['images4'] = imgs4
 
     args['image_first_id'] = imgs[0].id
 
