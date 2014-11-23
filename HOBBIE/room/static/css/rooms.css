@@ -18,3 +18,15 @@
     background-position: center center;
     background-color: #6d655c;;
 }
+
+.multi_radiobutton input[type="radio"] {
+    display: none;
+}
+
+
+
+.multi_radiobutton input[type="radio"]:checked + img{
+    border: solid 4px #44c7db;
+}
+
+

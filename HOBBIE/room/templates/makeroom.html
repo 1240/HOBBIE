@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/datetimepicker/foundation-datepicker.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/datetimepicker/foundation-datepicker.less" %}">
     <script type="text/javascript" src="{% static "js/ff/foundation/foundation-datetimepicker.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/rooms.css" %}">
     <div class="row">
         <h2>Создание новой комнаты</h2>
         <br>
@@ -184,7 +185,8 @@
                     <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
 
                         {% for image in images %}
-                            <li class="imgs1">
+                            <li class="multi_radiobutton imgs1">
+
                                 <input id='r{{ image.id }}' type="radio" name="action_image"
                                        value="{{ image.roomimage_image.url }}"
                                         {% if image_first_id == image.id %}
@@ -198,7 +200,7 @@
 
 
                     {% for image in images2 %}
-                            <li class='imgs2' style="display: none;">
+                            <li class='multi_radiobutton imgs2' style="display: none;">
                                 <input id='r{{ image.id }}' type="radio" name="action_image"
                                        value="{{ image.roomimage_image.url }}">
 
@@ -211,7 +213,7 @@
 
 
                         {% for image in images3 %}
-                            <li class='imgs3' style="display: none;">
+                            <li class='multi_radiobutton imgs3' style="display: none;">
                                 <input id='r{{ image.id }}' type="radio" name="action_image"
                                        value="{{ image.roomimage_image.url }}">
 
@@ -225,7 +227,7 @@
 
 
                         {% for image in images4 %}
-                            <li class='imgs4' style="display: none;">
+                            <li class='multi_radiobutton imgs4' style="display: none;">
                                 <input id='r{{ image.id }}' type="radio" name="action_image"
                                        value="{{ image.roomimage_image.url }}"
                                         >
