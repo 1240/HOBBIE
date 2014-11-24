@@ -45,14 +45,14 @@ def rooms_list(request):
         q_aux = Q(room_region_id=region_index)
         q = ( q_aux & q ) if bool(q) else q_aux
         if (search_string != None):
-            for word in search_string.split():
+            for word in search_string.split(','):
                 q_aux = Q(room_title__icontains=word) | Q(hash_tags__icontains=word)
                 q = ( q_aux & q ) if bool(q) else q_aux
         current_page = Paginator(object_list=Room.objects.filter(q)
                                  .order_by(toggles[toggle]), per_page=per_page)
     else:
         if (search_string != None):
-            for word in search_string.split():
+            for word in search_string.split(','):
                 q_aux = Q(room_title__icontains=word) | Q(hash_tags__icontains=word)
                 q = ( q_aux & q ) if bool(q) else q_aux
         if (q == None):
@@ -141,7 +141,8 @@ def get_messages(request):
 
     room_id = argv.get('room_id')
     room = Room.objects.get(id=room_id)
-    messages = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False, invite=0).order_by('message_datetime')
+    messages = UserRoom.objects.filter(room_id=room_id, message_text__isnull=False, invite=0).order_by(
+        'message_datetime')
     usinroom = User.objects.filter(userroom__room_id=room_id, userroom__message_text__isnull=True, userroom__invite=0)
 
     args = {}

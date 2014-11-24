@@ -91,5 +91,5 @@ function getSearch() {
         tags.push($($keywords[i]).text().substring(0, $($keywords[i]).text().length - 1).trim());
     }
     var uniqueTags = $.unique(tags);
-    return uniqueTags.toString().replace(",", " ")
+    return uniqueTags.toString();/*.replace(",", " ")*/
 }

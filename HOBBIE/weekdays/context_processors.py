@@ -24,6 +24,7 @@ def room_soon(request):
         "rooms_soon": rooms_soon
     }
 
+
 def room_today(request):
     rooms_today = Room.objects.filter(room_to_date__day=timezone.now().day).order_by('room_to_date')[:5]
     for a in rooms_today:
