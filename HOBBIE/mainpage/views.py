@@ -58,7 +58,7 @@ def home(request):
         "user_avatar_change_form": UserAvatarChangeForm(),
         "invite_counts": len(UserRoom.objects.filter(room_id__isnull=False, invite='1', user_id=user.id)),
         "current_region": region[0],
-        "hash_tags": HashTags.objects.all()[:10],
+        "hash_tags": HashTags.objects.all().order_by('count')[:10],
         "rooms_soon": rooms_soon,
     })
     c.update(csrf(request))

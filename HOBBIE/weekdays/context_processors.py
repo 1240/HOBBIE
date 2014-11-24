@@ -37,5 +37,5 @@ def room_today(request):
 
 def popular_hash_tags(request):
     return  {
-        "hash_tags": HashTags.objects.all()[:10]
+        "hash_tags": HashTags.objects.all().order_by('count')[:10]
     }
