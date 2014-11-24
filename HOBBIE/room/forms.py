@@ -3,7 +3,7 @@ from django.forms import ModelForm, Textarea, DateTimeInput
 from accounts.models import UserRoom
 
 from room.models import Room
-
+from utils.utils import fill_hash_tags_statistics
 
 
 __author__ = '1240'

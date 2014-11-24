@@ -13,6 +13,7 @@ from mainpage.models import Regions
 from room.forms import MessageForm, RoomForm
 from room.models import Room
 from room.models import Category, RoomImage, CategoryRooms
+from utils.utils import fill_hash_tags_statistics
 
 
 def rooms(request, region_name='all', category_name='all'):
@@ -149,8 +150,8 @@ def addroom(request):
                 'cult_ent': 4
             }
             category = Category.objects.get(id=categories[categ])
-            imgid = request.POST.get('action_image')
-            room.room_image = imgid
+            img_id = request.POST.get('action_image')
+            room.room_image = img_id
             if category.id == 1:
                 category.category_room_count = len(CategoryRooms.objects.all())
             else:
@@ -161,6 +162,7 @@ def addroom(request):
                 room.room_open = False
             else:
                 room.room_open = True
+            fill_hash_tags_statistics(form.cleaned_data['hash_tags'])
             form.save()
             user = auth.get_user(request)
             room = Room.objects.get(id=room.id)
@@ -282,3 +284,4 @@ def editroom(request, room_id):
             args['form'] = RoomForm(request.POST)
         args['form'] = form
     return render(request, 'editroom.html', args)
+
