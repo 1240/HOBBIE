@@ -2,7 +2,7 @@ from django.contrib import auth
 from django.utils import timezone
 
 from accounts.models import UserRoom
-from room.models import Room
+from room.models import Room, HashTags
 
 
 __author__ = '1240'
@@ -32,4 +32,10 @@ def room_today(request):
 
     return {
         "rooms_today": rooms_today
+    }
+
+
+def popular_hash_tags(request):
+    return  {
+        "hash_tags": HashTags.objects.all()[:10]
     }

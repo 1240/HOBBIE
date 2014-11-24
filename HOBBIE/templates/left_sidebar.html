@@ -55,18 +55,8 @@
             class="label">{{ invite_counts }}</span></a></li>
 </ul>
 <hr>
-<button onclick="$('#tags').slideUp('slow')">
-    up
-</button>
-<button onclick="$('#tags').slideDown('slow')">
-    down
-</button>
 <div id="tags">
-    <button class="left-off-button">секс</button>
-    <button class="left-off-button">наркотики</button>
-    <button class="left-off-button">рок-н-ролл</button>
-    <button class="left-off-button">да</button>
-    <button class="left-off-button">нет</button>
-    <button class="left-off-button">ни зяю</button>
-    <button class="left-off-button">саша</button>
+    {% for hash_tag in hash_tags %}
+        <button class="left-off-button">{{ hash_tag.hash_name }}</button>
+    {% endfor %}
 </div>

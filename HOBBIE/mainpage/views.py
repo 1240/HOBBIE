@@ -12,7 +12,7 @@ from django_geoip.models import IpRange
 from accounts.models import UserRoom
 from mainpage.models import Regions
 from accounts.forms import UserAvatarChangeForm
-from room.models import Room
+from room.models import Room, HashTags
 
 kirov_ip = "37.113.83.1"
 localhost_ip = "127.0.0.1"
@@ -58,6 +58,7 @@ def home(request):
         "user_avatar_change_form": UserAvatarChangeForm(),
         "invite_counts": len(UserRoom.objects.filter(room_id__isnull=False, invite='1', user_id=user.id)),
         "current_region": region[0],
+        "hash_tags": HashTags.objects.all()[:10],
         "rooms_soon": rooms_soon,
     })
     c.update(csrf(request))

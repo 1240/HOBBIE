@@ -15,18 +15,15 @@ class Migration(migrations.Migration):
             model_name='user',
             name='avatar',
             field=models.ImageField(default='images/avatar.jpg', verbose_name='Аватар', upload_to='images/%Y/%m/%d'),
-            preserve_default=True,
         ),
         migrations.AlterField(
             model_name='user',
             name='region',
             field=models.ForeignKey(to='mainpage.Regions', null=True),
-            preserve_default=True,
         ),
         migrations.AlterField(
             model_name='user',
             name='sex',
             field=models.BooleanField(default=True),
-            preserve_default=True,
         ),
     ]

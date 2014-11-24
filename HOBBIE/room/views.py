@@ -28,11 +28,11 @@ def rooms(request, region_name='all', category_name='all'):
         if category_name == 'all':
             current_page = Paginator(object_list=Room.objects
                                      .filter(category__category_title__in=categories)
-                                     .order_by("-room_create_date"), per_page=10)
+                                     .order_by("-room_create_date"), per_page=12)
         else:
             current_page = Paginator(object_list=Room.objects
                                      .filter(category__category_title=category_name)
-                                     .order_by("-room_create_date"), per_page=10)
+                                     .order_by("-room_create_date"), per_page=12)
     else:
         region = Regions.objects.filter(region_url='/' + region_name)
         region_title = region[0].region_title
@@ -40,12 +40,12 @@ def rooms(request, region_name='all', category_name='all'):
             current_page = Paginator(object_list=Room.objects
                                      .filter(category__category_title__in=categories,
                                              room_region__region_url='/' + region_name)
-                                     .order_by("-room_create_date"), per_page=10)
+                                     .order_by("-room_create_date"), per_page=12)
         else:
             current_page = Paginator(object_list=Room.objects
                                      .filter(category__category_title=category_name,
                                              room_region__region_url='/' + region_name)
-                                     .order_by("-room_create_date"), per_page=10)
+                                     .order_by("-room_create_date"), per_page=12)
     args = {}
     args['rooms'] = current_page.page(1)
     args['user'] = auth.get_user(request)
@@ -127,6 +127,7 @@ def makeroom(request):
     args['images2'] = imgs2
     args['images3'] = imgs3
     args['images4'] = imgs4
+    args['header'] = "Создание новой комнаты"
 
     args['image_first_id'] = imgs[0].id
 
@@ -246,6 +247,7 @@ def editroom(request, room_id):
     imgs = RoomImage.objects.filter(roomimage_category_id=category_room.category.id)
 
     args['images'] = imgs
+    args['header'] = "Редактирование комнаты"
 
     if request.method == 'POST':
         form = RoomForm(request.POST, instance=Room.objects.get(id=room_id))

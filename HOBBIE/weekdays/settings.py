@@ -131,4 +131,5 @@ TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'weekdays.context_processors.invite_count',
     'weekdays.context_processors.room_soon',
     'weekdays.context_processors.room_today',
+    'weekdays.context_processors.popular_hash_tags',
 )

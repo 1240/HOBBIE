@@ -15,6 +15,5 @@ class Migration(migrations.Migration):
             model_name='room',
             name='hash_tags',
             field=models.CharField(null=True, max_length=200, blank=True, verbose_name='Ключевые слова - для того, чтобы людям было проще найти вашу комнату'),
-            preserve_default=True,
         ),
     ]

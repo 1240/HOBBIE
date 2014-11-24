@@ -32,14 +32,14 @@ def rooms_list(request):
     page_number = argv.get('p')
     view = argv.get('view')
     search_string = argv.get('search_string')
-    per_page = 10
+    per_page = 12
     toggles = {
         'by_date': '-room_create_date',
         'by_people': '-room_people_count',
     }
     q = None
-    q_aux = Q(category__category_title__in=categories) if category_name == 'all' else Q(
-        category__category_title=category_name)
+    q_aux = Q(category__category_title__in=categories) if (category_name == 'all' or category_name == None) else \
+        Q(category__category_title=category_name)
     q = ( q_aux & q ) if bool(q) else q_aux
     if region_index:
         q_aux = Q(room_region_id=region_index)

@@ -16,6 +16,5 @@ class Migration(migrations.Migration):
             model_name='room',
             name='room_create_date',
             field=models.DateTimeField(default=datetime.datetime.now, verbose_name='Дата создания комнаты'),
-            preserve_default=True,
         ),
     ]
