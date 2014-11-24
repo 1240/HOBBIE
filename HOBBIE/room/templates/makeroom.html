@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/datetimepicker/foundation-datepicker.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/datetimepicker/foundation-datepicker.less" %}">
     <script type="text/javascript" src="{% static "js/ff/foundation/foundation-datetimepicker.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/tagsinput/jquery.tagsinput.css" %}">
+    <script type="text/javascript" src="{% static "js/tagsinput/jquery.tagsinput.js" %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static "css/rooms.css" %}">
     <div class="row">
         <h2>Создание новой комнаты</h2>
@@ -18,61 +20,64 @@
             {% csrf_token %}
 
             <div>
-                <label for="id_room_title"><strong>Введите название вашей новой комнаты:</strong></label>
+                <label for="id_room_title"><strong>Введите название:</strong></label>
                 {{ form.room_title }}
             </div>
             <div>
-                <label for="id_room_text"><strong>Введите описание комнаты:</strong></label>
+                <label for="id_room_text"><strong>Введите описание:</strong></label>
                 {{ form.room_text }}
             </div>
             <div>
 
                 <label for="id_hash_tags"><strong>Ключевые слова - для того, чтобы людям было проще найти вашу комнату
-                    (укажите через пробел):</strong></label>
+                    :</strong></label>
                 {{ form.hash_tags }}
 
             </div>
             <div>
-            <div class="small-4 columns">
-                <label style="white-space: nowrap" for="id_room_to_date"><strong>Дата мероприятия (не обязательно):</strong></label>
+                <div class="small-4 columns">
+                    <label style="white-space: nowrap" for="id_room_to_date"><strong>Дата мероприятия (не
+                        обязательно):</strong></label>
 
-                <div class="row date collapse" data-date-format="dd-mm-yyyy hh:ii">
-                    <div class="small-9 columns">
-                        {{ form.room_to_date }}
-                    </div>
-                    <div class="small-3 columns">
-                        <span class="postfix" onclick="$('#id_room_to_date').fdatetimepicker('show')"><i class="fa fa-calendar"></i></span>
+                    <div class="row date collapse" data-date-format="dd-mm-yyyy hh:ii">
+                        <div class="small-9 columns">
+                            {{ form.room_to_date }}
+                        </div>
+                        <div class="small-3 columns">
+                            <span class="postfix" onclick="$('#id_room_to_date').fdatetimepicker('show')"><i
+                                    class="fa fa-calendar"></i></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="small-4 columns">
-                <label><strong>Выберите регион для публикации комнаты</strong>
-            <select name="region_select">
-                <option value="0">Все</option>
-                {% for region in regions_list %}
+                <div class="small-4 columns">
+                    <label><strong>Выберите регион для публикации</strong>
+                        <select name="region_select">
+                            <option value="0">Все</option>
+                            {% for region in regions_list %}
 
 
 
-                        <option value="{{ region.id }}">{{ region.region_name }}</option>
+                                <option value="{{ region.id }}">{{ region.region_name }}</option>
 
-                {% endfor %}
-            </select>
-        </label>
-            </div>
-            <div >
-                <div><strong>Доступ в комнату</strong></div>
-                <div class="switch">
-                    <input id="openCheckboxSwitch" type="checkbox" name="openclose">
-
-                    открытая
-                    <label for="openCheckboxSwitch"></label>
-                    по приглашениям
-
+                            {% endfor %}
+                        </select>
+                    </label>
                 </div>
-            </div>
+                <div>
+                    <div><strong>Доступ в комнату</strong></div>
+                    <div class="switch">
+                        <input id="openCheckboxSwitch" type="checkbox" name="openclose">
+
+                        открытая
+                        <label for="openCheckboxSwitch"></label>
+                        по приглашениям
+
+                    </div>
+                </div>
             </div>
 
             <br>
+
             <div><strong>Выберите соответствующее изображение для комнаты</strong></div>
 
             <div class="panel callout radius">
@@ -180,7 +185,8 @@
 
                     <a class="button"></a>
                 </div>
-            <br>
+                <br>
+
                 <div id="imagechoicelist">
                     <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
 
@@ -199,7 +205,7 @@
                         {% endfor %}
 
 
-                    {% for image in images2 %}
+                        {% for image in images2 %}
                             <li class='multi_radiobutton imgs2' style="display: none;">
                                 <input id='r{{ image.id }}' type="radio" name="action_image"
                                        value="{{ image.roomimage_image.url }}">
@@ -251,6 +257,7 @@
                     format: 'dd.mm.yyyy hh:ii'
                 });
             });
+            $('#id_hash_tags').tagsInput();
         </script>
 
     </div>

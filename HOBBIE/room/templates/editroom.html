@@ -5,23 +5,25 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/datetimepicker/foundation-datepicker.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/datetimepicker/foundation-datepicker.less" %}">
     <script type="text/javascript" src="{% static "js/ff/foundation/foundation-datetimepicker.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/tagsinput/jquery.tagsinput.css" %}">
+    <script type="text/javascript" src="{% static "js/tagsinput/jquery.tagsinput.js" %}"></script>
     <div class="row">
-    <h2>Редактирование комнаты</h2>
+        <h2>Редактирование комнаты</h2>
 
-    <form action="" method="post">
-        {% csrf_token %}
+        <form action="" method="post">
+            {% csrf_token %}
             <div>
-                <label for="id_room_title"><strong>Введите название вашей новой комнаты:</strong></label>
+                <label for="id_room_title"><strong>Введите название:</strong></label>
                 {{ form.room_title }}
             </div>
             <div>
-                <label for="id_room_text"><strong>Введите описание комнаты:</strong></label>
+                <label for="id_room_text"><strong>Введите описание:</strong></label>
                 {{ form.room_text }}
             </div>
             <div>
 
-                <label for="id_hash_tags"><strong>Ключевые слова - для того, чтобы людям было проще найти вашу комнату
-                    (укажите через пробел):</strong></label>
+                <label for="id_hash_tags"><strong>Ключевые слова - для того, чтобы людям было проще найти вашу комнату:
+                </strong></label>
                 {{ form.hash_tags }}
 
             </div>
@@ -35,18 +37,19 @@
                         {{ form.room_to_date }}
                     </div>
                     <div class="small-3 columns">
-                        <span class="postfix" onclick="$('#id_room_to_date').fdatetimepicker('show')"><i class="fa fa-calendar"></i></span>
+                        <span class="postfix" onclick="$('#id_room_to_date').fdatetimepicker('show')"><i
+                                class="fa fa-calendar"></i></span>
                     </div>
                 </div>
             </div>
-        <div>
-            <div><strong>Доступ в комнату</strong></div>
-            <div class="switch">
-                <input id="openCheckboxSwitch" type="checkbox" name="openclose" {{ open }}  >
-                открытая <label for="openCheckboxSwitch"></label> закрытая (вход только по приглашениям)
+            <div>
+                <div><strong>Доступ в комнату</strong></div>
+                <div class="switch">
+                    <input id="openCheckboxSwitch" type="checkbox" name="openclose" {{ open }}  >
+                    открытая <label for="openCheckboxSwitch"></label> закрытая (вход только по приглашениям)
+                </div>
             </div>
-        </div>
-        <!-- <div style="margin-top: 10px;">
+            <!-- <div style="margin-top: 10px;">
                 <div class="row">
                     <div class="small-3 large-3 columns">
                         <label for="meetingdate"><strong>Дата встречи :</strong> </label><input id="meetingdate"
@@ -65,81 +68,82 @@
 
 
             </div>-->
-        <label><strong>Выберите регион для публикации комнаты</strong>
-            <select name="region_select">
-                <option value="0">Все</option>
-                {% for region in regions_list %}
-                    {% if region.id == roomreg %}
-                        <option selected value="{{ region.id }}">{{ region.region_name }}</option>
-                    {% else %}
-                        <option value="{{ region.id }}">{{ region.region_name }}</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
-        </label>
+            <label><strong>Выберите регион для публикации</strong>
+                <select name="region_select">
+                    <option value="0">Все</option>
+                    {% for region in regions_list %}
+                        {% if region.id == roomreg %}
+                            <option selected value="{{ region.id }}">{{ region.region_name }}</option>
+                        {% else %}
+                            <option value="{{ region.id }}">{{ region.region_name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
 
-        <div><strong>Выберите соответствующее изображение для комнаты</strong></div>
+            <div><strong>Выберите соответствующее изображение для комнаты</strong></div>
 
-        <div class="panel callout radius">
+            <div class="panel callout radius">
 
-            <div class="switch-toggle switch-4 alert-box secondary round ">
-                <input id="cat_common" name="view" type="radio" value="common"
-                        {% if categ == 1 %}
-                       checked=""
-                        {% endif %}>
-                <label for="cat_common" onclick="Dajaxice.room.get_images_list(Dajax.process,
+                <div class="switch-toggle switch-4 alert-box secondary round ">
+                    <input id="cat_common" name="view" type="radio" value="common"
+                            {% if categ == 1 %}
+                           checked=""
+                            {% endif %}>
+                    <label for="cat_common" onclick="Dajaxice.room.get_images_list(Dajax.process,
                                                         {'toggle': 'by_common'});">Общее</label>
 
-                <input id="cat_communication" name="view" type="radio" value="communication"
-                        {% if categ == 2 %}
-                       checked=""
-                        {% endif %}>
-                <label for="cat_communication" onclick="Dajaxice.room.get_images_list(Dajax.process,
+                    <input id="cat_communication" name="view" type="radio" value="communication"
+                            {% if categ == 2 %}
+                           checked=""
+                            {% endif %}>
+                    <label for="cat_communication" onclick="Dajaxice.room.get_images_list(Dajax.process,
                                                         {'toggle': 'by_communication'});">Общение</label>
 
-                <input id="cat_sports" name="view" type="radio" value="sports"
-                        {% if categ == 3 %}
-                       checked=""
-                        {% endif %}>
-                <label for="cat_sports" onclick="Dajaxice.room.get_images_list(Dajax.process,
+                    <input id="cat_sports" name="view" type="radio" value="sports"
+                            {% if categ == 3 %}
+                           checked=""
+                            {% endif %}>
+                    <label for="cat_sports" onclick="Dajaxice.room.get_images_list(Dajax.process,
                                                         {'toggle': 'by_sports'});">Спорт</label>
 
-                <input id="cat_cult_ent" name="view" type="radio" value="cult_ent"
-                        {% if categ == 4 %}
-                       checked=""
-                        {% endif %}>
-                <label for="cat_cult_ent" onclick="Dajaxice.room.get_images_list(Dajax.process,
+                    <input id="cat_cult_ent" name="view" type="radio" value="cult_ent"
+                            {% if categ == 4 %}
+                           checked=""
+                            {% endif %}>
+                    <label for="cat_cult_ent" onclick="Dajaxice.room.get_images_list(Dajax.process,
                                                         {'toggle': 'by_cult_ent'});">Культура/Развлечения</label>
 
-                <a class="button"></a>
-            </div>
-            <div id="imagechoicelist">
-                <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
+                    <a class="button"></a>
+                </div>
+                <div id="imagechoicelist">
+                    <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" style="margin-top: 20px">
 
-                    {% for image in images %}
-                        <li>
-                            <input id='r{{ image.id }}' type="radio" name="action_image"
-                                   value="{{ image.roomimage_image.url }}"
-                                    {% if nofimage == image.roomimage_image.url %}
-                                   checked {% endif %}>
-                            <img src="{% static image.roomimage_image.url %}"
-                                 onclick="document.getElementById('r{{ image.id }}').checked='checked';"
-                                 class="roomimage">
-                        </li>
-                    {% endfor %}
+                        {% for image in images %}
+                            <li>
+                                <input id='r{{ image.id }}' type="radio" name="action_image"
+                                       value="{{ image.roomimage_image.url }}"
+                                        {% if nofimage == image.roomimage_image.url %}
+                                       checked {% endif %}>
+                                <img src="{% static image.roomimage_image.url %}"
+                                     onclick="document.getElementById('r{{ image.id }}').checked='checked';"
+                                     class="roomimage">
+                            </li>
+                        {% endfor %}
 
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-default">Сохранить</button>
-    </form>
-    <script>
-        $(function () {
-            window.prettyPrint && prettyPrint();
-            $('#id_room_to_date').fdatetimepicker({
-                format: 'dd.mm.yyyy hh:ii'
+            <button type="submit" class="btn btn-default">Сохранить</button>
+        </form>
+        <script>
+            $(function () {
+                window.prettyPrint && prettyPrint();
+                $('#id_room_to_date').fdatetimepicker({
+                    format: 'dd.mm.yyyy hh:ii'
+                });
             });
-        });
-    </script>
+            $('#id_hash_tags').tagsInput();
+        </script>
     </div>
 {% endblock %}

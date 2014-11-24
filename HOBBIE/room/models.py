@@ -14,7 +14,7 @@ class Room(models.Model):
 
     room_title = models.CharField(max_length=100, verbose_name="Название комнаты (краткое описание вашего предложения)")
     room_text = models.TextField(verbose_name="Описание комнаты")
-    hash_tags = models.TextField(verbose_name="Ключевые слова - для того, чтобы людям было проще найти вашу комнату (укажите через пробел)", blank=True, null=True)
+    hash_tags = models.CharField(verbose_name="Ключевые слова - для того, чтобы людям было проще найти вашу комнату", blank=True, null=True, max_length=200)
     room_create_date = models.DateTimeField(default=datetime.datetime.now, verbose_name='Дата создания комнаты')
     room_to_date = models.DateTimeField(null=True, blank=True, verbose_name="Дата мероприятия (указывать не обязательно)")
     room_people_count = models.IntegerField(default=1)
