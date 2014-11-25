@@ -194,7 +194,21 @@
     </div>
 
     <script>
-        $('#search_string').tagsInput();
+
+        if ({{ search_hash }}) {
+            $('#search_string').addTag('{{ search_hash }}');
+        Dajaxice.room.rooms_list(Dajax.process,
+                {
+                    'toggle': getSort(),
+                    'region': document.getElementById('region_select').selectedIndex,
+                    'p': 1,
+                    'view': getView(),
+                    'search_string': getSearch(),
+                    'category_name': document.URL.split('/')[document.URL.split('/').length - 2]
+                })
+        } else {
+            $('#search_string').tagsInput();
+        }
         $('.tagsinput').keyup(function (event) {
             if (event.keyCode == 13) {
                 Dajaxice.room.rooms_list(Dajax.process,

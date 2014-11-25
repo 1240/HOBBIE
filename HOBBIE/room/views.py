@@ -16,7 +16,7 @@ from room.models import Category, RoomImage, CategoryRooms
 from utils.utils import fill_hash_tags_statistics
 
 
-def rooms(request, region_name='all', category_name='all'):
+def rooms(request, region_name='all', category_name='all', search_hash=''):
     categories = {
         'common': '1',
         'communications': '2',
@@ -54,7 +54,7 @@ def rooms(request, region_name='all', category_name='all'):
     args['region_id'] = '/' + region_name
     args['header'] = 'Комнаты ' + region_title
     args['categories'] = Category.objects.all()
-
+    args['search_hash'] = search_hash
     return render(request, 'rooms.html', args)
 
 

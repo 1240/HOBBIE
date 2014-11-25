@@ -57,6 +57,8 @@
 <hr>
 <div id="tags">
     {% for hash_tag in hash_tags %}
-        <button class="left-off-button">{{ hash_tag.hash_name }}</button>
+        <a href="/rooms{{ user.region.region_url }}/all/{{ hash_tag.hash_name }}/">
+            <button class="left-off-button">{{ hash_tag.hash_name }}</button>
+        </a>
     {% endfor %}
 </div>
